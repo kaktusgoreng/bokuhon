@@ -86,6 +86,7 @@ data class BokuhonTypography(
 
 val LocalBokuhonColors = staticCompositionLocalOf { BokuhonLightColors }
 val LocalBokuhonTypography = staticCompositionLocalOf { BokuhonTypography() }
+val LocalBokuhonTextStyle = staticCompositionLocalOf { BokuhonTypography().bodyLarge }
 val LocalBokuhonContentColor = staticCompositionLocalOf { Color.Unspecified }
 
 @Composable
@@ -102,7 +103,7 @@ fun Text(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
-    style: TextStyle = LocalBokuhonTypography.current.bodyLarge,
+    style: TextStyle = LocalBokuhonTextStyle.current,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontWeight: FontWeight? = null,
     fontStyle: FontStyle? = null,
@@ -147,7 +148,7 @@ fun Text(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
-    style: TextStyle = LocalBokuhonTypography.current.bodyLarge,
+    style: TextStyle = LocalBokuhonTextStyle.current,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontWeight: FontWeight? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,

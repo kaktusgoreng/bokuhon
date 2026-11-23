@@ -12,30 +12,38 @@ Branch `bionic/no-material3`. Backup of the shipping alpha 2 build: tag `alpha2-
   `OutlinedButton`, `BokuhonBadge`.
 - Home rail + phone bottom bar hand-built; `material3-adaptive-navigation-suite` dependency removed.
 - Migrated call sites: text 477, icons 139, dividers 41, icon buttons 57, buttons 136 → ~860.
+- `Chip.kt`, `Checkbox.kt`, `ProgressIndicators.kt` and `ListItem.kt` in the same package hold the
+  mechanical batch: chips 30, checkboxes 10, progress indicators 19, list items 6. Done.
+- `LocalBokuhonTextStyle` gives containers (chips, list items) a default text style for their
+  slots, matching Material's `ProvideTextStyle` role.
 - `Text`/`Icon` still read Material's `LocalContentColor` as a bridge while Material owns the theme.
 - `Badges.kt` and `ChapterTransition.kt` stay on Material (need `AnnotatedString` + `inlineContent`).
+- `DownloadQueueList.kt` still reads `ListItemDefaults.elevation()` for its drag shadow; it goes
+  with `Surface` in the overlay batch.
 
-## Remaining (184 files import material3)
+## Remaining (181 files import material3)
 
 | Group | Sites | Nature |
 |---|---|---|
-| FilterChip | 27 | mechanical |
-| Progress indicators | 20 | mechanical |
-| Checkbox | 9 | mechanical |
-| ListItem | 6 | mechanical |
 | Scaffold | 45 | behaviour: insets |
+| TopAppBar | 16 | behaviour: scroll, insets |
 | DropdownMenu + items | 53 | behaviour: popup anchoring, dismissal |
 | AlertDialog | 40 | behaviour: window, back |
 | OutlinedTextField | 10 | behaviour: IME, selection |
-| Snackbar / sheet / tab | ~25 | behaviour |
-| MaterialTheme token reads | 143 | mechanical, wide |
+| Snackbar / tab | ~25 | behaviour |
+| Surface / cards | 26 | mechanical, then elevation |
+| FloatingActionButton | 11 | behaviour: scroll, motion |
+| Slider | 4 | behaviour: touch, keyboard |
+| RadioButton | 3 | mechanical |
+| SegmentedButton | 3 | behaviour: selection |
+| Tooltip / DatePicker / wavy progress / badges | 6 | behaviour or mechanical |
+| MaterialTheme token reads | 452 (122 files) | mechanical, wide |
 
 ## Next steps (in order)
 
-1. Mechanical batch: chips, checkbox, progress, list items → compile, screenshot, commit.
-2. Overlays one kind at a time (menu → dialog → snackbar → scaffold → text field), screenshot after each.
-3. Replace `MaterialTheme.colorScheme/typography/shapes` reads with the Bokuhon locals.
-4. Delete `implementation(libs.androidx.compose.material3)`, drop the Material theme wrapper and
+1. Overlays one kind at a time (menu → dialog → snackbar → scaffold → text field), screenshot after each.
+2. Replace `MaterialTheme.colorScheme/typography/shapes` reads with the Bokuhon locals.
+3. Delete `implementation(libs.androidx.compose.material3)`, drop the Material theme wrapper and
    `LocalRippleConfiguration` bridge, final screen-by-screen diff against `alpha2-backup`.
 
 ## Build / run

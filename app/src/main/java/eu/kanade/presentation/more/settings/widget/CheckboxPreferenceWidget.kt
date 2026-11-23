@@ -1,10 +1,10 @@
 package eu.kanade.presentation.more.settings.widget
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import tachiyomi.presentation.core.bokuhon.Checkbox
 
 @Composable
 fun CheckboxPreferenceWidget(
