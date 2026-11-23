@@ -2,11 +2,14 @@ package tachiyomi.presentation.core.bokuhon
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicText
@@ -229,6 +232,91 @@ fun VerticalDivider(
             .fillMaxHeight()
             .width(thickness)
             .background(color),
+    )
+}
+
+@Composable
+private fun ButtonSurface(
+    onClick: () -> Unit,
+    modifier: Modifier,
+    enabled: Boolean,
+    container: Color,
+    contentColor: Color,
+    border: androidx.compose.foundation.BorderStroke?,
+    borderColor: Color,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    androidx.compose.foundation.layout.Row(
+        modifier = modifier
+            .heightIn(min = 40.dp)
+            .then(if (border != null) Modifier.border(border.width, borderColor) else Modifier)
+            .background(container)
+            .clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Button, onClick = onClick)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+    ) {
+        CompositionLocalProvider(LocalContentColor provides contentColor) { content() }
+    }
+}
+
+@Composable
+fun Button(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: Any? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    ButtonSurface(onClick, modifier, enabled, c.primary, c.onPrimary, border, c.outline, content)
+}
+
+@Composable
+fun TextButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: Any? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    ButtonSurface(onClick, modifier, enabled, Color.Transparent, c.onSurface, border, c.outline, content)
+}
+
+@Composable
+fun OutlinedButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: Any? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    ButtonSurface(
+        onClick,
+        modifier,
+        enabled,
+        Color.Transparent,
+        c.onSurface,
+        border ?: androidx.compose.foundation.BorderStroke(1.dp, c.outline),
+        c.outline,
+        content,
     )
 }
 
