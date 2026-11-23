@@ -2,6 +2,7 @@ package tachiyomi.presentation.core.bokuhon
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -229,6 +230,48 @@ fun VerticalDivider(
             .width(thickness)
             .background(color),
     )
+}
+
+@Composable
+fun IconButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: Any? = null,
+    shape: Any? = null,
+    interactionSource: androidx.compose.foundation.interaction.MutableInteractionSource? = null,
+    content: @Composable () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .size(48.dp)
+            .clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Button, onClick = onClick),
+        contentAlignment = androidx.compose.ui.Alignment.Center,
+    ) {
+        content()
+    }
+}
+
+@Composable
+fun FilledIconButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: Any? = null,
+    shape: Any? = null,
+    content: @Composable () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .size(40.dp)
+            .background(LocalBokuhonColors.current.primary)
+            .clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Button, onClick = onClick),
+        contentAlignment = androidx.compose.ui.Alignment.Center,
+    ) {
+        CompositionLocalProvider(LocalContentColor provides LocalBokuhonColors.current.onPrimary) {
+            content()
+        }
+    }
 }
 
 @Composable
