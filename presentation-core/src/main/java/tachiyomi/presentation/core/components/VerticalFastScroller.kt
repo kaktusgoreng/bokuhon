@@ -1,7 +1,6 @@
 package tachiyomi.presentation.core.components
 
 import android.view.ViewConfiguration
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ScrollIndicatorState
 import androidx.compose.foundation.background
@@ -28,6 +27,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
@@ -185,19 +185,17 @@ private fun FastScrollerThumb(
             }
     }
 
-    // Thumb alpha
-    val alpha = remember { Animatable(0f) }
-    val isThumbVisible by remember { derivedStateOf { alpha.value > 0f } }
-    LaunchedEffect(scrolled, alpha) {
+    var isThumbVisible by remember { mutableStateOf(false) }
+    LaunchedEffect(scrolled) {
         scrolled
             .sample(0.1.seconds)
             .collectLatest {
                 if (thumbAllowed()) {
-                    alpha.snapTo(1f)
+                    isThumbVisible = true
                     delay(ScrollBarVisibilityDuration)
-                    alpha.animateTo(0f, animationSpec = ImmediateFadeOutAnimationSpec)
+                    isThumbVisible = false
                 } else {
-                    alpha.animateTo(0f, animationSpec = ImmediateFadeOutAnimationSpec)
+                    isThumbVisible = false
                 }
             }
     }
@@ -251,7 +249,7 @@ private fun FastScrollerThumb(
             .padding(horizontal = horizontalPadding)
             .padding(end = endContentPadding)
             .width(ThumbThickness)
-            .graphicsLayer { this.alpha = alpha.value }
+            .graphicsLayer { this.alpha = if (isThumbVisible) 1f else 0f }
             .background(color = thumbColor, shape = ThumbShape),
     )
 }

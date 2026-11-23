@@ -1,29 +1,44 @@
 package eu.kanade.tachiyomi.ui.home
 
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -54,8 +69,6 @@ import mihon.core.navigation.Navigator
 import mihon.core.navigation.NavigatorDisplay
 import mihon.core.navigation.rememberNavigator
 import mihon.presentation.core.util.isTabletUi
-import soup.compose.material.motion.animation.materialFadeThroughIn
-import soup.compose.material.motion.animation.materialFadeThroughOut
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
@@ -156,53 +169,22 @@ fun HomeScreen() {
         }
     }
 
-    NavigationSuiteScaffold(
-        navigationSuiteType = navigationSuiteType,
-        state = navigationSuiteState,
-        navigationSuiteColors = NavigationSuiteDefaults.colors(
-            navigationRailContainerColor = MaterialTheme.colorScheme
-                .surfaceColorAtElevation(3.dp),
-        ),
-        navigationItemVerticalArrangement = Arrangement.Center,
-        navigationItems = {
-            TABS.fastForEach { NavigationSuiteItem(it, tabNavigator, navigationSuiteType) }
-        },
-    ) {
-        val tabStateHolder = rememberSaveableStateHolder()
-        NavigatorDisplay(
-            navigator = tabNavigator,
-            entryDecorators = listOf(
-                remember(tabStateHolder) {
-                    NavEntryDecorator { entry ->
-                        tabStateHolder.SaveableStateProvider(entry.contentKey) { entry.Content() }
-                    }
-                },
-            ),
-            transitionSpec = { spec },
-            popTransitionSpec = { spec },
-            predictivePopTransitionSpec = { spec },
-            entryProvider = entryProvider {
-                entry<TopLevelRoute.Library> {
-                    LibraryTab()
-                }
-
-                entry<TopLevelRoute.Updates> {
-                    UpdatesTab()
-                }
-
-                entry<TopLevelRoute.History> {
-                    HistoryTab()
-                }
-
-                entry<TopLevelRoute.Browse> {
-                    BrowseTab()
-                }
-
-                entry<TopLevelRoute.More> {
-                    MoreTab()
-                }
+    if (tabletUi) {
+        Row(modifier = Modifier.fillMaxSize()) {
+            TabletNavigationRail(tabNavigator)
+            HomeContent(tabNavigator, Modifier.weight(1f))
+        }
+    } else {
+        NavigationSuiteScaffold(
+            navigationSuiteType = NavigationSuiteType.NavigationBar,
+            state = navigationSuiteState,
+            navigationItemVerticalArrangement = Arrangement.Center,
+            navigationItems = {
+                TABS.fastForEach { NavigationSuiteItem(it, tabNavigator, NavigationSuiteType.NavigationBar) }
             },
-        )
+        ) {
+            HomeContent(tabNavigator, Modifier.fillMaxSize())
+        }
     }
 
     ResultEffect<TabEvent> {
@@ -323,6 +305,108 @@ private fun tabBadge(tab: TopLevelRoute): (@Composable () -> Unit)? {
     }
 }
 
+@Composable
+private fun HomeContent(tabNavigator: Navigator, modifier: Modifier = Modifier) {
+    val tabStateHolder = rememberSaveableStateHolder()
+    NavigatorDisplay(
+        navigator = tabNavigator,
+        modifier = modifier,
+        entryDecorators = listOf(
+            remember(tabStateHolder) {
+                NavEntryDecorator { entry ->
+                    tabStateHolder.SaveableStateProvider(entry.contentKey) { entry.Content() }
+                }
+            },
+        ),
+        transitionSpec = { spec },
+        popTransitionSpec = { spec },
+        predictivePopTransitionSpec = { spec },
+        entryProvider = entryProvider {
+            entry<TopLevelRoute.Library> {
+                LibraryTab()
+            }
+
+            entry<TopLevelRoute.Updates> {
+                UpdatesTab()
+            }
+
+            entry<TopLevelRoute.History> {
+                HistoryTab()
+            }
+
+            entry<TopLevelRoute.Browse> {
+                BrowseTab()
+            }
+
+            entry<TopLevelRoute.More> {
+                MoreTab()
+            }
+        },
+    )
+}
+
+@Composable
+private fun TabletNavigationRail(tabNavigator: Navigator) {
+    val resultEventBus = LocalResultEventBus.current
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .width(88.dp)
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        TABS.fastForEach { tab ->
+            val selected = tabNavigator.current == tab
+            val options = tab.options(selected)
+            val contentColor = if (selected) {
+                MaterialTheme.colorScheme.onPrimary
+            } else {
+                MaterialTheme.colorScheme.onSurfaceVariant
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .selectable(
+                        selected = selected,
+                        role = Role.Tab,
+                        onClick = {
+                            if (!selected) {
+                                tabNavigator.replaceAll(tab)
+                            } else {
+                                resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
+                            }
+                        },
+                    )
+                    .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
+                    .padding(vertical = 12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Box {
+                    Icon(
+                        painter = options.icon,
+                        contentDescription = options.title,
+                        tint = contentColor,
+                    )
+                    tabBadge(tab)?.let { badge ->
+                        Box(modifier = Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp)) {
+                            badge()
+                        }
+                    }
+                }
+                Text(
+                    text = options.title,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = contentColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
+            }
+        }
+    }
+}
+
 sealed interface TabEvent {
     data class Library(val mangaIdToOpen: Long? = null, val query: String? = null) : TabEvent
     data object Updates : TabEvent
@@ -331,9 +415,6 @@ sealed interface TabEvent {
     data class More(val toDownloads: Boolean) : TabEvent
 }
 
-@Suppress("ConstPropertyName")
-private const val TabFadeDuration = 200
-
 data class ShowBottomNavEvent(val visible: Boolean)
 
 data class TabOptions(
@@ -341,10 +422,7 @@ data class TabOptions(
     val icon: Painter,
 )
 
-private val spec = materialFadeThroughIn(
-    initialScale = 1f,
-    durationMillis = TabFadeDuration,
-) togetherWith materialFadeThroughOut(durationMillis = TabFadeDuration)
+private val spec: ContentTransform = EnterTransition.None togetherWith ExitTransition.None
 
 private val TABS: List<TopLevelRoute> = listOf(
     TopLevelRoute.Library,

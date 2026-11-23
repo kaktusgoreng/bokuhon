@@ -1,6 +1,5 @@
 package mihon.core.navigation
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -21,9 +20,8 @@ import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SceneStrategyScope
 import mihon.presentation.core.util.isTabletUi
-import soup.compose.material.motion.animation.materialSharedAxisX
-import soup.compose.material.motion.animation.rememberSlideDistance
 import tachiyomi.presentation.core.components.TwoPanelBox
+import tachiyomi.presentation.core.components.motion.AnimatedContent
 
 val LocalBackButtonVisibility = compositionLocalOf { true }
 
@@ -44,19 +42,7 @@ data class TwoPaneSettingsScene<T : Any>(
             startContent = { firstEntry.Content() },
             endContent = {
                 CompositionLocalProvider(LocalBackButtonVisibility provides false) {
-                    val slideDistance = rememberSlideDistance()
-                    AnimatedContent(
-                        targetState = secondEntry to detailDepth,
-                        contentKey = { (entry) -> entry.contentKey },
-                        transitionSpec = {
-                            materialSharedAxisX(
-                                forward = targetState.second >= initialState.second,
-                                slideDistance = slideDistance,
-                            )
-                        },
-                    ) { (entry) ->
-                        entry.Content()
-                    }
+                    secondEntry.Content()
                 }
             },
             modifier = Modifier

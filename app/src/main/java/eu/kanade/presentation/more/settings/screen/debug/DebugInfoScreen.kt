@@ -69,7 +69,7 @@ private fun getAppInfoGroup(): Preference.PreferenceGroup {
         preferenceItems = listOf(
             Preference.PreferenceItem.TextPreference(
                 title = "Version",
-                subtitle = getVersionName(buildTime = null),
+                subtitle = getVersionName(),
             ),
             Preference.PreferenceItem.TextPreference(
                 title = "Build time",

@@ -19,11 +19,11 @@ abstract class ViewerNavigation(
     enum class Action { MENU, FORWARD, BACKWARD }
 
     sealed class NavigationRegion(val nameRes: StringResource, val color: Color) {
-        data object MENU : NavigationRegion(MR.strings.action_menu, Color(0xCC95818D))
-        data object PREV : NavigationRegion(MR.strings.nav_zone_prev, Color(0xCCFF7733))
-        data object NEXT : NavigationRegion(MR.strings.nav_zone_next, Color(0xCC84E296))
-        data object LEFT : NavigationRegion(MR.strings.nav_zone_left, Color(0xCC7D1128))
-        data object RIGHT : NavigationRegion(MR.strings.nav_zone_right, Color(0xCCA6CFD5))
+        data object MENU : NavigationRegion(MR.strings.action_menu, Color(0xCC767676))
+        data object PREV : NavigationRegion(MR.strings.nav_zone_prev, Color(0xCC5A5A5A))
+        data object NEXT : NavigationRegion(MR.strings.nav_zone_next, Color(0xCC5A5A5A))
+        data object LEFT : NavigationRegion(MR.strings.nav_zone_left, Color(0xCC3C3C3C))
+        data object RIGHT : NavigationRegion(MR.strings.nav_zone_right, Color(0xCC3C3C3C))
     }
 
     data class Region(

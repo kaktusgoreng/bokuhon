@@ -1,6 +1,5 @@
 package eu.kanade.presentation.download
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.gestures.ScrollScope
 import androidx.compose.foundation.gestures.ScrollableState
@@ -60,6 +59,7 @@ import sh.calvin.reorderable.rememberScroller
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable

@@ -1,6 +1,5 @@
 package eu.kanade.presentation.more.settings.widget
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.StartOffset
 import androidx.compose.animation.core.StartOffsetType
@@ -33,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.more.settings.LocalPreferenceHighlighted
 import eu.kanade.presentation.more.settings.LocalPreferenceMinHeight
 import kotlinx.coroutines.delay
+import tachiyomi.presentation.core.components.motion.animateColorAsState
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

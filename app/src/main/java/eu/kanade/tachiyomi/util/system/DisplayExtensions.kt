@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.view.View
-import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.domain.ui.model.TabletUiMode
 import mihon.presentation.core.util.isTabletUi
 
 private const val TABLET_UI_REQUIRED_SCREEN_WIDTH_DP = 720
@@ -17,19 +15,24 @@ private const val TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP = 700
 // make sure icons on the nav rail fit
 private const val TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP = 600
 
+// e-readers are close to 3:4, so a display whose sides are nearly equal reads better with
+// the rail navigation and split panes that narrow phones don't have room for
+private const val TABLET_UI_NEAR_SQUARE_ASPECT_RATIO = 0.7f
+
 // TODO: move the logic to `isTabletUi()` when main activity is rewritten in Compose
-fun Context.prepareTabletUiContext(uiPreferences: UiPreferences): Context {
+private fun Configuration.isNearSquare(): Boolean {
+    val shortSide = minOf(screenWidthDp, screenHeightDp)
+    val longSide = maxOf(screenWidthDp, screenHeightDp)
+    return longSide > 0 && shortSide.toFloat() / longSide >= TABLET_UI_NEAR_SQUARE_ASPECT_RATIO
+}
+
+fun Context.prepareTabletUiContext(): Context {
     val configuration = resources.configuration
-    val expected = when (uiPreferences.tabletUiMode.get()) {
-        TabletUiMode.AUTOMATIC ->
-            configuration.smallestScreenWidthDp >= when (configuration.orientation) {
-                Configuration.ORIENTATION_PORTRAIT -> TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP
-                else -> TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP
-            }
-        TabletUiMode.ALWAYS -> true
-        TabletUiMode.LANDSCAPE -> configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        TabletUiMode.NEVER -> false
-    }
+    val expected = configuration.isNearSquare() ||
+        configuration.smallestScreenWidthDp >= when (configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP
+            else -> TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP
+        }
     if (configuration.isTabletUi() != expected) {
         val overrideConf = Configuration()
         overrideConf.setTo(configuration)

@@ -125,7 +125,6 @@ fun MigrationListScreenContent(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .animateItem()
                         .padding(
                             start = MaterialTheme.padding.medium,
                             end = MaterialTheme.padding.small,

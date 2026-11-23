@@ -1,13 +1,6 @@
 package eu.kanade.presentation.reader.appbars
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -38,6 +31,7 @@ import eu.kanade.presentation.reader.components.ChapterNavigatorType
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 
 private val readerBarsSlideAnimationSpec = tween<IntOffset>(200)
 private val readerBarsFadeAnimationSpec = tween<Float>(150)
@@ -80,11 +74,7 @@ fun ReaderAppBars(
         .copy(alpha = if (isSystemInDarkTheme()) 0.9f else 0.95f)
 
     Column(modifier = Modifier.fillMaxHeight()) {
-        AnimatedVisibility(
-            visible = visible,
-            enter = slideInVertically(readerBarsSlideAnimationSpec) { -it } + fadeIn(readerBarsFadeAnimationSpec),
-            exit = slideOutVertically(readerBarsSlideAnimationSpec) { -it } + fadeOut(readerBarsFadeAnimationSpec),
-        ) {
+        AnimatedVisibility(visible = visible) {
             ReaderTopBar(
                 modifier = Modifier
                     .background(backgroundColor)
@@ -106,13 +96,7 @@ fun ReaderAppBars(
                 LocalLayoutDirection provides if (sliderOnLeft) LayoutDirection.Ltr else LayoutDirection.Rtl,
             ) {
                 Row(modifier = Modifier.weight(1f)) {
-                    AnimatedVisibility(
-                        visible = visible,
-                        enter = slideInHorizontally(readerBarsSlideAnimationSpec) { if (sliderOnLeft) -it else it } +
-                            fadeIn(readerBarsFadeAnimationSpec),
-                        exit = slideOutHorizontally(readerBarsSlideAnimationSpec) { if (sliderOnLeft) -it else it } +
-                            fadeOut(readerBarsFadeAnimationSpec),
-                    ) {
+                    AnimatedVisibility(visible = visible) {
                         Row {
                             Spacer(modifier = Modifier.width(MaterialTheme.padding.small))
                             Box(
@@ -141,11 +125,7 @@ fun ReaderAppBars(
             Spacer(Modifier.weight(1f))
         }
 
-        AnimatedVisibility(
-            visible = visible,
-            enter = slideInVertically(readerBarsSlideAnimationSpec) { it } + fadeIn(readerBarsFadeAnimationSpec),
-            exit = slideOutVertically(readerBarsSlideAnimationSpec) { it } + fadeOut(readerBarsFadeAnimationSpec),
-        ) {
+        AnimatedVisibility(visible = visible) {
             Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
                 if (chapterNavigatorType.isHorizontal()) {
                     ChapterNavigator(

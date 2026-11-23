@@ -2,7 +2,10 @@ package mihon.core.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
@@ -19,9 +22,8 @@ import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.defaultPopTransitionSpec
-import androidx.navigation3.ui.defaultPredictivePopTransitionSpec
-import androidx.navigation3.ui.defaultTransitionSpec
+
+private val NoTransition: ContentTransform = EnterTransition.None togetherWith ExitTransition.None
 
 val LocalNavigator = compositionLocalOf<Navigator> {
     error("LocalNavigator not initialized!")
@@ -98,11 +100,10 @@ fun NavigatorDisplay(
     entryDecorators: List<NavEntryDecorator<NavKey>> = listOf(rememberSaveableStateHolderNavEntryDecorator()),
     sceneStrategies: List<SceneStrategy<NavKey>> = listOf(SinglePaneSceneStrategy()),
     sizeTransform: SizeTransform? = null,
-    transitionSpec: AnimatedContentTransitionScope<Scene<NavKey>>.() -> ContentTransform = defaultTransitionSpec(),
-    popTransitionSpec: AnimatedContentTransitionScope<Scene<NavKey>>.() -> ContentTransform =
-        defaultPopTransitionSpec(),
+    transitionSpec: AnimatedContentTransitionScope<Scene<NavKey>>.() -> ContentTransform = { NoTransition },
+    popTransitionSpec: AnimatedContentTransitionScope<Scene<NavKey>>.() -> ContentTransform = { NoTransition },
     predictivePopTransitionSpec: AnimatedContentTransitionScope<Scene<NavKey>>.(Int) -> ContentTransform =
-        defaultPredictivePopTransitionSpec(),
+        { NoTransition },
     entryProvider: (NavKey) -> NavEntry<NavKey>,
 ) {
     val routes = navigator.backStack.toList()

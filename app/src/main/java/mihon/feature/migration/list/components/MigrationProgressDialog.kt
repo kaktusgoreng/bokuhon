@@ -1,6 +1,5 @@
 package mihon.feature.migration.list.components
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ProgressIndicatorDefaults
@@ -10,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.DialogProperties
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable

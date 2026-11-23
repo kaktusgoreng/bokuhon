@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.webkit.WebView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -25,7 +26,6 @@ import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.createGraphFactory
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
 import eu.kanade.tachiyomi.core.security.PrivacyPreferences
 import eu.kanade.tachiyomi.crash.CrashActivity
 import eu.kanade.tachiyomi.crash.GlobalExceptionHandler
@@ -184,7 +184,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
             .onEach(TelemetryConfig::setCrashlyticsEnabled)
             .launchIn(scope)
 
-        setAppCompatDelegateThemeMode(uiPreferences.themeMode.get())
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         // Updates widget update
         widgetManager.init(scope)

@@ -1,8 +1,5 @@
 package eu.kanade.presentation.manga.components
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
@@ -102,6 +99,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.TextButton
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.clickableNoIndication
@@ -282,7 +280,6 @@ fun ExpandableMangaDescription(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .padding(vertical = 12.dp)
-                    .animateContentSize(animationSpec = spring())
                     .fillMaxWidth(),
             ) {
                 var showMenu by remember { mutableStateOf(false) }

@@ -38,7 +38,7 @@ android {
         applicationId = "app.mihon"
 
         versionCode = 39
-        versionName = "0.21.3"
+        versionName = "0.21.3_alpha2"
 
         buildConfigField("boolean", "TELEMETRY_INCLUDED", "${Config.includeTelemetry}")
         buildConfigField("boolean", "UPDATER_ENABLED", "${Config.enableUpdater}")
@@ -422,13 +422,6 @@ androidComponents {
         variant.buildConfigField("String", "COMMIT_COUNT", latestCommitCount.map { "\"$it\"" })
         variant.buildConfigField("String", "COMMIT_SHA", latestCommitSha.map { "\"$it\"" })
         variant.buildConfigField("String", "BUILD_TIME", buildTime.map { "\"$it\"" })
-
-        if (isUnstableBuild) {
-            variant.outputs.forEach { output ->
-                val versionName = output.versionName.get()
-                output.versionName.set(latestCommitCount.map { "$versionName-$it" })
-            }
-        }
     }
 
     onVariants { variant ->

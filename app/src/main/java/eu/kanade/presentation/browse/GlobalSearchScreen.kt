@@ -81,7 +81,7 @@ internal fun GlobalSearchContent(
                     } ?: source.name,
                     subtitle = LocaleHelper.getLocalizedDisplayName(source.lang),
                     onClick = { onClickSource(source) },
-                    modifier = Modifier.animateItem(),
+                    modifier = Modifier,
                 ) {
                     when (result) {
                         SearchItemResult.Loading -> {

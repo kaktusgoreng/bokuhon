@@ -52,16 +52,7 @@ suspend fun Animatable<Dp, *>.animateElevation(
     from: Interaction? = null,
     to: Interaction? = null,
 ) {
-    val spec = when {
-        // Moving to a new state
-        to != null -> ElevationDefaults.incomingAnimationSpecForInteraction(to)
-        // Moving to default, from a previous state
-        from != null -> ElevationDefaults.outgoingAnimationSpecForInteraction(from)
-        // Loading the initial state, or moving back to the baseline state from a disabled /
-        // unknown state, so just snap to the final value.
-        else -> null
-    }
-    if (spec != null) animateTo(target, spec) else snapTo(target)
+    snapTo(target)
 }
 
 /**

@@ -186,8 +186,7 @@ fun MigrationConfigScreen(mangaIds: Collection<Long>) {
                             ),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier
-                                .padding(MaterialTheme.padding.medium)
-                                .animateItem(),
+                                .padding(MaterialTheme.padding.medium),
                         )
                     }
                 }
@@ -247,8 +246,7 @@ private fun LazyItemScope.SourceItemContainer(
         ElevatedCard(
             shape = shape,
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.padding.medium)
-                .animateItem(),
+                .padding(horizontal = MaterialTheme.padding.medium),
         ) {
             SourceItem(
                 source = source,

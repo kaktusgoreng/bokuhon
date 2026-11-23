@@ -1,9 +1,5 @@
 package eu.kanade.presentation.reader
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -23,6 +19,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation
 import eu.kanade.tachiyomi.ui.reader.viewer.navigation.DisabledNavigation
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -33,8 +30,6 @@ fun ReaderNavigationOverlay(
     AnimatedVisibility(
         visible = state.visible,
         modifier = modifier,
-        enter = fadeIn(tween(FADE_DURATION)),
-        exit = fadeOut(tween(FADE_DURATION)),
     ) {
         val regions = state.regions
         val labels = regions.map { stringResource(it.type.nameRes) }

@@ -110,7 +110,7 @@ private fun CategoryContent(
         ) { category ->
             ReorderableItem(reorderableState, category.key) {
                 CategoryListItem(
-                    modifier = Modifier.animateItem(),
+                    modifier = Modifier,
                     category = category,
                     onRename = { onClickRename(category) },
                     onDelete = { onClickDelete(category) },

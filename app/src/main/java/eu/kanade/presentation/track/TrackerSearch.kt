@@ -1,11 +1,6 @@
 package eu.kanade.presentation.track
 
 import android.content.ClipData
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
@@ -80,6 +75,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
@@ -164,11 +160,7 @@ fun TrackerSearch(
             }
         },
         bottomBar = {
-            AnimatedVisibility(
-                visible = selected != null,
-                enter = fadeIn() + slideInVertically { it / 2 },
-                exit = slideOutVertically { it / 2 } + fadeOut(),
-            ) {
+            AnimatedVisibility(visible = selected != null) {
                 Row(
                     modifier = Modifier
                         .padding(MaterialTheme.padding.small)

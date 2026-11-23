@@ -1,6 +1,5 @@
 package eu.kanade.presentation.browse
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -70,6 +69,7 @@ import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
+import tachiyomi.presentation.core.components.motion.animateDpAsState
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.EmptyScreenAction
@@ -195,14 +195,14 @@ private fun ExtensionContent(
                             }
                         ExtensionHeader(
                             textRes = header.textRes,
-                            modifier = Modifier.animateItem(),
+                            modifier = Modifier,
                             action = action,
                         )
                     }
                     is ExtensionUiModel.Header.Text -> {
                         ExtensionHeader(
                             text = header.text,
-                            modifier = Modifier.animateItem(),
+                            modifier = Modifier,
                         )
                     }
                 }
@@ -220,7 +220,7 @@ private fun ExtensionContent(
                 },
             ) { item ->
                 ExtensionItem(
-                    modifier = Modifier.animateItem(),
+                    modifier = Modifier,
                     item = item,
                     onClickItem = {
                         when (it) {

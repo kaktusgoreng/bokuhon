@@ -111,7 +111,7 @@ fun TrackingPreferenceWidget(
                     modifier = Modifier
                         .padding(4.dp)
                         .size(32.dp),
-                    tint = Color(0xFF4CAF50),
+                    tint = MaterialTheme.colorScheme.primary,
                     contentDescription = stringResource(MR.strings.login_success),
                 )
             }

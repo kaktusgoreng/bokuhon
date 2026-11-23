@@ -1,6 +1,5 @@
 package eu.kanade.presentation.components
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -72,7 +71,7 @@ fun TabbedDialog(
             }
 
             HorizontalPager(
-                modifier = Modifier.animateContentSize(),
+                modifier = Modifier,
                 state = pagerState,
                 verticalAlignment = Alignment.Top,
                 pageContent = { page -> content(page) },

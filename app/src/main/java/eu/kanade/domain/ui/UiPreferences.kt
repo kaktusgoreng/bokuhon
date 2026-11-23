@@ -4,12 +4,7 @@ import android.text.format.DateFormat
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.domain.ui.model.AppTheme
-import eu.kanade.domain.ui.model.TabletUiMode
-import eu.kanade.domain.ui.model.ThemeMode
 import eu.kanade.domain.ui.model.TimeFormat
-import eu.kanade.tachiyomi.util.system.DeviceUtil
-import eu.kanade.tachiyomi.util.system.isDynamicColorAvailable
 import logcat.LogPriority
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
@@ -26,26 +21,11 @@ class UiPreferences(
     preferenceStore: PreferenceStore,
 ) {
 
-    val themeMode: Preference<ThemeMode> = preferenceStore.getEnum("pref_theme_mode_key", ThemeMode.SYSTEM)
-
-    val appTheme: Preference<AppTheme> = preferenceStore.getEnum(
-        "pref_app_theme",
-        if (DeviceUtil.isDynamicColorAvailable) {
-            AppTheme.MONET
-        } else {
-            AppTheme.DEFAULT
-        },
-    )
-
-    val themeDarkAmoled: Preference<Boolean> = preferenceStore.getBoolean("pref_theme_dark_amoled_key", false)
-
     val relativeTime: Preference<Boolean> = preferenceStore.getBoolean("relative_time_v2", true)
 
     val dateFormat: Preference<String> = preferenceStore.getString("app_date_format", "")
 
     val timeFormat: Preference<TimeFormat> = preferenceStore.getEnum("app_time_format", TimeFormat.FOLLOW_LANGUAGE)
-
-    val tabletUiMode: Preference<TabletUiMode> = preferenceStore.getEnum("tablet_ui_mode", TabletUiMode.AUTOMATIC)
 
     val imagesInDescription: Preference<Boolean> = preferenceStore.getBoolean("pref_render_images_description", true)
 

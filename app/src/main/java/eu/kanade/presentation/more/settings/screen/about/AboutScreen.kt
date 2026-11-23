@@ -2,7 +2,6 @@ package eu.kanade.presentation.more.settings.screen.about
 
 import android.content.Context
 import android.text.format.DateFormat
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -59,6 +58,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.LinkIcon
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 import java.util.Locale
 import kotlin.time.Instant
@@ -101,7 +101,7 @@ fun AboutScreen() {
                     // Keyed on the system 12/24h setting, which can change while the app is backgrounded.
                     // Date/time prefs only change in Appearance, which recreates this screen on return.
                     subtitle = remember(is24HourSystem) {
-                        getVersionName(buildTime = getFormattedBuildTime(context))
+                        getVersionName()
                     },
                     onPreferenceClick = {
                         val deviceInfo = crashLogUtil.getDebugInfo()
@@ -246,38 +246,7 @@ private suspend fun checkVersion(
     }
 }
 
-fun getVersionName(buildTime: String?): String {
-    return when {
-        BuildConfig.DEBUG -> {
-            "Debug ${BuildConfig.COMMIT_SHA}".let {
-                if (buildTime != null) {
-                    "$it ($buildTime)"
-                } else {
-                    it
-                }
-            }
-        }
-        isNightlyBuildType -> {
-            "Nightly r${BuildConfig.COMMIT_COUNT}".let {
-                if (buildTime != null) {
-                    "$it (${BuildConfig.COMMIT_SHA}, $buildTime)"
-                } else {
-                    "$it (${BuildConfig.COMMIT_SHA})"
-                }
-            }
-        }
-        else -> {
-            val channel = if (isFossBuildType) "FOSS" else "Stable"
-            "$channel v${BuildConfig.VERSION_NAME}".let {
-                if (buildTime != null) {
-                    "$it ($buildTime)"
-                } else {
-                    it
-                }
-            }
-        }
-    }
-}
+fun getVersionName(): String = "v${BuildConfig.VERSION_NAME}"
 
 internal fun getFormattedBuildTime(context: Context): String {
     return try {

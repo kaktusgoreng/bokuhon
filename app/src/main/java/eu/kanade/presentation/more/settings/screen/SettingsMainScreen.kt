@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
@@ -108,7 +107,7 @@ data object SettingsMainScreen : NavKey {
                         .takeIf { it > -1 } // Don't trigger if route for right side hasn't been added yet
                         ?.also {
                             LaunchedEffect(Unit) {
-                                state.animateScrollToItem(it)
+                                state.scrollToItem(it)
                                 if (it > 0) {
                                     // Lift scroll
                                     topBarState.contentOffset = topBarState.heightOffsetLimit
@@ -133,7 +132,7 @@ data object SettingsMainScreen : NavKey {
                         if (twoPane) {
                             modifier = Modifier
                                 .padding(horizontal = 8.dp)
-                                .clip(RoundedCornerShape(24.dp))
+                                .clip(MaterialTheme.shapes.small)
                                 .then(
                                     if (selected) {
                                         Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
@@ -231,7 +230,7 @@ data object SettingsMainScreen : NavKey {
         Item(
             titleRes = MR.strings.pref_category_about,
             formatSubtitle = {
-                "${stringResource(MR.strings.app_name)} ${getVersionName(buildTime = null)}"
+                "${stringResource(MR.strings.app_name)} ${getVersionName()}"
             },
             icon = MaterialSymbols.Rounded.Info,
             screen = AboutRoute,

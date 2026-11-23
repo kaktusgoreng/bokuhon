@@ -13,8 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.painter.Painter
 
 /**
- * Plays [enter] forwards when [atEnd] becomes true and [exit] forwards when it becomes false,
- * instead of reversing a single animation. Nothing animates on the first composition.
+ * Returns the end frame of [enter] or [exit] without playing anything; the app has no motion.
  */
 @Composable
 fun rememberAnimatedVectorPainter(
@@ -22,12 +21,5 @@ fun rememberAnimatedVectorPainter(
     exit: AnimatedImageVector,
     atEnd: Boolean,
 ): Painter {
-    val composed = remember { mutableStateOf(false) }
-    SideEffect { composed.value = true }
-    return key(atEnd) {
-        // A fresh group per change, so the new animation starts from its first frame
-        var playing by remember { mutableStateOf(!composed.value) }
-        LaunchedEffect(Unit) { playing = true }
-        rememberAnimatedVectorPainter(if (atEnd) enter else exit, playing)
-    }
+    return rememberAnimatedVectorPainter(if (atEnd) enter else exit, atEnd = true)
 }

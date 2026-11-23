@@ -1,15 +1,5 @@
 package mihon.feature.upcoming.components.calendar
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.ContentTransform
-import androidx.compose.animation.SizeTransform
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
@@ -31,6 +21,7 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.KeyboardArrowLeft
 import mihon.icons.materialsymbols.rounded.KeyboardArrowRight
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.components.motion.AnimatedContent
 import tachiyomi.presentation.core.i18n.stringResource
 import java.time.format.DateTimeFormatter
 import kotlin.time.Clock
@@ -47,16 +38,10 @@ fun CalenderHeader(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        AnimatedContent(
-            targetState = yearMonth,
-            transitionSpec = { getAnimation() },
-            label = "Change Month",
-        ) { monthYear ->
-            Text(
-                text = getTitleText(monthYear),
-                style = MaterialTheme.typography.titleLarge,
-            )
-        }
+        Text(
+            text = getTitleText(yearMonth),
+            style = MaterialTheme.typography.titleLarge,
+        )
         Row {
             IconButton(onClick = onPreviousClick) {
                 @Suppress("DEPRECATION")
@@ -68,25 +53,6 @@ fun CalenderHeader(
             }
         }
     }
-}
-
-private const val MONTH_YEAR_CHANGE_ANIMATION_DURATION = 200
-
-private fun AnimatedContentTransitionScope<YearMonth>.getAnimation(): ContentTransform {
-    val movingForward = targetState > initialState
-
-    val enterTransition = slideInVertically(
-        animationSpec = tween(durationMillis = MONTH_YEAR_CHANGE_ANIMATION_DURATION),
-    ) { height -> if (movingForward) height else -height } + fadeIn(
-        animationSpec = tween(durationMillis = MONTH_YEAR_CHANGE_ANIMATION_DURATION),
-    )
-    val exitTransition = slideOutVertically(
-        animationSpec = tween(durationMillis = MONTH_YEAR_CHANGE_ANIMATION_DURATION),
-    ) { height -> if (movingForward) -height else height } + fadeOut(
-        animationSpec = tween(durationMillis = MONTH_YEAR_CHANGE_ANIMATION_DURATION),
-    )
-    return (enterTransition togetherWith exitTransition)
-        .using(SizeTransform(clip = false))
 }
 
 @Composable

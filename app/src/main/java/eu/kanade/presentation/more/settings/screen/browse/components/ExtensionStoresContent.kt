@@ -47,7 +47,7 @@ fun ExtensionStoresContent(
         repos.forEach {
             item {
                 ExtensionStoresListItem(
-                    modifier = Modifier.animateItem(),
+                    modifier = Modifier,
                     store = it,
                     onOpenWebsite = { onOpenWebsite(it) },
                     onOpenDiscord = { onOpenDiscord(it) },

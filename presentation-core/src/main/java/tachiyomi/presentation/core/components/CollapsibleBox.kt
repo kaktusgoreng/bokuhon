@@ -1,6 +1,5 @@
 package tachiyomi.presentation.core.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.KeyboardArrowDown
 import mihon.icons.materialsymbols.rounded.KeyboardArrowUp
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.theme.header
 
 @Composable

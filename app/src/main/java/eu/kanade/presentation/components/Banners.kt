@@ -1,8 +1,5 @@
 package eu.kanade.presentation.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -32,6 +29,7 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMaxBy
 import dev.icerock.moko.resources.StringResource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 
 val DownloadedOnlyBannerBackgroundColor
@@ -70,11 +68,7 @@ fun AppStateBanners(
     val mainInsetsTop = mainInsets.getTop(density)
     SubcomposeLayout(modifier = modifier) { constraints ->
         val indexingPlaceable = subcompose(0) {
-            AnimatedVisibility(
-                visible = indexing,
-                enter = expandVertically(),
-                exit = shrinkVertically(),
-            ) {
+            AnimatedVisibility(visible = indexing) {
                 IndexingDownloadBanner(
                     modifier = Modifier.windowInsetsPadding(mainInsets),
                 )
@@ -83,11 +77,7 @@ fun AppStateBanners(
         val indexingHeight = indexingPlaceable.fastMaxBy { it.height }?.height ?: 0
 
         val downloadedOnlyPlaceable = subcompose(1) {
-            AnimatedVisibility(
-                visible = downloadedOnlyMode,
-                enter = expandVertically(),
-                exit = shrinkVertically(),
-            ) {
+            AnimatedVisibility(visible = downloadedOnlyMode) {
                 val top = (mainInsetsTop - indexingHeight).coerceAtLeast(0)
                 DownloadedOnlyModeBanner(
                     modifier = Modifier.windowInsetsPadding(WindowInsets(top = top)),
@@ -97,11 +87,7 @@ fun AppStateBanners(
         val downloadedOnlyHeight = downloadedOnlyPlaceable.fastMaxBy { it.height }?.height ?: 0
 
         val incognitoPlaceable = subcompose(2) {
-            AnimatedVisibility(
-                visible = incognitoMode,
-                enter = expandVertically(),
-                exit = shrinkVertically(),
-            ) {
+            AnimatedVisibility(visible = incognitoMode) {
                 val top = (mainInsetsTop - indexingHeight - downloadedOnlyHeight).coerceAtLeast(0)
                 IncognitoModeBanner(
                     modifier = Modifier.windowInsetsPadding(WindowInsets(top = top)),

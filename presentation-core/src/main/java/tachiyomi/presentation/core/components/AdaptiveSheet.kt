@@ -1,7 +1,6 @@
 package tachiyomi.presentation.core.components
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
@@ -47,6 +46,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import kotlin.math.roundToInt
 
 @Composable
@@ -121,7 +121,7 @@ fun AdaptiveSheet(
         )
         val internalOnDismissRequest = {
             if (anchoredDraggableState.settledValue == 0) {
-                scope.launch { anchoredDraggableState.animateTo(1) }
+                scope.launch { anchoredDraggableState.settle(sheetAnimationSpec) }
             }
         }
         Box(
@@ -192,7 +192,7 @@ fun AdaptiveSheet(
             )
 
             LaunchedEffect(anchoredDraggableState) {
-                scope.launch { anchoredDraggableState.animateTo(0) }
+                scope.launch { anchoredDraggableState.settle(sheetAnimationSpec) }
                 snapshotFlow { anchoredDraggableState.settledValue }
                     .drop(1)
                     .filter { it == 1 }
@@ -257,4 +257,4 @@ private fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection(
     private fun Offset.toFloat(): Float = this.y
 }
 
-private val sheetAnimationSpec = tween<Float>(durationMillis = 350)
+private val sheetAnimationSpec = tween<Float>(durationMillis = 0)

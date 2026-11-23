@@ -1,12 +1,5 @@
 package eu.kanade.presentation.manga.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -63,6 +56,8 @@ import mihon.icons.materialsymbols.rounded.MoreVert
 import mihon.icons.materialsymbols.rounded.RemoveDone
 import mihon.icons.materialsymbols.rounded.SwapCalls
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.components.motion.AnimatedVisibility
+import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.stringResource
 import kotlin.time.Duration.Companion.seconds
 
@@ -78,11 +73,7 @@ fun MangaBottomActionMenu(
     onDownloadClicked: (() -> Unit)? = null,
     onDeleteClicked: (() -> Unit)? = null,
 ) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = expandVertically(expandFrom = Alignment.Bottom),
-        exit = shrinkVertically(shrinkTowards = Alignment.Bottom),
-    ) {
+    AnimatedVisibility(visible = visible) {
         val scope = rememberCoroutineScope()
         Surface(
             modifier = modifier,
@@ -211,11 +202,7 @@ private fun RowScope.Button(
                 imageVector = icon,
                 contentDescription = title,
             )
-            AnimatedVisibility(
-                visible = toConfirm,
-                enter = expandVertically(expandFrom = Alignment.Top) + fadeIn(),
-                exit = shrinkVertically(shrinkTowards = Alignment.Top) + fadeOut(),
-            ) {
+            AnimatedVisibility(visible = toConfirm) {
                 Text(
                     text = title,
                     overflow = TextOverflow.Visible,
@@ -239,11 +226,7 @@ fun LibraryBottomActionMenu(
     onMigrateClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = expandVertically(animationSpec = tween(delayMillis = 300)),
-        exit = shrinkVertically(animationSpec = tween()),
-    ) {
+    AnimatedVisibility(visible = visible) {
         val scope = rememberCoroutineScope()
         Surface(
             modifier = modifier,

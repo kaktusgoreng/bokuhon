@@ -131,14 +131,14 @@ private fun HistoryScreenContent(
             when (item) {
                 is HistoryUiModel.Header -> {
                     ListGroupHeader(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier,
                         text = relativeDateText(item.date),
                     )
                 }
                 is HistoryUiModel.Item -> {
                     val value = item.item
                     HistoryItem(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier,
                         history = value,
                         timeFormatter = timeFormatter,
                         onClickCover = { onClickCover(value) },
