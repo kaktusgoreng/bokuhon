@@ -71,10 +71,10 @@ import mihon.core.navigation.rememberNavigator
 import mihon.presentation.core.util.isTabletUi
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.BokuhonBadge
-import tachiyomi.presentation.core.bokuhon.BokuhonIcon
-import tachiyomi.presentation.core.bokuhon.BokuhonText
+import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -276,14 +276,14 @@ private fun TabletNavigationRail(tabNavigator: Navigator) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Box {
-                    BokuhonIcon(
+                    Icon(
                         painter = options.icon,
                         contentDescription = options.title,
                         tint = contentColor,
                     )
                     TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp))
                 }
-                BokuhonText(
+                Text(
                     text = options.title,
                     style = LocalBokuhonTypography.current.labelSmall,
                     color = contentColor,
@@ -334,7 +334,7 @@ private fun BottomNavigationBar(tabNavigator: Navigator) {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Box {
-                    BokuhonIcon(
+                    Icon(
                         painter = options.icon,
                         contentDescription = options.title,
                         tint = contentColor,
@@ -342,7 +342,7 @@ private fun BottomNavigationBar(tabNavigator: Navigator) {
                     )
                     TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 8.dp, y = (-4).dp))
                 }
-                BokuhonText(
+                Text(
                     text = options.title,
                     style = LocalBokuhonTypography.current.labelSmall,
                     color = contentColor,

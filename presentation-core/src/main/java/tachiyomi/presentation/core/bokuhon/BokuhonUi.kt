@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicText
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
@@ -18,15 +19,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// A deliberately tiny UI layer over Compose Foundation: no Material library, four tones, square
-// corners, and the handful of primitives the app actually uses.
+// A deliberately tiny UI layer over Compose Foundation: no Material widgets, four tones, square
+// corners, and the handful of primitives the app actually uses. Names and parameters mirror the
+// Material components they replace, so screens migrate by changing imports only.
 
 @Immutable
 data class BokuhonColors(
@@ -84,64 +93,141 @@ fun ProvideBokuhonTheme(isDark: Boolean, content: @Composable () -> Unit) {
 }
 
 @Composable
-fun BokuhonText(
+fun Text(
     text: String,
     modifier: Modifier = Modifier,
-    style: TextStyle = LocalBokuhonTypography.current.bodyLarge,
     color: Color = Color.Unspecified,
-    maxLines: Int = Int.MAX_VALUE,
-    overflow: TextOverflow = TextOverflow.Clip,
+    style: TextStyle = LocalBokuhonTypography.current.bodyLarge,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    fontWeight: FontWeight? = null,
+    fontStyle: FontStyle? = null,
+    fontFamily: FontFamily? = null,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
+    lineHeight: TextUnit = TextUnit.Unspecified,
     textAlign: TextAlign? = null,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
+    softWrap: Boolean = true,
+    onTextLayout: ((TextLayoutResult) -> Unit)? = null,
 ) {
+    // While Material still owns the theme, honour its ambient content colour so text inside
+    // Material buttons and cards keeps its contrast.
+    val resolvedColor = color.takeOrElse {
+        LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+    }
     BasicText(
         text = text,
         modifier = modifier,
         style = style.copy(
-            color = color.takeOrElse {
-                LocalBokuhonContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
-            },
+            color = resolvedColor,
+            fontSize = if (fontSize != TextUnit.Unspecified) fontSize else style.fontSize,
+            fontWeight = fontWeight ?: style.fontWeight,
+            fontStyle = fontStyle ?: style.fontStyle,
+            fontFamily = fontFamily ?: style.fontFamily,
+            letterSpacing = if (letterSpacing != TextUnit.Unspecified) letterSpacing else style.letterSpacing,
+            lineHeight = if (lineHeight != TextUnit.Unspecified) lineHeight else style.lineHeight,
             textAlign = textAlign ?: style.textAlign,
         ),
-        maxLines = maxLines,
         overflow = overflow,
+        softWrap = softWrap,
+        maxLines = maxLines,
+        minLines = minLines,
+        onTextLayout = onTextLayout,
     )
 }
 
 @Composable
-fun BokuhonIcon(
+fun Text(
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
+    style: TextStyle = LocalBokuhonTypography.current.bodyLarge,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    fontWeight: FontWeight? = null,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
+    textAlign: TextAlign? = null,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    val resolvedColor = color.takeOrElse {
+        LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+    }
+    BasicText(
+        text = text,
+        modifier = modifier,
+        style = style.copy(
+            color = resolvedColor,
+            fontSize = if (fontSize != TextUnit.Unspecified) fontSize else style.fontSize,
+            fontWeight = fontWeight ?: style.fontWeight,
+            letterSpacing = if (letterSpacing != TextUnit.Unspecified) letterSpacing else style.letterSpacing,
+            textAlign = textAlign ?: style.textAlign,
+        ),
+        overflow = overflow,
+        maxLines = maxLines,
+    )
+}
+
+@Composable
+fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = Color.Unspecified,
 ) {
-    val resolved = tint.takeOrElse {
-        LocalBokuhonContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
-    }
     Image(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier,
-        colorFilter = ColorFilter.tint(resolved),
+        colorFilter = ColorFilter.tint(resolveIconTint(tint)),
     )
 }
 
 @Composable
-fun BokuhonDivider(modifier: Modifier = Modifier) {
+fun Icon(
+    imageVector: ImageVector,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified,
+) {
+    Image(
+        imageVector = imageVector,
+        contentDescription = contentDescription,
+        modifier = modifier,
+        colorFilter = ColorFilter.tint(resolveIconTint(tint)),
+    )
+}
+
+@Composable
+private fun resolveIconTint(tint: Color): Color = tint.takeOrElse {
+    LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+}
+
+@Composable
+fun HorizontalDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = 1.dp,
+    color: Color = LocalBokuhonColors.current.outlineVariant,
+) {
     Box(
         modifier
             .fillMaxWidth()
-            .height(1.dp)
-            .background(LocalBokuhonColors.current.outlineVariant),
+            .height(thickness)
+            .background(color),
     )
 }
 
 @Composable
-fun BokuhonVerticalDivider(modifier: Modifier = Modifier) {
+fun VerticalDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = 1.dp,
+    color: Color = LocalBokuhonColors.current.outlineVariant,
+) {
     Box(
         modifier
             .fillMaxHeight()
-            .width(1.dp)
-            .background(LocalBokuhonColors.current.outlineVariant),
+            .width(thickness)
+            .background(color),
     )
 }
 
@@ -152,7 +238,7 @@ fun BokuhonBadge(text: String, modifier: Modifier = Modifier) {
             .size(16.dp)
             .background(LocalBokuhonColors.current.primary),
     ) {
-        BokuhonText(
+        Text(
             text = text,
             modifier = Modifier.align(androidx.compose.ui.Alignment.Center),
             style = LocalBokuhonTypography.current.labelSmall,

@@ -2,12 +2,12 @@ package tachiyomi.presentation.core.components.material
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.offset
 import androidx.compose.ui.unit.sp
+import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.Pill
 
 @Composable
