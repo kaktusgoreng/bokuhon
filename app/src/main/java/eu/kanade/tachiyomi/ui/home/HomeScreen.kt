@@ -12,27 +12,27 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.Badge
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
-import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -70,6 +70,11 @@ import mihon.core.navigation.NavigatorDisplay
 import mihon.core.navigation.rememberNavigator
 import mihon.presentation.core.util.isTabletUi
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonBadge
+import tachiyomi.presentation.core.bokuhon.BokuhonIcon
+import tachiyomi.presentation.core.bokuhon.BokuhonText
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -151,22 +156,10 @@ fun HomeScreen() {
     val navigator = LocalNavigator.current
     val resultEventBus = LocalResultEventBus.current
     val tabletUi = isTabletUi()
-    val navigationSuiteType = if (tabletUi) {
-        NavigationSuiteType.NavigationRail
-    } else {
-        NavigationSuiteType.NavigationBar
-    }
-    val navigationSuiteState = rememberNavigationSuiteScaffoldState()
-    LaunchedEffect(navigationSuiteState, tabletUi) {
-        if (tabletUi) navigationSuiteState.show()
-    }
+    var bottomBarVisible by rememberSaveable { mutableStateOf(true) }
 
     ResultEffect<ShowBottomNavEvent> {
-        if (tabletUi || it.visible) {
-            navigationSuiteState.show()
-        } else {
-            navigationSuiteState.hide()
-        }
+        bottomBarVisible = tabletUi || it.visible
     }
 
     if (tabletUi) {
@@ -175,15 +168,11 @@ fun HomeScreen() {
             HomeContent(tabNavigator, Modifier.weight(1f))
         }
     } else {
-        NavigationSuiteScaffold(
-            navigationSuiteType = NavigationSuiteType.NavigationBar,
-            state = navigationSuiteState,
-            navigationItemVerticalArrangement = Arrangement.Center,
-            navigationItems = {
-                TABS.fastForEach { NavigationSuiteItem(it, tabNavigator, NavigationSuiteType.NavigationBar) }
-            },
-        ) {
-            HomeContent(tabNavigator, Modifier.fillMaxSize())
+        Column(modifier = Modifier.fillMaxSize()) {
+            HomeContent(tabNavigator, Modifier.weight(1f))
+            if (bottomBarVisible) {
+                BottomNavigationBar(tabNavigator)
+            }
         }
     }
 
@@ -208,99 +197,6 @@ fun HomeScreen() {
         }
         if (it is TabEvent.More && it.toDownloads) {
             navigator.push(DownloadQueueRoute)
-        }
-    }
-}
-
-@Composable
-private fun NavigationSuiteItem(
-    tab: TopLevelRoute,
-    tabNavigator: Navigator,
-    navigationSuiteType: NavigationSuiteType,
-) {
-    val resultEventBus = LocalResultEventBus.current
-    val selected = tabNavigator.current == tab
-    val options = tab.options(selected)
-
-    NavigationSuiteItem(
-        navigationSuiteType = navigationSuiteType,
-        selected = selected,
-        onClick = {
-            if (!selected) {
-                tabNavigator.replaceAll(tab)
-            } else {
-                resultEventBus.sendResult(
-                    resultKey = tab.reselectEventKey,
-                    result = Unit,
-                )
-            }
-        },
-        icon = {
-            Icon(
-                painter = options.icon,
-                contentDescription = options.title,
-            )
-        },
-        label = {
-            Text(
-                text = options.title,
-                style = MaterialTheme.typography.labelLarge,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        },
-        badge = tabBadge(tab),
-    )
-}
-
-@Composable
-private fun tabBadge(tab: TopLevelRoute): (@Composable () -> Unit)? {
-    val context = LocalContext.current
-    val count by produceState(initialValue = 0, tab) {
-        val graph = context.appGraph
-        when (tab) {
-            is TopLevelRoute.Updates -> {
-                combine(
-                    graph.libraryPreferences.newShowUpdatesCount.changes(),
-                    graph.libraryPreferences.newUpdatesCount.changes(),
-                ) { show, count ->
-                    if (show) count else 0
-                }
-                    .collectLatest { value = it }
-            }
-
-            is TopLevelRoute.Browse -> {
-                graph.sourcePreferences.extensionUpdatesCount.changes()
-                    .collectLatest { value = it }
-            }
-
-            else -> value = 0
-        }
-    }
-    if (count <= 0) return null
-    return {
-        Badge {
-            val desc = when (tab) {
-                is TopLevelRoute.Updates -> pluralStringResource(
-                    MR.plurals.notification_chapters_generic,
-                    count = count,
-                    count,
-                )
-
-                is TopLevelRoute.Browse -> pluralStringResource(
-                    MR.plurals.update_check_notification_ext_updates,
-                    count = count,
-                    count,
-                )
-
-                else -> null
-            }
-            Text(
-                text = count.toString(),
-                modifier = Modifier.semantics {
-                    if (desc != null) contentDescription = desc
-                },
-            )
         }
     }
 }
@@ -347,23 +243,20 @@ private fun HomeContent(tabNavigator: Navigator, modifier: Modifier = Modifier) 
 
 @Composable
 private fun TabletNavigationRail(tabNavigator: Navigator) {
-    val resultEventBus = LocalResultEventBus.current
+    val colors = LocalBokuhonColors.current
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .width(88.dp)
-            .background(MaterialTheme.colorScheme.surfaceContainerHigh),
+            .background(colors.container),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TABS.fastForEach { tab ->
+            val resultEventBus = LocalResultEventBus.current
             val selected = tabNavigator.current == tab
             val options = tab.options(selected)
-            val contentColor = if (selected) {
-                MaterialTheme.colorScheme.onPrimary
-            } else {
-                MaterialTheme.colorScheme.onSurfaceVariant
-            }
+            val contentColor = if (selected) colors.onPrimary else colors.onSurface
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -378,25 +271,21 @@ private fun TabletNavigationRail(tabNavigator: Navigator) {
                             }
                         },
                     )
-                    .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
+                    .background(if (selected) colors.primary else Color.Transparent)
                     .padding(vertical = 12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Box {
-                    Icon(
+                    BokuhonIcon(
                         painter = options.icon,
                         contentDescription = options.title,
                         tint = contentColor,
                     )
-                    tabBadge(tab)?.let { badge ->
-                        Box(modifier = Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp)) {
-                            badge()
-                        }
-                    }
+                    TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp))
                 }
-                Text(
+                BokuhonText(
                     text = options.title,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = LocalBokuhonTypography.current.labelSmall,
                     color = contentColor,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -405,6 +294,112 @@ private fun TabletNavigationRail(tabNavigator: Navigator) {
             }
         }
     }
+}
+
+@Composable
+private fun BottomNavigationBar(tabNavigator: Navigator) {
+    val colors = LocalBokuhonColors.current
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(colors.container)
+            .windowInsetsPadding(WindowInsets.navigationBars)
+            .height(BottomBarHeight),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        TABS.fastForEach { tab ->
+            val resultEventBus = LocalResultEventBus.current
+            val selected = tabNavigator.current == tab
+            val options = tab.options(selected)
+            val contentColor = if (selected) colors.onPrimary else colors.onSurface
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .selectable(
+                        selected = selected,
+                        role = Role.Tab,
+                        onClick = {
+                            if (!selected) {
+                                tabNavigator.replaceAll(tab)
+                            } else {
+                                resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
+                            }
+                        },
+                    )
+                    .background(if (selected) colors.primary else Color.Transparent)
+                    .padding(vertical = 6.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Box {
+                    BokuhonIcon(
+                        painter = options.icon,
+                        contentDescription = options.title,
+                        tint = contentColor,
+                        modifier = Modifier.size(24.dp),
+                    )
+                    TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 8.dp, y = (-4).dp))
+                }
+                BokuhonText(
+                    text = options.title,
+                    style = LocalBokuhonTypography.current.labelSmall,
+                    color = contentColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun TabBadge(tab: TopLevelRoute, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val count by produceState(initialValue = 0, tab) {
+        val graph = context.appGraph
+        when (tab) {
+            is TopLevelRoute.Updates -> {
+                combine(
+                    graph.libraryPreferences.newShowUpdatesCount.changes(),
+                    graph.libraryPreferences.newUpdatesCount.changes(),
+                ) { show, count ->
+                    if (show) count else 0
+                }
+                    .collectLatest { value = it }
+            }
+
+            is TopLevelRoute.Browse -> {
+                graph.sourcePreferences.extensionUpdatesCount.changes()
+                    .collectLatest { value = it }
+            }
+
+            else -> value = 0
+        }
+    }
+    if (count <= 0) return
+
+    val desc = when (tab) {
+        is TopLevelRoute.Updates -> pluralStringResource(
+            MR.plurals.notification_chapters_generic,
+            count = count,
+            count,
+        )
+
+        is TopLevelRoute.Browse -> pluralStringResource(
+            MR.plurals.update_check_notification_ext_updates,
+            count = count,
+            count,
+        )
+
+        else -> null
+    }
+
+    BokuhonBadge(
+        text = count.toString(),
+        modifier = modifier.semantics { if (desc != null) contentDescription = desc },
+    )
 }
 
 sealed interface TabEvent {
@@ -423,6 +418,8 @@ data class TabOptions(
 )
 
 private val spec: ContentTransform = EnterTransition.None togetherWith ExitTransition.None
+
+private val BottomBarHeight = 64.dp
 
 private val TABS: List<TopLevelRoute> = listOf(
     TopLevelRoute.Library,

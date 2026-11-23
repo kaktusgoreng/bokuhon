@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import tachiyomi.presentation.core.bokuhon.ProvideBokuhonTheme
 
 @Composable
 fun TachiyomiTheme(content: @Composable () -> Unit) {
@@ -16,13 +17,15 @@ fun TachiyomiTheme(content: @Composable () -> Unit) {
         // Touch ripples are motion too; e-ink panels smear them into grey trails.
         LocalRippleConfiguration provides null,
     ) {
-        MaterialTheme(
-            colorScheme = remember(isDark) {
-                if (isDark) BokuhonDarkScheme else BokuhonLightScheme
-            },
-            shapes = SquareShapes,
-            content = content,
-        )
+        ProvideBokuhonTheme(isDark = isDark) {
+            MaterialTheme(
+                colorScheme = remember(isDark) {
+                    if (isDark) BokuhonDarkScheme else BokuhonLightScheme
+                },
+                shapes = SquareShapes,
+                content = content,
+            )
+        }
     }
 }
 
