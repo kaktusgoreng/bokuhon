@@ -182,7 +182,7 @@ fun MangaActionRow(
                 stringResource(MR.strings.action_add)
             },
             selected = favorite,
-            color = if (favorite) LocalBokuhonColors.current.primary else defaultActionButtonColor,
+            labelColor = if (favorite) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = onAddToLibraryClicked,
             onLongClick = onEditCategory,
         ) {
@@ -206,7 +206,7 @@ fun MangaActionRow(
                 )
             },
             selected = isUserIntervalMode,
-            color = if (isUserIntervalMode) LocalBokuhonColors.current.primary else defaultActionButtonColor,
+            labelColor = if (isUserIntervalMode) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = { onEditIntervalClicked?.invoke() },
         ) {
             Icon(imageVector = MaterialSymbols.Rounded.HourglassEmpty, contentDescription = null)
@@ -218,7 +218,7 @@ fun MangaActionRow(
                 pluralStringResource(MR.plurals.num_trackers, count = trackingCount, trackingCount)
             },
             selected = trackingCount != 0,
-            color = if (trackingCount == 0) defaultActionButtonColor else LocalBokuhonColors.current.primary,
+            labelColor = if (trackingCount == 0) defaultActionButtonColor else LocalBokuhonColors.current.primary,
             onClick = onTrackingClicked,
         ) {
             Icon(
@@ -230,7 +230,7 @@ fun MangaActionRow(
             MangaActionSquare(
                 title = stringResource(MR.strings.action_web_view),
                 selected = false,
-                color = defaultActionButtonColor,
+                labelColor = defaultActionButtonColor,
                 onClick = onWebViewClicked,
                 onLongClick = onWebViewLongClicked,
             ) {
@@ -716,7 +716,7 @@ private fun TagsChip(
 private fun RowScope.MangaActionSquare(
     title: String,
     selected: Boolean,
-    color: Color,
+    labelColor: Color,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
     content: @Composable () -> Unit,
@@ -735,14 +735,16 @@ private fun RowScope.MangaActionSquare(
                 .combinedClickable(role = Role.Button, onClick = onClick, onLongClick = onLongClick),
             contentAlignment = Alignment.Center,
         ) {
-            CompositionLocalProvider(LocalBokuhonContentColor provides if (selected) colors.onPrimary else color) {
+            // Icons stay ink when idle; only the caption dims.
+            val contentColor = if (selected) colors.onPrimary else colors.onSurface
+            CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) {
                 content()
             }
         }
         Spacer(Modifier.height(4.dp))
         Text(
             text = title,
-            color = color,
+            color = labelColor,
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
         )
