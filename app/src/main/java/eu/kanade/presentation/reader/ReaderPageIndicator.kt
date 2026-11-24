@@ -1,16 +1,19 @@
 package eu.kanade.presentation.reader
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
@@ -23,30 +26,24 @@ fun ReaderPageIndicator(
 ) {
     if (currentPage <= 0 || totalPages <= 0) return
 
-    val text = "$currentPage / $totalPages"
-
-    val style = TextStyle(
-        color = Color(235, 235, 235),
-        fontSize = LocalBokuhonTypography.current.bodySmall.fontSize,
-        fontWeight = FontWeight.Bold,
-        letterSpacing = 1.sp,
-    )
-    val strokeStyle = style.copy(
-        color = Color(45, 45, 45),
-        drawStyle = Stroke(width = 4f),
-    )
+    val colors = LocalBokuhonColors.current
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier,
+        modifier = modifier
+            // A gap off the panel edge, where e-ink devices clip into their bezel.
+            .padding(bottom = BokuhonPadding.small)
+            .background(colors.surface)
+            // Ink in the light theme, so the block reads against a white page.
+            .border(1.dp, colors.onSurface)
+            .padding(horizontal = BokuhonPadding.small, vertical = 2.dp),
     ) {
         Text(
-            text = text,
-            style = strokeStyle,
-        )
-        Text(
-            text = text,
-            style = style,
+            text = "$currentPage / $totalPages",
+            color = colors.onSurface,
+            style = LocalBokuhonTypography.current.bodySmall,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 1.sp,
         )
     }
 }
