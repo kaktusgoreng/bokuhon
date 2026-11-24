@@ -61,7 +61,7 @@ fun Scaffold(
 
     val contentPadding = PaddingValues(
         start = insets.calculateStartPadding(layoutDirection),
-        top = topBarHeightDp,
+        top = if (topBarHeight > 0) topBarHeightDp else insets.calculateTopPadding(),
         end = insets.calculateEndPadding(layoutDirection),
         bottom = if (bottomBarHeight > 0) bottomBarHeightDp else insets.calculateBottomPadding(),
     )
