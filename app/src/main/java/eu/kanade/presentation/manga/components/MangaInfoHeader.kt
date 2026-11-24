@@ -672,7 +672,7 @@ private fun MangaSummary(
                 ) {
                     val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_caret_flip)
                     Icon(
-                        painter = rememberAnimatedVectorPainter(image, !expanded),
+                        painter = rememberAnimatedVectorPainter(image, atEnd = true),
                         contentDescription = stringResource(
                             if (expanded) MR.strings.manga_info_collapse else MR.strings.manga_info_expand,
                         ),
