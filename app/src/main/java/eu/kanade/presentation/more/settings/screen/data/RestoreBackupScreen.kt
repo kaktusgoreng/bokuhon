@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
@@ -42,12 +41,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mihon.core.navigation.LocalNavigator
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.LazyColumnWithAction
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -110,8 +109,8 @@ private fun LazyListScope.errorMessageItem(
     item {
         SectionCard {
             Column(
-                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                modifier = Modifier.padding(horizontal = BokuhonPadding.medium),
+                verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             ) {
                 val msg = buildAnnotatedString {
                     when (error) {

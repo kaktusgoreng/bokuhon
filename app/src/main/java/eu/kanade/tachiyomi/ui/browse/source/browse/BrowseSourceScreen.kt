@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -50,13 +47,16 @@ import mihon.presentation.core.util.collectAsLazyPagingItems
 import tachiyomi.core.common.Constants
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.FilterChipDefaults
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.source.local.LocalSource
@@ -120,7 +120,7 @@ fun BrowseSourceScreen(
         topBar = {
             Column(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface)
+                    .background(LocalBokuhonColors.current.surface)
                     .pointerInput(Unit) {},
             ) {
                 BrowseSourceToolbar(
@@ -139,8 +139,8 @@ fun BrowseSourceScreen(
                 Row(
                     modifier = Modifier
                         .horizontalScroll(rememberScrollState())
-                        .padding(horizontal = MaterialTheme.padding.small),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                        .padding(horizontal = BokuhonPadding.small),
+                    horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                 ) {
                     FilterChip(
                         selected = state.listing == Listing.Popular,

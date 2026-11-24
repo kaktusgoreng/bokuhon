@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,8 +25,8 @@ import kotlinx.datetime.plusMonth
 import kotlinx.datetime.toJavaDayOfWeek
 import mihon.core.designsystem.utils.isExpandedWidthWindow
 import mihon.core.designsystem.utils.isMediumWidthWindow
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
@@ -54,8 +53,8 @@ fun Calendar(
             onNextClick = { setSelectedYearMonth(selectedYearMonth.plusMonth()) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MaterialTheme.padding.small)
-                .padding(start = MaterialTheme.padding.medium),
+                .padding(vertical = BokuhonPadding.small)
+                .padding(start = BokuhonPadding.medium),
         )
         CalendarGrid(
             selectedYearMonth = selectedYearMonth,

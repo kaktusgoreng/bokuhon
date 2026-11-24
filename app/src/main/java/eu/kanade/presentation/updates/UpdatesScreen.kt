@@ -5,11 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,13 +31,17 @@ import mihon.icons.materialsymbols.rounded.FlipToBack
 import mihon.icons.materialsymbols.rounded.Refresh
 import mihon.icons.materialsymbols.rounded.SelectAll
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
+import tachiyomi.presentation.core.bokuhon.TopAppBarScrollBehavior
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
-import tachiyomi.presentation.core.theme.active
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
@@ -175,7 +174,11 @@ private fun UpdatesAppBar(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
                         icon = MaterialSymbols.Rounded.FilterList,
-                        iconTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current,
+                        iconTint = if (hasFilters) {
+                            LocalBokuhonColors.current.active
+                        } else {
+                            LocalBokuhonContentColor.current
+                        },
                         onClick = onFilterClicked,
                     ),
                     AppBar.Action(

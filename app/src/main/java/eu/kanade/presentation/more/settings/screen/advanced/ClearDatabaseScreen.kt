@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
@@ -53,13 +51,16 @@ import tachiyomi.domain.source.interactor.GetSourcesWithNonLibraryManga
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.model.SourceWithCount
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Checkbox
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.LazyColumnWithAction
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.Switch
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
@@ -84,12 +85,12 @@ fun ClearDatabaseScreen() {
                     },
                     text = {
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                         ) {
                             Text(text = stringResource(MR.strings.clear_database_text))
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
@@ -104,8 +105,8 @@ fun ClearDatabaseScreen() {
                             if (!keepReadManga) {
                                 Text(
                                     text = stringResource(MR.strings.clear_database_history_warning),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.error,
+                                    style = LocalBokuhonTypography.current.bodySmall,
+                                    color = LocalBokuhonColors.current.error,
                                 )
                             }
                         }
@@ -210,7 +211,7 @@ private fun ClearDatabaseItem(
         ) {
             Text(
                 text = source.visualName,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
             )
             Text(text = stringResource(MR.strings.clear_database_source_item_count, count))
         }

@@ -4,8 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +14,11 @@ import mihon.icons.materialsymbols.rounded.Edit
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.ElevatedCard
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -34,10 +33,10 @@ fun ReorderableCollectionItemScope.CategoryListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onRename)
-                .padding(vertical = MaterialTheme.padding.small)
+                .padding(vertical = BokuhonPadding.small)
                 .padding(
-                    start = MaterialTheme.padding.small,
-                    end = MaterialTheme.padding.medium,
+                    start = BokuhonPadding.small,
+                    end = BokuhonPadding.medium,
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -45,7 +44,7 @@ fun ReorderableCollectionItemScope.CategoryListItem(
                 imageVector = MaterialSymbols.Rounded.DragHandle,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(MaterialTheme.padding.medium)
+                    .padding(BokuhonPadding.medium)
                     .draggableHandle(),
             )
             Text(

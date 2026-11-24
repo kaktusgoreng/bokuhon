@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -21,10 +20,11 @@ import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.flow.collectLatest
 import mihon.app.di.appGraph
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Button
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 internal class StorageStep : OnboardingStep {
@@ -44,7 +44,7 @@ internal class StorageStep : OnboardingStep {
 
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
         ) {
             Text(
                 stringResource(
@@ -69,7 +69,7 @@ internal class StorageStep : OnboardingStep {
 
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 8.dp),
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = LocalBokuhonColors.current.onPrimaryContainer,
             )
 
             Text(stringResource(MR.strings.onboarding_storage_help_info, stringResource(MR.strings.app_name)))

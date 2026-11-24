@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -29,6 +28,8 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -66,7 +67,7 @@ fun TrackingPreferenceWidget(
                         text = tracker.name,
                         modifier = Modifier.padding(horizontal = 16.dp),
                         maxLines = 1,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = LocalBokuhonTypography.current.titleLarge,
                         fontSize = TitleFontSize,
                         fontWeight = FontWeight.Medium,
                     )
@@ -76,7 +77,7 @@ fun TrackingPreferenceWidget(
                             text = displayName,
                             modifier = Modifier.padding(horizontal = 16.dp),
                             maxLines = 1,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = LocalBokuhonTypography.current.bodyMedium,
                             overflow = TextOverflow.Ellipsis,
                         )
                     }
@@ -111,7 +112,7 @@ fun TrackingPreferenceWidget(
                     modifier = Modifier
                         .padding(4.dp)
                         .size(32.dp),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = LocalBokuhonColors.current.primary,
                     contentDescription = stringResource(MR.strings.login_success),
                 )
             }

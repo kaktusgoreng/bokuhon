@@ -11,19 +11,6 @@ import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PlainTooltip
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TooltipAnchorPosition
-import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults.rememberTooltipPositionProvider
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.material3.rememberTooltipState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -55,9 +42,17 @@ import mihon.icons.materialsymbols.rounded.Close
 import mihon.icons.materialsymbols.rounded.MoreVert
 import mihon.icons.materialsymbols.rounded.Search
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.PlaceholderTextFieldDecorator
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.TopAppBar
+import tachiyomi.presentation.core.bokuhon.TopAppBarDefaults
+import tachiyomi.presentation.core.bokuhon.TopAppBarScrollBehavior
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.clearFocusOnSoftKeyboardHide
 import tachiyomi.presentation.core.util.runOnEnterKeyPressed
@@ -154,7 +149,7 @@ fun AppBar(
             title = titleContent,
             actions = actions,
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = backgroundColor ?: MaterialTheme.colorScheme.surfaceColorAtElevation(
+                containerColor = backgroundColor ?: LocalBokuhonColors.current.surfaceColorAtElevation(
                     elevation = if (isActionMode) 3.dp else 0.dp,
                 ),
             ),
@@ -180,7 +175,7 @@ fun AppBarTitle(
         subtitle?.let {
             Text(
                 text = it,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.basicMarquee(
@@ -198,49 +193,27 @@ fun AppBarActions(
     var showMenu by remember { mutableStateOf(false) }
 
     actions.filterIsInstance<AppBar.Action>().map {
-        TooltipBox(
-            positionProvider = rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-            tooltip = {
-                PlainTooltip {
-                    Text(it.title)
-                }
-            },
-            state = rememberTooltipState(),
-            focusable = false,
+        IconButton(
+            onClick = it.onClick,
+            enabled = it.enabled,
         ) {
-            IconButton(
-                onClick = it.onClick,
-                enabled = it.enabled,
-            ) {
-                Icon(
-                    imageVector = it.icon,
-                    tint = it.iconTint ?: LocalContentColor.current,
-                    contentDescription = it.title,
-                )
-            }
+            Icon(
+                imageVector = it.icon,
+                tint = it.iconTint ?: LocalBokuhonContentColor.current,
+                contentDescription = it.title,
+            )
         }
     }
 
     val overflowActions = actions.filterIsInstance<AppBar.OverflowAction>()
     if (overflowActions.isNotEmpty()) {
-        TooltipBox(
-            positionProvider = rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-            tooltip = {
-                PlainTooltip {
-                    Text(stringResource(MR.strings.action_menu_overflow_description))
-                }
-            },
-            state = rememberTooltipState(),
-            focusable = false,
+        IconButton(
+            onClick = { showMenu = !showMenu },
         ) {
-            IconButton(
-                onClick = { showMenu = !showMenu },
-            ) {
-                Icon(
-                    MaterialSymbols.Rounded.MoreVert,
-                    contentDescription = stringResource(MR.strings.action_menu_overflow_description),
-                )
-            }
+            Icon(
+                MaterialSymbols.Rounded.MoreVert,
+                contentDescription = stringResource(MR.strings.action_menu_overflow_description),
+            )
         }
 
         DropdownMenu(
@@ -324,35 +297,30 @@ fun SearchToolbar(
                     .runOnEnterKeyPressed(action = searchAndClearFocus)
                     .showSoftKeyboard(remember { searchQuery.isEmpty() })
                     .clearFocusOnSoftKeyboardHide(),
-                textStyle = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.onBackground,
+                textStyle = LocalBokuhonTypography.current.titleMedium.copy(
+                    color = LocalBokuhonColors.current.onBackground,
                     fontWeight = FontWeight.Normal,
                     fontSize = 18.sp,
                 ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                 onKeyboardAction = { searchAndClearFocus() },
                 lineLimits = TextFieldLineLimits.SingleLine,
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+                cursorBrush = SolidColor(LocalBokuhonColors.current.onBackground),
                 interactionSource = interactionSource,
-                decorator = TextFieldDefaults.decorator(
-                    state = searchFieldState,
-                    enabled = true,
-                    lineLimits = TextFieldLineLimits.SingleLine,
-                    outputTransformation = null,
-                    interactionSource = interactionSource,
+                decorator = PlaceholderTextFieldDecorator(
+                    showPlaceholder = { searchFieldState.text.isEmpty() },
                     placeholder = {
                         Text(
                             modifier = Modifier.secondaryItemAlpha(),
                             text = (placeholderText ?: stringResource(MR.strings.action_search_hint)),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.titleMedium.copy(
+                            style = LocalBokuhonTypography.current.titleMedium.copy(
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Normal,
                             ),
                         )
                     },
-                    container = {},
                 ),
             )
         },
@@ -364,48 +332,26 @@ fun SearchToolbar(
                 if (!searchEnabled) {
                     // Don't show search action
                 } else if (searchQuery == null) {
-                    TooltipBox(
-                        positionProvider = rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-                        tooltip = {
-                            PlainTooltip {
-                                Text(stringResource(MR.strings.action_search))
-                            }
-                        },
-                        state = rememberTooltipState(),
-                        focusable = false,
+                    IconButton(
+                        onClick = onClick,
                     ) {
-                        IconButton(
-                            onClick = onClick,
-                        ) {
-                            Icon(
-                                MaterialSymbols.Rounded.Search,
-                                contentDescription = stringResource(MR.strings.action_search),
-                            )
-                        }
+                        Icon(
+                            MaterialSymbols.Rounded.Search,
+                            contentDescription = stringResource(MR.strings.action_search),
+                        )
                     }
                 } else if (searchQuery.isNotEmpty()) {
-                    TooltipBox(
-                        positionProvider = rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-                        tooltip = {
-                            PlainTooltip {
-                                Text(stringResource(MR.strings.action_reset))
-                            }
+                    IconButton(
+                        onClick = {
+                            searchFieldState.clearText()
+                            onClick()
+                            focusRequester.requestFocus()
                         },
-                        state = rememberTooltipState(),
-                        focusable = false,
                     ) {
-                        IconButton(
-                            onClick = {
-                                searchFieldState.clearText()
-                                onClick()
-                                focusRequester.requestFocus()
-                            },
-                        ) {
-                            Icon(
-                                MaterialSymbols.Rounded.Close,
-                                contentDescription = stringResource(MR.strings.action_reset),
-                            )
-                        }
+                        Icon(
+                            MaterialSymbols.Rounded.Close,
+                            contentDescription = stringResource(MR.strings.action_reset),
+                        )
                     }
                 }
             }

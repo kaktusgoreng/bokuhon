@@ -7,10 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,12 +15,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.RadioButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
+import tachiyomi.presentation.core.bokuhon.minimumInteractiveComponentSize
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -116,7 +117,7 @@ private fun DialogRow(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .clip(MaterialTheme.shapes.small)
+            .clip(RectangleShape)
             .selectable(
                 selected = isSelected,
                 onClick = { if (!isSelected) onSelected() },
@@ -130,7 +131,7 @@ private fun DialogRow(
         )
         Text(
             text = label,
-            style = MaterialTheme.typography.bodyLarge.merge(),
+            style = LocalBokuhonTypography.current.bodyLarge.merge(),
             modifier = Modifier.padding(start = 24.dp),
         )
     }

@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Badge
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -32,13 +29,16 @@ import mihon.presentation.core.util.isTabletUi
 import tachiyomi.core.common.Constants
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.Badge
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.TwoPanelBox
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.theme.active
 
 @Composable
 fun UpcomingScreenContent(
@@ -110,7 +110,11 @@ private fun UpcomingToolbar(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
                         icon = MaterialSymbols.Rounded.FilterList,
-                        iconTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current,
+                        iconTint = if (hasFilters) {
+                            LocalBokuhonColors.current.active
+                        } else {
+                            LocalBokuhonContentColor.current
+                        },
                         onClick = onClickFilter,
                     ),
                     AppBar.Action(
@@ -136,15 +140,15 @@ private fun DateHeading(
         Text(
             text = relativeDateText(date),
             modifier = Modifier
-                .padding(MaterialTheme.padding.small)
-                .padding(start = MaterialTheme.padding.small),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                .padding(BokuhonPadding.small)
+                .padding(start = BokuhonPadding.small),
+            color = LocalBokuhonColors.current.onSurfaceVariant,
             fontWeight = FontWeight.SemiBold,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
         Badge(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
+            containerColor = LocalBokuhonColors.current.primary,
+            contentColor = LocalBokuhonColors.current.onPrimary,
         ) {
             Text("$mangaCount")
         }

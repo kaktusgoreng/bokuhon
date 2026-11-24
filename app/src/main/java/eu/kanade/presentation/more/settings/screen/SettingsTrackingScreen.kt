@@ -10,11 +10,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedSecureTextField
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -59,12 +54,17 @@ import mihon.icons.materialsymbols.rounded.Close
 import mihon.icons.materialsymbols.roundedfilled.Visibility
 import mihon.icons.materialsymbols.roundedfilled.VisibilityOff
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
+import tachiyomi.presentation.core.bokuhon.ButtonDefaults
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
+import tachiyomi.presentation.core.bokuhon.OutlinedSecureTextField
+import tachiyomi.presentation.core.bokuhon.OutlinedTextField
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Serializable
@@ -339,7 +339,7 @@ data object SettingsTrackingScreen : SearchableSettings {
                 )
             },
             confirmButton = {
-                Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall)) {
                     OutlinedButton(
                         modifier = Modifier.weight(1f),
                         onClick = onDismissRequest,
@@ -354,8 +354,8 @@ data object SettingsTrackingScreen : SearchableSettings {
                             context.toast(MR.strings.logout_success)
                         },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.error,
-                            contentColor = MaterialTheme.colorScheme.onError,
+                            containerColor = LocalBokuhonColors.current.error,
+                            contentColor = LocalBokuhonColors.current.onError,
                         ),
                     ) {
                         Text(text = stringResource(MR.strings.logout))

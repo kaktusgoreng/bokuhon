@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
@@ -125,6 +127,51 @@ private fun CheckboxBody(checked: Boolean, indeterminate: Boolean, enabled: Bool
                         cap = StrokeCap.Square,
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun RadioButton(
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: Any? = null,
+    interactionSource: Any? = null,
+) {
+    val alpha = if (enabled) 1f else DISABLED_ALPHA
+    Box(
+        modifier = modifier
+            .defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+            .then(
+                if (onClick != null) {
+                    Modifier.selectable(
+                        selected = selected,
+                        onClick = onClick,
+                        enabled = enabled,
+                        role = Role.RadioButton,
+                    )
+                } else {
+                    Modifier
+                },
+            ),
+        contentAlignment = Alignment.Center,
+    ) {
+        val c = LocalBokuhonColors.current
+        Canvas(modifier = Modifier.size(20.dp)) {
+            val stroke = 2.dp.toPx()
+            drawCircle(
+                color = c.outline.copy(alpha = alpha),
+                radius = (size.minDimension - stroke) / 2,
+                style = Stroke(width = stroke),
+            )
+            if (selected) {
+                drawCircle(
+                    color = c.primary.copy(alpha = alpha),
+                    radius = size.minDimension * 0.25f,
+                )
             }
         }
     }

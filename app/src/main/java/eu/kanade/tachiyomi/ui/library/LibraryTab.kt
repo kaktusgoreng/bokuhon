@@ -3,8 +3,6 @@ package eu.kanade.tachiyomi.ui.library
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -46,6 +44,8 @@ import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen

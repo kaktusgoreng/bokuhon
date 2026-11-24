@@ -3,8 +3,6 @@ package eu.kanade.presentation.history
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -29,6 +27,8 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.DeleteSweep
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.Scaffold

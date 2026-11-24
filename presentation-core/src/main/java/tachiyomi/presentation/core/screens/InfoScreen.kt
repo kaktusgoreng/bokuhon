@@ -7,15 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -27,12 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Newspaper
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
@@ -51,10 +53,10 @@ fun InfoScreen(
     Scaffold(
         bottomBar = {
             val strokeWidth = Dp.Hairline
-            val borderColor = MaterialTheme.colorScheme.outline
+            val borderColor = LocalBokuhonColors.current.outline
             Column(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
+                    .background(LocalBokuhonColors.current.background)
                     .drawBehind {
                         drawLine(
                             borderColor,
@@ -63,10 +65,10 @@ fun InfoScreen(
                             strokeWidth.value,
                         )
                     }
-                    .windowInsetsPadding(NavigationBarDefaults.windowInsets)
+                    .windowInsetsPadding(WindowInsets.navigationBars)
                     .padding(
-                        horizontal = MaterialTheme.padding.medium,
-                        vertical = MaterialTheme.padding.small,
+                        horizontal = BokuhonPadding.medium,
+                        vertical = BokuhonPadding.small,
                     ),
             ) {
                 Button(
@@ -77,7 +79,7 @@ fun InfoScreen(
                     Text(text = acceptText)
                 }
                 if (rejectText != null && onRejectClick != null) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall)) {
                         OutlinedButton(
                             modifier = Modifier.weight(1f),
                             onClick = onRejectClick,
@@ -95,7 +97,7 @@ fun InfoScreen(
             modifier = Modifier
                 .zIndex(2f)
                 .secondaryItemAlpha()
-                .background(MaterialTheme.colorScheme.background)
+                .background(LocalBokuhonColors.current.background)
                 .fillMaxWidth()
                 .height(paddingValues.calculateTopPadding()),
         )
@@ -106,26 +108,26 @@ fun InfoScreen(
                 .fillMaxWidth()
                 .padding(paddingValues)
                 .padding(top = 48.dp)
-                .padding(horizontal = MaterialTheme.padding.medium),
+                .padding(horizontal = BokuhonPadding.medium),
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(bottom = MaterialTheme.padding.small)
+                    .padding(bottom = BokuhonPadding.small)
                     .size(48.dp),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = LocalBokuhonColors.current.primary,
             )
             Text(
                 text = headingText,
-                style = MaterialTheme.typography.headlineLarge,
+                style = LocalBokuhonTypography.current.headlineLarge,
             )
             Text(
                 text = subtitleText,
                 modifier = Modifier
                     .secondaryItemAlpha()
-                    .padding(vertical = MaterialTheme.padding.small),
-                style = MaterialTheme.typography.titleSmall,
+                    .padding(vertical = BokuhonPadding.small),
+                style = LocalBokuhonTypography.current.titleSmall,
             )
 
             content()

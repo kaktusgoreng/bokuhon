@@ -1,9 +1,5 @@
 package eu.kanade.tachiyomi.ui.browse.migration.search
 
-import androidx.compose.material3.SmallExtendedFloatingActionButton
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,7 +29,11 @@ import tachiyomi.core.common.Constants
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.SmallExtendedFloatingActionButton
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.animateFloatingActionButton
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen

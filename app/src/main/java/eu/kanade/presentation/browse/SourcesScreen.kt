@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,13 +20,17 @@ import mihon.icons.materialsymbols.roundedfilled.Keep
 import tachiyomi.domain.source.model.Pin
 import tachiyomi.domain.source.model.Source
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
@@ -101,8 +102,8 @@ private fun SourceHeader(
     Text(
         text = LocaleHelper.getSourceDisplayName(language, context),
         modifier = modifier
-            .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
-        style = MaterialTheme.typography.header,
+            .padding(horizontal = BokuhonPadding.medium, vertical = BokuhonPadding.small),
+        style = LocalBokuhonTypography.current.header,
     )
 }
 
@@ -124,8 +125,8 @@ private fun SourceItem(
                 TextButton(onClick = { onClickItem(source, Listing.Latest) }) {
                     Text(
                         text = stringResource(MR.strings.latest),
-                        style = LocalTextStyle.current.copy(
-                            color = MaterialTheme.colorScheme.primary,
+                        style = LocalBokuhonTextStyle.current.copy(
+                            color = LocalBokuhonColors.current.primary,
                         ),
                     )
                 }
@@ -145,9 +146,9 @@ private fun SourcePinButton(
 ) {
     val icon = if (isPinned) MaterialSymbols.RoundedFilled.Keep else MaterialSymbols.Rounded.Keep
     val tint = if (isPinned) {
-        MaterialTheme.colorScheme.primary
+        LocalBokuhonColors.current.primary
     } else {
-        MaterialTheme.colorScheme.onBackground.copy(
+        LocalBokuhonColors.current.onBackground.copy(
             alpha = SECONDARY_ALPHA,
         )
     }

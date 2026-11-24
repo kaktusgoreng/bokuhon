@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +19,12 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.automirroredrounded.ArrowForward
 import mihon.icons.materialsymbols.roundedfilled.Error
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -39,8 +39,8 @@ fun GlobalSearchResultItem(
         Row(
             modifier = Modifier
                 .padding(
-                    start = MaterialTheme.padding.medium,
-                    end = MaterialTheme.padding.extraSmall,
+                    start = BokuhonPadding.medium,
+                    end = BokuhonPadding.extraSmall,
                 )
                 .fillMaxWidth()
                 .clickable(onClick = onClick),
@@ -50,7 +50,7 @@ fun GlobalSearchResultItem(
             Column {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = LocalBokuhonTypography.current.titleMedium,
                 )
                 Text(text = subtitle)
             }
@@ -67,7 +67,7 @@ fun GlobalSearchLoadingResultItem() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = MaterialTheme.padding.medium),
+            .padding(vertical = BokuhonPadding.medium),
     ) {
         CircularProgressIndicator(
             modifier = Modifier
@@ -83,8 +83,8 @@ fun GlobalSearchErrorResultItem(message: String?) {
     Column(
         modifier = Modifier
             .padding(
-                horizontal = MaterialTheme.padding.medium,
-                vertical = MaterialTheme.padding.small,
+                horizontal = BokuhonPadding.medium,
+                vertical = BokuhonPadding.small,
             )
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,

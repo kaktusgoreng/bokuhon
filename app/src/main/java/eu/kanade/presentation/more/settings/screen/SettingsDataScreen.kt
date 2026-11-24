@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MultiChoiceSegmentedButtonRow
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
@@ -64,9 +60,13 @@ import tachiyomi.domain.backup.service.BackupPreferences
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.storage.service.StoragePreferences
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
 import tachiyomi.presentation.core.bokuhon.Checkbox
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.MultiChoiceSegmentedButtonRow
+import tachiyomi.presentation.core.bokuhon.SegmentedButton
+import tachiyomi.presentation.core.bokuhon.SegmentedButtonDefaults
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.TextButton
 import tachiyomi.presentation.core.i18n.stringResource

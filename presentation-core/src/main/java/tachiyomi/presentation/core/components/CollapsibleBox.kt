@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +17,7 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.KeyboardArrowDown
 import mihon.icons.materialsymbols.rounded.KeyboardArrowUp
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.theme.header
@@ -38,7 +38,7 @@ fun CollapsibleBox(
         ) {
             Text(
                 text = heading,
-                style = MaterialTheme.typography.header,
+                style = LocalBokuhonTypography.current.header,
             )
 
             Spacer(modifier = Modifier.weight(1f))

@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,17 +30,19 @@ import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.getAndSet
 import tachiyomi.core.common.preference.toggle
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.ListItem
 import tachiyomi.presentation.core.bokuhon.ListItemDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.OutlinedTextField
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Button
 import tachiyomi.presentation.core.components.material.Switch
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.theme.active
 import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.collectAsState
 
@@ -61,23 +61,23 @@ fun MigrationConfigScreenSheet(
                     .weight(1f, fill = false)
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
-                    .padding(top = MaterialTheme.padding.medium),
+                    .padding(top = BokuhonPadding.medium),
             ) {
                 Text(
                     text = stringResource(MR.strings.migrationConfigScreen_dataToMigrateHeader),
-                    style = MaterialTheme.typography.header,
+                    style = LocalBokuhonTypography.current.header,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = MaterialTheme.padding.extraSmall)
-                        .padding(horizontal = MaterialTheme.padding.medium),
+                        .padding(top = BokuhonPadding.extraSmall)
+                        .padding(horizontal = BokuhonPadding.medium),
                 )
-                Spacer(modifier = Modifier.height(MaterialTheme.padding.extraSmall))
+                Spacer(modifier = Modifier.height(BokuhonPadding.extraSmall))
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = MaterialTheme.padding.medium)
-                        .padding(bottom = MaterialTheme.padding.extraSmall),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                        .padding(horizontal = BokuhonPadding.medium)
+                        .padding(bottom = BokuhonPadding.extraSmall),
+                    horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                 ) {
                     MigrationFlag.entries
                         .fastFilterNot { it == MigrationFlag.REMOVE_DOWNLOAD }
@@ -133,8 +133,8 @@ fun MigrationConfigScreenSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
-                            horizontal = MaterialTheme.padding.medium,
-                            vertical = MaterialTheme.padding.extraSmall,
+                            horizontal = BokuhonPadding.medium,
+                            vertical = BokuhonPadding.extraSmall,
                         ),
                 )
                 MigrationSheetSwitchItem(
@@ -169,8 +169,8 @@ fun MigrationConfigScreenSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        horizontal = MaterialTheme.padding.medium,
-                        vertical = MaterialTheme.padding.small,
+                        horizontal = BokuhonPadding.medium,
+                        vertical = BokuhonPadding.small,
                     ),
             ) {
                 Text(text = stringResource(MR.strings.migrationConfigScreen_continueButtonText))
@@ -216,7 +216,7 @@ private fun MigrationSheetSwitchItem(
 
 @Composable
 private fun MigrationSheetDividerItem() {
-    HorizontalDivider(modifier = Modifier.padding(vertical = MaterialTheme.padding.extraSmall))
+    HorizontalDivider(modifier = Modifier.padding(vertical = BokuhonPadding.extraSmall))
 }
 
 @Composable
@@ -228,14 +228,14 @@ private fun MigrationSheetWarningItem(
             Icon(
                 imageVector = MaterialSymbols.RoundedFilled.Warning,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.active,
+                tint = LocalBokuhonColors.current.active,
             )
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
     ) {
         Text(
             text = text,
-            color = MaterialTheme.colorScheme.error,
+            color = LocalBokuhonColors.current.error,
             modifier = Modifier,
         )
     }

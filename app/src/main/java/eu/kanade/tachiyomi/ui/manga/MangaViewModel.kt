@@ -1,9 +1,6 @@
 package eu.kanade.tachiyomi.ui.manga
 
 import android.content.Context
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
@@ -106,6 +103,9 @@ import tachiyomi.domain.manga.model.applyFilter
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.SnackbarDuration
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
+import tachiyomi.presentation.core.bokuhon.SnackbarResult
 import tachiyomi.source.local.isLocal
 import kotlin.math.floor
 import kotlin.time.Duration.Companion.seconds

@@ -2,16 +2,15 @@ package tachiyomi.presentation.core.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
-import tachiyomi.presentation.core.components.material.padding
 
 @Composable
 fun ActionButton(
@@ -25,7 +24,7 @@ fun ActionButton(
         onClick = onClick,
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Icon(

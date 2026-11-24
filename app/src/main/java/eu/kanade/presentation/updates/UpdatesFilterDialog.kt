@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,12 +26,14 @@ import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.getAndSet
 import tachiyomi.domain.updates.service.UpdatesPreferences
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.SettingsItemsPaddings
 import tachiyomi.presentation.core.components.TriStateItem
 import tachiyomi.presentation.core.components.material.Switch
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.util.collectAsState
@@ -94,7 +95,7 @@ private fun ColumnScope.FilterSheet(
         onClick = { viewModel.toggleFilter(UpdatesPreferences::filterBookmarked) },
     )
 
-    HorizontalDivider(modifier = Modifier.padding(MaterialTheme.padding.small))
+    HorizontalDivider(modifier = Modifier.padding(BokuhonPadding.small))
 
     val filterExcludedScanlators by viewModel.updatesPreferences.filterExcludedScanlators.collectAsState()
 
@@ -110,8 +111,8 @@ private fun ColumnScope.FilterSheet(
     ) {
         Text(
             text = stringResource(MR.strings.action_filter_excluded_scanlators),
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodyMedium,
+            color = LocalBokuhonColors.current.onSurface,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
 
         Switch(
@@ -135,7 +136,7 @@ private fun ColumnScope.CategoryFilterSheet(
             ),
     )
 
-    HorizontalDivider(modifier = Modifier.padding(MaterialTheme.padding.extraSmall))
+    HorizontalDivider(modifier = Modifier.padding(BokuhonPadding.extraSmall))
 
     val allCategories by viewModel.getCategories.subscribe().collectAsState(initial = emptyList())
 

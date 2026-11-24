@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,16 +54,21 @@ import mihon.icons.materialsymbols.rounded.Settings
 import mihon.icons.materialsymbols.rounded.VerifiedUser
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
+import tachiyomi.presentation.core.bokuhon.ButtonDefaults
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.PullRefresh
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
 import tachiyomi.presentation.core.components.motion.animateDpAsState
 import tachiyomi.presentation.core.i18n.stringResource
@@ -184,8 +185,8 @@ private fun ExtensionContent(
                                     Button(onClick = { onClickUpdateAll() }) {
                                         Text(
                                             text = stringResource(MR.strings.ext_update_all),
-                                            style = LocalTextStyle.current.copy(
-                                                color = MaterialTheme.colorScheme.onPrimary,
+                                            style = LocalBokuhonTextStyle.current.copy(
+                                                color = LocalBokuhonColors.current.onPrimary,
                                             ),
                                         )
                                     }
@@ -342,13 +343,13 @@ private fun ExtensionItemContent(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(start = MaterialTheme.padding.medium),
+        modifier = modifier.padding(start = BokuhonPadding.medium),
     ) {
         Text(
             text = extension.name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
 
         if (store != null) {
@@ -356,8 +357,8 @@ private fun ExtensionItemContent(
                 text = store.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = LocalBokuhonTypography.current.bodySmall,
+                color = LocalBokuhonColors.current.onSurfaceVariant,
             )
         }
 
@@ -408,8 +409,8 @@ private fun ExtensionItemMetadata(
 ) {
     FlowRow(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall / 2),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall / 2),
         itemVerticalAlignment = Alignment.CenterVertically,
     ) {
         val facts = listOfNotNull(
@@ -424,8 +425,8 @@ private fun ExtensionItemMetadata(
                 text = facts.joinToString(" \u2022 "),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = LocalBokuhonTypography.current.bodySmall,
+                color = LocalBokuhonColors.current.onSurfaceVariant,
             )
         }
 
@@ -435,18 +436,18 @@ private fun ExtensionItemMetadata(
                 InstallStep.Downloading -> MR.strings.ext_downloading
                 InstallStep.Installing -> MR.strings.ext_installing
                 else -> null
-            }?.let { it to MaterialTheme.colorScheme.primary },
+            }?.let { it to LocalBokuhonColors.current.primary },
             when {
                 extension is Extension.NotLoaded ->
-                    extension.reason.labelRes?.let { it to MaterialTheme.colorScheme.error }
+                    extension.reason.labelRes?.let { it to LocalBokuhonColors.current.error }
                 extension is Extension.Loaded && extension.isObsolete ->
-                    MR.strings.ext_obsolete to MaterialTheme.colorScheme.error
+                    MR.strings.ext_obsolete to LocalBokuhonColors.current.error
                 else -> null
             },
             extension.contentWarning.label?.let { it.title to it.color },
             (extension as? Extension.Loaded)
                 ?.takeIf { !it.isShared }
-                ?.let { MR.strings.ext_installer_private to MaterialTheme.colorScheme.onSurfaceVariant },
+                ?.let { MR.strings.ext_installer_private to LocalBokuhonColors.current.onSurfaceVariant },
         )
         notable.forEach { (label, color) ->
             ExtensionPill(text = stringResource(label), color = color)
@@ -465,7 +466,7 @@ private fun ExtensionItemActions(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (!installStep.isCompleted()) {
@@ -532,7 +533,7 @@ private fun ExtensionHeader(
     action: @Composable RowScope.() -> Unit = {},
 ) {
     Row(
-        modifier = modifier.padding(horizontal = MaterialTheme.padding.medium),
+        modifier = modifier.padding(horizontal = BokuhonPadding.medium),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -540,7 +541,7 @@ private fun ExtensionHeader(
             modifier = Modifier
                 .padding(vertical = 8.dp)
                 .weight(1f),
-            style = MaterialTheme.typography.header,
+            style = LocalBokuhonTypography.current.header,
         )
         action()
     }
@@ -583,15 +584,15 @@ private fun ExtensionNotLoadedDialog(
             Text(text = stringResource(MR.strings.ext_not_loaded_dialog))
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
+            Column(verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small)) {
                 Text(text = stringResource(reason.descriptionRes))
 
                 if (reason is Extension.NotLoaded.Reason.Failed) {
                     Text(
                         text = reason.message,
-                        style = MaterialTheme.typography.bodySmall,
+                        style = LocalBokuhonTypography.current.bodySmall,
                         fontFamily = FontFamily.Monospace,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = LocalBokuhonColors.current.onSurfaceVariant,
                     )
 
                     val context = LocalContext.current
@@ -679,8 +680,8 @@ fun PrivateExtensionUninstallDialog(
                 )
                 Text(
                     text = extension.name,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyLarge,
+                    color = LocalBokuhonColors.current.onSurface,
+                    style = LocalBokuhonTypography.current.bodyLarge,
                 )
             }
         },
@@ -698,7 +699,7 @@ fun PrivateExtensionUninstallDialog(
             OutlinedButton(
                 onClick = onDismissRequest,
                 colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = MaterialTheme.colorScheme.primary,
+                    contentColor = LocalBokuhonColors.current.primary,
                 ),
             ) {
                 Text(text = stringResource(MR.strings.action_cancel))

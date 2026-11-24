@@ -1,8 +1,8 @@
 package mihon.feature.migration.list.components
 
-import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.i18n.pluralStringResource

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,10 +12,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
-import tachiyomi.presentation.core.components.material.padding
 
 @Composable
 fun RowScope.StatsOverviewItem(
@@ -26,9 +27,9 @@ fun RowScope.StatsOverviewItem(
 ) {
     BaseStatsItem(
         title = title,
-        titleStyle = MaterialTheme.typography.titleLarge,
+        titleStyle = LocalBokuhonTypography.current.titleLarge,
         subtitle = subtitle,
-        subtitleStyle = MaterialTheme.typography.bodyMedium,
+        subtitleStyle = LocalBokuhonTypography.current.bodyMedium,
         icon = icon,
     )
 }
@@ -40,9 +41,9 @@ fun RowScope.StatsItem(
 ) {
     BaseStatsItem(
         title = title,
-        titleStyle = MaterialTheme.typography.bodyMedium,
+        titleStyle = LocalBokuhonTypography.current.bodyMedium,
         subtitle = subtitle,
-        subtitleStyle = MaterialTheme.typography.labelSmall,
+        subtitleStyle = LocalBokuhonTypography.current.labelSmall,
     )
 }
 
@@ -58,7 +59,7 @@ private fun RowScope.BaseStatsItem(
         modifier = Modifier
             .weight(1f)
             .fillMaxHeight(),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -72,7 +73,7 @@ private fun RowScope.BaseStatsItem(
             text = subtitle,
             style = subtitleStyle
                 .copy(
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = LocalBokuhonColors.current.onSurface
                         .copy(alpha = SECONDARY_ALPHA),
                 ),
             textAlign = TextAlign.Center,
@@ -82,7 +83,7 @@ private fun RowScope.BaseStatsItem(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = LocalBokuhonColors.current.primary,
             )
         }
     }

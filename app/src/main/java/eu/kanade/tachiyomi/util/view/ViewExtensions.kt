@@ -8,9 +8,6 @@ import android.view.View
 import android.widget.EditText
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.CompositionLocalProvider
@@ -24,6 +21,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import mihon.app.di.appGraph
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 
 inline fun ComponentActivity.setComposeContent(
     parent: CompositionContext? = null,
@@ -32,8 +33,8 @@ inline fun ComponentActivity.setComposeContent(
     setContent(parent) {
         TachiyomiTheme {
             CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodySmall,
-                LocalContentColor provides MaterialTheme.colorScheme.onBackground,
+                LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodySmall,
+                LocalBokuhonContentColor provides LocalBokuhonColors.current.onBackground,
                 LocalMetroViewModelFactory provides appGraph.viewModelFactory,
             ) {
                 content()
@@ -49,8 +50,8 @@ fun ComposeView.setComposeContent(
     setContent {
         TachiyomiTheme {
             CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodySmall,
-                LocalContentColor provides MaterialTheme.colorScheme.onBackground,
+                LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodySmall,
+                LocalBokuhonContentColor provides LocalBokuhonColors.current.onBackground,
             ) {
                 content()
             }

@@ -4,11 +4,6 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularWavyProgressIndicator
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.WavyProgressIndicatorDefaults
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,11 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -34,7 +26,11 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Error
 import mihon.icons.materialsymbols.roundedfilled.CheckCircle
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.ProgressIndicatorDefaults
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.IconButtonTokens
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
@@ -104,7 +100,7 @@ private fun NotDownloadedIndicator(
             imageVector = CustomMaterialSymbols.Rounded.DownloadCircle,
             contentDescription = stringResource(MR.strings.manga_download),
             modifier = Modifier.size(IndicatorSize),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = LocalBokuhonColors.current.onSurfaceVariant,
         )
     }
 }
@@ -129,38 +125,30 @@ private fun DownloadingIndicator(
             ),
         contentAlignment = Alignment.Center,
     ) {
-        val color = MaterialTheme.colorScheme.onSurfaceVariant
+        val color = LocalBokuhonColors.current.onSurfaceVariant
         val trackColor = color.copy(alpha = TRACK_ALPHA)
-        val stroke = Stroke(width = with(LocalDensity.current) { IndicatorStrokeWidth.toPx() }, cap = StrokeCap.Round)
         val downloadProgress = downloadProgressProvider()
         val indeterminate = downloadState == Download.State.QUEUE ||
             (downloadState == Download.State.DOWNLOADING && downloadProgress == 0)
         if (indeterminate) {
-            CircularWavyProgressIndicator(
+            CircularProgressIndicator(
                 modifier = IndicatorModifier,
                 color = color,
                 trackColor = Color.Transparent,
-                stroke = stroke,
-                trackStroke = stroke,
-                // Only an active download waves, so a queued one reads as waiting
-                amplitude = if (downloadState == Download.State.DOWNLOADING) INDICATOR_AMPLITUDE else 0f,
-                wavelength = IndicatorWavelength,
+                strokeWidth = IndicatorStrokeWidth,
             )
         } else {
             val animatedProgress by animateFloatAsState(
                 targetValue = downloadProgress / 100f,
-                animationSpec = WavyProgressIndicatorDefaults.ProgressAnimationSpec,
+                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
                 label = "progress",
             )
-            CircularWavyProgressIndicator(
+            CircularProgressIndicator(
                 progress = { animatedProgress },
                 modifier = IndicatorModifier,
                 color = color,
                 trackColor = trackColor,
-                stroke = stroke,
-                trackStroke = stroke,
-                amplitude = { WavyProgressIndicatorDefaults.indicatorAmplitude(it) * INDICATOR_AMPLITUDE },
-                wavelength = IndicatorWavelength,
+                strokeWidth = IndicatorStrokeWidth,
             )
         }
         DropdownMenu(expanded = isMenuExpanded, onDismissRequest = { isMenuExpanded = false }) {
@@ -210,7 +198,7 @@ private fun DownloadedIndicator(
             imageVector = MaterialSymbols.RoundedFilled.CheckCircle,
             contentDescription = null,
             modifier = Modifier.size(IndicatorSize),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = LocalBokuhonColors.current.onSurfaceVariant,
         )
         DropdownMenu(expanded = isMenuExpanded, onDismissRequest = { isMenuExpanded = false }) {
             DropdownMenuItem(
@@ -245,7 +233,7 @@ private fun ErrorIndicator(
             imageVector = MaterialSymbols.Rounded.Error,
             contentDescription = stringResource(MR.strings.chapter_error),
             modifier = Modifier.size(IndicatorSize),
-            tint = MaterialTheme.colorScheme.error,
+            tint = LocalBokuhonColors.current.error,
         )
     }
 }
@@ -264,16 +252,11 @@ private fun Modifier.commonClickable(
     onClick = onClick,
     role = Role.Button,
     interactionSource = null,
-    indication = ripple(
-        bounded = false,
-        radius = IconButtonTokens.StateLayerSize / 2,
-    ),
+    indication = null,
 )
 
 private val IndicatorSize = 26.dp
 private val IndicatorPadding = 1.dp
-private val IndicatorWavelength = 7.dp
-private const val INDICATOR_AMPLITUDE = 0.6f
 private const val TRACK_ALPHA = 0.25f
 
 private val IndicatorStrokeWidth = 2.dp

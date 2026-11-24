@@ -6,7 +6,6 @@ import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Button
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -40,8 +41,8 @@ fun ReaderError(
     ) {
         Text(
             text = message ?: stringResource(MR.strings.decode_image_error),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            style = LocalBokuhonTypography.current.bodyMedium,
+            color = LocalBokuhonColors.current.onBackground,
             textAlign = TextAlign.Center,
         )
         Button(onClick = onRetry, modifier = buttonModifier) {

@@ -22,11 +22,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -92,12 +87,17 @@ import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.findChildOfType
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.SuggestionChip
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.TextButton
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
@@ -123,7 +123,7 @@ fun MangaInfoBox(
         // Backdrop
         val backdropGradientColors = listOf(
             Color.Transparent,
-            MaterialTheme.colorScheme.background,
+            LocalBokuhonColors.current.background,
         )
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -145,7 +145,7 @@ fun MangaInfoBox(
         )
 
         // Manga & source info
-        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
+        CompositionLocalProvider(LocalBokuhonContentColor provides LocalBokuhonColors.current.onSurface) {
             if (!isTabletUi) {
                 MangaAndSourceTitlesSmall(
                     appBarPadding = appBarPadding,
@@ -185,7 +185,7 @@ fun MangaActionRow(
     onEditCategory: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    val defaultActionButtonColor = MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_ALPHA)
+    val defaultActionButtonColor = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA)
 
     // TODO: show something better when using custom interval
     val nextUpdateDays = remember(nextUpdate) {
@@ -205,7 +205,7 @@ fun MangaActionRow(
                 stringResource(MR.strings.add_to_library)
             },
             icon = if (favorite) MaterialSymbols.RoundedFilled.Favorite else MaterialSymbols.Rounded.Favorite,
-            color = if (favorite) MaterialTheme.colorScheme.primary else defaultActionButtonColor,
+            color = if (favorite) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = onAddToLibraryClicked,
             onLongClick = onEditCategory,
         )
@@ -220,7 +220,7 @@ fun MangaActionRow(
                 )
             },
             icon = MaterialSymbols.Rounded.HourglassEmpty,
-            color = if (isUserIntervalMode) MaterialTheme.colorScheme.primary else defaultActionButtonColor,
+            color = if (isUserIntervalMode) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = { onEditIntervalClicked?.invoke() },
         )
         MangaActionButton(
@@ -230,7 +230,7 @@ fun MangaActionRow(
                 pluralStringResource(MR.plurals.num_trackers, count = trackingCount, trackingCount)
             },
             icon = if (trackingCount == 0) MaterialSymbols.Rounded.Sync else MaterialSymbols.Rounded.Check,
-            color = if (trackingCount == 0) defaultActionButtonColor else MaterialTheme.colorScheme.primary,
+            color = if (trackingCount == 0) defaultActionButtonColor else LocalBokuhonColors.current.primary,
             onClick = onTrackingClicked,
         )
         if (onWebViewClicked != null) {
@@ -305,7 +305,7 @@ fun ExpandableMangaDescription(
                 if (expanded) {
                     FlowRow(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
                     ) {
                         tags.forEach {
                             TagsChip(
@@ -320,8 +320,8 @@ fun ExpandableMangaDescription(
                     }
                 } else {
                     LazyRow(
-                        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.medium),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                        contentPadding = PaddingValues(horizontal = BokuhonPadding.medium),
+                        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
                     ) {
                         items(items = tags) {
                             TagsChip(
@@ -435,12 +435,12 @@ private fun ColumnScope.MangaContentInfo(
     sourceName: String,
     isStubSource: Boolean,
     doSearch: (query: String, global: Boolean) -> Unit,
-    textAlign: TextAlign? = LocalTextStyle.current.textAlign,
+    textAlign: TextAlign? = LocalBokuhonTextStyle.current.textAlign,
 ) {
     val context = LocalContext.current
     Text(
         text = title.ifBlank { stringResource(MR.strings.unknown_title) },
-        style = MaterialTheme.typography.titleLarge,
+        style = LocalBokuhonTypography.current.titleLarge,
         modifier = Modifier.clickableNoIndication(
             onLongClick = {
                 if (title.isNotBlank()) {
@@ -459,7 +459,7 @@ private fun ColumnScope.MangaContentInfo(
 
     Row(
         modifier = Modifier.secondaryItemAlpha(),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -470,7 +470,7 @@ private fun ColumnScope.MangaContentInfo(
         Text(
             text = author?.takeIf { it.isNotBlank() }
                 ?: stringResource(MR.strings.unknown_author),
-            style = MaterialTheme.typography.titleSmall,
+            style = LocalBokuhonTypography.current.titleSmall,
             modifier = Modifier
                 .clickableNoIndication(
                     onLongClick = {
@@ -490,7 +490,7 @@ private fun ColumnScope.MangaContentInfo(
     if (!artist.isNullOrBlank() && author != artist) {
         Row(
             modifier = Modifier.secondaryItemAlpha(),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -500,7 +500,7 @@ private fun ColumnScope.MangaContentInfo(
             )
             Text(
                 text = artist,
-                style = MaterialTheme.typography.titleSmall,
+                style = LocalBokuhonTypography.current.titleSmall,
                 modifier = Modifier
                     .clickableNoIndication(
                         onLongClick = { context.copyToClipboard(artist, artist) },
@@ -532,7 +532,7 @@ private fun ColumnScope.MangaContentInfo(
                 .padding(end = 4.dp)
                 .size(16.dp),
         )
-        ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
+        CompositionLocalProvider(LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodyMedium) {
             Text(
                 text = when (status) {
                     SManga.ONGOING.toLong() -> stringResource(MR.strings.ongoing)
@@ -554,7 +554,7 @@ private fun ColumnScope.MangaContentInfo(
                     modifier = Modifier
                         .padding(end = 4.dp)
                         .size(16.dp),
-                    tint = MaterialTheme.colorScheme.error,
+                    tint = LocalBokuhonColors.current.error,
                 )
             }
             Text(
@@ -637,7 +637,7 @@ private fun MangaSummary(
                     // Shows at least 3 lines if no notes
                     // when there are notes show 6
                     text = if (notes.isBlank()) "\n\n" else "\n\n\n\n\n",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = LocalBokuhonTypography.current.bodyMedium,
                 )
             },
             {
@@ -665,7 +665,7 @@ private fun MangaSummary(
                 }
             },
             {
-                val colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background)
+                val colors = listOf(Color.Transparent, LocalBokuhonColors.current.background)
                 Box(
                     modifier = Modifier.background(Brush.verticalGradient(colors = colors)),
                     contentAlignment = Alignment.Center,
@@ -676,7 +676,7 @@ private fun MangaSummary(
                         contentDescription = stringResource(
                             if (expanded) MR.strings.manga_info_collapse else MR.strings.manga_info_expand,
                         ),
-                        tint = MaterialTheme.colorScheme.onBackground,
+                        tint = LocalBokuhonColors.current.onBackground,
                         modifier = Modifier.background(Brush.radialGradient(colors = colors.asReversed())),
                     )
                 }
@@ -715,7 +715,7 @@ private fun TagsChip(
     SuggestionChip(
         modifier = modifier,
         onClick = onClick,
-        label = { Text(text = text, style = MaterialTheme.typography.bodySmall) },
+        label = { Text(text = text, style = LocalBokuhonTypography.current.bodySmall) },
     )
 }
 

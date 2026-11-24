@@ -2,11 +2,11 @@ package eu.kanade.presentation.manga.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -25,7 +25,7 @@ enum class MangaCover(val ratio: Float) {
         data: Any?,
         modifier: Modifier = Modifier,
         contentDescription: String = "",
-        shape: Shape = MaterialTheme.shapes.extraSmall,
+        shape: Shape = RectangleShape,
         onClick: (() -> Unit)? = null,
     ) {
         AsyncImage(

@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ListItemDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -53,12 +49,16 @@ import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import sh.calvin.reorderable.rememberScroller
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
 import tachiyomi.presentation.core.bokuhon.LinearProgressIndicator
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.ListGroupHeader
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -278,12 +278,12 @@ private fun ReorderableCollectionItemScope.DownloadQueueHeader(
     onDragStopped: () -> Unit,
 ) {
     Surface(
-        modifier = Modifier.padding(top = MaterialTheme.padding.small),
+        modifier = Modifier.padding(top = BokuhonPadding.small),
         color = listItemContainerColor(isDragging),
         shadowElevation = listItemElevation(isDragging),
     ) {
         Row(
-            modifier = Modifier.padding(end = MaterialTheme.padding.small),
+            modifier = Modifier.padding(end = BokuhonPadding.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ListGroupHeader(
@@ -319,8 +319,8 @@ private fun ReorderableCollectionItemScope.DownloadQueueItem(
     ) {
         Row(
             modifier = Modifier.padding(
-                start = MaterialTheme.padding.small,
-                end = MaterialTheme.padding.extraSmall,
+                start = BokuhonPadding.small,
+                end = BokuhonPadding.extraSmall,
             ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -328,22 +328,22 @@ private fun ReorderableCollectionItemScope.DownloadQueueItem(
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(vertical = MaterialTheme.padding.small),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                    .padding(vertical = BokuhonPadding.small),
+                verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
             ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small)) {
                     Text(
                         text = download.manga.title,
                         modifier = Modifier.weight(1f),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = LocalBokuhonTypography.current.bodyMedium,
                     )
                     progress?.let {
                         Text(
                             text = "${it.downloadedPages}/${it.pageCount}",
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = MaterialTheme.typography.bodySmall,
+                            color = LocalBokuhonColors.current.onSurfaceVariant,
+                            style = LocalBokuhonTypography.current.bodySmall,
                         )
                     }
                 }
@@ -351,13 +351,13 @@ private fun ReorderableCollectionItemScope.DownloadQueueItem(
                     text = download.chapter.name,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = LocalBokuhonTypography.current.bodySmall,
                 )
                 LinearProgressIndicator(
                     progress = { animatedProgress },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = MaterialTheme.padding.extraSmall),
+                        .padding(top = BokuhonPadding.extraSmall),
                 )
             }
             DownloadQueueItemMenu(
@@ -382,7 +382,7 @@ private fun ReorderableCollectionItemScope.DragHandle(onDragStarted: () -> Unit,
                 onDragStarted = { onDragStarted() },
                 onDragStopped = onDragStopped,
             )
-            .padding(MaterialTheme.padding.small),
+            .padding(BokuhonPadding.small),
     )
 }
 
@@ -458,14 +458,11 @@ private fun DownloadQueueItemMenu(
 // A neutral lifted surface while dragged, rather than Material's tertiaryContainer list tint
 @Composable
 private fun listItemContainerColor(isDragging: Boolean): Color {
-    return if (isDragging) MaterialTheme.colorScheme.surfaceContainerHigh else MaterialTheme.colorScheme.background
+    return if (isDragging) LocalBokuhonColors.current.surfaceContainerHigh else LocalBokuhonColors.current.background
 }
 
 @Composable
-private fun listItemElevation(isDragging: Boolean): Dp {
-    val elevation = ListItemDefaults.elevation()
-    return if (isDragging) elevation.draggedElevation else elevation.elevation
-}
+private fun listItemElevation(isDragging: Boolean): Dp = if (isDragging) 8.dp else 1.dp
 
 private class PagesProgress(
     val pageCount: Int,

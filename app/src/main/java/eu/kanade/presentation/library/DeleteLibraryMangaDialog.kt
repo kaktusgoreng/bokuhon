@@ -1,7 +1,6 @@
 package eu.kanade.presentation.library
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +9,7 @@ import androidx.compose.runtime.setValue
 import dev.icerock.moko.resources.StringResource
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.LabeledCheckbox

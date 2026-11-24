@@ -15,11 +15,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
@@ -33,18 +28,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tachiyomi.presentation.core.bokuhon.Button
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.util.animateElevation
-import androidx.compose.material3.ButtonDefaults as M3ButtonDefaults
+
+private val ButtonContentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
+private val TextButtonContentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
 
 /**
  * TextButton with additional onLongClick functionality.
- *
- * @see androidx.compose.material3.TextButton
  */
 @Composable
 fun TextButton(
@@ -54,15 +55,15 @@ fun TextButton(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = null,
-    shape: Shape = MaterialTheme.shapes.small,
+    shape: Shape = RectangleShape,
     border: BorderStroke? = null,
     colors: ButtonColors = ButtonColors(
         containerColor = Color.Transparent,
-        contentColor = MaterialTheme.colorScheme.primary,
+        contentColor = LocalBokuhonColors.current.primary,
         disabledContainerColor = Color.Transparent,
-        disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_ALPHA),
+        disabledContentColor = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
     ),
-    contentPadding: PaddingValues = M3ButtonDefaults.TextButtonContentPadding,
+    contentPadding: PaddingValues = TextButtonContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) = Button(
     onClick = onClick,
@@ -80,8 +81,6 @@ fun TextButton(
 
 /**
  * Button with additional onLongClick functionality.
- *
- * @see androidx.compose.material3.TextButton
  */
 @Composable
 fun Button(
@@ -91,10 +90,10 @@ fun Button(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
-    shape: Shape = MaterialTheme.shapes.small,
+    shape: Shape = RectangleShape,
     border: BorderStroke? = null,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
-    contentPadding: PaddingValues = M3ButtonDefaults.ContentPadding,
+    contentPadding: PaddingValues = ButtonContentPadding,
     content: @Composable RowScope.() -> Unit,
 ) {
     val containerColor = colors.containerColor(enabled).value
@@ -113,19 +112,17 @@ fun Button(
         interactionSource = interactionSource,
         enabled = enabled,
     ) {
-        CompositionLocalProvider(LocalContentColor provides contentColor) {
-            ProvideTextStyle(value = MaterialTheme.typography.labelLarge) {
-                Row(
-                    Modifier.defaultMinSize(
-                        minWidth = M3ButtonDefaults.MinWidth,
-                        minHeight = M3ButtonDefaults.MinHeight,
-                    )
-                        .padding(contentPadding),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = content,
-                )
-            }
+        CompositionLocalProvider(
+            LocalBokuhonContentColor provides contentColor,
+            LocalBokuhonTextStyle provides LocalBokuhonTypography.current.labelLarge,
+        ) {
+            Row(
+                Modifier.defaultMinSize(minWidth = 58.dp, minHeight = 40.dp)
+                    .padding(contentPadding),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                content = content,
+            )
         }
     }
 }
@@ -142,10 +139,10 @@ object ButtonDefaults {
      */
     @Composable
     fun buttonColors(
-        containerColor: Color = MaterialTheme.colorScheme.primary,
-        contentColor: Color = MaterialTheme.colorScheme.onPrimary,
-        disabledContainerColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-        disabledContentColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_ALPHA),
+        containerColor: Color = LocalBokuhonColors.current.primary,
+        contentColor: Color = LocalBokuhonColors.current.onPrimary,
+        disabledContainerColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = 0.12f),
+        disabledContentColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
     ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,

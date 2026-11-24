@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,6 +26,7 @@ import tachiyomi.domain.library.model.sort
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilterChip
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.BaseSortItem
 import tachiyomi.presentation.core.components.CheckboxItem
@@ -260,7 +260,7 @@ private fun ColumnScope.DisplayPage(
                 stringResource(MR.strings.label_auto)
             },
             onChange = columnPreference::set,
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
     }
 

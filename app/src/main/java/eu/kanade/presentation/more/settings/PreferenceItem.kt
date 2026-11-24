@@ -1,7 +1,6 @@
 package eu.kanade.presentation.more.settings
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +27,7 @@ import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.launch
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.components.BaseSliderItem
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.util.collectAsState
@@ -97,7 +97,7 @@ internal fun PreferenceItem(
                             }
                         }
                     },
-                    titleStyle = MaterialTheme.typography.titleLarge.copy(fontSize = TitleFontSize),
+                    titleStyle = LocalBokuhonTypography.current.titleLarge.copy(fontSize = TitleFontSize),
                     modifier = Modifier.padding(
                         horizontal = PrefsHorizontalPadding,
                         vertical = PrefsVerticalPadding,

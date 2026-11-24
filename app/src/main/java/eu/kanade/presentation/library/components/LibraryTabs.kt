@@ -1,13 +1,13 @@
 package eu.kanade.presentation.library.components
 
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PrimaryScrollableTabRow
-import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.category.visualName
 import tachiyomi.domain.category.model.Category
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.PrimaryScrollableTabRow
+import tachiyomi.presentation.core.bokuhon.Tab
 import tachiyomi.presentation.core.components.material.TabText
 
 @Composable
@@ -32,7 +32,7 @@ internal fun LibraryTabs(
                         badgeCount = getItemCountForCategory(category),
                     )
                 },
-                unselectedContentColor = MaterialTheme.colorScheme.onSurface,
+                unselectedContentColor = LocalBokuhonColors.current.onSurface,
             )
         }
     }

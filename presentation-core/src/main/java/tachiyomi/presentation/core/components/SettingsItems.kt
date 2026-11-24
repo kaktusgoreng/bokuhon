@@ -15,17 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExposedDropdownMenu
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -51,12 +40,22 @@ import mihon.icons.materialsymbols.roundedfilled.DisabledByDefault
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.toggle
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Checkbox
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
+import tachiyomi.presentation.core.bokuhon.ExposedDropdownMenuAnchorType
+import tachiyomi.presentation.core.bokuhon.ExposedDropdownMenuBox
+import tachiyomi.presentation.core.bokuhon.ExposedDropdownMenuDefaults
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.OutlinedTextField
+import tachiyomi.presentation.core.bokuhon.ProvideBokuhonTheme
+import tachiyomi.presentation.core.bokuhon.RadioButton
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.Slider
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.collectAsState
@@ -76,7 +75,7 @@ fun HeadingItem(labelRes: StringResource) {
 fun HeadingItem(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.header,
+        style = LocalBokuhonTypography.current.header,
         modifier = Modifier
             .fillMaxWidth()
             .padding(
@@ -110,7 +109,7 @@ fun BaseSortItem(label: String, icon: ImageVector?, onClick: () -> Unit) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = LocalBokuhonColors.current.primary,
                 )
             } else {
                 Spacer(modifier = Modifier.size(24.dp))
@@ -166,8 +165,8 @@ fun SliderItem(
     onChange: (Int) -> Unit,
     steps: Int = with(valueRange) { (last - first) - 1 },
     valueString: String = value.toString(),
-    labelStyle: TextStyle = MaterialTheme.typography.bodyMedium,
-    pillColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    labelStyle: TextStyle = LocalBokuhonTypography.current.bodyMedium,
+    pillColor: Color = LocalBokuhonColors.current.surfaceContainerHigh,
 ) {
     BaseSliderItem(
         value = value,
@@ -195,9 +194,9 @@ fun BaseSliderItem(
     subtitle: String? = null,
     steps: Int = with(valueRange) { (last - first) - 1 },
     valueString: String = value.toString(),
-    titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
-    subtitleStyle: TextStyle = MaterialTheme.typography.bodySmall,
-    pillColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    titleStyle: TextStyle = LocalBokuhonTypography.current.titleLarge,
+    subtitleStyle: TextStyle = LocalBokuhonTypography.current.bodySmall,
+    pillColor: Color = LocalBokuhonColors.current.surfaceContainerHigh,
 ) {
     val haptic = LocalHapticFeedback.current
     Column(
@@ -208,7 +207,7 @@ fun BaseSliderItem(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -225,7 +224,7 @@ fun BaseSliderItem(
             }
             Pill(
                 text = valueString,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
                 color = pillColor,
             )
         }
@@ -245,7 +244,7 @@ fun BaseSliderItem(
 @Composable
 @PreviewLightDark
 fun SliderItemPreview() {
-    MaterialTheme(if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
+    ProvideBokuhonTheme(isSystemInDarkTheme()) {
         var value by remember { mutableIntStateOf(0) }
         Surface {
             BaseSliderItem(
@@ -298,7 +297,6 @@ fun SelectItem(
         )
 
         ExposedDropdownMenu(
-            modifier = Modifier.exposedDropdownSize(),
             expanded = expanded,
             onDismissRequest = { expanded = false },
         ) {
@@ -341,7 +339,7 @@ fun TriStateItem(
                 vertical = SettingsItemsPaddings.Vertical,
             ),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.large),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.large),
     ) {
         val stateAlpha = if (enabled && onClick != null) 1f else DISABLED_ALPHA
 
@@ -353,18 +351,18 @@ fun TriStateItem(
             },
             contentDescription = null,
             tint = if (!enabled || state == TriState.DISABLED) {
-                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = stateAlpha)
+                LocalBokuhonColors.current.onSurfaceVariant.copy(alpha = stateAlpha)
             } else {
                 when (onClick) {
-                    null -> MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_ALPHA)
-                    else -> MaterialTheme.colorScheme.primary
+                    null -> LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA)
+                    else -> LocalBokuhonColors.current.primary
                 }
             },
         )
         Text(
             text = label,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = stateAlpha),
-            style = MaterialTheme.typography.bodyMedium,
+            color = LocalBokuhonColors.current.onSurface.copy(alpha = stateAlpha),
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }
@@ -393,7 +391,7 @@ fun SettingsChipRow(labelRes: StringResource, content: @Composable FlowRowScope.
                 end = SettingsItemsPaddings.Horizontal,
                 bottom = SettingsItemsPaddings.Vertical,
             ),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             content = content,
         )
     }
@@ -410,8 +408,8 @@ fun SettingsIconGrid(labelRes: StringResource, content: LazyGridScope.() -> Unit
                 end = SettingsItemsPaddings.Horizontal,
                 bottom = SettingsItemsPaddings.Vertical,
             ),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             content = content,
         )
     }
@@ -437,7 +435,7 @@ private fun BaseSettingsItem(
         widget(this)
         Text(
             text = label,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }

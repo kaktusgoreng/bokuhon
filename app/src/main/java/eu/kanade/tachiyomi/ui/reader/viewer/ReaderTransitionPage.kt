@@ -4,9 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -20,6 +17,10 @@ import eu.kanade.tachiyomi.ui.reader.model.ReaderChapter
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -39,8 +40,8 @@ fun ReaderTransitionPage(
     ) {
         if (downloadState != null) {
             CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodySmall,
-                LocalContentColor provides MaterialTheme.colorScheme.onBackground,
+                LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodySmall,
+                LocalBokuhonContentColor provides LocalBokuhonColors.current.onBackground,
             ) {
                 ChapterTransition(
                     transition,
@@ -60,8 +61,8 @@ fun ReaderTransitionPage(
                 CircularProgressIndicator()
                 Text(
                     text = stringResource(MR.strings.transition_pages_loading),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalBokuhonColors.current.onBackground,
+                    style = LocalBokuhonTypography.current.bodyMedium,
                 )
             }
             is ReaderChapter.State.Error -> Column(
@@ -70,8 +71,8 @@ fun ReaderTransitionPage(
             ) {
                 Text(
                     text = stringResource(MR.strings.transition_pages_error, state.error.message ?: ""),
-                    color = MaterialTheme.colorScheme.onBackground,
-                    style = MaterialTheme.typography.bodyMedium,
+                    color = LocalBokuhonColors.current.onBackground,
+                    style = LocalBokuhonTypography.current.bodyMedium,
                 )
                 Button(
                     onClick = { onRetry(toChapter) },

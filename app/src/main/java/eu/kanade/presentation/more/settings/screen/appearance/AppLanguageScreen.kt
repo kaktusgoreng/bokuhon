@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,6 +26,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.i18n.R
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.ListItem
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
@@ -72,7 +72,7 @@ fun AppLanguageScreen() {
                             Icon(
                                 imageVector = MaterialSymbols.Rounded.Check,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
+                                tint = LocalBokuhonColors.current.primary,
                             )
                         }
                     },

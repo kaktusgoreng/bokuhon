@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -40,11 +38,14 @@ import mihon.icons.materialsymbols.roundedfilled.Bookmark
 import mihon.icons.materialsymbols.roundedfilled.Circle
 import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.selectedBackground
 
@@ -66,7 +67,7 @@ internal fun UpdatesLastUpdatedHeader(
 ) {
     Box(
         modifier = modifier
-            .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
+            .padding(horizontal = BokuhonPadding.medium, vertical = BokuhonPadding.small),
     ) {
         Text(
             text = stringResource(MR.strings.updates_last_update_info, relativeTimeSpanString(lastUpdated)),
@@ -168,7 +169,7 @@ private fun UpdatesUiItem(
                 },
             )
             .height(56.dp)
-            .padding(horizontal = MaterialTheme.padding.medium),
+            .padding(horizontal = BokuhonPadding.medium),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         MangaCover.Square(
@@ -181,14 +182,14 @@ private fun UpdatesUiItem(
 
         Column(
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.padding.medium)
+                .padding(horizontal = BokuhonPadding.medium)
                 .weight(1f),
         ) {
             Text(
                 text = update.mangaTitle,
                 maxLines = 1,
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalContentColor.current.copy(alpha = textAlpha),
+                style = LocalBokuhonTypography.current.bodyMedium,
+                color = LocalBokuhonContentColor.current.copy(alpha = textAlpha),
                 overflow = TextOverflow.Ellipsis,
             )
 
@@ -201,7 +202,7 @@ private fun UpdatesUiItem(
                         modifier = Modifier
                             .height(8.dp)
                             .padding(end = 4.dp),
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = LocalBokuhonColors.current.primary,
                     )
                 }
                 if (update.bookmark) {
@@ -210,15 +211,15 @@ private fun UpdatesUiItem(
                         contentDescription = stringResource(MR.strings.action_filter_bookmarked),
                         modifier = Modifier
                             .sizeIn(maxHeight = with(LocalDensity.current) { textHeight.toDp() - 2.dp }),
-                        tint = MaterialTheme.colorScheme.primary,
+                        tint = LocalBokuhonColors.current.primary,
                     )
                     Spacer(modifier = Modifier.width(2.dp))
                 }
                 Text(
                     text = update.chapterName,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalContentColor.current.copy(alpha = textAlpha),
+                    style = LocalBokuhonTypography.current.bodySmall,
+                    color = LocalBokuhonContentColor.current.copy(alpha = textAlpha),
                     overflow = TextOverflow.Ellipsis,
                     onTextLayout = { textHeight = it.size.height },
                     modifier = Modifier
@@ -229,7 +230,7 @@ private fun UpdatesUiItem(
                     Text(
                         text = readProgress,
                         maxLines = 1,
-                        color = LocalContentColor.current.copy(alpha = DISABLED_ALPHA),
+                        color = LocalBokuhonContentColor.current.copy(alpha = DISABLED_ALPHA),
                         overflow = TextOverflow.Ellipsis,
                     )
                 }

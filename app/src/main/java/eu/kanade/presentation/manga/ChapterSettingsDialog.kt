@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +25,12 @@ import mihon.icons.materialsymbols.rounded.Group
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.LabeledCheckbox
@@ -37,7 +38,6 @@ import tachiyomi.presentation.core.components.RadioItem
 import tachiyomi.presentation.core.components.SortItem
 import tachiyomi.presentation.core.components.TriStateItem
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.theme.active
 
 @Composable
 fun ChapterSettingsDialog(
@@ -172,14 +172,14 @@ fun ScanlatorFilterItem(
             imageVector = MaterialSymbols.Rounded.Group,
             contentDescription = null,
             tint = if (active) {
-                MaterialTheme.colorScheme.active
+                LocalBokuhonColors.current.active
             } else {
-                LocalContentColor.current
+                LocalBokuhonContentColor.current
             },
         )
         Text(
             text = stringResource(MR.strings.scanlator),
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }

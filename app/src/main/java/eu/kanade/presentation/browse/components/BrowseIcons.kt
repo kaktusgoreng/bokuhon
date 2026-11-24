@@ -4,12 +4,12 @@ import android.util.DisplayMetrics
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -23,6 +23,7 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.roundedfilled.Dangerous
 import mihon.icons.materialsymbols.roundedfilled.Warning
 import tachiyomi.domain.source.model.Source
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.source.local.isLocal
 
 private val defaultModifier = Modifier
@@ -39,7 +40,7 @@ fun SourceIcon(
             Image(
                 imageVector = MaterialSymbols.RoundedFilled.Warning,
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
+                colorFilter = ColorFilter.tint(LocalBokuhonColors.current.error),
                 modifier = modifier.then(defaultModifier),
             )
         }
@@ -77,7 +78,7 @@ fun ExtensionIcon(
                 placeholder = ColorPainter(Color(0x1F888888)),
                 error = rememberResourceBitmapPainter(id = R.drawable.cover_error),
                 modifier = modifier
-                    .clip(MaterialTheme.shapes.extraSmall),
+                    .clip(RectangleShape),
             )
         }
         is Extension.Loaded -> {
@@ -93,7 +94,7 @@ fun ExtensionIcon(
         is Extension.NotLoaded -> Image(
             imageVector = MaterialSymbols.RoundedFilled.Dangerous,
             contentDescription = null,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
+            colorFilter = ColorFilter.tint(LocalBokuhonColors.current.error),
             modifier = modifier.then(defaultModifier),
         )
     }

@@ -3,9 +3,6 @@ package eu.kanade.presentation.browse
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -28,6 +25,9 @@ import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.SnackbarDuration
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
+import tachiyomi.presentation.core.bokuhon.SnackbarResult
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen

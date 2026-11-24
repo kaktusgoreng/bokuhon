@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,8 +20,8 @@ import mihon.icons.materialsymbols.rounded.CollectionsBookmark
 import mihon.icons.materialsymbols.rounded.LocalLibrary
 import mihon.icons.materialsymbols.rounded.Schedule
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.components.SectionCard
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import java.util.Locale
 import kotlin.time.DurationUnit
@@ -35,7 +34,7 @@ fun StatsScreenContent(
 ) {
     LazyColumn(
         contentPadding = paddingValues,
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
     ) {
         item {
             OverviewSection(state.overview)

@@ -17,9 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
@@ -53,15 +51,19 @@ import mihon.icons.materialsymbols.rounded.DoneAll
 import mihon.icons.materialsymbols.rounded.MoreVert
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
+import tachiyomi.presentation.core.bokuhon.DropdownMenu
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.plus
@@ -126,8 +128,8 @@ fun MigrationListScreenContent(
                     Modifier
                         .fillMaxWidth()
                         .padding(
-                            start = MaterialTheme.padding.medium,
-                            end = MaterialTheme.padding.small,
+                            start = BokuhonPadding.medium,
+                            end = BokuhonPadding.small,
                         )
                         .height(IntrinsicSize.Min),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -188,7 +190,7 @@ fun MigrationListItem(
         modifier = modifier
             .widthIn(max = 150.dp)
             .fillMaxWidth()
-            .clip(MaterialTheme.shapes.small)
+            .clip(RectangleShape)
             .clickable(onClick = onClick)
             .padding(4.dp),
     ) {
@@ -207,7 +209,7 @@ fun MigrationListItem(
                     .background(
                         Brush.verticalGradient(
                             0f to Color.Transparent,
-                            1f to MaterialTheme.colorScheme.background,
+                            1f to LocalBokuhonColors.current.background,
                         ),
                     )
                     .fillMaxHeight(0.4f)
@@ -221,7 +223,7 @@ fun MigrationListItem(
                 text = manga.title,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
-                style = MaterialTheme.typography.labelMedium,
+                style = LocalBokuhonTypography.current.labelMedium,
             )
             BadgeGroup(modifier = Modifier.padding(4.dp)) {
                 Badge(text = "$chapterCount")
@@ -230,14 +232,14 @@ fun MigrationListItem(
 
         Column(
             modifier = Modifier
-                .padding(MaterialTheme.padding.extraSmall),
+                .padding(BokuhonPadding.extraSmall),
             verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
             Text(
                 text = source,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                style = MaterialTheme.typography.titleSmall,
+                style = LocalBokuhonTypography.current.titleSmall,
             )
             val formattedLatestChapters = remember(latestChapter) {
                 latestChapter?.let(::formatChapterNumber)
@@ -249,7 +251,7 @@ fun MigrationListItem(
                 ),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
             )
         }
     }
@@ -287,13 +289,13 @@ fun MigrationListItemResult(
                         modifier = Modifier
                             .fillMaxWidth()
                             .aspectRatio(MangaCover.Book.ratio)
-                            .clip(MaterialTheme.shapes.extraSmall),
+                            .clip(RectangleShape),
                         contentScale = ContentScale.Crop,
                     )
                     Text(
                         text = stringResource(MR.strings.migrationListScreen_noMatchFoundText),
-                        modifier = Modifier.padding(MaterialTheme.padding.extraSmall),
-                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.padding(BokuhonPadding.extraSmall),
+                        style = LocalBokuhonTypography.current.titleSmall,
                     )
                 }
             }

@@ -18,8 +18,6 @@ import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -34,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -46,6 +45,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import kotlin.math.roundToInt
 
@@ -95,8 +96,8 @@ fun AdaptiveSheet(
                     .systemBarsPadding()
                     .padding(vertical = 16.dp)
                     .then(modifier),
-                shape = MaterialTheme.shapes.extraLarge,
-                color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                shape = RectangleShape,
+                color = LocalBokuhonColors.current.surfaceContainerHigh,
                 content = {
                     BackHandler(
                         enabled = enableImplicitDismiss && remember { derivedStateOf { alpha > 0f } }.value,
@@ -180,8 +181,8 @@ fun AdaptiveSheet(
                     )
                     .navigationBarsPadding()
                     .statusBarsPadding(),
-                shape = MaterialTheme.shapes.extraLarge,
-                color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                shape = RectangleShape,
+                color = LocalBokuhonColors.current.surfaceContainerHigh,
                 content = {
                     BackHandler(
                         enabled = enableImplicitDismiss && anchoredDraggableState.targetValue == 0,

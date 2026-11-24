@@ -2,10 +2,10 @@ package eu.kanade.presentation.track.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -31,7 +31,7 @@ fun TrackLogoIcon(
         contentDescription = tracker.name,
         modifier = modifier
             .size(48.dp)
-            .clip(MaterialTheme.shapes.medium),
+            .clip(RectangleShape),
     )
 }
 

@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,11 +21,12 @@ import mihon.icons.materialsymbols.rounded.UpdateDisabled
 import mihon.icons.materialsymbols.rounded.Verified
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.InfoScreen
 
@@ -96,7 +95,7 @@ fun NewUpdateScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = MaterialTheme.padding.large),
+                .padding(vertical = BokuhonPadding.large),
         ) {
             MarkdownRender(
                 content = changelogInfo,
@@ -105,10 +104,10 @@ fun NewUpdateScreen(
 
             TextButton(
                 onClick = onOpenInBrowser,
-                modifier = Modifier.padding(top = MaterialTheme.padding.small),
+                modifier = Modifier.padding(top = BokuhonPadding.small),
             ) {
                 Text(text = stringResource(MR.strings.update_check_open))
-                Spacer(modifier = Modifier.width(MaterialTheme.padding.extraSmall))
+                Spacer(modifier = Modifier.width(BokuhonPadding.extraSmall))
                 Icon(imageVector = MaterialSymbols.AutoMirroredRounded.OpenInNew, contentDescription = null)
             }
         }

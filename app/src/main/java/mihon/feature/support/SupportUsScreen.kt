@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,9 +27,12 @@ import mihon.icons.simpleicons.Patreon
 import mihon.icons.simpleicons.SimpleIcons
 import tachiyomi.core.common.Constants
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.Card
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -49,13 +49,13 @@ fun SupportUsScreen() {
         },
     ) { paddingValues ->
         Column(
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             modifier = Modifier.verticalScroll(rememberScrollState()).padding(
                 remember(paddingValues) {
                     object : PaddingValues {
                         override fun calculateLeftPadding(layoutDirection: LayoutDirection): Dp {
                             return paddingValues.calculateLeftPadding(layoutDirection) +
-                                MaterialTheme.padding.medium
+                                BokuhonPadding.medium
                         }
 
                         override fun calculateTopPadding(): Dp {
@@ -64,7 +64,7 @@ fun SupportUsScreen() {
 
                         override fun calculateRightPadding(layoutDirection: LayoutDirection): Dp {
                             return paddingValues.calculateRightPadding(layoutDirection) +
-                                MaterialTheme.padding.medium
+                                BokuhonPadding.medium
                         }
 
                         override fun calculateBottomPadding(): Dp {
@@ -78,8 +78,8 @@ fun SupportUsScreen() {
 
             Text(
                 text = stringResource(MR.strings.supportUsScreen_perks),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                style = LocalBokuhonTypography.current.bodyMedium,
+                modifier = Modifier.padding(horizontal = BokuhonPadding.medium),
             )
 
             SupportItem(
@@ -95,14 +95,14 @@ fun SupportUsScreen() {
 
             Text(
                 text = stringResource(MR.strings.supportUsScreen_currentlySupportedBy, 200),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                style = LocalBokuhonTypography.current.bodyMedium,
+                modifier = Modifier.padding(horizontal = BokuhonPadding.medium),
             )
 
             Text(
                 text = stringResource(MR.strings.supportUsScreen_contactForDetailsMessage),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                style = LocalBokuhonTypography.current.bodyMedium,
+                modifier = Modifier.padding(horizontal = BokuhonPadding.medium),
             )
 
             SupportItem(

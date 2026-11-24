@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,11 +23,11 @@ import mihon.core.navigation.LocalNavigator
 import mihon.core.navigation.MangaRoute
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.SettingsItemsPaddings
 import tachiyomi.presentation.core.components.TriStateItem
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.util.collectAsState
@@ -73,7 +72,7 @@ private fun ColumnScope.CategoryFilterSheet(
             ),
     )
 
-    HorizontalDivider(modifier = Modifier.padding(MaterialTheme.padding.extraSmall))
+    HorizontalDivider(modifier = Modifier.padding(BokuhonPadding.extraSmall))
 
     val allCategories by viewModel.getCategories.subscribe().collectAsState(initial = emptyList())
 

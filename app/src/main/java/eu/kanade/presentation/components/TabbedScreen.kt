@@ -9,11 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -23,6 +18,11 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.zIndex
 import dev.icerock.moko.resources.StringResource
 import kotlinx.coroutines.launch
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.PrimaryTabRow
+import tachiyomi.presentation.core.bokuhon.SnackbarHost
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
+import tachiyomi.presentation.core.bokuhon.Tab
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.TabText
 import tachiyomi.presentation.core.i18n.stringResource
@@ -69,7 +69,7 @@ fun TabbedScreen(
                         selected = state.currentPage == index,
                         onClick = { scope.launch { state.animateScrollToPage(index) } },
                         text = { TabText(text = stringResource(tab.titleRes), badgeCount = tab.badgeNumber) },
-                        unselectedContentColor = MaterialTheme.colorScheme.onSurface,
+                        unselectedContentColor = LocalBokuhonColors.current.onSurface,
                     )
                 }
             }

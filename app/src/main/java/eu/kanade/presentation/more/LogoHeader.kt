@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import eu.kanade.tachiyomi.R
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 
 @Composable
 fun LogoHeader(
@@ -26,7 +26,7 @@ fun LogoHeader(
         Icon(
             painter = painterResource(R.drawable.ic_bokuhon),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface,
+            tint = LocalBokuhonColors.current.onSurface,
             modifier = Modifier
                 .padding(iconPadding)
                 .size(64.dp),

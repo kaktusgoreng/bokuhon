@@ -11,9 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -56,9 +53,14 @@ import sh.calvin.reorderable.ReorderableColumn
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.OutlinedTextField
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.BaseSliderItem
@@ -67,7 +69,6 @@ import tachiyomi.presentation.core.components.HeadingItem
 import tachiyomi.presentation.core.components.SettingsChipRow
 import tachiyomi.presentation.core.components.SettingsItemsPaddings
 import tachiyomi.presentation.core.components.SliderItem
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import java.text.NumberFormat
@@ -124,7 +125,7 @@ internal fun WebGpuViewerSettings(viewModel: ReaderSettingsViewModel) {
             onChange = {
                 viewModel.preferences.continuousMinWidth.set(it)
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
 
         if (resolved == ReadingMode.CONTINUOUS_VERTICAL) {
@@ -137,7 +138,7 @@ internal fun WebGpuViewerSettings(viewModel: ReaderSettingsViewModel) {
                 onChange = {
                     viewModel.preferences.continuousGap.set(it)
                 },
-                pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
             )
         }
 
@@ -342,7 +343,7 @@ private fun rememberShaderPicker(pref: Preference<List<WebGpuShader>>, sampler: 
                     Text(
                         text = message,
                         fontFamily = FontFamily.Monospace,
-                        style = MaterialTheme.typography.bodySmall,
+                        style = LocalBokuhonTypography.current.bodySmall,
                     )
                 }
             },
@@ -368,7 +369,7 @@ private fun SamplerItem(labelRes: StringResource, defaultName: String, pref: Pre
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = SettingsItemsPaddings.Horizontal, end = MaterialTheme.padding.small),
+            .padding(start = SettingsItemsPaddings.Horizontal, end = BokuhonPadding.small),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -420,7 +421,7 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = SettingsItemsPaddings.Horizontal, end = MaterialTheme.padding.small),
+                            .padding(start = SettingsItemsPaddings.Horizontal, end = BokuhonPadding.small),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
@@ -432,7 +433,7 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
                             text = shader.name,
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(horizontal = MaterialTheme.padding.medium),
+                                .padding(horizontal = BokuhonPadding.medium),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -464,12 +465,12 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
     }
     TextButton(
         onClick = pick,
-        modifier = Modifier.padding(horizontal = SettingsItemsPaddings.Horizontal - MaterialTheme.padding.small),
+        modifier = Modifier.padding(horizontal = SettingsItemsPaddings.Horizontal - BokuhonPadding.small),
     ) {
         Icon(imageVector = MaterialSymbols.Rounded.Add, contentDescription = null)
         Text(
             text = stringResource(MR.strings.action_add_shader),
-            modifier = Modifier.padding(start = MaterialTheme.padding.small),
+            modifier = Modifier.padding(start = BokuhonPadding.small),
         )
     }
 }
@@ -524,8 +525,8 @@ private fun ShaderParams(
                             val new = min + span * it / positions
                             set(if (integer) new.roundToInt().toFloat() else new)
                         },
-                        titleStyle = MaterialTheme.typography.bodyMedium,
-                        pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+                        titleStyle = LocalBokuhonTypography.current.bodyMedium,
+                        pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
                         modifier = itemModifier,
                     )
                 } else {
@@ -549,7 +550,7 @@ private fun ShaderParams(
                 IconButton(
                     onClick = { set(null) },
                     enabled = param.name in shader.values,
-                    modifier = Modifier.padding(end = MaterialTheme.padding.small),
+                    modifier = Modifier.padding(end = BokuhonPadding.small),
                 ) {
                     Icon(
                         imageVector = MaterialSymbols.Rounded.Refresh,

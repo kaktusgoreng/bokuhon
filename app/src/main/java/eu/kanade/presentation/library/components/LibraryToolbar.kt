@@ -2,9 +2,6 @@ package eu.kanade.presentation.library.components
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
@@ -19,10 +16,12 @@ import mihon.icons.materialsymbols.rounded.FilterList
 import mihon.icons.materialsymbols.rounded.FlipToBack
 import mihon.icons.materialsymbols.rounded.SelectAll
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.TopAppBarScrollBehavior
 import tachiyomi.presentation.core.components.Pill
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.theme.active
 
 @Composable
 fun LibraryToolbar(
@@ -84,7 +83,7 @@ private fun LibraryRegularToolbar(
                 if (title.numberOfManga != null) {
                     Pill(
                         text = "${title.numberOfManga}",
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),
+                        color = LocalBokuhonColors.current.onBackground.copy(alpha = pillAlpha),
                         fontSize = 14.sp,
                     )
                 }
@@ -93,7 +92,7 @@ private fun LibraryRegularToolbar(
         searchQuery = searchQuery,
         onChangeSearchQuery = onSearchQueryChange,
         actions = {
-            val filterTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current
+            val filterTint = if (hasFilters) LocalBokuhonColors.current.active else LocalBokuhonContentColor.current
             AppBarActions(
                 listOf(
                     AppBar.Action(

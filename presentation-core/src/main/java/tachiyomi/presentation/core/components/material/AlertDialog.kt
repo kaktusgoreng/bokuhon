@@ -7,14 +7,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 
 @Composable
 fun AlertDialogContent(
@@ -31,10 +32,10 @@ fun AlertDialogContent(
         content = {
             Column {
                 CompositionLocalProvider(
-                    LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
+                    LocalBokuhonContentColor provides LocalBokuhonColors.current.onSurfaceVariant,
                 ) {
-                    val textStyle = MaterialTheme.typography.bodyMedium
-                    ProvideTextStyle(textStyle) {
+                    val textStyle = LocalBokuhonTypography.current.bodyMedium
+                    CompositionLocalProvider(LocalBokuhonTextStyle provides textStyle) {
                         Box(
                             Modifier
                                 .weight(weight = 1f, fill = false)
@@ -57,10 +58,10 @@ fun AlertDialogContent(
                         .align(Alignment.End),
                 ) {
                     CompositionLocalProvider(
-                        LocalContentColor provides MaterialTheme.colorScheme.primary,
+                        LocalBokuhonContentColor provides LocalBokuhonColors.current.primary,
                     ) {
-                        val textStyle = MaterialTheme.typography.labelLarge
-                        ProvideTextStyle(value = textStyle, content = buttons)
+                        val textStyle = LocalBokuhonTypography.current.labelLarge
+                        CompositionLocalProvider(LocalBokuhonTextStyle provides textStyle, content = buttons)
                     }
                 }
             }
@@ -91,7 +92,7 @@ fun AlertDialogContent(
             ) {
                 icon?.let {
                     CompositionLocalProvider(
-                        LocalContentColor provides MaterialTheme.colorScheme.secondary,
+                        LocalBokuhonContentColor provides LocalBokuhonColors.current.secondary,
                     ) {
                         Box(
                             Modifier
@@ -104,10 +105,10 @@ fun AlertDialogContent(
                 }
                 title?.let {
                     CompositionLocalProvider(
-                        LocalContentColor provides MaterialTheme.colorScheme.onSurface,
+                        LocalBokuhonContentColor provides LocalBokuhonColors.current.onSurface,
                     ) {
-                        val textStyle = MaterialTheme.typography.headlineSmall
-                        ProvideTextStyle(textStyle) {
+                        val textStyle = LocalBokuhonTypography.current.headlineSmall
+                        CompositionLocalProvider(LocalBokuhonTextStyle provides textStyle) {
                             Box(
                                 // Align the title to the center when an icon is present.
                                 Modifier

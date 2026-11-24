@@ -1,8 +1,5 @@
 package eu.kanade.presentation.manga.components
 
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,8 +19,9 @@ import mihon.icons.materialsymbols.rounded.FilterList
 import mihon.icons.materialsymbols.rounded.FlipToBack
 import mihon.icons.materialsymbols.rounded.SelectAll
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.theme.active
 
 @Composable
 fun MangaToolbar(
@@ -58,8 +56,7 @@ fun MangaToolbar(
             }
         },
         modifier = modifier,
-        backgroundColor = MaterialTheme.colorScheme
-            .surfaceColorAtElevation(3.dp)
+        backgroundColor = LocalBokuhonColors.current.surface
             .copy(alpha = if (isActionMode) 1f else backgroundAlphaProvider()),
         navigateUp = navigateUp,
         actions = {
@@ -73,7 +70,7 @@ fun MangaToolbar(
                 )
             }
 
-            val filterTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current
+            val filterTint = if (hasFilters) LocalBokuhonColors.current.active else LocalBokuhonContentColor.current
             AppBarActions(
                 actions = buildList {
                     if (isActionMode) {

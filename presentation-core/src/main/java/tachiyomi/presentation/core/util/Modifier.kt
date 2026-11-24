@@ -4,7 +4,6 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.isImeVisible
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -24,13 +23,14 @@ import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalFocusManager
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
 
 @Composable
 fun Modifier.selectedBackground(isSelected: Boolean): Modifier {
     if (!isSelected) return this
     val alpha = if (isSystemInDarkTheme()) 0.16f else 0.22f
-    val color = MaterialTheme.colorScheme.secondary.copy(alpha = alpha)
+    val color = LocalBokuhonColors.current.secondary.copy(alpha = alpha)
     return this.drawBehind { drawRect(color) }
 }
 

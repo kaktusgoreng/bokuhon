@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -27,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,7 +36,12 @@ import mihon.icons.materialsymbols.roundedfilled.PlayArrow
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilledIconButton
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.IconButtonDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.contentColorFor
 import tachiyomi.presentation.core.components.BadgeGroup
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.selectedBackground
@@ -147,7 +149,7 @@ private fun BoxScope.CoverTextOverlay(
                 .weight(1f)
                 .padding(8.dp),
             title = title,
-            style = MaterialTheme.typography.titleSmall.copy(
+            style = LocalBokuhonTypography.current.titleSmall.copy(
                 color = Color.White,
                 shadow = Shadow(
                     color = Color.Black,
@@ -219,7 +221,7 @@ fun MangaComfortableGridItem(
             GridItemTitle(
                 modifier = Modifier.padding(4.dp),
                 title = title,
-                style = MaterialTheme.typography.titleSmall,
+                style = LocalBokuhonTypography.current.titleSmall,
                 minLines = 2,
                 maxLines = titleMaxLines,
             )
@@ -298,20 +300,20 @@ private fun GridItemSelectable(
 ) {
     Box(
         modifier = modifier
-            .clip(MaterialTheme.shapes.small)
+            .clip(RectangleShape)
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick,
             )
-            .selectedOutline(isSelected = isSelected, color = MaterialTheme.colorScheme.secondary)
+            .selectedOutline(isSelected = isSelected, color = LocalBokuhonColors.current.secondary)
             .padding(4.dp),
     ) {
         val contentColor = if (isSelected) {
-            MaterialTheme.colorScheme.onSecondary
+            LocalBokuhonColors.current.onSecondary
         } else {
-            LocalContentColor.current
+            LocalBokuhonContentColor.current
         }
-        CompositionLocalProvider(LocalContentColor provides contentColor) {
+        CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) {
             content()
         }
     }
@@ -363,7 +365,7 @@ fun MangaListItem(
                 .weight(1f),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
         BadgeGroup(content = badge)
         if (onClickContinueReading != null) {
@@ -387,10 +389,10 @@ private fun ContinueReadingButton(
     Box(modifier = modifier) {
         FilledIconButton(
             onClick = onClick,
-            shape = MaterialTheme.shapes.small,
+            shape = RectangleShape,
             colors = IconButtonDefaults.filledIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f),
-                contentColor = contentColorFor(MaterialTheme.colorScheme.primaryContainer),
+                containerColor = LocalBokuhonColors.current.primaryContainer.copy(alpha = 0.9f),
+                contentColor = contentColorFor(LocalBokuhonColors.current.primaryContainer),
             ),
             modifier = Modifier.size(size),
         ) {

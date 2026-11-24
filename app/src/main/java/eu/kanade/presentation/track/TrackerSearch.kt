@@ -25,10 +25,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -67,14 +63,19 @@ import mihon.icons.materialsymbols.rounded.Close
 import mihon.icons.materialsymbols.roundedfilled.CheckCircle
 import mihon.icons.materialsymbols.roundedfilled.VisibilityOff
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
+import tachiyomi.presentation.core.bokuhon.ButtonDefaults
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.TopAppBar
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
@@ -110,7 +111,7 @@ fun TrackerSearch(
                             Icon(
                                 imageVector = MaterialSymbols.AutoMirroredRounded.ArrowBack,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                tint = LocalBokuhonColors.current.onSurfaceVariant,
                             )
                         }
                     },
@@ -121,18 +122,18 @@ fun TrackerSearch(
                                 .fillMaxWidth()
                                 .focusRequester(focusRequester)
                                 .runOnEnterKeyPressed(action = dispatchQueryAndClearFocus),
-                            textStyle = MaterialTheme.typography.bodyLarge
-                                .copy(color = MaterialTheme.colorScheme.onSurface),
+                            textStyle = LocalBokuhonTypography.current.bodyLarge
+                                .copy(color = LocalBokuhonColors.current.onSurface),
                             lineLimits = TextFieldLineLimits.SingleLine,
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                             onKeyboardAction = { dispatchQueryAndClearFocus() },
-                            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                            cursorBrush = SolidColor(LocalBokuhonColors.current.primary),
                             decorator = {
                                 if (state.text.isEmpty()) {
                                     Text(
                                         text = stringResource(MR.strings.action_search_hint),
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = LocalBokuhonColors.current.onSurfaceVariant,
+                                        style = LocalBokuhonTypography.current.bodyLarge,
                                     )
                                 }
                                 it()
@@ -150,7 +151,7 @@ fun TrackerSearch(
                                 Icon(
                                     imageVector = MaterialSymbols.Rounded.Close,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    tint = LocalBokuhonColors.current.onSurfaceVariant,
                                 )
                             }
                         }
@@ -163,10 +164,10 @@ fun TrackerSearch(
             AnimatedVisibility(visible = selected != null) {
                 Row(
                     modifier = Modifier
-                        .padding(MaterialTheme.padding.small)
+                        .padding(BokuhonPadding.small)
                         .windowInsetsPadding(WindowInsets.navigationBars)
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                    horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                 ) {
                     Button(
                         onClick = { onConfirmSelection(false) },
@@ -242,7 +243,7 @@ private fun SearchResultItem(
     val status = trackSearch.publishing_status.toLowerCase(locale).capitalize(locale)
     val description = trackSearch.summary.trim()
     val shape = RoundedCornerShape(16.dp)
-    val borderColor = if (selected) MaterialTheme.colorScheme.outline else Color.Transparent
+    val borderColor = if (selected) LocalBokuhonColors.current.outline else Color.Transparent
     var dropDownMenuExpanded by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     Box(
@@ -250,7 +251,7 @@ private fun SearchResultItem(
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
             .clip(shape)
-            .background(MaterialTheme.colorScheme.surface)
+            .background(LocalBokuhonColors.current.surface)
             .border(
                 width = 2.dp,
                 color = borderColor,
@@ -270,7 +271,7 @@ private fun SearchResultItem(
                 imageVector = MaterialSymbols.RoundedFilled.CheckCircle,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.TopEnd),
-                tint = MaterialTheme.colorScheme.primary,
+                tint = LocalBokuhonColors.current.primary,
             )
         }
         Column {
@@ -286,7 +287,7 @@ private fun SearchResultItem(
                         modifier = Modifier.padding(end = 28.dp),
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = LocalBokuhonTypography.current.titleMedium,
                     )
                     SearchResultItemDropDownMenu(
                         expanded = dropDownMenuExpanded,
@@ -313,7 +314,7 @@ private fun SearchResultItem(
                             modifier = Modifier.secondaryItemAlpha(),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = LocalBokuhonTypography.current.bodySmall,
                         )
                     }
                     if (type.isNotBlank()) {
@@ -350,7 +351,7 @@ private fun SearchResultItem(
                         .secondaryItemAlpha(),
                     maxLines = 4,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = LocalBokuhonTypography.current.bodySmall,
                 )
             }
         }
@@ -389,11 +390,11 @@ private fun SearchResultItemDetails(
     title: String,
     text: String,
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall)) {
         Text(
             text = title,
             maxLines = 1,
-            style = MaterialTheme.typography.titleSmall,
+            style = LocalBokuhonTypography.current.titleSmall,
         )
         Text(
             text = text,
@@ -402,7 +403,7 @@ private fun SearchResultItemDetails(
                 .secondaryItemAlpha(),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }

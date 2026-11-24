@@ -9,9 +9,6 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SmallExtendedFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -60,15 +57,18 @@ import sh.calvin.reorderable.rememberReorderableLazyListState
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.ElevatedCard
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.ListItem
 import tachiyomi.presentation.core.bokuhon.ListItemDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.SmallExtendedFloatingActionButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.Pill
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.util.shouldExpandFAB
@@ -184,9 +184,9 @@ fun MigrationConfigScreen(mangaIds: Collection<Long>) {
                                     MR.strings.migrationConfigScreen_availableHeader
                                 },
                             ),
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = LocalBokuhonTypography.current.bodyMedium,
                             modifier = Modifier
-                                .padding(MaterialTheme.padding.medium),
+                                .padding(BokuhonPadding.medium),
                         )
                     }
                 }
@@ -246,7 +246,7 @@ private fun LazyItemScope.SourceItemContainer(
         ElevatedCard(
             shape = shape,
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.padding.medium),
+                .padding(horizontal = BokuhonPadding.medium),
         ) {
             SourceItem(
                 source = source,
@@ -259,7 +259,7 @@ private fun LazyItemScope.SourceItemContainer(
     }
 
     if (!lastItem) {
-        HorizontalDivider(modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium))
+        HorizontalDivider(modifier = Modifier.padding(horizontal = BokuhonPadding.medium))
     }
 }
 
@@ -289,7 +289,7 @@ private fun SourceItem(
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SourceIcon(source = source.source)
@@ -297,13 +297,13 @@ private fun SourceItem(
                 text = source.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
                 modifier = Modifier.weight(1f),
             )
             if (showLanguage) {
                 Pill(
                     text = LocaleHelper.getShortDisplayName(source.shortLanguage, uppercase = true),
-                    style = MaterialTheme.typography.bodySmall,
+                    style = LocalBokuhonTypography.current.bodySmall,
                 )
             }
         }

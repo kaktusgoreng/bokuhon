@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 
 @Composable
@@ -45,7 +45,7 @@ fun LazyColumnWithAction(
         ) {
             Text(
                 text = actionLabel,
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = LocalBokuhonColors.current.onPrimary,
             )
         }
     }

@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,14 +21,16 @@ import mihon.icons.materialsymbols.rounded.DoneAll
 import mihon.icons.materialsymbols.rounded.FilterList
 import mihon.icons.materialsymbols.rounded.Keep
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.FilterChipDefaults
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.LinearProgressIndicator
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.TopAppBarScrollBehavior
 import tachiyomi.presentation.core.bokuhon.VerticalDivider
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -48,7 +48,7 @@ fun GlobalSearchToolbar(
     onToggleResults: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+    Column(modifier = Modifier.background(LocalBokuhonColors.current.surface)) {
         Box {
             SearchToolbar(
                 searchQuery = searchQuery,
@@ -71,8 +71,8 @@ fun GlobalSearchToolbar(
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
-                .padding(horizontal = MaterialTheme.padding.small),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                .padding(horizontal = BokuhonPadding.small),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             // TODO: make this UX better; it only applies when triggering a new search

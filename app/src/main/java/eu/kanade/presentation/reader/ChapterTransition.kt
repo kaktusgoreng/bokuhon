@@ -10,14 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,7 +32,15 @@ import mihon.icons.materialsymbols.roundedfilled.Warning
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.chapter.service.calculateChapterGap
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.CardColors
+import tachiyomi.presentation.core.bokuhon.CardDefaults
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.OutlinedCard
+import tachiyomi.presentation.core.bokuhon.Surface
+import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
@@ -52,7 +54,7 @@ fun ChapterTransition(
     val currChapter = transition.from.chapter
     val goingToChapter = transition.to?.chapter
 
-    ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
+    CompositionLocalProvider(LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodyMedium) {
         when (transition) {
             is ChapterTransition.Prev -> {
                 TransitionText(
@@ -156,13 +158,13 @@ private fun NoChapterNotification(
         ) {
             Icon(
                 imageVector = MaterialSymbols.Rounded.Info,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = LocalBokuhonColors.current.primary,
                 contentDescription = null,
             )
 
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
             )
         }
     }
@@ -184,13 +186,13 @@ private fun ChapterGapWarning(
         ) {
             Icon(
                 imageVector = MaterialSymbols.RoundedFilled.Warning,
-                tint = MaterialTheme.colorScheme.error,
+                tint = LocalBokuhonColors.current.error,
                 contentDescription = null,
             )
 
             Text(
                 text = pluralStringResource(MR.plurals.missing_chapters_warning, count = gapCount, gapCount),
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
             )
         }
     }
@@ -204,7 +206,7 @@ private fun ChapterHeaderText(
     Text(
         text = text,
         modifier = modifier,
-        style = MaterialTheme.typography.titleMedium,
+        style = LocalBokuhonTypography.current.titleMedium,
     )
 }
 
@@ -232,7 +234,7 @@ private fun ChapterText(
             fontSize = 20.sp,
             maxLines = 5,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.titleLarge,
+            style = LocalBokuhonTypography.current.titleLarge,
             inlineContent = mapOf(
                 DOWNLOADED_ICON_ID to InlineTextContent(
                     Placeholder(
@@ -257,7 +259,7 @@ private fun ChapterText(
                     .padding(top = 2.dp),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
+                style = LocalBokuhonTypography.current.bodySmall,
             )
         }
     }
@@ -267,7 +269,7 @@ private val CardColor: CardColors
     @Composable
     get() = CardDefaults.outlinedCardColors(
         containerColor = Color.Transparent,
-        contentColor = MaterialTheme.colorScheme.onSurface,
+        contentColor = LocalBokuhonColors.current.onSurface,
     )
 
 private val VerticalSpacerSize = 24.dp

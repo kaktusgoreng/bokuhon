@@ -5,14 +5,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.SpanStyle
@@ -33,8 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mohamedrejeb.richeditor.model.rememberRichTextState
-import com.mohamedrejeb.richeditor.ui.material3.RichTextEditor
-import com.mohamedrejeb.richeditor.ui.material3.RichTextEditorDefaults.richTextEditorColors
+import com.mohamedrejeb.richeditor.ui.BasicRichTextEditor
 import eu.kanade.tachiyomi.ui.manga.notes.MangaNotesViewModel
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -48,10 +46,12 @@ import mihon.icons.materialsymbols.rounded.FormatItalic
 import mihon.icons.materialsymbols.rounded.FormatListNumbered
 import mihon.icons.materialsymbols.rounded.FormatUnderlined
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.VerticalDivider
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import kotlin.time.Duration.Companion.seconds
 
@@ -63,7 +63,7 @@ fun MangaNotesTextArea(
 ) {
     val scope = rememberCoroutineScope()
     val richTextState = rememberRichTextState()
-    val primaryColor = MaterialTheme.colorScheme.primary
+    val primaryColor = LocalBokuhonColors.current.primary
 
     DisposableEffect(scope, richTextState) {
         snapshotFlow { richTextState.annotatedString }
@@ -93,33 +93,31 @@ fun MangaNotesTextArea(
 
     Column(
         modifier = modifier
-            .padding(horizontal = MaterialTheme.padding.small)
+            .padding(horizontal = BokuhonPadding.small)
             .fillMaxSize(),
     ) {
-        RichTextEditor(
-            state = richTextState,
-            textStyle = MaterialTheme.typography.bodyLarge,
-            placeholder = {
-                Text(text = stringResource(MR.strings.notes_placeholder))
-            },
-            colors = richTextEditorColors(
-                containerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
-            contentPadding = PaddingValues(
-                horizontal = MaterialTheme.padding.medium,
-            ),
+        Box(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .focusRequester(focusRequester),
-        )
+                .padding(horizontal = BokuhonPadding.medium),
+        ) {
+            if (textLength == 0) {
+                Text(text = stringResource(MR.strings.notes_placeholder))
+            }
+            BasicRichTextEditor(
+                state = richTextState,
+                textStyle = LocalBokuhonTypography.current.bodyLarge,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .focusRequester(focusRequester),
+            )
+        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .padding(vertical = MaterialTheme.padding.small)
+                .padding(vertical = BokuhonPadding.small)
                 .fillMaxWidth(),
         ) {
             LazyRow(
@@ -154,8 +152,8 @@ fun MangaNotesTextArea(
                 item {
                     VerticalDivider(
                         modifier = Modifier
-                            .padding(horizontal = MaterialTheme.padding.extraSmall)
-                            .height(MaterialTheme.padding.large),
+                            .padding(horizontal = BokuhonPadding.extraSmall)
+                            .height(BokuhonPadding.large),
                     )
                 }
                 item {
@@ -179,7 +177,7 @@ fun MangaNotesTextArea(
             ) {
                 Text(
                     text = textLength.toString(),
-                    modifier = Modifier.padding(MaterialTheme.padding.extraSmall),
+                    modifier = Modifier.padding(BokuhonPadding.extraSmall),
                 )
             }
         }
@@ -195,7 +193,7 @@ fun MangaNotesTextAreaButton(
 ) {
     Box(
         modifier = modifier
-            .clip(MaterialTheme.shapes.small)
+            .clip(RectangleShape)
             .clickable(
                 onClick = onClick,
                 enabled = true,
@@ -206,10 +204,10 @@ fun MangaNotesTextAreaButton(
         Icon(
             imageVector = icon,
             contentDescription = icon.name,
-            tint = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary,
+            tint = if (isSelected) LocalBokuhonColors.current.onPrimary else LocalBokuhonColors.current.primary,
             modifier = Modifier
-                .background(color = if (isSelected) MaterialTheme.colorScheme.onBackground else Color.Transparent)
-                .padding(MaterialTheme.padding.extraSmall),
+                .background(color = if (isSelected) LocalBokuhonColors.current.onBackground else Color.Transparent)
+                .padding(BokuhonPadding.extraSmall),
         )
     }
 }

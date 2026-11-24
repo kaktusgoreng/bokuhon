@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -21,9 +20,10 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import dev.icerock.moko.resources.StringResource
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.ActionButton
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
 import kotlin.random.Random
@@ -66,7 +66,7 @@ fun EmptyScreen(
             Text(
                 text = face,
                 modifier = Modifier.secondaryItemAlpha(),
-                style = MaterialTheme.typography.displayMedium,
+                style = LocalBokuhonTypography.current.displayMedium,
             )
         }
 
@@ -75,7 +75,7 @@ fun EmptyScreen(
             modifier = Modifier
                 .paddingFromBaseline(top = 24.dp)
                 .secondaryItemAlpha(),
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
             textAlign = TextAlign.Center,
         )
 
@@ -83,7 +83,7 @@ fun EmptyScreen(
             Row(
                 modifier = Modifier
                     .padding(top = 24.dp),
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             ) {
                 actions.fastForEach {
                     ActionButton(

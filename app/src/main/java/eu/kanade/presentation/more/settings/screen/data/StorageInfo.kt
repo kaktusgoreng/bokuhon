@@ -5,22 +5,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import eu.kanade.tachiyomi.util.storage.DiskUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.LinearProgressIndicator
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.secondaryItemAlpha
@@ -37,7 +38,7 @@ fun StorageInfo(
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
     ) {
         storages.forEach {
             StorageInfo(it)
@@ -62,16 +63,16 @@ private fun StorageInfo(
     val totalText = remember(total) { Formatter.formatFileSize(context, total) }
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
     ) {
         Text(
             text = file.absolutePath,
-            style = MaterialTheme.typography.header,
+            style = LocalBokuhonTypography.current.header,
         )
 
         LinearProgressIndicator(
             modifier = Modifier
-                .clip(MaterialTheme.shapes.small)
+                .clip(RectangleShape)
                 .fillMaxWidth()
                 .height(12.dp),
             progress = { if (total > 0) 1 - (available / total.toFloat()) else 0f },
@@ -80,7 +81,7 @@ private fun StorageInfo(
         Text(
             text = stringResource(MR.strings.available_disk_space_info, availableText, totalText),
             modifier = Modifier.secondaryItemAlpha(),
-            style = MaterialTheme.typography.bodySmall,
+            style = LocalBokuhonTypography.current.bodySmall,
         )
     }
 }

@@ -5,15 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -33,7 +34,7 @@ fun ChapterHeader(
                 onClick = onClick,
             )
             .padding(horizontal = 16.dp, vertical = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
     ) {
         Text(
             text = if (chapterCount == null) {
@@ -41,8 +42,8 @@ fun ChapterHeader(
             } else {
                 pluralStringResource(MR.plurals.manga_num_chapters, count = chapterCount, chapterCount)
             },
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            style = LocalBokuhonTypography.current.titleMedium,
+            color = LocalBokuhonColors.current.onBackground,
         )
 
         MissingChaptersWarning(missingChapterCount)
@@ -59,7 +60,7 @@ private fun MissingChaptersWarning(count: Int) {
         text = pluralStringResource(MR.plurals.missing_chapters, count = count, count),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        style = MaterialTheme.typography.bodySmall,
-        color = MaterialTheme.colorScheme.error.copy(alpha = SECONDARY_ALPHA),
+        style = LocalBokuhonTypography.current.bodySmall,
+        color = LocalBokuhonColors.current.error.copy(alpha = SECONDARY_ALPHA),
     )
 }

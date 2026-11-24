@@ -1,7 +1,6 @@
 package eu.kanade.presentation.reader.settings
 
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.core.graphics.alpha
@@ -13,6 +12,7 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsViewModel
 import tachiyomi.core.common.preference.getAndSet
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilterChip
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.CheckboxItem
 import tachiyomi.presentation.core.components.SettingsChipRow
@@ -42,7 +42,7 @@ internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
             steps = 0,
             label = stringResource(MR.strings.pref_custom_brightness),
             onChange = { viewModel.preferences.customBrightnessValue.set(it) },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
     }
 
@@ -63,7 +63,7 @@ internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
                     getColorValue(it, newRValue, RED_MASK, 16)
                 }
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
         SliderItem(
             value = colorFilterValue.green,
@@ -75,7 +75,7 @@ internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
                     getColorValue(it, newGValue, GREEN_MASK, 8)
                 }
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
         SliderItem(
             value = colorFilterValue.blue,
@@ -87,7 +87,7 @@ internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
                     getColorValue(it, newBValue, BLUE_MASK, 0)
                 }
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
         SliderItem(
             value = colorFilterValue.alpha,
@@ -99,7 +99,7 @@ internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
                     getColorValue(it, newAValue, ALPHA_MASK, 24)
                 }
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
 
         val colorFilterMode by viewModel.preferences.colorFilterMode.collectAsState()

@@ -9,27 +9,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.CheckBoxOutlineBlank
 import mihon.icons.materialsymbols.roundedfilled.DisabledByDefault
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.minimumInteractiveComponentSize
 import tachiyomi.presentation.core.components.material.TextButton
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -68,9 +70,9 @@ fun ScanlatorFilterDialog(
                                         }
                                     }
                                     .minimumInteractiveComponentSize()
-                                    .clip(MaterialTheme.shapes.small)
+                                    .clip(RectangleShape)
                                     .fillMaxWidth()
-                                    .padding(horizontal = MaterialTheme.padding.small),
+                                    .padding(horizontal = BokuhonPadding.small),
                             ) {
                                 Icon(
                                     imageVector = if (isExcluded) {
@@ -79,15 +81,15 @@ fun ScanlatorFilterDialog(
                                         MaterialSymbols.Rounded.CheckBoxOutlineBlank
                                     },
                                     tint = if (isExcluded) {
-                                        MaterialTheme.colorScheme.primary
+                                        LocalBokuhonColors.current.primary
                                     } else {
-                                        LocalContentColor.current
+                                        LocalBokuhonContentColor.current
                                     },
                                     contentDescription = null,
                                 )
                                 Text(
                                     text = scanlator,
-                                    style = MaterialTheme.typography.bodyMedium,
+                                    style = LocalBokuhonTypography.current.bodyMedium,
                                     modifier = Modifier.padding(start = 24.dp),
                                 )
                             }

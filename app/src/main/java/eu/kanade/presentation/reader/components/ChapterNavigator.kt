@@ -12,14 +12,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderState
-import androidx.compose.material3.VerticalSlider
-import androidx.compose.material3.rememberSliderState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -48,7 +40,14 @@ import mihon.presentation.core.util.isTabletUi
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilledIconButton
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.IconButtonColors
+import tachiyomi.presentation.core.bokuhon.IconButtonDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.Slider
+import tachiyomi.presentation.core.bokuhon.SliderState
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.VerticalSlider
+import tachiyomi.presentation.core.bokuhon.rememberSliderState
 import tachiyomi.presentation.core.i18n.stringResource
 import kotlin.math.roundToInt
 
@@ -104,8 +103,7 @@ fun ChapterNavigator(
     val mainAxisPadding = if (isTabletUi) 24.dp else 8.dp
 
     // Match with toolbar background color set in ReaderActivity
-    val backgroundColor = MaterialTheme.colorScheme
-        .surfaceColorAtElevation(3.dp)
+    val backgroundColor = LocalBokuhonColors.current.surface
         .copy(alpha = if (isSystemInDarkTheme()) 0.9f else 0.95f)
     val buttonColor = IconButtonDefaults.filledIconButtonColors(
         containerColor = backgroundColor,

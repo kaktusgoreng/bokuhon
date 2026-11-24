@@ -2,7 +2,6 @@ package eu.kanade.presentation.reader.settings
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
@@ -11,6 +10,7 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilterChip
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.CheckboxItem
 import tachiyomi.presentation.core.components.SettingsChipRow
@@ -143,7 +143,7 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
             label = stringResource(MR.strings.pref_flash_duration),
             valueString = stringResource(MR.strings.pref_flash_duration_summary, flashMillis),
             onChange = { flashMillisPref.set(it * ReaderPreferences.MILLI_CONVERSION) },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
         SliderItem(
             value = flashInterval,
@@ -153,7 +153,7 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
             onChange = {
                 flashIntervalPref.set(it)
             },
-            pillColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
         SettingsChipRow(MR.strings.pref_flash_with) {
             flashColors.map { (labelRes, value) ->

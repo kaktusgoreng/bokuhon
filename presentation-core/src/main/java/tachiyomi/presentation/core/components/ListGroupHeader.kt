@@ -1,12 +1,13 @@
 package tachiyomi.presentation.core.components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 
 @Composable
 fun ListGroupHeader(
@@ -17,11 +18,11 @@ fun ListGroupHeader(
         text = text,
         modifier = modifier
             .padding(
-                horizontal = MaterialTheme.padding.medium,
-                vertical = MaterialTheme.padding.small,
+                horizontal = BokuhonPadding.medium,
+                vertical = BokuhonPadding.small,
             ),
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        color = LocalBokuhonColors.current.onSurfaceVariant,
         fontWeight = FontWeight.SemiBold,
-        style = MaterialTheme.typography.bodyMedium,
+        style = LocalBokuhonTypography.current.bodyMedium,
     )
 }

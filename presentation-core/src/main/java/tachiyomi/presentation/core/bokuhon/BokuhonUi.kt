@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +39,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 
 // A deliberately tiny UI layer over Compose Foundation: no Material widgets, four tones, square
 // corners, and the handful of primitives the app actually uses. Names and parameters mirror the
@@ -51,14 +54,51 @@ data class BokuhonColors(
     val isDark: Boolean,
 ) {
     val background: Color get() = if (isDark) ink else paper
-    val surface: Color get() = if (isDark) ink else paper
+    val onBackground: Color get() = if (isDark) paper else ink
+    val surface: Color get() = background
+    val onSurface: Color get() = onBackground
     val surfaceVariant: Color get() = if (isDark) ash else mist
-    val onSurface: Color get() = if (isDark) paper else ink
-    val onSurfaceVariant: Color get() = if (isDark) paper else mist
+    val onSurfaceVariant: Color get() = if (isDark) mist else ash
+    val surfaceBright: Color get() = if (isDark) ash else paper
+    val surfaceDim: Color get() = if (isDark) ink else mist
+    val surfaceContainerLowest: Color get() = surface
+    val surfaceContainerLow: Color get() = surface
+    val surfaceContainer: Color get() = surface
+    val surfaceContainerHigh: Color get() = surfaceVariant
+    val surfaceContainerHighest: Color get() = surfaceVariant
+    val surfaceTint: Color get() = primary
+    val inverseSurface: Color get() = onSurface
+    val inverseOnSurface: Color get() = surface
+    val scrim: Color get() = ink
+
     val outline: Color get() = ash
     val outlineVariant: Color get() = if (isDark) ash else mist
+
     val primary: Color get() = onSurface
-    val onPrimary: Color get() = background
+    val onPrimary: Color get() = surface
+    val primaryContainer: Color get() = primary
+    val onPrimaryContainer: Color get() = onPrimary
+
+    val secondary: Color get() = ash
+    val onSecondary: Color get() = paper
+    val secondaryContainer: Color get() = surfaceVariant
+    val onSecondaryContainer: Color get() = onSurface
+
+    val tertiary: Color get() = ash
+    val onTertiary: Color get() = paper
+    val tertiaryContainer: Color get() = surfaceVariant
+    val onTertiaryContainer: Color get() = onSurface
+
+    val error: Color get() = onSurface
+    val onError: Color get() = surface
+    val errorContainer: Color get() = surfaceVariant
+    val onErrorContainer: Color get() = onSurface
+
+    val active: Color get() = if (isDark) Color(0xFFEBEB3B) else Color(0xFFFFC107)
+
+    // Elevation has no meaning on an e-ink panel; tinted surfaces just muddy the four tones.
+    fun surfaceColorAtElevation(elevation: Dp): Color = surface
+
     val container: Color get() = surfaceVariant
     val onContainer: Color get() = onSurface
 }
@@ -73,14 +113,20 @@ val BokuhonDarkColors = BokuhonColors(BokuhonPaper, BokuhonMist, BokuhonAsh, Bok
 
 @Immutable
 data class BokuhonTypography(
+    val displayLarge: TextStyle = TextStyle(fontSize = 57.sp, lineHeight = 64.sp),
+    val displayMedium: TextStyle = TextStyle(fontSize = 45.sp, lineHeight = 52.sp),
     val displaySmall: TextStyle = TextStyle(fontSize = 36.sp, lineHeight = 44.sp),
+    val headlineLarge: TextStyle = TextStyle(fontSize = 32.sp, lineHeight = 40.sp),
+    val headlineMedium: TextStyle = TextStyle(fontSize = 28.sp, lineHeight = 36.sp),
     val headlineSmall: TextStyle = TextStyle(fontSize = 24.sp, lineHeight = 32.sp),
     val titleLarge: TextStyle = TextStyle(fontSize = 22.sp, lineHeight = 28.sp),
     val titleMedium: TextStyle = TextStyle(fontSize = 16.sp, lineHeight = 24.sp, fontWeight = FontWeight.Medium),
+    val titleSmall: TextStyle = TextStyle(fontSize = 14.sp, lineHeight = 20.sp, fontWeight = FontWeight.Medium),
     val bodyLarge: TextStyle = TextStyle(fontSize = 16.sp, lineHeight = 24.sp),
     val bodyMedium: TextStyle = TextStyle(fontSize = 14.sp, lineHeight = 20.sp),
     val bodySmall: TextStyle = TextStyle(fontSize = 12.sp, lineHeight = 16.sp),
     val labelLarge: TextStyle = TextStyle(fontSize = 14.sp, lineHeight = 20.sp, fontWeight = FontWeight.Medium),
+    val labelMedium: TextStyle = TextStyle(fontSize = 12.sp, lineHeight = 16.sp, fontWeight = FontWeight.Medium),
     val labelSmall: TextStyle = TextStyle(fontSize = 11.sp, lineHeight = 16.sp, fontWeight = FontWeight.Medium),
 )
 
@@ -91,11 +137,42 @@ val LocalBokuhonContentColor = staticCompositionLocalOf { Color.Unspecified }
 
 @Composable
 fun ProvideBokuhonTheme(isDark: Boolean, content: @Composable () -> Unit) {
+    val colors = if (isDark) BokuhonDarkColors else BokuhonLightColors
     CompositionLocalProvider(
-        LocalBokuhonColors provides if (isDark) BokuhonDarkColors else BokuhonLightColors,
+        LocalBokuhonColors provides colors,
         LocalBokuhonTypography provides BokuhonTypography(),
+        LocalBokuhonContentColor provides colors.onBackground,
         content = content,
     )
+}
+
+@Composable
+@ReadOnlyComposable
+fun contentColorFor(backgroundColor: Color): Color {
+    val c = LocalBokuhonColors.current
+    return when (backgroundColor) {
+        c.background, c.surface -> c.onBackground
+        c.primary -> c.onPrimary
+        c.primaryContainer -> c.onPrimaryContainer
+        c.secondary -> c.onSecondary
+        c.secondaryContainer -> c.onSecondaryContainer
+        c.tertiary -> c.onTertiary
+        c.tertiaryContainer -> c.onTertiaryContainer
+        c.error -> c.onError
+        c.errorContainer -> c.onErrorContainer
+        c.surfaceVariant -> c.onSurfaceVariant
+        else -> LocalBokuhonContentColor.current.takeOrElse { c.onSurface }
+    }
+}
+
+fun Modifier.minimumInteractiveComponentSize(): Modifier = defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+
+object BokuhonPadding {
+    val extraLarge = 32.dp
+    val large = 24.dp
+    val medium = 16.dp
+    val small = 8.dp
+    val extraSmall = 4.dp
 }
 
 @Composable
@@ -117,10 +194,8 @@ fun Text(
     softWrap: Boolean = true,
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
 ) {
-    // While Material still owns the theme, honour its ambient content colour so text inside
-    // Material buttons and cards keeps its contrast.
     val resolvedColor = color.takeOrElse {
-        LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+        LocalBokuhonContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
     }
     BasicText(
         text = text,
@@ -155,9 +230,10 @@ fun Text(
     textAlign: TextAlign? = null,
     overflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
+    inlineContent: Map<String, InlineTextContent> = emptyMap(),
 ) {
     val resolvedColor = color.takeOrElse {
-        LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+        LocalBokuhonContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
     }
     BasicText(
         text = text,
@@ -171,6 +247,7 @@ fun Text(
         ),
         overflow = overflow,
         maxLines = maxLines,
+        inlineContent = inlineContent,
     )
 }
 
@@ -206,7 +283,7 @@ fun Icon(
 
 @Composable
 private fun resolveIconTint(tint: Color): Color = tint.takeOrElse {
-    LocalContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
+    LocalBokuhonContentColor.current.takeOrElse { LocalBokuhonColors.current.onSurface }
 }
 
 @Composable
@@ -258,9 +335,79 @@ private fun ButtonSurface(
         horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
         verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
     ) {
-        CompositionLocalProvider(LocalContentColor provides contentColor) { content() }
+        CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) { content() }
     }
 }
+
+@Immutable
+data class ButtonColors(
+    val containerColor: Color,
+    val contentColor: Color,
+    val disabledContainerColor: Color = containerColor,
+    val disabledContentColor: Color = contentColor,
+)
+
+object ButtonDefaults {
+    @Composable
+    fun buttonColors(
+        containerColor: Color = LocalBokuhonColors.current.primary,
+        contentColor: Color = LocalBokuhonColors.current.onPrimary,
+        disabledContainerColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = 0.12f),
+        disabledContentColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
+
+    @Composable
+    fun outlinedButtonColors(
+        containerColor: Color = Color.Transparent,
+        contentColor: Color = LocalBokuhonColors.current.primary,
+        disabledContainerColor: Color = Color.Transparent,
+        disabledContentColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
+
+    @Composable
+    fun textButtonColors(
+        containerColor: Color = Color.Transparent,
+        contentColor: Color = LocalBokuhonColors.current.primary,
+        disabledContainerColor: Color = Color.Transparent,
+        disabledContentColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
+
+    @Composable
+    fun filledTonalButtonColors(
+        containerColor: Color = LocalBokuhonColors.current.surfaceVariant,
+        contentColor: Color = LocalBokuhonColors.current.onSurface,
+        disabledContainerColor: Color = LocalBokuhonColors.current.surfaceVariant.copy(alpha = DISABLED_ALPHA),
+        disabledContentColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
+
+    fun elevatedButtonElevation(): Any? = null
+}
+
+private fun ButtonColors.container(enabled: Boolean): Color =
+    if (enabled) containerColor else disabledContainerColor
+
+private fun ButtonColors.content(enabled: Boolean): Color =
+    if (enabled) contentColor else disabledContentColor
 
 @Composable
 fun Button(
@@ -268,41 +415,7 @@ fun Button(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: Any? = null,
-    colors: Any? = null,
-    elevation: Any? = null,
-    border: androidx.compose.foundation.BorderStroke? = null,
-    contentPadding: Any? = null,
-    interactionSource: Any? = null,
-    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
-) {
-    val c = LocalBokuhonColors.current
-    ButtonSurface(onClick, modifier, enabled, c.primary, c.onPrimary, border, c.outline, content)
-}
-
-@Composable
-fun TextButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    shape: Any? = null,
-    colors: Any? = null,
-    elevation: Any? = null,
-    border: androidx.compose.foundation.BorderStroke? = null,
-    contentPadding: Any? = null,
-    interactionSource: Any? = null,
-    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
-) {
-    val c = LocalBokuhonColors.current
-    ButtonSurface(onClick, modifier, enabled, Color.Transparent, c.onSurface, border, c.outline, content)
-}
-
-@Composable
-fun OutlinedButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    shape: Any? = null,
-    colors: Any? = null,
+    colors: ButtonColors? = null,
     elevation: Any? = null,
     border: androidx.compose.foundation.BorderStroke? = null,
     contentPadding: Any? = null,
@@ -314,8 +427,87 @@ fun OutlinedButton(
         onClick,
         modifier,
         enabled,
-        Color.Transparent,
-        c.onSurface,
+        colors?.container(enabled) ?: c.primary,
+        colors?.content(enabled) ?: c.onPrimary,
+        border,
+        c.outline,
+        content,
+    )
+}
+
+@Composable
+fun FilledTonalButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: ButtonColors? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    val tonal = colors ?: ButtonDefaults.filledTonalButtonColors()
+    ButtonSurface(
+        onClick,
+        modifier,
+        enabled,
+        tonal.container(enabled),
+        tonal.content(enabled),
+        border,
+        c.outline,
+        content,
+    )
+}
+
+@Composable
+fun TextButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: ButtonColors? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    ButtonSurface(
+        onClick,
+        modifier,
+        enabled,
+        colors?.container(enabled) ?: Color.Transparent,
+        colors?.content(enabled) ?: c.onSurface,
+        border,
+        c.outline,
+        content,
+    )
+}
+
+@Composable
+fun OutlinedButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Any? = null,
+    colors: ButtonColors? = null,
+    elevation: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
+    contentPadding: Any? = null,
+    interactionSource: Any? = null,
+    content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    ButtonSurface(
+        onClick,
+        modifier,
+        enabled,
+        colors?.container(enabled) ?: Color.Transparent,
+        colors?.content(enabled) ?: c.onSurface,
         border ?: androidx.compose.foundation.BorderStroke(1.dp, c.outline),
         c.outline,
         content,
@@ -342,23 +534,79 @@ fun IconButton(
     }
 }
 
+@Immutable
+data class IconButtonColors(
+    val containerColor: Color,
+    val contentColor: Color,
+    val disabledContainerColor: Color,
+    val disabledContentColor: Color,
+)
+
+object IconButtonDefaults {
+    @Composable
+    fun filledIconButtonColors(
+        containerColor: Color = LocalBokuhonColors.current.primary,
+        contentColor: Color = LocalBokuhonColors.current.onPrimary,
+        disabledContainerColor: Color = LocalBokuhonColors.current.onSurface.copy(alpha = DISABLED_ALPHA),
+        disabledContentColor: Color = LocalBokuhonColors.current.surface.copy(alpha = DISABLED_ALPHA),
+    ): IconButtonColors = IconButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
+}
+
 @Composable
 fun FilledIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: Any? = null,
+    colors: IconButtonColors? = null,
     shape: Any? = null,
     content: @Composable () -> Unit,
 ) {
+    val c = LocalBokuhonColors.current
     Box(
         modifier = modifier
             .size(40.dp)
-            .background(LocalBokuhonColors.current.primary)
+            .background(colors?.let { if (enabled) it.containerColor else it.disabledContainerColor } ?: c.primary)
             .clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Button, onClick = onClick),
         contentAlignment = androidx.compose.ui.Alignment.Center,
     ) {
-        CompositionLocalProvider(LocalContentColor provides LocalBokuhonColors.current.onPrimary) {
+        CompositionLocalProvider(
+            LocalBokuhonContentColor provides
+                (colors?.let { if (enabled) it.contentColor else it.disabledContentColor } ?: c.onPrimary),
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+fun FilledIconToggleButton(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    content: @Composable () -> Unit,
+) {
+    val c = LocalBokuhonColors.current
+    Box(
+        modifier = modifier
+            .background(if (checked) c.primary else Color.Transparent)
+            .border(1.dp, if (checked) c.primary else c.outline)
+            .toggleable(
+                value = checked,
+                enabled = enabled,
+                role = androidx.compose.ui.semantics.Role.Checkbox,
+                onValueChange = onCheckedChange,
+            ),
+        contentAlignment = androidx.compose.ui.Alignment.Center,
+    ) {
+        CompositionLocalProvider(
+            LocalBokuhonContentColor provides if (checked) c.onPrimary else c.onSurface,
+        ) {
             content()
         }
     }

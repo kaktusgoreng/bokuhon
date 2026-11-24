@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,14 +26,16 @@ import mihon.icons.materialsymbols.rounded.Numbers
 import mihon.icons.materialsymbols.rounded.SortByAlpha
 import tachiyomi.domain.source.model.Source
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.Scroller.STICKY_HEADER_KEY_PREFIX
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
@@ -92,14 +93,14 @@ private fun MigrateSourceList(
         stickyHeader(key = STICKY_HEADER_KEY_PREFIX) {
             Row(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(start = MaterialTheme.padding.medium),
+                    .background(LocalBokuhonColors.current.background)
+                    .padding(start = BokuhonPadding.medium),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = stringResource(MR.strings.migration_selection_prompt),
                     modifier = Modifier.weight(1f),
-                    style = MaterialTheme.typography.header,
+                    style = LocalBokuhonTypography.current.header,
                 )
 
                 IconButton(onClick = onToggleSortingMode) {
@@ -167,17 +168,17 @@ private fun MigrateSourceItem(
         content = { _, sourceLangString ->
             Column(
                 modifier = Modifier
-                    .padding(horizontal = MaterialTheme.padding.medium)
+                    .padding(horizontal = BokuhonPadding.medium)
                     .weight(1f),
             ) {
                 Text(
                     text = source.name.ifBlank { source.id.toString() },
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = LocalBokuhonTypography.current.bodyMedium,
                 )
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                    horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     if (sourceLangString != null) {
@@ -186,7 +187,7 @@ private fun MigrateSourceItem(
                             text = sourceLangString,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = LocalBokuhonTypography.current.bodySmall,
                         )
                     }
                     if (source.isStub) {
@@ -195,8 +196,8 @@ private fun MigrateSourceItem(
                             text = stringResource(MR.strings.not_installed),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.error,
+                            style = LocalBokuhonTypography.current.bodySmall,
+                            color = LocalBokuhonColors.current.error,
                         )
                     }
                 }

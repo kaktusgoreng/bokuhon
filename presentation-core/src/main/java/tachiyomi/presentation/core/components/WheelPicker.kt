@@ -18,7 +18,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -46,8 +45,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.util.clearFocusOnSoftKeyboardHide
 import tachiyomi.presentation.core.util.clickableNoIndication
 import tachiyomi.presentation.core.util.showSoftKeyboard
@@ -173,12 +175,12 @@ private fun <T> WheelPicker(
                     keyboardType = manualInputType!!,
                     imeAction = ImeAction.Done,
                 ),
-                textStyle = MaterialTheme.typography.titleMedium +
+                textStyle = LocalBokuhonTypography.current.titleMedium +
                     TextStyle(
-                        color = MaterialTheme.colorScheme.onSurface,
+                        color = LocalBokuhonColors.current.onSurface,
                         textAlign = TextAlign.Center,
                     ),
-                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                cursorBrush = SolidColor(LocalBokuhonColors.current.primary),
             )
         } else {
             LazyColumn(
@@ -252,12 +254,12 @@ private fun calculateSnappedItemIndex(lazyListState: LazyListState): Int {
 object WheelPickerDefaults {
     @Composable
     fun Background(size: DpSize) {
-        androidx.compose.material3.Surface(
+        Surface(
             modifier = Modifier
                 .size(size.width, size.height / ROW_COUNT),
-            shape = RoundedCornerShape(MaterialTheme.padding.medium),
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+            shape = RoundedCornerShape(BokuhonPadding.medium),
+            color = LocalBokuhonColors.current.primary.copy(alpha = 0.2f),
+            border = BorderStroke(1.dp, LocalBokuhonColors.current.primary),
             content = {},
         )
     }
@@ -266,7 +268,7 @@ object WheelPickerDefaults {
     fun Item(text: String) {
         Text(
             text = text,
-            style = MaterialTheme.typography.titleMedium,
+            style = LocalBokuhonTypography.current.titleMedium,
             maxLines = 1,
         )
     }

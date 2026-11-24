@@ -1,12 +1,12 @@
 package eu.kanade.presentation.browse.components
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import dev.icerock.moko.resources.StringResource
 import mihon.domain.extension.model.ContentWarning
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 
 internal data class ContentWarningLabel(
     val title: StringResource,
@@ -22,11 +22,11 @@ internal val ContentWarning.label: ContentWarningLabel?
         ContentWarning.MIXED -> ContentWarningLabel(
             title = MR.strings.ext_content_warning_mixed,
             description = MR.strings.ext_content_warning_mixed_description,
-            color = MaterialTheme.colorScheme.primary,
+            color = LocalBokuhonColors.current.primary,
         )
         ContentWarning.NSFW -> ContentWarningLabel(
             title = MR.strings.ext_content_warning_nsfw,
             description = MR.strings.ext_content_warning_nsfw_description,
-            color = MaterialTheme.colorScheme.error,
+            color = LocalBokuhonColors.current.error,
         )
     }

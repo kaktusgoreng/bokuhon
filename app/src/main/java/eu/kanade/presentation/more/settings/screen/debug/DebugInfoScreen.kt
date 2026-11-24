@@ -1,7 +1,6 @@
 package eu.kanade.presentation.more.settings.screen.debug
 
 import android.os.Build
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -30,6 +29,7 @@ import mihon.icons.materialsymbols.rounded.Autorenew
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.util.collectAsState
 
 @Composable
@@ -90,7 +90,7 @@ private fun getAppInfoGroup(): Preference.PreferenceGroup {
                     ) {
                         Icon(
                             imageVector = MaterialSymbols.Rounded.Autorenew,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = LocalBokuhonColors.current.primary,
                             contentDescription = null,
                         )
                     }

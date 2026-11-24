@@ -6,16 +6,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.components.motion.animateDpAsState
 
 /**
- * Material3's switch, drawn square so it stays legible on e-ink panels.
+ * Switch drawn square so it stays legible on e-ink panels.
  */
 @Composable
 fun Switch(
@@ -24,7 +24,7 @@ fun Switch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    val colors = MaterialTheme.colorScheme
+    val colors = LocalBokuhonColors.current
     val trackColor = if (checked) colors.primary else colors.surface
     val borderColor = when {
         !enabled -> colors.onSurface.copy(alpha = 0.12f)

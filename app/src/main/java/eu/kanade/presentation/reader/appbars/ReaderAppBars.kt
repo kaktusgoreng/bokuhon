@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -30,7 +28,8 @@ import eu.kanade.presentation.reader.components.ChapterNavigator
 import eu.kanade.presentation.reader.components.ChapterNavigatorType
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
-import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 
 private val readerBarsSlideAnimationSpec = tween<IntOffset>(200)
@@ -69,8 +68,7 @@ fun ReaderAppBars(
     onClickCropBorder: () -> Unit,
     onClickSettings: () -> Unit,
 ) {
-    val backgroundColor = MaterialTheme.colorScheme
-        .surfaceColorAtElevation(3.dp)
+    val backgroundColor = LocalBokuhonColors.current.surface
         .copy(alpha = if (isSystemInDarkTheme()) 0.9f else 0.95f)
 
     Column(modifier = Modifier.fillMaxHeight()) {
@@ -98,7 +96,7 @@ fun ReaderAppBars(
                 Row(modifier = Modifier.weight(1f)) {
                     AnimatedVisibility(visible = visible) {
                         Row {
-                            Spacer(modifier = Modifier.width(MaterialTheme.padding.small))
+                            Spacer(modifier = Modifier.width(BokuhonPadding.small))
                             Box(
                                 modifier = Modifier.fillMaxHeight(),
                                 contentAlignment = Alignment.BottomCenter,
@@ -126,7 +124,7 @@ fun ReaderAppBars(
         }
 
         AnimatedVisibility(visible = visible) {
-            Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
+            Column(verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small)) {
                 if (chapterNavigatorType.isHorizontal()) {
                     ChapterNavigator(
                         type = chapterNavigatorType,
@@ -144,7 +142,7 @@ fun ReaderAppBars(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(backgroundColor)
-                        .padding(horizontal = MaterialTheme.padding.small)
+                        .padding(horizontal = BokuhonPadding.small)
                         .windowInsetsPadding(WindowInsets.navigationBars),
                     readingMode = readingMode,
                     onClickReadingMode = onClickReadingMode,

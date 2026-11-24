@@ -1,11 +1,10 @@
 package tachiyomi.presentation.core.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -17,6 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
 import tachiyomi.presentation.core.bokuhon.ProgressIndicatorDefaults
+import tachiyomi.presentation.core.bokuhon.ProvideBokuhonTheme
+import tachiyomi.presentation.core.bokuhon.Scaffold
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.motion.AnimatedContent
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
@@ -43,7 +44,7 @@ fun CombinedCircularProgressIndicator(
 @Composable
 private fun CombinedCircularProgressIndicatorPreview() {
     var progress by remember { mutableFloatStateOf(0f) }
-    MaterialTheme {
+    ProvideBokuhonTheme(isSystemInDarkTheme()) {
         Scaffold(
             bottomBar = {
                 Button(

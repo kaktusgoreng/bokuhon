@@ -1,7 +1,6 @@
 package eu.kanade.tachiyomi.ui.history
 
 import android.content.Context
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,6 +25,7 @@ import mihon.feature.migration.dialog.MigrateMangaDialog
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 
 @Composable
 fun HistoryTab() {

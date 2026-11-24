@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -22,10 +20,11 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import tachiyomi.domain.manga.interactor.FetchInterval
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.WheelTextPicker
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import kotlin.math.absoluteValue
@@ -107,7 +106,7 @@ fun SetIntervalDialog(
                         stringResource(MR.strings.manga_interval_expected_update_null),
                     )
                 }
-                Spacer(Modifier.height(MaterialTheme.padding.small))
+                Spacer(Modifier.height(BokuhonPadding.small))
 
                 if (onValueChanged != null && (!isReleaseBuildType)) {
                     Text(stringResource(MR.strings.manga_interval_custom_amount))

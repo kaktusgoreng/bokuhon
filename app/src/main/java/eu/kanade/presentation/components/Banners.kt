@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,16 +27,18 @@ import androidx.compose.ui.util.fastMaxBy
 import dev.icerock.moko.resources.StringResource
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.CircularProgressIndicator
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.i18n.stringResource
 
 val DownloadedOnlyBannerBackgroundColor
-    @Composable get() = MaterialTheme.colorScheme.tertiary
+    @Composable get() = LocalBokuhonColors.current.tertiary
 val IncognitoModeBannerBackgroundColor
-    @Composable get() = MaterialTheme.colorScheme.primary
+    @Composable get() = LocalBokuhonColors.current.primary
 val IndexingBannerBackgroundColor
-    @Composable get() = MaterialTheme.colorScheme.secondary
+    @Composable get() = LocalBokuhonColors.current.secondary
 
 @Composable
 fun WarningBanner(
@@ -48,10 +49,10 @@ fun WarningBanner(
         text = stringResource(textRes),
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.error)
+            .background(LocalBokuhonColors.current.error)
             .padding(16.dp),
-        color = MaterialTheme.colorScheme.onError,
-        style = MaterialTheme.typography.bodyMedium,
+        color = LocalBokuhonColors.current.onError,
+        style = LocalBokuhonTypography.current.bodyMedium,
         textAlign = TextAlign.Center,
     )
 }
@@ -119,9 +120,9 @@ private fun DownloadedOnlyModeBanner(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(4.dp)
             .then(modifier),
-        color = MaterialTheme.colorScheme.onTertiary,
+        color = LocalBokuhonColors.current.onTertiary,
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.labelMedium,
+        style = LocalBokuhonTypography.current.labelMedium,
     )
 }
 
@@ -134,9 +135,9 @@ private fun IncognitoModeBanner(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(4.dp)
             .then(modifier),
-        color = MaterialTheme.colorScheme.onPrimary,
+        color = LocalBokuhonColors.current.onPrimary,
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.labelMedium,
+        style = LocalBokuhonTypography.current.labelMedium,
     )
 }
 
@@ -154,15 +155,15 @@ private fun IndexingDownloadBanner(modifier: Modifier = Modifier) {
         var textHeight by remember { mutableStateOf(0.dp) }
         CircularProgressIndicator(
             modifier = Modifier.requiredSize(textHeight),
-            color = MaterialTheme.colorScheme.onSecondary,
+            color = LocalBokuhonColors.current.onSecondary,
             strokeWidth = textHeight / 8,
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = stringResource(MR.strings.download_notifier_cache_renewal),
-            color = MaterialTheme.colorScheme.onSecondary,
+            color = LocalBokuhonColors.current.onSecondary,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelMedium,
+            style = LocalBokuhonTypography.current.labelMedium,
             onTextLayout = {
                 with(density) {
                     textHeight = it.size.height.toDp()

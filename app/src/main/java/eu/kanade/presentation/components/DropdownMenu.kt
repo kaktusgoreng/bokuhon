@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,9 +19,11 @@ import mihon.icons.materialsymbols.automirroredrounded.ArrowRight
 import mihon.icons.materialsymbols.rounded.RadioButtonChecked
 import mihon.icons.materialsymbols.rounded.RadioButtonUnchecked
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.i18n.stringResource
-import androidx.compose.material3.DropdownMenu as ComposeDropdownMenu
+import tachiyomi.presentation.core.bokuhon.DropdownMenu as BokuhonDropdownMenu
 
 /**
  * DropdownMenu but overlaps anchor and has width constraints to better
@@ -39,7 +39,7 @@ fun DropdownMenu(
     properties: PopupProperties = PopupProperties(focusable = true),
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    ComposeDropdownMenu(
+    BokuhonDropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         modifier = modifier.sizeIn(minWidth = 196.dp, maxWidth = 196.dp),
@@ -65,7 +65,7 @@ fun RadioMenuItem(
                 Icon(
                     imageVector = MaterialSymbols.Rounded.RadioButtonChecked,
                     contentDescription = stringResource(MR.strings.selected),
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = LocalBokuhonColors.current.primary,
                 )
             } else {
                 Icon(

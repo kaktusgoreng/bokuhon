@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,10 +24,13 @@ import mihon.icons.materialsymbols.rounded.Delete
 import mihon.icons.materialsymbols.rounded.Favorite
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -50,7 +51,7 @@ fun HistoryItem(
         modifier = modifier
             .clickable(onClick = onClickResume)
             .height(HistoryItemHeight)
-            .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
+            .padding(horizontal = BokuhonPadding.medium, vertical = BokuhonPadding.small),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         MangaCover.Book(
@@ -61,9 +62,9 @@ fun HistoryItem(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = MaterialTheme.padding.medium, end = MaterialTheme.padding.small),
+                .padding(start = BokuhonPadding.medium, end = BokuhonPadding.small),
         ) {
-            val textStyle = MaterialTheme.typography.bodyMedium
+            val textStyle = LocalBokuhonTypography.current.bodyMedium
             Text(
                 text = history.title,
                 fontWeight = FontWeight.SemiBold,
@@ -94,7 +95,7 @@ fun HistoryItem(
                 Icon(
                     imageVector = MaterialSymbols.Rounded.Favorite,
                     contentDescription = stringResource(MR.strings.add_to_library),
-                    tint = MaterialTheme.colorScheme.onSurface,
+                    tint = LocalBokuhonColors.current.onSurface,
                 )
             }
         }
@@ -103,7 +104,7 @@ fun HistoryItem(
             Icon(
                 imageVector = MaterialSymbols.Rounded.Delete,
                 contentDescription = stringResource(MR.strings.action_delete),
-                tint = MaterialTheme.colorScheme.onSurface,
+                tint = LocalBokuhonColors.current.onSurface,
             )
         }
     }

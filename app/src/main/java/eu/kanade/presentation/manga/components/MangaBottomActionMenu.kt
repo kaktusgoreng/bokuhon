@@ -15,10 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -28,6 +24,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -54,7 +51,11 @@ import mihon.icons.materialsymbols.rounded.MoreVert
 import mihon.icons.materialsymbols.rounded.RemoveDone
 import mihon.icons.materialsymbols.rounded.SwapCalls
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
@@ -77,8 +78,8 @@ fun MangaBottomActionMenu(
         val scope = rememberCoroutineScope()
         Surface(
             modifier = modifier,
-            shape = MaterialTheme.shapes.large.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+            shape = RectangleShape,
+            color = LocalBokuhonColors.current.surfaceContainerHigh,
         ) {
             val haptic = LocalHapticFeedback.current
             val confirm = remember { mutableStateListOf(false, false, false, false, false, false, false) }
@@ -188,7 +189,7 @@ private fun RowScope.Button(
             .weight(animatedWeight)
             .combinedClickable(
                 interactionSource = null,
-                indication = ripple(bounded = false),
+                indication = null,
                 onLongClick = onLongClick,
                 onClick = onClick,
             ),
@@ -207,7 +208,7 @@ private fun RowScope.Button(
                     text = title,
                     overflow = TextOverflow.Visible,
                     maxLines = 1,
-                    style = MaterialTheme.typography.labelSmall,
+                    style = LocalBokuhonTypography.current.labelSmall,
                 )
             }
         }
@@ -230,8 +231,8 @@ fun LibraryBottomActionMenu(
         val scope = rememberCoroutineScope()
         Surface(
             modifier = modifier,
-            shape = MaterialTheme.shapes.large.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+            shape = RectangleShape,
+            color = LocalBokuhonColors.current.surfaceContainerHigh,
         ) {
             val haptic = LocalHapticFeedback.current
             val confirm = remember { mutableStateListOf(false, false, false, false, false, false) }

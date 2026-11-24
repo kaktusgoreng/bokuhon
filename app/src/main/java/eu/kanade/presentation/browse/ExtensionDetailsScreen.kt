@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
@@ -49,10 +48,14 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Eyeglasses2
 import mihon.icons.materialsymbols.rounded.Settings
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
@@ -60,7 +63,6 @@ import tachiyomi.presentation.core.bokuhon.VerticalDivider
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.Switch
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -207,10 +209,10 @@ private fun DetailsHeader(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.padding.medium)
+                .padding(horizontal = BokuhonPadding.medium)
                 .padding(
-                    top = MaterialTheme.padding.medium,
-                    bottom = MaterialTheme.padding.small,
+                    top = BokuhonPadding.medium,
+                    bottom = BokuhonPadding.small,
                 )
                 .clickable {
                     val extDebugInfo = buildString {
@@ -250,37 +252,37 @@ private fun DetailsHeader(
 
             Text(
                 text = extension.name,
-                style = MaterialTheme.typography.headlineSmall,
+                style = LocalBokuhonTypography.current.headlineSmall,
                 textAlign = TextAlign.Center,
             )
 
             Text(
                 text = extension.pkgName,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = LocalBokuhonTypography.current.bodySmall,
+                color = LocalBokuhonColors.current.onSurfaceVariant,
             )
 
             extension.store?.let { store ->
                 Text(
                     text = store.name,
                     modifier = Modifier
-                        .clip(MaterialTheme.shapes.small)
+                        .clip(RectangleShape)
                         .clickable(enabled = onClickStore != null) { onClickStore?.invoke() }
                         .padding(
-                            horizontal = MaterialTheme.padding.extraSmall,
-                            vertical = MaterialTheme.padding.extraSmall / 2,
+                            horizontal = BokuhonPadding.extraSmall,
+                            vertical = BokuhonPadding.extraSmall / 2,
                         ),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
+                    style = LocalBokuhonTypography.current.labelLarge,
+                    color = LocalBokuhonColors.current.primary,
                 )
             }
 
             if ((extension as? Extension.Loaded)?.isShared == false) {
                 ExtensionPill(
                     text = stringResource(MR.strings.ext_installer_private),
-                    modifier = Modifier.padding(top = MaterialTheme.padding.small),
+                    modifier = Modifier.padding(top = BokuhonPadding.small),
                 )
             }
         }
@@ -289,8 +291,8 @@ private fun DetailsHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = MaterialTheme.padding.medium,
-                    vertical = MaterialTheme.padding.small,
+                    horizontal = BokuhonPadding.medium,
+                    vertical = BokuhonPadding.small,
                 ),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
@@ -324,9 +326,9 @@ private fun DetailsHeader(
 
         Row(
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.padding.medium)
-                .padding(top = MaterialTheme.padding.small),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+                .padding(horizontal = BokuhonPadding.medium)
+                .padding(top = BokuhonPadding.small),
+            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.medium),
         ) {
             OutlinedButton(
                 modifier = Modifier.weight(1f),
@@ -346,7 +348,7 @@ private fun DetailsHeader(
         }
 
         TextPreferenceWidget(
-            modifier = Modifier.padding(horizontal = MaterialTheme.padding.small),
+            modifier = Modifier.padding(horizontal = BokuhonPadding.small),
             title = stringResource(MR.strings.pref_incognito_mode),
             subtitle = stringResource(MR.strings.pref_incognito_mode_extension_summary),
             icon = MaterialSymbols.Rounded.Eyeglasses2,
@@ -389,7 +391,7 @@ private fun InfoText(
         Text(
             text = primaryText,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.titleSmall,
+            style = LocalBokuhonTypography.current.titleSmall,
             color = primaryTextColor,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
@@ -398,8 +400,8 @@ private fun InfoText(
         Text(
             text = secondaryText + if (onClick != null) " ⓘ" else "",
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+            style = LocalBokuhonTypography.current.bodySmall,
+            color = LocalBokuhonColors.current.onSurface.copy(alpha = 0.5f),
         )
     }
 }
@@ -408,7 +410,7 @@ private fun InfoText(
 private fun InfoDivider() {
     VerticalDivider(
         modifier = Modifier
-            .padding(horizontal = MaterialTheme.padding.small)
+            .padding(horizontal = BokuhonPadding.small)
             .height(24.dp),
     )
 }
@@ -438,7 +440,7 @@ private fun SourceSwitchPreference(
                         Icon(
                             imageVector = MaterialSymbols.Rounded.Settings,
                             contentDescription = stringResource(MR.strings.label_settings),
-                            tint = MaterialTheme.colorScheme.onSurface,
+                            tint = LocalBokuhonColors.current.onSurface,
                         )
                     }
                 }
@@ -464,7 +466,7 @@ private fun ContentWarningDialog(
         title = {
             Text(
                 text = stringResource(label),
-                style = MaterialTheme.typography.titleMedium,
+                style = LocalBokuhonTypography.current.titleMedium,
             )
         },
         text = {

@@ -7,11 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -39,7 +36,12 @@ import mihon.icons.materialsymbols.roundedfilled.Circle
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.contentColorFor
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
 import tachiyomi.presentation.core.i18n.stringResource
@@ -70,7 +72,7 @@ fun MangaChapterListItem(
         read = read,
         bookmark = bookmark,
         downloadState = downloadStateProvider(),
-        background = MaterialTheme.colorScheme.primaryContainer,
+        background = LocalBokuhonColors.current.primaryContainer,
         onSwipe = { onChapterSwipe(chapterSwipeStartAction) },
     )
     val end = getSwipeAction(
@@ -78,7 +80,7 @@ fun MangaChapterListItem(
         read = read,
         bookmark = bookmark,
         downloadState = downloadStateProvider(),
-        background = MaterialTheme.colorScheme.primaryContainer,
+        background = LocalBokuhonColors.current.primaryContainer,
         onSwipe = { onChapterSwipe(chapterSwipeEndAction) },
     )
 
@@ -87,7 +89,7 @@ fun MangaChapterListItem(
         startActions = listOfNotNull(start),
         endActions = listOfNotNull(end),
         swipeThreshold = swipeActionThreshold,
-        backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.surfaceContainerLowest,
+        backgroundUntilSwipeThreshold = LocalBokuhonColors.current.surfaceContainerLowest,
     ) {
         Row(
             modifier = modifier
@@ -114,7 +116,7 @@ fun MangaChapterListItem(
                             modifier = Modifier
                                 .height(8.dp)
                                 .padding(end = 4.dp),
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = LocalBokuhonColors.current.primary,
                         )
                     }
                     if (bookmark) {
@@ -123,26 +125,26 @@ fun MangaChapterListItem(
                             contentDescription = stringResource(MR.strings.action_filter_bookmarked),
                             modifier = Modifier
                                 .sizeIn(maxHeight = with(LocalDensity.current) { textHeight.toDp() - 2.dp }),
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = LocalBokuhonColors.current.primary,
                         )
                     }
                     Text(
                         text = title,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = LocalBokuhonTypography.current.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         onTextLayout = { textHeight = it.size.height },
-                        color = LocalContentColor.current.copy(alpha = if (read) DISABLED_ALPHA else 1f),
+                        color = LocalBokuhonContentColor.current.copy(alpha = if (read) DISABLED_ALPHA else 1f),
                     )
                 }
 
                 Row {
-                    val subtitleStyle = MaterialTheme.typography.bodySmall
+                    val subtitleStyle = LocalBokuhonTypography.current.bodySmall
                         .merge(
-                            color = LocalContentColor.current
+                            color = LocalBokuhonContentColor.current
                                 .copy(alpha = if (read) DISABLED_ALPHA else SECONDARY_ALPHA),
                         )
-                    ProvideTextStyle(value = subtitleStyle) {
+                    CompositionLocalProvider(LocalBokuhonTextStyle provides subtitleStyle) {
                         if (date != null) {
                             Text(
                                 text = date,
@@ -156,7 +158,7 @@ fun MangaChapterListItem(
                                 text = readProgress,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
-                                color = LocalContentColor.current.copy(alpha = DISABLED_ALPHA),
+                                color = LocalBokuhonContentColor.current.copy(alpha = DISABLED_ALPHA),
                             )
                             if (scanlator != null) DotSeparatorText()
                         }

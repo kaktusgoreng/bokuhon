@@ -6,10 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
@@ -46,6 +43,10 @@ import mihon.icons.materialsymbols.rounded.Storage
 import mihon.icons.materialsymbols.rounded.Sync
 import mihon.presentation.core.util.isTabletUi
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.TopAppBarDefaults
+import tachiyomi.presentation.core.bokuhon.rememberTopAppBarState
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -54,7 +55,7 @@ data object SettingsMainScreen : NavKey {
 
     @Composable
     private fun getPalerSurface(): Color {
-        val surface = MaterialTheme.colorScheme.surface
+        val surface = LocalBokuhonColors.current.surface
         val dark = isSystemInDarkTheme()
         return remember(surface, dark) {
             val arr = FloatArray(3)
@@ -72,7 +73,7 @@ data object SettingsMainScreen : NavKey {
     fun Content() {
         val navigator = LocalNavigator.current
         val twoPane = isTabletUi()
-        val containerColor = if (twoPane) getPalerSurface() else MaterialTheme.colorScheme.surface
+        val containerColor = if (twoPane) getPalerSurface() else LocalBokuhonColors.current.surface
         val topBarState = rememberTopAppBarState()
 
         Scaffold(
@@ -128,23 +129,23 @@ data object SettingsMainScreen : NavKey {
                     ) { index, item ->
                         val selected = indexSelected == index
                         var modifier: Modifier = Modifier
-                        var contentColor = LocalContentColor.current
+                        var contentColor = LocalBokuhonContentColor.current
                         if (twoPane) {
                             modifier = Modifier
                                 .padding(horizontal = 8.dp)
-                                .clip(MaterialTheme.shapes.small)
+                                .clip(RectangleShape)
                                 .then(
                                     if (selected) {
-                                        Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
+                                        Modifier.background(LocalBokuhonColors.current.surfaceVariant)
                                     } else {
                                         Modifier
                                     },
                                 )
                             if (selected) {
-                                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                contentColor = LocalBokuhonColors.current.onSurfaceVariant
                             }
                         }
-                        CompositionLocalProvider(LocalContentColor provides contentColor) {
+                        CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) {
                             TextPreferenceWidget(
                                 modifier = modifier,
                                 title = stringResource(item.titleRes),

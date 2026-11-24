@@ -7,12 +7,12 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 
 @Composable
 fun FastScrollLazyVerticalGrid(
@@ -20,7 +20,7 @@ fun FastScrollLazyVerticalGrid(
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
     thumbAllowed: () -> Boolean = { true },
-    thumbColor: Color = MaterialTheme.colorScheme.primary,
+    thumbColor: Color = LocalBokuhonColors.current.primary,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     topContentPadding: Dp = Dp.Hairline,
     bottomContentPadding: Dp = Dp.Hairline,

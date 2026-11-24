@@ -11,7 +11,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -38,6 +37,7 @@ import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.ListItem
 import tachiyomi.presentation.core.bokuhon.ListItemDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Switch
@@ -121,7 +121,7 @@ internal class PermissionStep : OnboardingStep {
 
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = LocalBokuhonColors.current.onPrimaryContainer,
             )
 
             val crashlyticsPref = privacyPreferences.crashlytics
@@ -163,7 +163,7 @@ internal class PermissionStep : OnboardingStep {
                         Icon(
                             imageVector = MaterialSymbols.Rounded.Check,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
+                            tint = LocalBokuhonColors.current.primary,
                         )
                     } else {
                         Text(stringResource(MR.strings.onboarding_permission_action_grant))

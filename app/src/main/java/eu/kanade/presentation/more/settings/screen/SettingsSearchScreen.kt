@@ -16,8 +16,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -51,7 +49,10 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.TopAppBar
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.motion.Crossfade
 import tachiyomi.presentation.core.i18n.stringResource
@@ -104,18 +105,18 @@ fun SettingsSearchScreen() {
                                 .fillMaxWidth()
                                 .focusRequester(focusRequester)
                                 .runOnEnterKeyPressed(action = focusManager::clearFocus),
-                            textStyle = MaterialTheme.typography.bodyLarge
-                                .copy(color = MaterialTheme.colorScheme.onSurface),
+                            textStyle = LocalBokuhonTypography.current.bodyLarge
+                                .copy(color = LocalBokuhonColors.current.onSurface),
                             lineLimits = TextFieldLineLimits.SingleLine,
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                             onKeyboardAction = { focusManager.clearFocus() },
-                            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                            cursorBrush = SolidColor(LocalBokuhonColors.current.primary),
                             decorator = {
                                 if (textFieldState.text.isEmpty()) {
                                     Text(
                                         text = stringResource(MR.strings.action_search_settings),
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = LocalBokuhonColors.current.onSurfaceVariant,
+                                        style = LocalBokuhonTypography.current.bodyLarge,
                                     )
                                 }
                                 it()
@@ -128,7 +129,7 @@ fun SettingsSearchScreen() {
                                 Icon(
                                     imageVector = MaterialSymbols.Rounded.Close,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    tint = LocalBokuhonColors.current.onSurfaceVariant,
                                 )
                             }
                         }
@@ -198,14 +199,14 @@ private fun SearchResult(
                                 overflow = TextOverflow.Ellipsis,
                                 maxLines = 1,
                                 fontWeight = FontWeight.Normal,
-                                style = MaterialTheme.typography.titleMedium,
+                                style = LocalBokuhonTypography.current.titleMedium,
                             )
                             Text(
                                 text = item.breadcrumbs,
                                 modifier = Modifier.paddingFromBaseline(top = 16.dp),
                                 maxLines = 1,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                style = MaterialTheme.typography.bodySmall,
+                                color = LocalBokuhonColors.current.onSurfaceVariant,
+                                style = LocalBokuhonTypography.current.bodySmall,
                             )
                         }
                     }

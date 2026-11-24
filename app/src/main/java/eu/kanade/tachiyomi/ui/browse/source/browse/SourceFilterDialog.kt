@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,6 +16,8 @@ import eu.kanade.tachiyomi.source.model.FilterList
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.CheckboxItem
@@ -45,14 +45,14 @@ fun SourceFilterDialog(
             stickyHeader {
                 Row(
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
+                        .background(LocalBokuhonColors.current.background)
                         .padding(8.dp),
                 ) {
                     TextButton(onClick = onReset) {
                         Text(
                             text = stringResource(MR.strings.action_reset),
-                            style = LocalTextStyle.current.copy(
-                                color = MaterialTheme.colorScheme.primary,
+                            style = LocalBokuhonTextStyle.current.copy(
+                                color = LocalBokuhonColors.current.primary,
                             ),
                         )
                     }

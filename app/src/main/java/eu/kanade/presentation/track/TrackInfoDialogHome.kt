@@ -21,11 +21,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -54,9 +50,15 @@ import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.MoreVert
 import mihon.icons.materialsymbols.roundedfilled.VisibilityOff
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.Badge
+import tachiyomi.presentation.core.bokuhon.BadgedBox
+import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.bokuhon.VerticalDivider
@@ -168,8 +170,8 @@ private fun TrackInfoItem(
                 badge = {
                     if (private) {
                         Badge(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            containerColor = LocalBokuhonColors.current.primary,
+                            contentColor = LocalBokuhonColors.current.onPrimary,
                             modifier = Modifier.absoluteOffset(x = (-5).dp),
                         ) {
                             Icon(
@@ -204,8 +206,8 @@ private fun TrackInfoItem(
                     text = title,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    style = LocalBokuhonTypography.current.titleMedium,
+                    color = LocalBokuhonColors.current.onSurface,
                 )
             }
             VerticalDivider()
@@ -221,8 +223,8 @@ private fun TrackInfoItem(
         Box(
             modifier = Modifier
                 .padding(top = 12.dp)
-                .clip(MaterialTheme.shapes.medium)
-                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .clip(RectangleShape)
+                .background(LocalBokuhonColors.current.surfaceContainerHighest)
                 .padding(8.dp)
                 .clip(RoundedCornerShape(6.dp)),
         ) {
@@ -293,9 +295,9 @@ private fun TrackDetailsItem(
             text = text ?: placeholder,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = if (text == null) UNSET_TEXT_ALPHA else 1f),
+            color = LocalBokuhonColors.current.onSurface.copy(alpha = if (text == null) UNSET_TEXT_ALPHA else 1f),
         )
     }
 }

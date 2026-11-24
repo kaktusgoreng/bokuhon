@@ -19,8 +19,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -28,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -66,13 +65,16 @@ import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaWithChapterCount
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.BokuhonTypography
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
@@ -101,24 +103,24 @@ fun DuplicateMangaDialog(
                 .padding(vertical = TabbedDialogPaddings.Vertical)
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(BokuhonPadding.medium),
         ) {
             Text(
                 text = stringResource(MR.strings.possible_duplicates_title),
-                style = MaterialTheme.typography.headlineMedium,
+                style = LocalBokuhonTypography.current.headlineMedium,
                 modifier = Modifier
                     .then(horizontalPaddingModifier)
-                    .padding(top = MaterialTheme.padding.small),
+                    .padding(top = BokuhonPadding.small),
             )
 
             Text(
                 text = stringResource(MR.strings.possible_duplicates_summary),
-                style = MaterialTheme.typography.bodyMedium,
+                style = LocalBokuhonTypography.current.bodyMedium,
                 modifier = Modifier.then(horizontalPaddingModifier),
             )
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                 modifier = Modifier.height(getMaximumMangaCardHeight(duplicates)),
                 contentPadding = horizontalPadding,
             ) {
@@ -154,15 +156,15 @@ fun DuplicateMangaDialog(
                 onClick = onDismissRequest,
                 modifier = Modifier
                     .then(horizontalPaddingModifier)
-                    .padding(bottom = MaterialTheme.padding.medium)
+                    .padding(bottom = BokuhonPadding.medium)
                     .heightIn(min = minHeight)
                     .fillMaxWidth(),
             ) {
                 Text(
-                    modifier = Modifier.padding(vertical = MaterialTheme.padding.extraSmall),
+                    modifier = Modifier.padding(vertical = BokuhonPadding.extraSmall),
                     text = stringResource(MR.strings.action_cancel),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.bodyLarge,
+                    color = LocalBokuhonColors.current.primary,
+                    style = LocalBokuhonTypography.current.bodyLarge,
                 )
             }
         }
@@ -182,8 +184,8 @@ private fun DuplicateMangaListItem(
     Column(
         modifier = Modifier
             .width(MangaCardWidth)
-            .clip(MaterialTheme.shapes.medium)
-            .background(MaterialTheme.colorScheme.surface)
+            .clip(RectangleShape)
+            .background(LocalBokuhonColors.current.surface)
             .combinedClickable(
                 onLongClick = { onOpenManga() },
                 onClick = {
@@ -191,7 +193,7 @@ private fun DuplicateMangaListItem(
                     onMigrate()
                 },
             )
-            .padding(MaterialTheme.padding.small),
+            .padding(BokuhonPadding.small),
     ) {
         Box {
             MangaCover.Book(
@@ -207,8 +209,8 @@ private fun DuplicateMangaListItem(
                     .align(Alignment.TopStart),
             ) {
                 Badge(
-                    color = MaterialTheme.colorScheme.secondary,
-                    textColor = MaterialTheme.colorScheme.onSecondary,
+                    color = LocalBokuhonColors.current.secondary,
+                    textColor = LocalBokuhonColors.current.onSecondary,
                     text = pluralStringResource(
                         MR.plurals.manga_num_chapters,
                         duplicate.chapterCount.toInt(),
@@ -218,11 +220,11 @@ private fun DuplicateMangaListItem(
             }
         }
 
-        Spacer(modifier = Modifier.height(MaterialTheme.padding.extraSmall))
+        Spacer(modifier = Modifier.height(BokuhonPadding.extraSmall))
 
         Text(
             text = manga.title,
-            style = MaterialTheme.typography.titleSmall,
+            style = LocalBokuhonTypography.current.titleSmall,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
         )
@@ -275,12 +277,12 @@ private fun DuplicateMangaListItem(
                     imageVector = MaterialSymbols.RoundedFilled.Warning,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.error,
+                    tint = LocalBokuhonColors.current.error,
                 )
             }
             Text(
                 text = source?.name.orEmpty(),
-                style = MaterialTheme.typography.labelSmall,
+                style = LocalBokuhonTypography.current.labelSmall,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
             )
@@ -297,8 +299,8 @@ private fun MangaDetailRow(
     Row(
         modifier = Modifier
             .secondaryItemAlpha()
-            .padding(top = MaterialTheme.padding.extraSmall),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+            .padding(top = BokuhonPadding.extraSmall),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -308,7 +310,7 @@ private fun MangaDetailRow(
         )
         Text(
             text = text,
-            style = MaterialTheme.typography.bodySmall,
+            style = LocalBokuhonTypography.current.bodySmall,
             overflow = TextOverflow.Ellipsis,
             maxLines = maxLines,
         )
@@ -318,11 +320,11 @@ private fun MangaDetailRow(
 @Composable
 private fun getMaximumMangaCardHeight(duplicates: List<MangaWithChapterCount>): Dp {
     val density = LocalDensity.current
-    val typography = MaterialTheme.typography
+    val typography = LocalBokuhonTypography.current
     val textMeasurer = rememberTextMeasurer()
 
-    val smallPadding = with(density) { MaterialTheme.padding.small.roundToPx() }
-    val extraSmallPadding = with(density) { MaterialTheme.padding.extraSmall.roundToPx() }
+    val smallPadding = with(density) { BokuhonPadding.small.roundToPx() }
+    val extraSmallPadding = with(density) { BokuhonPadding.extraSmall.roundToPx() }
 
     val width = with(density) { MangaCardWidth.roundToPx() - (2 * smallPadding) }
     val iconWidth = with(density) { MangaDetailsIconWidth.roundToPx() }
@@ -362,7 +364,7 @@ private fun getMaximumMangaCardHeight(duplicates: List<MangaWithChapterCount>): 
 private fun calculateMangaCardHeight(
     manga: Manga,
     density: Density,
-    typography: Typography,
+    typography: BokuhonTypography,
     textMeasurer: TextMeasurer,
     smallPadding: Int,
     extraSmallPadding: Int,

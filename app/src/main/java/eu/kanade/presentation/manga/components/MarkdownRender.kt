@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -65,8 +64,10 @@ import org.intellij.markdown.parser.markerblocks.providers.CodeFenceProvider
 import org.intellij.markdown.parser.markerblocks.providers.HorizontalRuleProvider
 import org.intellij.markdown.parser.markerblocks.providers.ListMarkerProvider
 import org.intellij.markdown.parser.markerblocks.providers.SetextHeaderProvider
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Icon
-import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 
 const val MARKDOWN_INLINE_IMAGE_TAG = "MARKDOWN_INLINE_IMAGE"
 
@@ -98,22 +99,22 @@ fun MarkdownRender(
 @Composable
 @ReadOnlyComposable
 private fun getMarkdownColors(): MarkdownColors {
-    val codeBackground = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+    val codeBackground = LocalBokuhonColors.current.onSurface.copy(alpha = 0.1f)
     return DefaultMarkdownColors(
-        text = MaterialTheme.colorScheme.onSurface,
+        text = LocalBokuhonColors.current.onSurface,
         codeBackground = codeBackground,
         inlineCodeBackground = codeBackground,
-        dividerColor = MaterialTheme.colorScheme.outlineVariant,
-        tableBackground = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
-        highlightText = MaterialTheme.colorScheme.onSecondaryContainer,
-        highlightBackground = MaterialTheme.colorScheme.secondaryContainer,
+        dividerColor = LocalBokuhonColors.current.outlineVariant,
+        tableBackground = LocalBokuhonColors.current.onSurface.copy(alpha = 0.05f),
+        highlightText = LocalBokuhonColors.current.onSecondaryContainer,
+        highlightBackground = LocalBokuhonColors.current.secondaryContainer,
     )
 }
 
 @Composable
 @ReadOnlyComposable
-fun getMarkdownLinkStyle() = MaterialTheme.typography.bodyMedium.copy(
-    color = MaterialTheme.colorScheme.primary,
+fun getMarkdownLinkStyle() = LocalBokuhonTypography.current.bodyMedium.copy(
+    color = LocalBokuhonColors.current.primary,
     fontWeight = FontWeight.Bold,
 )
 
@@ -122,22 +123,22 @@ fun getMarkdownLinkStyle() = MaterialTheme.typography.bodyMedium.copy(
 private fun getMarkdownTypography(): MarkdownTypography {
     val link = getMarkdownLinkStyle()
     return DefaultMarkdownTypography(
-        h1 = MaterialTheme.typography.headlineMedium,
-        h2 = MaterialTheme.typography.headlineSmall,
-        h3 = MaterialTheme.typography.titleLarge,
-        h4 = MaterialTheme.typography.titleMedium,
-        h5 = MaterialTheme.typography.titleSmall,
-        h6 = MaterialTheme.typography.bodyLarge,
-        text = MaterialTheme.typography.bodyMedium,
-        code = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
-        inlineCode = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
-        quote = MaterialTheme.typography.bodyMedium.plus(SpanStyle(fontStyle = FontStyle.Italic)),
-        paragraph = MaterialTheme.typography.bodyMedium,
-        ordered = MaterialTheme.typography.bodyMedium,
-        bullet = MaterialTheme.typography.bodyMedium,
-        list = MaterialTheme.typography.bodyMedium,
+        h1 = LocalBokuhonTypography.current.headlineMedium,
+        h2 = LocalBokuhonTypography.current.headlineSmall,
+        h3 = LocalBokuhonTypography.current.titleLarge,
+        h4 = LocalBokuhonTypography.current.titleMedium,
+        h5 = LocalBokuhonTypography.current.titleSmall,
+        h6 = LocalBokuhonTypography.current.bodyLarge,
+        text = LocalBokuhonTypography.current.bodyMedium,
+        code = LocalBokuhonTypography.current.bodyMedium.copy(fontFamily = FontFamily.Monospace),
+        inlineCode = LocalBokuhonTypography.current.bodyMedium.copy(fontFamily = FontFamily.Monospace),
+        quote = LocalBokuhonTypography.current.bodyMedium.plus(SpanStyle(fontStyle = FontStyle.Italic)),
+        paragraph = LocalBokuhonTypography.current.bodyMedium,
+        ordered = LocalBokuhonTypography.current.bodyMedium,
+        bullet = LocalBokuhonTypography.current.bodyMedium,
+        list = LocalBokuhonTypography.current.bodyMedium,
         textLink = TextLinkStyles(style = link.toSpanStyle()),
-        table = MaterialTheme.typography.bodyMedium,
+        table = LocalBokuhonTypography.current.bodyMedium,
     )
 }
 
@@ -163,12 +164,12 @@ private val markdownComponents = markdownComponents(
     horizontalRule = {
         MarkdownDivider(
             modifier = Modifier
-                .padding(vertical = MaterialTheme.padding.extraSmall)
+                .padding(vertical = BokuhonPadding.extraSmall)
                 .fillMaxWidth(),
         )
     },
     orderedList = { ol ->
-        Column(modifier = Modifier.padding(start = MaterialTheme.padding.small)) {
+        Column(modifier = Modifier.padding(start = BokuhonPadding.small)) {
             MarkdownOrderedList(
                 content = ol.content,
                 node = ol.node,
@@ -185,7 +186,7 @@ private val markdownComponents = markdownComponents(
         CompositionLocalProvider(
             LocalBulletListHandler provides { _, _, _, _, _ -> "${markers[ul.listDepth % markers.size]} " },
         ) {
-            Column(modifier = Modifier.padding(start = MaterialTheme.padding.small)) {
+            Column(modifier = Modifier.padding(start = BokuhonPadding.small)) {
                 MarkdownBulletList(
                     content = ul.content,
                     node = ul.node,
@@ -238,15 +239,15 @@ private fun getMarkdownInlineContent() = DefaultMarkdownInlineContent(
     inlineContent = mapOf(
         MARKDOWN_INLINE_IMAGE_TAG to InlineTextContent(
             placeholder = Placeholder(
-                width = MaterialTheme.typography.bodyMedium.fontSize * 1.25,
-                height = MaterialTheme.typography.bodyMedium.fontSize * 1.25,
+                width = LocalBokuhonTypography.current.bodyMedium.fontSize * 1.25,
+                height = LocalBokuhonTypography.current.bodyMedium.fontSize * 1.25,
                 placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
             ),
             children = {
                 Icon(
                     imageVector = MaterialSymbols.Rounded.Image,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = LocalBokuhonColors.current.primary,
                 )
             },
         ),

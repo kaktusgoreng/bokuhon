@@ -5,16 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Checkbox
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 
 @Composable
 fun LabeledCheckbox(
@@ -26,7 +26,7 @@ fun LabeledCheckbox(
 ) {
     Row(
         modifier = modifier
-            .clip(MaterialTheme.shapes.small)
+            .clip(RectangleShape)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
             .clickable(
@@ -38,7 +38,7 @@ fun LabeledCheckbox(
                 },
             ),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
     ) {
         Checkbox(
             checked = checked,

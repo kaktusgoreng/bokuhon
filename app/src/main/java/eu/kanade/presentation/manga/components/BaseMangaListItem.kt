@@ -7,15 +7,15 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 
 @Composable
 fun BaseMangaListItem(
@@ -31,7 +31,7 @@ fun BaseMangaListItem(
         modifier = modifier
             .clickable(onClick = onClickItem)
             .height(56.dp)
-            .padding(horizontal = MaterialTheme.padding.medium),
+            .padding(horizontal = BokuhonPadding.medium),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         cover()
@@ -43,7 +43,7 @@ fun BaseMangaListItem(
 private val defaultCover: @Composable RowScope.(Manga, () -> Unit) -> Unit = { manga, onClick ->
     MangaCover.Square(
         modifier = Modifier
-            .padding(vertical = MaterialTheme.padding.small)
+            .padding(vertical = BokuhonPadding.small)
             .fillMaxHeight(),
         data = manga,
         onClick = onClick,
@@ -55,10 +55,10 @@ private val defaultContent: @Composable RowScope.(Manga) -> Unit = {
         Text(
             text = it.title,
             modifier = Modifier
-                .padding(start = MaterialTheme.padding.medium),
+                .padding(start = BokuhonPadding.medium),
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }

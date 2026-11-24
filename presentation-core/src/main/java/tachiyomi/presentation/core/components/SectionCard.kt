@@ -5,13 +5,14 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import dev.icerock.moko.resources.StringResource
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.ElevatedCard
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -21,9 +22,9 @@ fun LazyItemScope.SectionCard(
 ) {
     if (titleRes != null) {
         Text(
-            modifier = Modifier.padding(horizontal = MaterialTheme.padding.extraLarge),
+            modifier = Modifier.padding(horizontal = BokuhonPadding.extraLarge),
             text = stringResource(titleRes),
-            style = MaterialTheme.typography.titleSmall,
+            style = LocalBokuhonTypography.current.titleSmall,
         )
     }
 
@@ -31,12 +32,12 @@ fun LazyItemScope.SectionCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                horizontal = MaterialTheme.padding.medium,
-                vertical = MaterialTheme.padding.small,
+                horizontal = BokuhonPadding.medium,
+                vertical = BokuhonPadding.small,
             ),
-        shape = MaterialTheme.shapes.extraLarge,
+        shape = RectangleShape,
     ) {
-        Column(modifier = Modifier.padding(MaterialTheme.padding.medium)) {
+        Column(modifier = Modifier.padding(BokuhonPadding.medium)) {
             content()
         }
     }

@@ -14,10 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SelectableDates
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
@@ -97,12 +93,16 @@ import tachiyomi.domain.track.interactor.DeleteTrack
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.domain.track.model.Track
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.ButtonDefaults
+import tachiyomi.presentation.core.bokuhon.FilledTonalButton
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.SelectableDates
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
 import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.material.AlertDialogContent
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import kotlin.time.Clock
 import kotlin.time.Instant
@@ -703,7 +703,7 @@ fun TrackDateRemoverScreen(
         buttons = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
+                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small, Alignment.End),
             ) {
                 TextButton(onClick = navigator::pop) {
                     Text(text = stringResource(MR.strings.action_cancel))
@@ -714,8 +714,8 @@ fun TrackDateRemoverScreen(
                         navigator.popTo { it is TrackInfoDialogHomeRoute }
                     },
                     colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                        containerColor = LocalBokuhonColors.current.errorContainer,
+                        contentColor = LocalBokuhonColors.current.onErrorContainer,
                     ),
                 ) {
                     Text(text = stringResource(MR.strings.action_remove))
@@ -913,7 +913,7 @@ fun TrackerRemoveScreen(
         },
         text = {
             Column(
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             ) {
                 Text(
                     text = stringResource(MR.strings.track_delete_text, serviceName),
@@ -932,7 +932,7 @@ fun TrackerRemoveScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(
-                    MaterialTheme.padding.small,
+                    BokuhonPadding.small,
                     Alignment.End,
                 ),
             ) {
@@ -946,8 +946,8 @@ fun TrackerRemoveScreen(
                         navigator.pop()
                     },
                     colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                        containerColor = LocalBokuhonColors.current.errorContainer,
+                        contentColor = LocalBokuhonColors.current.onErrorContainer,
                     ),
                 ) {
                     Text(text = stringResource(MR.strings.action_ok))

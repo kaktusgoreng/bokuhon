@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import kotlin.time.Clock
@@ -43,7 +43,7 @@ fun CalendarDay(
                     Modifier.border(
                         border = BorderStroke(
                             width = 1.dp,
-                            color = MaterialTheme.colorScheme.onBackground,
+                            color = LocalBokuhonColors.current.onBackground,
                         ),
                         shape = CircleShape,
                     )
@@ -61,9 +61,9 @@ fun CalendarDay(
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             color = if (date < today) {
-                MaterialTheme.colorScheme.onBackground.copy(alpha = DISABLED_ALPHA)
+                LocalBokuhonColors.current.onBackground.copy(alpha = DISABLED_ALPHA)
             } else {
-                MaterialTheme.colorScheme.onBackground
+                LocalBokuhonColors.current.onBackground
             },
             fontWeight = FontWeight.SemiBold,
         )
@@ -73,7 +73,7 @@ fun CalendarDay(
                 CalendarIndicator(
                     index = index,
                     size = 56.dp,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = LocalBokuhonColors.current.primary,
                 )
             }
         }

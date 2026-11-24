@@ -1,10 +1,10 @@
 package mihon.feature.migration.list.components
 
-import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.DialogProperties
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.AlertDialog
 import tachiyomi.presentation.core.bokuhon.LinearProgressIndicator
 import tachiyomi.presentation.core.bokuhon.ProgressIndicatorDefaults
 import tachiyomi.presentation.core.bokuhon.Text

@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.grid.LazyGridLayoutInfo
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.systemGestureExclusion
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -48,6 +47,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.sample
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.components.Scroller.STICKY_HEADER_KEY_PREFIX
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -63,7 +63,7 @@ fun VerticalFastScroller(
     listState: LazyListState,
     modifier: Modifier = Modifier,
     thumbAllowed: () -> Boolean = { true },
-    thumbColor: Color = MaterialTheme.colorScheme.primary,
+    thumbColor: Color = LocalBokuhonColors.current.primary,
     topContentPadding: Dp = Dp.Hairline,
     bottomContentPadding: Dp = Dp.Hairline,
     endContentPadding: Dp = Dp.Hairline,
@@ -96,7 +96,7 @@ fun VerticalGridFastScroller(
     state: LazyGridState,
     modifier: Modifier = Modifier,
     thumbAllowed: () -> Boolean = { true },
-    thumbColor: Color = MaterialTheme.colorScheme.primary,
+    thumbColor: Color = LocalBokuhonColors.current.primary,
     topContentPadding: Dp = Dp.Hairline,
     bottomContentPadding: Dp = Dp.Hairline,
     endContentPadding: Dp = Dp.Hairline,

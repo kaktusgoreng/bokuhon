@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -33,6 +30,10 @@ import eu.kanade.tachiyomi.ui.reader.viewer.ReaderThemedContent
 import eu.kanade.tachiyomi.ui.webview.WebViewActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.components.CombinedCircularProgressIndicator
 import tachiyomi.source.local.isLocal
 
@@ -172,8 +173,8 @@ class TransitionPage(
         }
 
         CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.bodySmall,
-            LocalContentColor provides MaterialTheme.colorScheme.onBackground,
+            LocalBokuhonTextStyle provides LocalBokuhonTypography.current.bodySmall,
+            LocalBokuhonContentColor provides LocalBokuhonColors.current.onBackground,
         ) {
             // The padding the holder each viewer used to inflate this into gave it.
             val padding = if (viewer is WebGpuViewerContinuous) {

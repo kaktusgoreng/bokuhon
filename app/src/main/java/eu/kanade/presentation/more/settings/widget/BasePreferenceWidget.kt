@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,6 +30,8 @@ import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.more.settings.LocalPreferenceHighlighted
 import eu.kanade.presentation.more.settings.LocalPreferenceMinHeight
 import kotlinx.coroutines.delay
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.motion.animateColorAsState
 import kotlin.time.Duration.Companion.seconds
@@ -76,7 +77,7 @@ internal fun BasePreferenceWidget(
                     text = title,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = LocalBokuhonTypography.current.titleLarge,
                     fontSize = TitleFontSize,
                 )
             }
@@ -103,7 +104,7 @@ internal fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
     }
     val highlight by animateColorAsState(
         targetValue = if (highlightFlag) {
-            MaterialTheme.colorScheme.surfaceTint.copy(alpha = .12f)
+            LocalBokuhonColors.current.surfaceTint.copy(alpha = .12f)
         } else {
             Color.Transparent
         },

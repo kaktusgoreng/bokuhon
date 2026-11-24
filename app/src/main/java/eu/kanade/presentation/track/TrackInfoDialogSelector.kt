@@ -15,13 +15,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.SelectableDates
-import androidx.compose.material3.Surface
-import androidx.compose.material3.minimumInteractiveComponentSize
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,14 +24,21 @@ import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.DatePicker
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.RadioButton
+import tachiyomi.presentation.core.bokuhon.SelectableDates
+import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.bokuhon.TextButton
+import tachiyomi.presentation.core.bokuhon.minimumInteractiveComponentSize
+import tachiyomi.presentation.core.bokuhon.rememberDatePickerState
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.WheelNumberPicker
 import tachiyomi.presentation.core.components.WheelTextPicker
 import tachiyomi.presentation.core.components.material.AlertDialogContent
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -74,7 +74,7 @@ fun TrackStatusSelector(
                             )
                             Text(
                                 text = value?.let { stringResource(it) } ?: "",
-                                style = MaterialTheme.typography.bodyLarge.merge(),
+                                style = LocalBokuhonTypography.current.bodyLarge.merge(),
                                 modifier = Modifier.padding(start = 24.dp),
                             )
                         }
@@ -164,7 +164,7 @@ fun TrackDateSelector(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 24.dp),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
+                    horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small, Alignment.End),
                 ) {
                     if (onRemove != null) {
                         TextButton(onClick = onRemove) {
@@ -204,7 +204,7 @@ private fun BaseSelector(
         buttons = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
+                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small, Alignment.End),
             ) {
                 if (thirdButton != null) {
                     thirdButton()

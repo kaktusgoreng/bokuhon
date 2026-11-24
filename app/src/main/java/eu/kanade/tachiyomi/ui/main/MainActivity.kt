@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -131,13 +130,15 @@ import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.release.interactor.GetApplicationRelease
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.Button
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedButton
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Scaffold
-import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import kotlin.time.Clock
@@ -235,7 +236,7 @@ class MainActivity : BaseActivity() {
                 indexing -> IndexingBannerBackgroundColor
                 downloadOnly -> DownloadedOnlyBannerBackgroundColor
                 incognito -> IncognitoModeBannerBackgroundColor
-                else -> MaterialTheme.colorScheme.surface
+                else -> LocalBokuhonColors.current.surface
             }
             LaunchedEffect(isSystemInDarkTheme, statusBarBackgroundColor) {
                 // Draw edge-to-edge and set system bars color to transparent
@@ -316,7 +317,7 @@ class MainActivity : BaseActivity() {
                                     .fillMaxWidth()
                                     .windowInsetsBottomHeight(WindowInsets.navigationBars)
                                     .alpha(0.8f)
-                                    .background(MaterialTheme.colorScheme.surfaceContainer),
+                                    .background(LocalBokuhonColors.current.surfaceContainer),
                             )
                         }
                     }
@@ -489,20 +490,20 @@ class MainActivity : BaseActivity() {
                     ) {
                         Text(
                             text = stringResource(MR.strings.donationCampaign_title),
-                            color = MaterialTheme.colorScheme.primary,
-                            style = MaterialTheme.typography.headlineSmall,
+                            color = LocalBokuhonColors.current.primary,
+                            style = LocalBokuhonTypography.current.headlineSmall,
                         )
                         Text(
                             text = stringResource(MR.strings.donationCampaign_paragraph1),
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = LocalBokuhonTypography.current.bodyMedium,
                         )
                         Text(
                             text = stringResource(MR.strings.donationCampaign_paragraph2),
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = LocalBokuhonTypography.current.bodyMedium,
                         )
                         Text(
                             text = stringResource(MR.strings.donationCampaign_paragraph3),
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = LocalBokuhonTypography.current.bodyMedium,
                         )
                     }
 
@@ -510,8 +511,8 @@ class MainActivity : BaseActivity() {
 
                     Button(
                         modifier = Modifier
-                            .padding(top = MaterialTheme.padding.small)
-                            .padding(horizontal = MaterialTheme.padding.medium)
+                            .padding(top = BokuhonPadding.small)
+                            .padding(horizontal = BokuhonPadding.medium)
                             .fillMaxWidth(),
                         onClick = {
                             navigator.push(SupportUsRoute)
@@ -520,7 +521,7 @@ class MainActivity : BaseActivity() {
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                         ) {
                             Icon(
                                 imageVector = MaterialSymbols.RoundedFilled.VolunteerActivism,
@@ -528,15 +529,15 @@ class MainActivity : BaseActivity() {
                             )
                             Text(
                                 text = stringResource(MR.strings.label_support_us),
-                                color = MaterialTheme.colorScheme.onPrimary,
+                                color = LocalBokuhonColors.current.onPrimary,
                             )
                         }
                     }
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                         modifier = Modifier
-                            .padding(bottom = MaterialTheme.padding.small)
-                            .padding(horizontal = MaterialTheme.padding.medium),
+                            .padding(bottom = BokuhonPadding.small)
+                            .padding(horizontal = BokuhonPadding.medium),
                     ) {
                         OutlinedButton(
                             modifier = Modifier
@@ -546,7 +547,7 @@ class MainActivity : BaseActivity() {
                         ) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
                             ) {
                                 Text(
                                     text = stringResource(MR.strings.donationCampaign_contactPlatform),

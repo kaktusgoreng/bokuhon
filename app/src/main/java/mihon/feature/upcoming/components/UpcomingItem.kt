@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,8 +15,9 @@ import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.manga.components.MangaCover
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.asMangaCover
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
-import tachiyomi.presentation.core.components.material.padding
 
 private val UpcomingItemHeight = 96.dp
 
@@ -32,11 +32,11 @@ fun UpcomingItem(
             .clickable(onClick = onClick)
             .height(UpcomingItemHeight)
             .padding(
-                horizontal = MaterialTheme.padding.medium,
-                vertical = MaterialTheme.padding.small,
+                horizontal = BokuhonPadding.medium,
+                vertical = BokuhonPadding.small,
             ),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.large),
+        horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.large),
     ) {
         MangaCover.Book(
             modifier = Modifier.fillMaxHeight(),
@@ -48,7 +48,7 @@ fun UpcomingItem(
             fontWeight = FontWeight.SemiBold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = LocalBokuhonTypography.current.bodyMedium,
         )
     }
 }
