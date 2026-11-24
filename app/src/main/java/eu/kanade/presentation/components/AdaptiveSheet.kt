@@ -2,9 +2,8 @@ package eu.kanade.presentation.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import mihon.presentation.core.util.isTabletUi
+import tachiyomi.presentation.core.bokuhon.BokuhonDialogLayer
 import tachiyomi.presentation.core.components.AdaptiveSheet as AdaptiveSheetImpl
 
 /**
@@ -22,10 +21,7 @@ fun AdaptiveSheet(
 ) {
     val isTabletUi = isTabletUi()
 
-    Dialog(
-        onDismissRequest = onDismissRequest,
-        properties = dialogProperties,
-    ) {
+    BokuhonDialogLayer {
         AdaptiveSheetImpl(
             isTabletUi = isTabletUi,
             enableImplicitDismiss = enableImplicitDismiss,
@@ -36,8 +32,3 @@ fun AdaptiveSheet(
         }
     }
 }
-
-private val dialogProperties = DialogProperties(
-    usePlatformDefaultWidth = false,
-    decorFitsSystemWindows = true,
-)

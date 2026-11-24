@@ -2,6 +2,7 @@ package tachiyomi.presentation.core.components
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
@@ -20,17 +21,12 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -47,7 +43,6 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Surface
-import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import kotlin.math.roundToInt
 
 @Composable
@@ -61,28 +56,16 @@ fun AdaptiveSheet(
     val density = LocalDensity.current
     val scope = rememberCoroutineScope()
     if (isTabletUi) {
-        var targetAlpha by remember { mutableFloatStateOf(0f) }
-        val alpha by animateFloatAsState(
-            targetValue = targetAlpha,
-            animationSpec = sheetAnimationSpec,
-            label = "alpha",
-        )
-        val internalOnDismissRequest: () -> Unit = {
-            scope.launch {
-                targetAlpha = 0f
-                onDismissRequest()
-            }
-        }
         Box(
             modifier = Modifier
                 .clickable(
                     interactionSource = null,
                     indication = null,
                     enabled = enableImplicitDismiss,
-                    onClick = internalOnDismissRequest,
+                    onClick = onDismissRequest,
                 )
                 .fillMaxSize()
-                .alpha(alpha),
+                .background(LocalBokuhonColors.current.scrim.copy(alpha = 0.32f)),
             contentAlignment = Alignment.Center,
         ) {
             Surface(
@@ -99,17 +82,10 @@ fun AdaptiveSheet(
                 shape = RectangleShape,
                 color = LocalBokuhonColors.current.surfaceContainerHigh,
                 content = {
-                    BackHandler(
-                        enabled = enableImplicitDismiss && remember { derivedStateOf { alpha > 0f } }.value,
-                        onBack = internalOnDismissRequest,
-                    )
+                    BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
                     content()
                 },
             )
-
-            LaunchedEffect(Unit) {
-                targetAlpha = 1f
-            }
         }
     } else {
         val anchoredDraggableState = rememberSaveable(saver = AnchoredDraggableState.Saver()) {
@@ -130,9 +106,11 @@ fun AdaptiveSheet(
                 .clickable(
                     interactionSource = null,
                     indication = null,
+                    enabled = enableImplicitDismiss,
                     onClick = internalOnDismissRequest,
                 )
                 .fillMaxSize()
+                .background(LocalBokuhonColors.current.scrim.copy(alpha = 0.32f))
                 .onSizeChanged {
                     val anchors = DraggableAnchors {
                         0 at 0f
@@ -184,10 +162,7 @@ fun AdaptiveSheet(
                 shape = RectangleShape,
                 color = LocalBokuhonColors.current.surfaceContainerHigh,
                 content = {
-                    BackHandler(
-                        enabled = enableImplicitDismiss && anchoredDraggableState.targetValue == 0,
-                        onBack = internalOnDismissRequest,
-                    )
+                    BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
                     content()
                 },
             )
