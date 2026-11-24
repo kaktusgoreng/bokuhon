@@ -1,7 +1,7 @@
 package eu.kanade.presentation.reader.appbars
 
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.reader.components.ChapterNavigator
@@ -30,9 +29,6 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.components.motion.AnimatedVisibility
-
-private val readerBarsSlideAnimationSpec = tween<IntOffset>(200)
-private val readerBarsFadeAnimationSpec = tween<Float>(150)
 
 @Composable
 fun ReaderAppBars(
@@ -68,12 +64,15 @@ fun ReaderAppBars(
     onClickSettings: () -> Unit,
 ) {
     val backgroundColor = LocalBokuhonColors.current.surface
+    // Outlines the bars against the page behind them; ink in the light theme.
+    val outline = LocalBokuhonColors.current.onSurface
 
     Column(modifier = Modifier.fillMaxHeight()) {
         AnimatedVisibility(visible = visible) {
             ReaderTopBar(
                 modifier = Modifier
                     .background(backgroundColor)
+                    .border(1.dp, outline)
                     .clickable(onClick = onClickTopAppBar),
                 mangaTitle = mangaTitle,
                 chapterTitle = chapterTitle,
@@ -140,6 +139,7 @@ fun ReaderAppBars(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(backgroundColor)
+                        .border(1.dp, outline)
                         .padding(horizontal = BokuhonPadding.small)
                         .windowInsetsPadding(WindowInsets.navigationBars),
                     readingMode = readingMode,

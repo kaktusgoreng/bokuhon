@@ -1,6 +1,8 @@
 package eu.kanade.presentation.reader.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -100,10 +103,14 @@ fun ChapterNavigator(
     val mainAxisPadding = if (isTabletUi) 24.dp else 8.dp
 
     // Match with toolbar background color set in ReaderActivity
-    val backgroundColor = LocalBokuhonColors.current.surface
+    val colors = LocalBokuhonColors.current
+    val backgroundColor = colors.surface
+    // The bar and the buttons share one colour, so the buttons read by their outline only.
     val buttonColor = IconButtonDefaults.filledIconButtonColors(
         containerColor = backgroundColor,
+        contentColor = colors.onSurface,
         disabledContainerColor = backgroundColor,
+        disabledContentColor = colors.outline,
     )
 
     val onPageChange: (Int) -> Unit = { onPageIndexChange(it - 1) }
@@ -178,6 +185,7 @@ fun HorizontalChapterNavigator(
                 enabled = if (isRtl) enabledNext else enabledPrevious,
                 onClick = if (isRtl) onNextChapter else onPreviousChapter,
                 colors = buttonColor,
+                border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
             ) {
                 Icon(
                     imageVector = MaterialSymbols.Rounded.SkipPrevious,
@@ -192,7 +200,9 @@ fun HorizontalChapterNavigator(
                     Row(
                         modifier = Modifier
                             .weight(1f)
+                            .height(IconButtonDefaults.Size)
                             .background(backgroundColor)
+                            .border(1.dp, LocalBokuhonColors.current.onSurface)
                             .padding(horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -223,6 +233,7 @@ fun HorizontalChapterNavigator(
                 enabled = if (isRtl) enabledPrevious else enabledNext,
                 onClick = if (isRtl) onPreviousChapter else onNextChapter,
                 colors = buttonColor,
+                border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
             ) {
                 Icon(
                     imageVector = MaterialSymbols.Rounded.SkipNext,
@@ -262,6 +273,7 @@ fun VerticalChapterNavigator(
             enabled = enabledPrevious,
             onClick = onPreviousChapter,
             colors = buttonColor,
+            border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
         ) {
             Icon(
                 imageVector = MaterialSymbols.Rounded.SkipPrevious,
@@ -275,6 +287,7 @@ fun VerticalChapterNavigator(
                 modifier = Modifier
                     .weight(1f)
                     .background(backgroundColor)
+                    .border(1.dp, LocalBokuhonColors.current.onSurface)
                     .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -300,6 +313,7 @@ fun VerticalChapterNavigator(
             enabled = enabledNext,
             onClick = onNextChapter,
             colors = buttonColor,
+            border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
         ) {
             Icon(
                 imageVector = MaterialSymbols.Rounded.SkipNext,

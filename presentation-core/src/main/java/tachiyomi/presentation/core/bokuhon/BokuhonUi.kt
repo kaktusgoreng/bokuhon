@@ -543,6 +543,9 @@ data class IconButtonColors(
 )
 
 object IconButtonDefaults {
+    /** Side of the square filled icon button. */
+    val Size = 40.dp
+
     @Composable
     fun filledIconButtonColors(
         containerColor: Color = LocalBokuhonColors.current.primary,
@@ -564,13 +567,23 @@ fun FilledIconButton(
     enabled: Boolean = true,
     colors: IconButtonColors? = null,
     shape: Any? = null,
+    border: androidx.compose.foundation.BorderStroke? = null,
     content: @Composable () -> Unit,
 ) {
     val c = LocalBokuhonColors.current
     Box(
         modifier = modifier
-            .size(40.dp)
+            .size(IconButtonDefaults.Size)
             .background(colors?.let { if (enabled) it.containerColor else it.disabledContainerColor } ?: c.primary)
+            .then(
+                if (border !=
+                    null
+                ) {
+                    Modifier.border(border, androidx.compose.ui.graphics.RectangleShape)
+                } else {
+                    Modifier
+                },
+            )
             .clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Button, onClick = onClick),
         contentAlignment = androidx.compose.ui.Alignment.Center,
     ) {
