@@ -70,7 +70,6 @@ import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.util.shouldExpandFAB
 import tachiyomi.source.local.isLocal
 import kotlin.time.Instant
 
@@ -331,7 +330,8 @@ private fun MangaScreenSmallImpl(
                 },
                 icon = { Icon(imageVector = MaterialSymbols.RoundedFilled.PlayArrow, contentDescription = null) },
                 onClick = onContinueReading,
-                expanded = chapterListState.shouldExpandFAB(),
+                // One size whatever the scroll position: a button that shrinks and grows is motion.
+                expanded = true,
                 modifier = Modifier.animateFloatingActionButton(
                     visible = isFABVisible,
                     alignment = Alignment.BottomEnd,
@@ -561,7 +561,8 @@ fun MangaScreenLargeImpl(
                 },
                 icon = { Icon(imageVector = MaterialSymbols.RoundedFilled.PlayArrow, contentDescription = null) },
                 onClick = onContinueReading,
-                expanded = chapterListState.shouldExpandFAB(),
+                // One size whatever the scroll position: a button that shrinks and grows is motion.
+                expanded = true,
                 modifier = Modifier.animateFloatingActionButton(
                     visible = isFABVisible,
                     alignment = Alignment.BottomEnd,
