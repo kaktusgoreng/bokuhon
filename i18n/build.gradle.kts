@@ -27,17 +27,27 @@ kotlin {
     }
 }
 
+// The app drops every locale outside this set from resources.arsc, so listing them here would
+// offer languages in the picker that can only fall back to English.
+val shippedLocaleDirs = buildSet {
+    add("base") // English is the default resources.
+    addAll(providers.gradleProperty("locales").get().split(","))
+}
+// Resolved here rather than with a filtered file tree: a filter spec holding a build script
+// reference can't be stored in the configuration cache.
+val shippedLocaleFiles = layout.projectDirectory
+    .dir("src/commonMain/moko-resources")
+    .asFileTree
+    .matching { include("**/strings.xml", "**/plurals.xml") }
+    .filterTo(mutableListOf()) { it.parentFile.name in shippedLocaleDirs }
+
 androidComponents {
     onVariants { variant ->
         val resSource = variant.sources.res ?: return@onVariants
 
         val variantName = variant.name.replaceFirstChar { it.uppercase() }
         val task = tasks.register<GenerateLocalesConfigTask>("generate${variantName}LocalesConfig") {
-            localeFiles.from(
-                layout.projectDirectory.dir("src/commonMain/moko-resources").asFileTree.matching {
-                    include("**/strings.xml", "**/plurals.xml")
-                },
-            )
+            localeFiles.from(shippedLocaleFiles)
         }
         resSource.addGeneratedSourceDirectory(task) { it.outputDir }
     }

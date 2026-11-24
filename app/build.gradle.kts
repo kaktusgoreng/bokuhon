@@ -124,9 +124,9 @@ android {
     }
 
     androidResources {
-        // English, Malay and Japanese are the only locales kept; the other ~67 were megabytes of
-        // translated strings in resources.arsc.
-        localeFilters += listOf("en", "ms", "ja")
+        // Only the locales we ship; the other ~64 were megabytes of translated strings in
+        // resources.arsc. The i18n module builds its language list from the same property.
+        localeFilters += providers.gradleProperty("locales").get().split(",")
     }
 
     splits {
