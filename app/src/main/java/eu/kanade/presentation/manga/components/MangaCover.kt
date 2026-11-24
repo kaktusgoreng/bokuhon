@@ -30,7 +30,6 @@ enum class MangaCover(val ratio: Float) {
     ) {
         AsyncImage(
             model = data,
-            placeholder = ColorPainter(CoverPlaceholderColor),
             error = rememberResourceBitmapPainter(id = R.drawable.cover_error),
             contentDescription = contentDescription,
             modifier = modifier
@@ -50,5 +49,3 @@ enum class MangaCover(val ratio: Float) {
         )
     }
 }
-
-private val CoverPlaceholderColor = Color(0x1F888888)
