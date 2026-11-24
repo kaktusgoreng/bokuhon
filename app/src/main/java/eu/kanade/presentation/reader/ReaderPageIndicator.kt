@@ -5,6 +5,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -12,11 +17,15 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
+import kotlinx.coroutines.delay
 import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Surface
 import tachiyomi.presentation.core.bokuhon.Text
+
+/** How long the page number stays up after a page change. */
+private const val VISIBLE_MILLIS = 5_000L
 
 @Composable
 fun ReaderPageIndicator(
@@ -25,6 +34,15 @@ fun ReaderPageIndicator(
     modifier: Modifier = Modifier,
 ) {
     if (currentPage <= 0 || totalPages <= 0) return
+
+    // Shows on each page change, then clears itself; removing it beats fading it out on e-ink.
+    var visible by remember { mutableStateOf(true) }
+    LaunchedEffect(currentPage, totalPages) {
+        visible = true
+        delay(VISIBLE_MILLIS)
+        visible = false
+    }
+    if (!visible) return
 
     val colors = LocalBokuhonColors.current
 
