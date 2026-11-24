@@ -72,7 +72,6 @@ fun ReaderAppBars(
             ReaderTopBar(
                 modifier = Modifier
                     .background(backgroundColor)
-                    .border(1.dp, outline)
                     .clickable(onClick = onClickTopAppBar),
                 mangaTitle = mangaTitle,
                 chapterTitle = chapterTitle,
@@ -121,7 +120,14 @@ fun ReaderAppBars(
         }
 
         AnimatedVisibility(visible = visible) {
-            Column(verticalArrangement = Arrangement.spacedBy(BokuhonPadding.small)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(backgroundColor)
+                    .border(1.dp, outline)
+                    .padding(vertical = BokuhonPadding.extraSmall)
+                    .windowInsetsPadding(WindowInsets.navigationBars),
+            ) {
                 if (chapterNavigatorType.isHorizontal()) {
                     ChapterNavigator(
                         type = chapterNavigatorType,
@@ -138,10 +144,7 @@ fun ReaderAppBars(
                 ReaderBottomBar(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(backgroundColor)
-                        .border(1.dp, outline)
-                        .padding(horizontal = BokuhonPadding.small)
-                        .windowInsetsPadding(WindowInsets.navigationBars),
+                        .padding(horizontal = BokuhonPadding.small),
                     readingMode = readingMode,
                     onClickReadingMode = onClickReadingMode,
                     orientation = orientation,

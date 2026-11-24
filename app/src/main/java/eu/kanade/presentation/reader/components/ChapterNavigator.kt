@@ -129,7 +129,6 @@ fun ChapterNavigator(
             onPageChangeFinished = onPageIndexChangeFinished,
             interactionSource = interactionSource,
             mainAxisPadding = mainAxisPadding,
-            backgroundColor = backgroundColor,
             buttonColor = buttonColor,
             modifier = modifier,
         )
@@ -167,7 +166,6 @@ fun HorizontalChapterNavigator(
     onPageChangeFinished: () -> Unit,
     interactionSource: MutableInteractionSource,
     mainAxisPadding: Dp,
-    backgroundColor: Color,
     buttonColor: IconButtonColors,
     modifier: Modifier = Modifier,
 ) {
@@ -201,8 +199,6 @@ fun HorizontalChapterNavigator(
                         modifier = Modifier
                             .weight(1f)
                             .height(IconButtonDefaults.Size)
-                            .background(backgroundColor)
-                            .border(1.dp, LocalBokuhonColors.current.onSurface)
                             .padding(horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
