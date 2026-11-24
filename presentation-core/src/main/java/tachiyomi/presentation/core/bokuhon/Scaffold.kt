@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -94,6 +96,7 @@ fun Scaffold(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
+                .windowInsetsPadding(WindowInsets.navigationBars)
                 .padding(bottom = bottomBarHeightDp),
         ) {
             snackbarHost()
@@ -108,6 +111,7 @@ fun Scaffold(
                         FabPosition.Start -> Alignment.BottomStart
                     },
                 )
+                .windowInsetsPadding(WindowInsets.navigationBars)
                 .padding(bottom = bottomBarHeightDp + 16.dp, start = 16.dp, end = 16.dp),
         ) {
             floatingActionButton()
