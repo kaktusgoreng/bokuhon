@@ -1,20 +1,13 @@
 package tachiyomi.presentation.core.bokuhon
 
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -39,16 +32,6 @@ fun CircularProgressIndicator(
     trackColor: Color = LocalBokuhonColors.current.surfaceVariant,
     strokeCap: StrokeCap = StrokeCap.Round,
 ) {
-    val transition = rememberInfiniteTransition(label = "indeterminate")
-    val rotation by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1333, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart,
-        ),
-        label = "rotation",
-    )
     CircularIndicator(
         modifier = modifier,
         color = color,
@@ -56,7 +39,7 @@ fun CircularProgressIndicator(
         trackColor = trackColor,
         strokeCap = strokeCap,
         progress = null,
-        startAngle = rotation,
+        startAngle = -90f,
         sweepAngle = 270f,
     )
 }
@@ -137,17 +120,7 @@ fun LinearProgressIndicator(
     color: Color = LocalBokuhonColors.current.primary,
     trackColor: Color = LocalBokuhonColors.current.surfaceVariant,
 ) {
-    val transition = rememberInfiniteTransition(label = "indeterminate")
-    val fraction by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1500, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart,
-        ),
-        label = "position",
-    )
-    LinearIndicator(modifier = modifier, color = color, trackColor = trackColor, progress = null, fraction = fraction)
+    LinearIndicator(modifier = modifier, color = color, trackColor = trackColor, progress = 0.35f, fraction = 0f)
 }
 
 @Composable
