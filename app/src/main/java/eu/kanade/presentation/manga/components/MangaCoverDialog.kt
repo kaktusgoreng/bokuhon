@@ -1,5 +1,6 @@
 package eu.kanade.presentation.manga.components
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.activity.compose.BackHandler
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.WindowCompat
 import androidx.core.view.updatePadding
 import ca.mpreg.webgpuviewer.renderer.GainmapInput
 import ca.mpreg.webgpuviewer.renderer.Image
@@ -62,6 +65,7 @@ import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.ProvideBokuhonTheme
 import tachiyomi.presentation.core.bokuhon.SnackbarHost
 import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.bokuhon.Text
@@ -83,179 +87,200 @@ fun MangaCoverDialog(
     val useNewRenderer = LocalContext.current.appGraph.basePreferences.highQualityRenderer.get()
     val view = LocalView.current
 
+    // The viewer is a dark room: the system bars' icons have to turn white with it.
+    DisposableEffect(view) {
+        val window = (view.context as? Activity)?.window
+        val controller = window?.let { WindowCompat.getInsetsController(it, view) }
+        val lightStatusBar = controller?.isAppearanceLightStatusBars
+        val lightNavigationBar = controller?.isAppearanceLightNavigationBars
+        if (controller != null) {
+            controller.isAppearanceLightStatusBars = false
+            controller.isAppearanceLightNavigationBars = false
+        }
+        onDispose {
+            if (controller != null) {
+                controller.isAppearanceLightStatusBars = lightStatusBar ?: true
+                controller.isAppearanceLightNavigationBars = lightNavigationBar ?: true
+            }
+        }
+    }
+
     BokuhonDialogLayer {
         BackHandler(onBack = onDismissRequest)
-        Scaffold(
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-            containerColor = Color.Transparent,
-            bottomBar = {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp)
-                        .navigationBarsPadding(),
-                ) {
-                    ActionsPill {
-                        IconButton(onClick = onDismissRequest) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Close,
-                                contentDescription = stringResource(MR.strings.action_close),
-                            )
+        ProvideBokuhonTheme(isDark = true) {
+            Scaffold(
+                snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+                containerColor = LocalBokuhonColors.current.background,
+                bottomBar = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp)
+                            .navigationBarsPadding(),
+                    ) {
+                        ActionsPill {
+                            IconButton(onClick = onDismissRequest) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Close,
+                                    contentDescription = stringResource(MR.strings.action_close),
+                                )
+                            }
                         }
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    ActionsPill {
-                        AppBarActions(
-                            actions = listOf(
-                                AppBar.Action(
-                                    title = stringResource(MR.strings.action_share),
-                                    icon = MaterialSymbols.Rounded.Share,
-                                    onClick = onShareClick,
+                        Spacer(modifier = Modifier.weight(1f))
+                        ActionsPill {
+                            AppBarActions(
+                                actions = listOf(
+                                    AppBar.Action(
+                                        title = stringResource(MR.strings.action_share),
+                                        icon = MaterialSymbols.Rounded.Share,
+                                        onClick = onShareClick,
+                                    ),
+                                    AppBar.Action(
+                                        title = stringResource(MR.strings.action_save),
+                                        icon = MaterialSymbols.Rounded.Save,
+                                        onClick = onSaveClick,
+                                    ),
                                 ),
-                                AppBar.Action(
-                                    title = stringResource(MR.strings.action_save),
-                                    icon = MaterialSymbols.Rounded.Save,
-                                    onClick = onSaveClick,
-                                ),
-                            ),
-                        )
-                        if (onEditClick != null) {
-                            Box {
-                                var expanded by remember { mutableStateOf(false) }
-                                IconButton(
-                                    onClick = {
-                                        when {
-                                            !manga.favorite && !manga.isLocal() -> {
-                                                onEditClick(EditCoverAction.ADD_TO_LIBRARY)
+                            )
+                            if (onEditClick != null) {
+                                Box {
+                                    var expanded by remember { mutableStateOf(false) }
+                                    IconButton(
+                                        onClick = {
+                                            when {
+                                                !manga.favorite && !manga.isLocal() -> {
+                                                    onEditClick(EditCoverAction.ADD_TO_LIBRARY)
+                                                }
+                                                isCustomCover -> expanded = true
+                                                else -> onEditClick(EditCoverAction.EDIT)
                                             }
-                                            isCustomCover -> expanded = true
-                                            else -> onEditClick(EditCoverAction.EDIT)
-                                        }
-                                    },
-                                ) {
-                                    Icon(
-                                        imageVector = MaterialSymbols.Rounded.Edit,
-                                        contentDescription = stringResource(MR.strings.action_edit_cover),
-                                    )
-                                }
-                                DropdownMenu(
-                                    expanded = expanded,
-                                    onDismissRequest = { expanded = false },
-                                    offset = DpOffset(8.dp, 0.dp),
-                                ) {
-                                    DropdownMenuItem(
-                                        text = { Text(text = stringResource(MR.strings.action_edit)) },
-                                        onClick = {
-                                            onEditClick(EditCoverAction.EDIT)
-                                            expanded = false
                                         },
-                                    )
-                                    DropdownMenuItem(
-                                        text = { Text(text = stringResource(MR.strings.action_delete)) },
-                                        onClick = {
-                                            onEditClick(EditCoverAction.DELETE)
-                                            expanded = false
-                                        },
-                                    )
+                                    ) {
+                                        Icon(
+                                            imageVector = MaterialSymbols.Rounded.Edit,
+                                            contentDescription = stringResource(MR.strings.action_edit_cover),
+                                        )
+                                    }
+                                    DropdownMenu(
+                                        expanded = expanded,
+                                        onDismissRequest = { expanded = false },
+                                        offset = DpOffset(8.dp, 0.dp),
+                                    ) {
+                                        DropdownMenuItem(
+                                            text = { Text(text = stringResource(MR.strings.action_edit)) },
+                                            onClick = {
+                                                onEditClick(EditCoverAction.EDIT)
+                                                expanded = false
+                                            },
+                                        )
+                                        DropdownMenuItem(
+                                            text = { Text(text = stringResource(MR.strings.action_delete)) },
+                                            onClick = {
+                                                onEditClick(EditCoverAction.DELETE)
+                                                expanded = false
+                                            },
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            },
-        ) { contentPadding ->
-            if (useNewRenderer) {
-                val state = remember(manga) { ImageViewerState() }
-                LaunchedEffect(manga) {
-                    val request = ImageRequest.Builder(view.context)
-                        .data(manga)
-                        .size(Size.ORIGINAL)
-                        .memoryCachePolicy(CachePolicy.DISABLED)
-                        .newDecoder(true)
-                        .build()
-                    val result = view.context.imageLoader.execute(request) as? SuccessResult ?: return@LaunchedEffect
-                    val res = result.image as? ImageDecoder.DecodeResultImage ?: return@LaunchedEffect
-                    // Held, then freed, around the upload: its buffer alone doesn't keep
-                    // the frame's native pixels alive.
-                    val page = res.frame.use {
-                        withContext(Dispatchers.Default) {
-                            ImagePage.ImageSingle(
-                                Image(
-                                    res.image,
-                                    res.width,
-                                    res.height,
-                                    createMipMaps = true,
-                                    backgroundColor = 0,
-                                    hdr = res.isHdr,
-                                    hdrHeadroom = res.hdrHeadroom,
-                                    gainmap = res.gainmap?.let {
-                                        GainmapInput(
-                                            pixels = it.pixels,
-                                            width = it.width,
-                                            height = it.height,
-                                            channels = it.channels,
-                                            gamma = it.gamma,
-                                            minContentBoost = it.minContentBoost,
-                                            maxContentBoost = it.maxContentBoost,
-                                            offsetSdr = it.offsetSdr,
-                                            offsetHdr = it.offsetHdr,
-                                        )
-                                    },
-                                ),
-                            )
-                        }
-                    }
-                    state.apply {
-                        fetchPage = { index ->
-                            if (index == 0) page else null
-                        }
-                        invalidate()
-                    }
-                }
-
-                ImageViewer(state = state)
-                return@Scaffold
-            }
-
-            val statusBarPaddingPx = with(LocalDensity.current) { contentPadding.calculateTopPadding().roundToPx() }
-            val bottomPaddingPx = with(LocalDensity.current) { contentPadding.calculateBottomPadding().roundToPx() }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickableNoIndication(onClick = onDismissRequest),
-            ) {
-                AndroidView(
-                    factory = {
-                        ReaderPageImageView(it).apply {
-                            onViewClicked = onDismissRequest
-                            clipToPadding = false
-                            clipChildren = false
-                        }
-                    },
-                    update = { view ->
+                },
+            ) { contentPadding ->
+                if (useNewRenderer) {
+                    val state = remember(manga) { ImageViewerState() }
+                    LaunchedEffect(manga) {
                         val request = ImageRequest.Builder(view.context)
                             .data(manga)
                             .size(Size.ORIGINAL)
                             .memoryCachePolicy(CachePolicy.DISABLED)
-                            .target { image ->
-                                val drawable = image.asDrawable(view.context.resources)
-                                // Copy bitmap in case it came from memory cache
-                                // Because SSIV needs to thoroughly read the image
-                                val copy = (drawable as? BitmapDrawable)
-                                    ?.bitmap
-                                    ?.copy(Bitmap.Config.HARDWARE, false)
-                                    ?.toDrawable(view.context.resources)
-                                    ?: drawable
-                                view.setImage(copy, ReaderPageImageView.Config(zoomDuration = 500))
-                            }
+                            .newDecoder(true)
                             .build()
-                        view.context.imageLoader.enqueue(request)
+                        val result = view.context.imageLoader.execute(request) as? SuccessResult
+                            ?: return@LaunchedEffect
+                        val res = result.image as? ImageDecoder.DecodeResultImage ?: return@LaunchedEffect
+                        // Held, then freed, around the upload: its buffer alone doesn't keep
+                        // the frame's native pixels alive.
+                        val page = res.frame.use {
+                            withContext(Dispatchers.Default) {
+                                ImagePage.ImageSingle(
+                                    Image(
+                                        res.image,
+                                        res.width,
+                                        res.height,
+                                        createMipMaps = true,
+                                        backgroundColor = 0,
+                                        hdr = res.isHdr,
+                                        hdrHeadroom = res.hdrHeadroom,
+                                        gainmap = res.gainmap?.let {
+                                            GainmapInput(
+                                                pixels = it.pixels,
+                                                width = it.width,
+                                                height = it.height,
+                                                channels = it.channels,
+                                                gamma = it.gamma,
+                                                minContentBoost = it.minContentBoost,
+                                                maxContentBoost = it.maxContentBoost,
+                                                offsetSdr = it.offsetSdr,
+                                                offsetHdr = it.offsetHdr,
+                                            )
+                                        },
+                                    ),
+                                )
+                            }
+                        }
+                        state.apply {
+                            fetchPage = { index ->
+                                if (index == 0) page else null
+                            }
+                            invalidate()
+                        }
+                    }
 
-                        view.updatePadding(top = statusBarPaddingPx, bottom = bottomPaddingPx)
-                    },
-                    modifier = Modifier.fillMaxSize(),
-                )
+                    ImageViewer(state = state)
+                    return@Scaffold
+                }
+
+                val statusBarPaddingPx = with(LocalDensity.current) { contentPadding.calculateTopPadding().roundToPx() }
+                val bottomPaddingPx = with(LocalDensity.current) { contentPadding.calculateBottomPadding().roundToPx() }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickableNoIndication(onClick = onDismissRequest),
+                ) {
+                    AndroidView(
+                        factory = {
+                            ReaderPageImageView(it).apply {
+                                onViewClicked = onDismissRequest
+                                clipToPadding = false
+                                clipChildren = false
+                            }
+                        },
+                        update = { view ->
+                            val request = ImageRequest.Builder(view.context)
+                                .data(manga)
+                                .size(Size.ORIGINAL)
+                                .memoryCachePolicy(CachePolicy.DISABLED)
+                                .target { image ->
+                                    val drawable = image.asDrawable(view.context.resources)
+                                    // Copy bitmap in case it came from memory cache
+                                    // Because SSIV needs to thoroughly read the image
+                                    val copy = (drawable as? BitmapDrawable)
+                                        ?.bitmap
+                                        ?.copy(Bitmap.Config.HARDWARE, false)
+                                        ?.toDrawable(view.context.resources)
+                                        ?: drawable
+                                    view.setImage(copy, ReaderPageImageView.Config(zoomDuration = 500))
+                                }
+                                .build()
+                            view.context.imageLoader.enqueue(request)
+
+                            view.updatePadding(top = statusBarPaddingPx, bottom = bottomPaddingPx)
+                        },
+                        modifier = Modifier.fillMaxSize(),
+                    )
+                }
             }
         }
     }
@@ -266,7 +291,7 @@ private fun ActionsPill(content: @Composable () -> Unit) {
     Row(
         modifier = Modifier
             .clip(RectangleShape)
-            .background(LocalBokuhonColors.current.background.copy(alpha = 0.95f)),
+            .background(LocalBokuhonColors.current.background),
     ) {
         content()
     }
