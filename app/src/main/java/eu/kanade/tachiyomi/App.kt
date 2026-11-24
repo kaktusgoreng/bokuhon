@@ -249,7 +249,8 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
                     .build(),
             )
 
-            crossfade((300 * this@App.animatorDurationScale).toInt())
+            // Images appear as soon as they decode; a crossfade only smears them on e-ink.
+            crossfade(false)
             allowRgb565(DeviceUtil.isLowRamDevice(this@App))
             if (networkPreferences.verboseLogging.get()) logger(DebugLogger())
 

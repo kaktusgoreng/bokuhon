@@ -169,16 +169,6 @@ class ReaderActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         graph.inject(this)
         registerSecureActivity(this)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            overrideActivityTransition(
-                OVERRIDE_TRANSITION_OPEN,
-                R.anim.shared_axis_x_push_enter,
-                R.anim.shared_axis_x_push_exit,
-            )
-        } else {
-            @Suppress("DEPRECATION")
-            overridePendingTransition(R.anim.shared_axis_x_push_enter, R.anim.shared_axis_x_push_exit)
-        }
 
         enableEdgeToEdge()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -440,16 +430,6 @@ class ReaderActivity : BaseActivity() {
     override fun finish() {
         viewModel.onActivityFinish()
         super.finish()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            overrideActivityTransition(
-                OVERRIDE_TRANSITION_CLOSE,
-                R.anim.shared_axis_x_pop_enter,
-                R.anim.shared_axis_x_pop_exit,
-            )
-        } else {
-            @Suppress("DEPRECATION")
-            overridePendingTransition(R.anim.shared_axis_x_pop_enter, R.anim.shared_axis_x_pop_exit)
-        }
     }
 
     @Composable
