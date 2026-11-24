@@ -7,13 +7,17 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.VerticalDivider
 
 @Composable
 fun TwoPanelBox(
@@ -41,6 +45,13 @@ fun TwoPanelBox(
                 .align(Alignment.TopEnd)
                 .width(secondWidth + endPadding),
             content = endContent,
+        )
+        // The panes are two surfaces meeting, so they need a line like the rest of the chrome.
+        VerticalDivider(
+            modifier = Modifier
+                .fillMaxHeight()
+                .offset(x = firstWidth + startPadding - 0.5.dp),
+            color = LocalBokuhonColors.current.onSurface,
         )
     }
 }
