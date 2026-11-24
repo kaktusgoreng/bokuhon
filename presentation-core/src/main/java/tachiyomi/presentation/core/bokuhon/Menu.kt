@@ -60,7 +60,7 @@ fun DropdownMenu(
     containerColor: Color = LocalBokuhonColors.current.surface,
     tonalElevation: Dp = 0.dp,
     shadowElevation: Dp = 3.dp,
-    border: BorderStroke? = BorderStroke(1.dp, LocalBokuhonColors.current.outline),
+    border: BorderStroke? = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
     content: @Composable ColumnScope.() -> Unit,
 ) {
     if (!expanded) return

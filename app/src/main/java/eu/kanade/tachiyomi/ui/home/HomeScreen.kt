@@ -71,10 +71,12 @@ import mihon.core.navigation.rememberNavigator
 import mihon.presentation.core.util.isTabletUi
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.BokuhonBadge
+import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
+import tachiyomi.presentation.core.bokuhon.VerticalDivider
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -244,111 +246,120 @@ private fun HomeContent(tabNavigator: Navigator, modifier: Modifier = Modifier) 
 @Composable
 private fun TabletNavigationRail(tabNavigator: Navigator) {
     val colors = LocalBokuhonColors.current
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(88.dp)
-            .background(colors.container),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        TABS.fastForEach { tab ->
-            val resultEventBus = LocalResultEventBus.current
-            val selected = tabNavigator.current == tab
-            val options = tab.options(selected)
-            val contentColor = if (selected) colors.onPrimary else colors.onSurface
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .selectable(
-                        selected = selected,
-                        role = Role.Tab,
-                        onClick = {
-                            if (!selected) {
-                                tabNavigator.replaceAll(tab)
-                            } else {
-                                resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
-                            }
-                        },
+    Row(modifier = Modifier.fillMaxHeight()) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(88.dp)
+                .background(colors.container),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            TABS.fastForEach { tab ->
+                val resultEventBus = LocalResultEventBus.current
+                val selected = tabNavigator.current == tab
+                val options = tab.options(selected)
+                val contentColor = if (selected) colors.onPrimary else colors.onSurface
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = selected,
+                            role = Role.Tab,
+                            onClick = {
+                                if (!selected) {
+                                    tabNavigator.replaceAll(tab)
+                                } else {
+                                    resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
+                                }
+                            },
+                        )
+                        .background(if (selected) colors.primary else Color.Transparent)
+                        .padding(vertical = 12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Box {
+                        Icon(
+                            painter = options.icon,
+                            contentDescription = options.title,
+                            tint = contentColor,
+                        )
+                        TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp))
+                    }
+                    Text(
+                        text = options.title,
+                        style = LocalBokuhonTypography.current.labelSmall,
+                        color = contentColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = 4.dp),
                     )
-                    .background(if (selected) colors.primary else Color.Transparent)
-                    .padding(vertical = 12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Box {
-                    Icon(
-                        painter = options.icon,
-                        contentDescription = options.title,
-                        tint = contentColor,
-                    )
-                    TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 10.dp, y = (-6).dp))
                 }
-                Text(
-                    text = options.title,
-                    style = LocalBokuhonTypography.current.labelSmall,
-                    color = contentColor,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 4.dp),
-                )
             }
         }
+        VerticalDivider(color = colors.onSurface)
     }
 }
 
 @Composable
 private fun BottomNavigationBar(tabNavigator: Navigator) {
     val colors = LocalBokuhonColors.current
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(colors.container)
-            .windowInsetsPadding(WindowInsets.navigationBars)
-            .height(BottomBarHeight),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
+            .windowInsetsPadding(WindowInsets.navigationBars),
     ) {
-        TABS.fastForEach { tab ->
-            val resultEventBus = LocalResultEventBus.current
-            val selected = tabNavigator.current == tab
-            val options = tab.options(selected)
-            val contentColor = if (selected) colors.onPrimary else colors.onSurface
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .selectable(
-                        selected = selected,
-                        role = Role.Tab,
-                        onClick = {
-                            if (!selected) {
-                                tabNavigator.replaceAll(tab)
-                            } else {
-                                resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
-                            }
-                        },
+        HorizontalDivider(color = colors.onSurface)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(BottomBarHeight),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            TABS.fastForEach { tab ->
+                val resultEventBus = LocalResultEventBus.current
+                val selected = tabNavigator.current == tab
+                val options = tab.options(selected)
+                val contentColor = if (selected) colors.onPrimary else colors.onSurface
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .selectable(
+                            selected = selected,
+                            role = Role.Tab,
+                            onClick = {
+                                if (!selected) {
+                                    tabNavigator.replaceAll(tab)
+                                } else {
+                                    resultEventBus.sendResult(resultKey = tab.reselectEventKey, result = Unit)
+                                }
+                            },
+                        )
+                        .background(if (selected) colors.primary else Color.Transparent)
+                        .padding(vertical = 6.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Box {
+                        Icon(
+                            painter = options.icon,
+                            contentDescription = options.title,
+                            tint = contentColor,
+                            modifier = Modifier.size(24.dp),
+                        )
+                        TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 8.dp, y = (-4).dp))
+                    }
+                    Text(
+                        text = options.title,
+                        style = LocalBokuhonTypography.current.labelSmall,
+                        color = contentColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
-                    .background(if (selected) colors.primary else Color.Transparent)
-                    .padding(vertical = 6.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Box {
-                    Icon(
-                        painter = options.icon,
-                        contentDescription = options.title,
-                        tint = contentColor,
-                        modifier = Modifier.size(24.dp),
-                    )
-                    TabBadge(tab, Modifier.align(Alignment.TopEnd).offset(x = 8.dp, y = (-4).dp))
                 }
-                Text(
-                    text = options.title,
-                    style = LocalBokuhonTypography.current.labelSmall,
-                    color = contentColor,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
             }
         }
     }

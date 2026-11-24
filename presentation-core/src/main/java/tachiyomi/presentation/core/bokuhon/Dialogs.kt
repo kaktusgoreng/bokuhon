@@ -1,6 +1,7 @@
 package tachiyomi.presentation.core.bokuhon
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -88,6 +89,7 @@ fun AlertDialog(
             shape = shape,
             color = containerColor,
             contentColor = contentColor,
+            border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
                 icon?.let {
@@ -140,6 +142,7 @@ fun BasicAlertDialog(
                 .widthIn(max = 560.dp)
                 .sizeIn(minWidth = 280.dp),
             color = LocalBokuhonColors.current.surfaceVariant,
+            border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
         ) {
             content()
         }

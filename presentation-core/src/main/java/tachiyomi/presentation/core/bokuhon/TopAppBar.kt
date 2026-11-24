@@ -142,5 +142,7 @@ fun TopAppBar(
                 )
             }
         }
+        // The bars have no shadow, so they meet the content below them with a line.
+        HorizontalDivider(color = LocalBokuhonColors.current.onSurface)
     }
 }

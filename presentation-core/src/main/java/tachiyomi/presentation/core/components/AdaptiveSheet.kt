@@ -2,6 +2,7 @@ package tachiyomi.presentation.core.components
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
@@ -81,6 +82,7 @@ fun AdaptiveSheet(
                     .then(modifier),
                 shape = RectangleShape,
                 color = LocalBokuhonColors.current.surfaceContainerHigh,
+                border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 content = {
                     BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
                     content()
@@ -161,6 +163,7 @@ fun AdaptiveSheet(
                     .statusBarsPadding(),
                 shape = RectangleShape,
                 color = LocalBokuhonColors.current.surfaceContainerHigh,
+                border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 content = {
                     BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
                     content()
