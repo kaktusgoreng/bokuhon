@@ -334,7 +334,7 @@ class ReaderActivity : BaseActivity() {
             Notifications.ID_NEW_CHAPTERS,
         )
 
-        setMenuVisibility(viewModel.state.value.menuVisible)
+        applySystemBarVisibility()
 
         // Finish when incognito mode is disabled
         preferences.incognitoMode.changes()
@@ -414,7 +414,7 @@ class ReaderActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.restartReadTimer()
-        setMenuVisibility(viewModel.state.value.menuVisible)
+        applySystemBarVisibility()
     }
 
     /**
@@ -424,7 +424,7 @@ class ReaderActivity : BaseActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
-            setMenuVisibility(viewModel.state.value.menuVisible)
+            applySystemBarVisibility()
         }
     }
 
@@ -618,9 +618,16 @@ class ReaderActivity : BaseActivity() {
      */
     private fun setMenuVisibility(visible: Boolean) {
         viewModel.showMenus(visible)
-        if (visible) {
-            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
-        } else if (readerPreferences.fullscreen.get()) {
+    }
+
+    /**
+     * Applies the fullscreen preference to the system bars.
+     *
+     * The system bars keep the state they get here: showing or hiding them is animated by the
+     * platform, so following the menu with them smeared the page on every tap.
+     */
+    private fun applySystemBarVisibility() {
+        if (readerPreferences.fullscreen.get()) {
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         }
     }
