@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.components.AppBar
@@ -81,7 +82,6 @@ fun MangaToolbar(
                 )
             }
 
-            val filterTint = if (hasFilters) LocalBokuhonColors.current.active else LocalBokuhonContentColor.current
             AppBarActions(
                 actions = buildList {
                     if (isActionMode) {
@@ -101,6 +101,17 @@ fun MangaToolbar(
                         )
                         return@buildList
                     }
+                    add(
+                        AppBar.CustomAction {
+                            SquareAction(
+                                icon = MaterialSymbols.Rounded.Refresh,
+                                contentDescription = stringResource(MR.strings.action_webview_refresh),
+                                filled = isRefreshing,
+                                enabled = !isRefreshing,
+                                onClick = onClickRefresh,
+                            )
+                        },
+                    )
                     if (onClickDownload != null) {
                         add(
                             AppBar.Action(
@@ -112,16 +123,13 @@ fun MangaToolbar(
                     }
                     add(
                         AppBar.CustomAction {
-                            RefreshAction(isRefreshing = isRefreshing, onClick = onClickRefresh)
+                            SquareAction(
+                                icon = MaterialSymbols.Rounded.FilterList,
+                                contentDescription = stringResource(MR.strings.action_filter),
+                                filled = hasFilters,
+                                onClick = onClickFilter,
+                            )
                         },
-                    )
-                    add(
-                        AppBar.Action(
-                            title = stringResource(MR.strings.action_filter),
-                            icon = MaterialSymbols.Rounded.FilterList,
-                            iconTint = filterTint,
-                            onClick = onClickFilter,
-                        ),
                     )
                     if (onClickEditCategory != null) {
                         add(
@@ -162,13 +170,15 @@ fun MangaToolbar(
 }
 
 /**
- * Refresh sits beside the download action; it fills in while the fetch is running so the
- * header shows its progress instead of a spinner over the chapter list.
+ * Header action that says its state by filling in: refresh while fetching, filter while set.
  */
 @Composable
-private fun RefreshAction(
-    isRefreshing: Boolean,
+private fun SquareAction(
+    icon: ImageVector,
+    contentDescription: String,
+    filled: Boolean,
     onClick: () -> Unit,
+    enabled: Boolean = true,
 ) {
     val colors = LocalBokuhonColors.current
 
@@ -179,14 +189,14 @@ private fun RefreshAction(
         Box(
             modifier = Modifier
                 .size(IconButtonDefaults.Size)
-                .background(if (isRefreshing) colors.primary else Color.Transparent)
-                .clickable(enabled = !isRefreshing, role = Role.Button, onClick = onClick),
+                .background(if (filled) colors.primary else Color.Transparent)
+                .clickable(enabled = enabled, role = Role.Button, onClick = onClick),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.Refresh,
-                contentDescription = stringResource(MR.strings.action_webview_refresh),
-                tint = if (isRefreshing) colors.onPrimary else LocalBokuhonContentColor.current,
+                imageVector = icon,
+                contentDescription = contentDescription,
+                tint = if (filled) colors.onPrimary else LocalBokuhonContentColor.current,
             )
         }
     }
