@@ -2,12 +2,16 @@ package eu.kanade.tachiyomi.ui.reader.viewer
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AbstractComposeView
 import eu.kanade.tachiyomi.ui.reader.model.ChapterTransition
 import eu.kanade.tachiyomi.ui.reader.model.ReaderChapter
@@ -39,13 +43,19 @@ class ReaderTransitionView @JvmOverloads constructor(context: Context, attrs: At
         val data = data ?: return
         LaunchedEffect(data.downloadState) { data.downloadState?.checkDisk() }
         ReaderThemedContent(context) {
-            ReaderTransitionPage(
-                transition = data.transition,
-                downloadState = data.downloadState,
-                onRetry = data.onRetry,
-                onButtonPressChange = data.onButtonPressChange,
-                statusPadding = data.statusPadding,
-            )
+            // The theme's dialog host fills the page, so the column has to place itself.
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                ReaderTransitionPage(
+                    transition = data.transition,
+                    downloadState = data.downloadState,
+                    onRetry = data.onRetry,
+                    onButtonPressChange = data.onButtonPressChange,
+                    statusPadding = data.statusPadding,
+                )
+            }
         }
     }
 

@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -99,6 +100,7 @@ private fun TransitionText(
         modifier = Modifier
             .widthIn(max = 460.dp)
             .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (topChapter != null) {
             ChapterText(
@@ -217,7 +219,7 @@ private fun ChapterText(
     scanlator: String?,
     downloaded: Boolean,
 ) {
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         ChapterHeaderText(
             text = header,
             modifier = Modifier.padding(bottom = 4.dp),
@@ -234,6 +236,7 @@ private fun ChapterText(
             fontSize = 20.sp,
             maxLines = 5,
             overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center,
             style = LocalBokuhonTypography.current.titleLarge,
             inlineContent = mapOf(
                 DOWNLOADED_ICON_ID to InlineTextContent(
@@ -259,6 +262,7 @@ private fun ChapterText(
                     .padding(top = 2.dp),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
                 style = LocalBokuhonTypography.current.bodySmall,
             )
         }
