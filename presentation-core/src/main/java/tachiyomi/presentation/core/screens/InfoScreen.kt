@@ -40,7 +40,7 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
 fun InfoScreen(
-    icon: ImageVector,
+    icon: ImageVector? = null,
     headingText: String,
     subtitleText: String,
     acceptText: String,
@@ -112,14 +112,16 @@ fun InfoScreen(
                 .padding(top = 48.dp)
                 .padding(horizontal = BokuhonPadding.medium),
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(bottom = BokuhonPadding.small)
-                    .size(48.dp),
-                tint = LocalBokuhonColors.current.primary,
-            )
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(bottom = BokuhonPadding.small)
+                        .size(48.dp),
+                    tint = LocalBokuhonColors.current.primary,
+                )
+            }
             Text(
                 text = headingText,
                 style = LocalBokuhonTypography.current.headlineLarge,

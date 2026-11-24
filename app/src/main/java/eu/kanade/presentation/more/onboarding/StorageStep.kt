@@ -35,7 +35,6 @@ import kotlinx.coroutines.flow.collectLatest
 import mihon.app.di.appGraph
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.BokuhonPadding
-import tachiyomi.presentation.core.bokuhon.HorizontalDivider
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.Button
@@ -107,13 +106,6 @@ internal class StorageStep : OnboardingStep {
                     )
                 }
             }
-
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 8.dp),
-                color = colors.onPrimaryContainer,
-            )
-
-            Text(stringResource(MR.strings.onboarding_storage_help_info, stringResource(MR.strings.app_name)))
         }
 
         LaunchedEffect(Unit) {
