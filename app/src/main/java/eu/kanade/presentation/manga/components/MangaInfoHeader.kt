@@ -301,10 +301,10 @@ fun ExpandableMangaDescription(
                     FlowRow(
                         modifier = Modifier.padding(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
+                        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.extraSmall),
                     ) {
                         tags.forEach {
                             TagsChip(
-                                modifier = DefaultTagChipModifier,
                                 text = it,
                                 onClick = {
                                     tagSelected = it
@@ -320,7 +320,6 @@ fun ExpandableMangaDescription(
                     ) {
                         items(items = tags) {
                             TagsChip(
-                                modifier = DefaultTagChipModifier,
                                 text = it,
                                 onClick = {
                                     tagSelected = it
@@ -697,16 +696,12 @@ private fun MangaSummary(
     }
 }
 
-private val DefaultTagChipModifier = Modifier.padding(vertical = 4.dp)
-
 @Composable
 private fun TagsChip(
     text: String,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
     SuggestionChip(
-        modifier = modifier,
         onClick = onClick,
         label = { Text(text = text, style = LocalBokuhonTypography.current.bodySmall) },
     )

@@ -75,6 +75,7 @@ fun SuggestionChip(
     val c = LocalBokuhonColors.current
     ChipSurface(
         onClick = onClick,
+        modifier = modifier,
         enabled = enabled,
         container = Color.Transparent,
         contentColor = c.onSurface,
@@ -88,6 +89,7 @@ fun SuggestionChip(
 @Composable
 private fun ChipSurface(
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     enabled: Boolean,
     container: Color,
     contentColor: Color,
@@ -97,7 +99,7 @@ private fun ChipSurface(
     label: @Composable () -> Unit,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(FilterChipDefaults.Height)
             .then(if (border != null) Modifier.border(border) else Modifier)
             .background(container)
