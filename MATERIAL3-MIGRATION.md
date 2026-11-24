@@ -51,6 +51,14 @@ emulator -avd boox_go6_gen2         # 1072x1448 @300dpi, Android 13, tablet mode
 adb install -r app/build/outputs/apk/release/app-arm64-v8a-release.apk
 ```
 
-`app.mihon.dev` on the emulator is the stock 0.21.3-8251 build, not alpha 2; use the
-`alpha2-backup` tag for A/B screenshots.
-Release APK is debug-signed; version stays `0.21.3_alpha2` (bump when a new alpha is cut).
+`app.mihon.dev` on the emulator is the stock 0.21.3-8251 build; use the `alpha2-backup` tag
+for A/B screenshots.
+Release APK is debug-signed; the version is `0.21.3_alpha3` (bump when a new alpha is cut).
+
+## Size
+
+The arm64 APK is 31.1MB, down from 34.3MB at alpha 2. Nearly all of what remains is
+compiled code: ~19MB of dex and ~19MB of native libraries (`libimagedecoder`, `libwebgpu_c_bundled`,
+`libconscrypt_jni`, `libarchive-jni`, ...). The one large removable chunk was resources: the app
+shipped strings for 70 locales, so `androidResources.localeFilters` now keeps English, Malay and
+Japanese only and took resources.arsc from 4.1MB to 0.9MB.
