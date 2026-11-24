@@ -1,7 +1,7 @@
 # Material 3 → foundation UI migration
 
-Branch `bionic/no-material3`. Backup of the shipping alpha 2 build: tag `alpha2-backup`
-(commit `18159ab39`, branch `bionic/alpha2`). Nothing is pushed.
+Everything is on `main`, which is what ships. Backup of the shipping alpha 2 build: tag
+`alpha2-backup` (commit `18159ab39`).
 
 ## Done
 
