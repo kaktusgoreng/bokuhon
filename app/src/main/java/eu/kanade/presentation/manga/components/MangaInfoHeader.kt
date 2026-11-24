@@ -4,6 +4,8 @@ import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,11 +40,11 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -97,7 +99,6 @@ import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.SuggestionChip
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
-import tachiyomi.presentation.core.components.material.TextButton
 import tachiyomi.presentation.core.components.motion.animateFloatAsState
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
@@ -174,18 +175,24 @@ fun MangaActionRow(
     }
 
     Row(modifier = modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
-        MangaActionButton(
+        MangaActionSquare(
             title = if (favorite) {
                 stringResource(MR.strings.in_library)
             } else {
                 stringResource(MR.strings.add_to_library)
             },
-            icon = if (favorite) MaterialSymbols.RoundedFilled.Favorite else MaterialSymbols.Rounded.Favorite,
+            selected = favorite,
             color = if (favorite) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = onAddToLibraryClicked,
             onLongClick = onEditCategory,
-        )
-        MangaActionButton(
+        ) {
+            if (favorite) {
+                Icon(imageVector = MaterialSymbols.RoundedFilled.Favorite, contentDescription = null)
+            } else {
+                Text(text = stringResource(MR.strings.action_add), fontSize = 14.sp)
+            }
+        }
+        MangaActionSquare(
             title = when (nextUpdateDays) {
                 null -> stringResource(MR.strings.not_applicable)
                 0 -> stringResource(MR.strings.manga_interval_expected_update_soon)
@@ -195,28 +202,37 @@ fun MangaActionRow(
                     nextUpdateDays,
                 )
             },
-            icon = MaterialSymbols.Rounded.HourglassEmpty,
+            selected = isUserIntervalMode,
             color = if (isUserIntervalMode) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = { onEditIntervalClicked?.invoke() },
-        )
-        MangaActionButton(
+        ) {
+            Icon(imageVector = MaterialSymbols.Rounded.HourglassEmpty, contentDescription = null)
+        }
+        MangaActionSquare(
             title = if (trackingCount == 0) {
                 stringResource(MR.strings.manga_tracking_tab)
             } else {
                 pluralStringResource(MR.plurals.num_trackers, count = trackingCount, trackingCount)
             },
-            icon = if (trackingCount == 0) MaterialSymbols.Rounded.Sync else MaterialSymbols.Rounded.Check,
+            selected = trackingCount != 0,
             color = if (trackingCount == 0) defaultActionButtonColor else LocalBokuhonColors.current.primary,
             onClick = onTrackingClicked,
-        )
+        ) {
+            Icon(
+                imageVector = if (trackingCount == 0) MaterialSymbols.Rounded.Sync else MaterialSymbols.Rounded.Check,
+                contentDescription = null,
+            )
+        }
         if (onWebViewClicked != null) {
-            MangaActionButton(
+            MangaActionSquare(
                 title = stringResource(MR.strings.action_web_view),
-                icon = MaterialSymbols.Rounded.Public,
+                selected = false,
                 color = defaultActionButtonColor,
                 onClick = onWebViewClicked,
                 onLongClick = onWebViewLongClicked,
-            )
+            ) {
+                Icon(imageVector = MaterialSymbols.Rounded.Public, contentDescription = null)
+            }
         }
     }
 }
@@ -694,35 +710,38 @@ private fun TagsChip(
 }
 
 @Composable
-private fun RowScope.MangaActionButton(
+private fun RowScope.MangaActionSquare(
     title: String,
-    icon: ImageVector,
+    selected: Boolean,
     color: Color,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
+    content: @Composable () -> Unit,
 ) {
-    TextButton(
-        onClick = onClick,
+    val colors = LocalBokuhonColors.current
+
+    Column(
         modifier = Modifier.weight(1f),
-        onLongClick = onLongClick,
-        // The labels sit in a quarter of the pane; TextButton's 12dp sides are what broke words
-        // like "Tracking" in half.
-        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = color,
-                modifier = Modifier.size(20.dp),
-            )
-            Spacer(Modifier.height(4.dp))
-            Text(
-                text = title,
-                color = color,
-                fontSize = 12.sp,
-                textAlign = TextAlign.Center,
-            )
+        Box(
+            modifier = Modifier
+                .size(48.dp)
+                .background(if (selected) colors.primary else Color.Transparent)
+                .border(1.dp, colors.outline)
+                .combinedClickable(role = Role.Button, onClick = onClick, onLongClick = onLongClick),
+            contentAlignment = Alignment.Center,
+        ) {
+            CompositionLocalProvider(LocalBokuhonContentColor provides if (selected) colors.onPrimary else color) {
+                content()
+            }
         }
+        Spacer(Modifier.height(4.dp))
+        Text(
+            text = title,
+            color = color,
+            fontSize = 12.sp,
+            textAlign = TextAlign.Center,
+        )
     }
 }
