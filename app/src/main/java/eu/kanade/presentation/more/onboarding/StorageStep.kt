@@ -1,7 +1,7 @@
 package eu.kanade.presentation.more.onboarding
 
 import android.content.ActivityNotFoundException
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,7 +26,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.more.settings.screen.SettingsDataScreen
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.flow.collectLatest
@@ -92,13 +94,16 @@ internal class StorageStep : OnboardingStep {
                     modifier = Modifier
                         .fillMaxHeight()
                         .aspectRatio(1f, matchHeightConstraintsFirst = true)
-                        .border(1.dp, colors.outline)
+                        .background(colors.primary)
                         .clickable(role = Role.Button, onClick = { handler.openUri(SettingsDataScreen.HELP_URL) }),
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
                         text = "?",
                         modifier = Modifier.semantics { contentDescription = helpLabel },
+                        color = colors.onPrimary,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
             }
