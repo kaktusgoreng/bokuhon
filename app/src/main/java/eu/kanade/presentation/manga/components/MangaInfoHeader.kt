@@ -179,18 +179,21 @@ fun MangaActionRow(
             title = if (favorite) {
                 stringResource(MR.strings.in_library)
             } else {
-                stringResource(MR.strings.add_to_library)
+                stringResource(MR.strings.action_add)
             },
             selected = favorite,
             color = if (favorite) LocalBokuhonColors.current.primary else defaultActionButtonColor,
             onClick = onAddToLibraryClicked,
             onLongClick = onEditCategory,
         ) {
-            if (favorite) {
-                Icon(imageVector = MaterialSymbols.RoundedFilled.Favorite, contentDescription = null)
-            } else {
-                Text(text = stringResource(MR.strings.action_add), fontSize = 14.sp)
-            }
+            Icon(
+                imageVector = if (favorite) {
+                    MaterialSymbols.RoundedFilled.Favorite
+                } else {
+                    MaterialSymbols.Rounded.Favorite
+                },
+                contentDescription = null,
+            )
         }
         MangaActionSquare(
             title = when (nextUpdateDays) {
