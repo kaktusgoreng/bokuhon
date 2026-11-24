@@ -37,8 +37,8 @@ android {
     defaultConfig {
         applicationId = "app.mihon"
 
-        versionCode = 39
-        versionName = "0.21.3_alpha2"
+        versionCode = 40
+        versionName = "0.21.3_alpha3"
 
         buildConfigField("boolean", "TELEMETRY_INCLUDED", "${Config.includeTelemetry}")
         buildConfigField("boolean", "UPDATER_ENABLED", "${Config.enableUpdater}")
@@ -121,6 +121,12 @@ android {
     sourceSets {
         getByName("nightly").res.directories.add("src/debug/res")
         getByName("benchmark").res.directories.add("src/debug/res")
+    }
+
+    androidResources {
+        // English, Malay and Japanese are the only locales kept; the other ~67 were megabytes of
+        // translated strings in resources.arsc.
+        localeFilters += listOf("en", "ms", "ja")
     }
 
     splits {
