@@ -23,6 +23,10 @@ Branch `bionic/no-material3`. Backup of the shipping alpha 2 build: tag `alpha2-
   AboutLibraries data; `materialKolor` (unused) dropped.
 - Dropdowns size to their content (`IntrinsicSize.Max`) like Material's did. Without it a menu
   opened from inside a dialog measured at window width, which pinned it to the window edge.
+- Nothing animates, for the e-ink panel: `components/motion` holds no-op stand-ins for the Compose
+  animation APIs, progress indicators are static, tabs call `scrollToPage` and pagers snap. Dialogs
+  and sheets draw in the activity window through `BokuhonDialogHost`, because a dialog *window* is
+  scaled and faded in by the window manager and the app can't switch that off.
 
 ## Remaining
 
