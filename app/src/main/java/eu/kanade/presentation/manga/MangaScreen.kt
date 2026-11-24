@@ -4,9 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -505,7 +502,6 @@ fun MangaScreenLargeImpl(
         )
     }
 
-    val insetPadding = WindowInsets.systemBars.only(WindowInsetsSides.Horizontal).asPaddingValues()
     var topBarHeight by remember { mutableIntStateOf(0) }
 
     val chapterListState = rememberLazyListState()
@@ -573,61 +569,59 @@ fun MangaScreenLargeImpl(
             )
         },
     ) { contentPadding ->
-        PullRefresh(
-            refreshing = state.isRefreshingData,
-            onRefresh = onRefresh,
-            enabled = !isAnySelected,
-            indicatorPadding = PaddingValues(
-                start = insetPadding.calculateStartPadding(layoutDirection),
-                top = with(density) { topBarHeight.toDp() },
-                end = insetPadding.calculateEndPadding(layoutDirection),
+        TwoPanelBox(
+            modifier = Modifier.padding(
+                start = contentPadding.calculateStartPadding(layoutDirection),
+                end = contentPadding.calculateEndPadding(layoutDirection),
             ),
-        ) {
-            TwoPanelBox(
-                modifier = Modifier.padding(
-                    start = contentPadding.calculateStartPadding(layoutDirection),
-                    end = contentPadding.calculateEndPadding(layoutDirection),
-                ),
-                startContent = {
-                    Column(
-                        modifier = Modifier
-                            .verticalScroll(rememberScrollState())
-                            .padding(bottom = contentPadding.calculateBottomPadding()),
-                    ) {
-                        MangaInfoBox(
-                            isTabletUi = true,
-                            appBarPadding = contentPadding.calculateTopPadding(),
-                            manga = state.manga,
-                            source = remember { state.source },
-                            sourceName = state.sourceName,
-                            isStubSource = remember { state.source is StubSource },
-                            onCoverClick = onCoverClicked,
-                            doSearch = onSearch,
-                        )
-                        MangaActionRow(
-                            favorite = state.manga.favorite,
-                            trackingCount = state.trackingCount,
-                            nextUpdate = nextUpdate,
-                            isUserIntervalMode = state.manga.fetchInterval < 0,
-                            onAddToLibraryClicked = onAddToLibraryClicked,
-                            onWebViewClicked = onWebViewClicked,
-                            onWebViewLongClicked = onWebViewLongClicked,
-                            onTrackingClicked = onTrackingClicked,
-                            onEditIntervalClicked = onEditIntervalClicked,
-                            onEditCategory = onEditCategoryClicked,
-                        )
-                        ExpandableMangaDescription(
-                            defaultExpandState = true,
-                            description = state.manga.description,
-                            tagsProvider = { state.manga.genre },
-                            notes = state.manga.notes,
-                            onTagSearch = onTagSearch,
-                            onCopyTagToClipboard = onCopyTagToClipboard,
-                            onEditNotes = onEditNotesClicked,
-                        )
-                    }
-                },
-                endContent = {
+            startContent = {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(bottom = contentPadding.calculateBottomPadding()),
+                ) {
+                    MangaInfoBox(
+                        isTabletUi = true,
+                        appBarPadding = contentPadding.calculateTopPadding(),
+                        manga = state.manga,
+                        source = remember { state.source },
+                        sourceName = state.sourceName,
+                        isStubSource = remember { state.source is StubSource },
+                        onCoverClick = onCoverClicked,
+                        doSearch = onSearch,
+                    )
+                    MangaActionRow(
+                        favorite = state.manga.favorite,
+                        trackingCount = state.trackingCount,
+                        nextUpdate = nextUpdate,
+                        isUserIntervalMode = state.manga.fetchInterval < 0,
+                        onAddToLibraryClicked = onAddToLibraryClicked,
+                        onWebViewClicked = onWebViewClicked,
+                        onWebViewLongClicked = onWebViewLongClicked,
+                        onTrackingClicked = onTrackingClicked,
+                        onEditIntervalClicked = onEditIntervalClicked,
+                        onEditCategory = onEditCategoryClicked,
+                    )
+                    ExpandableMangaDescription(
+                        defaultExpandState = true,
+                        description = state.manga.description,
+                        tagsProvider = { state.manga.genre },
+                        notes = state.manga.notes,
+                        onTagSearch = onTagSearch,
+                        onCopyTagToClipboard = onCopyTagToClipboard,
+                        onEditNotes = onEditNotesClicked,
+                    )
+                }
+            },
+            endContent = {
+                // The gesture belongs to the chapter list, so the indicator sits over it rather than
+                // over the middle of both panes.
+                PullRefresh(
+                    refreshing = state.isRefreshingData,
+                    onRefresh = onRefresh,
+                    enabled = !isAnySelected,
+                    indicatorPadding = PaddingValues(top = with(density) { topBarHeight.toDp() }),
+                ) {
                     VerticalFastScroller(
                         listState = chapterListState,
                         topContentPadding = contentPadding.calculateTopPadding(),
@@ -666,9 +660,9 @@ fun MangaScreenLargeImpl(
                             )
                         }
                     }
-                },
-            )
-        }
+                }
+            },
+        )
     }
 }
 
