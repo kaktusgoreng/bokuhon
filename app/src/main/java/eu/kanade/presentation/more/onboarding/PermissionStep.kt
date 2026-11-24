@@ -9,14 +9,19 @@ import android.os.PowerManager
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -44,6 +49,9 @@ import tachiyomi.presentation.core.components.material.Switch
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import tachiyomi.presentation.core.util.secondaryItemAlpha
+
+private val TrailingWidth = 64.dp
+private val TrailingHeight = 40.dp
 
 internal class PermissionStep : OnboardingStep {
 
@@ -152,20 +160,32 @@ internal class PermissionStep : OnboardingStep {
         modifier: Modifier = Modifier,
         onButtonClick: () -> Unit,
     ) {
+        val colors = LocalBokuhonColors.current
+
         ListItem(
             modifier = modifier,
             trailingContent = {
-                OutlinedButton(
-                    enabled = !granted,
-                    onClick = onButtonClick,
-                ) {
-                    if (granted) {
+                // One width for both states, so the column of controls lines up.
+                val trailingModifier = Modifier
+                    .width(TrailingWidth)
+                    .height(TrailingHeight)
+
+                if (granted) {
+                    Box(
+                        modifier = trailingModifier.background(colors.primary),
+                        contentAlignment = Alignment.Center,
+                    ) {
                         Icon(
                             imageVector = MaterialSymbols.Rounded.Check,
                             contentDescription = null,
-                            tint = LocalBokuhonColors.current.primary,
+                            tint = colors.onPrimary,
                         )
-                    } else {
+                    }
+                } else {
+                    OutlinedButton(
+                        modifier = trailingModifier,
+                        onClick = onButtonClick,
+                    ) {
                         Text(stringResource(MR.strings.onboarding_permission_action_grant))
                     }
                 }
