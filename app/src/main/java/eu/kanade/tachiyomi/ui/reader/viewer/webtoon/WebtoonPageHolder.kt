@@ -10,9 +10,9 @@ import androidx.core.view.updateMargins
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.ui.reader.model.ReaderPage
+import eu.kanade.tachiyomi.ui.reader.viewer.ReaderLoadingIndicator
 import eu.kanade.tachiyomi.ui.reader.viewer.ReaderPageErrorView
 import eu.kanade.tachiyomi.ui.reader.viewer.ReaderPageImageView
-import eu.kanade.tachiyomi.ui.reader.viewer.ReaderProgressIndicator
 import eu.kanade.tachiyomi.ui.reader.viewer.processStripImage
 import eu.kanade.tachiyomi.util.system.dpToPx
 import kotlinx.coroutines.Dispatchers
@@ -40,13 +40,13 @@ class WebtoonPageHolder(
 ) : WebtoonBaseHolder(frame, viewer) {
 
     /**
-     * Loading progress bar to indicate the current progress.
+     * Glyph shown while the page has no image to show yet.
      */
-    private val progressIndicator = createProgressIndicator()
+    private val loadingIndicator = createLoadingIndicator()
 
     /**
-     * Progress bar container. Needed to keep a minimum height size of the holder, otherwise the
-     * adapter would create more views to fill the screen, which is not wanted.
+     * Glyph container. Needed to keep a minimum height size of the holder, otherwise the adapter
+     * would create more views to fill the screen, which is not wanted.
      */
     private lateinit var progressContainer: ViewGroup
 
@@ -112,7 +112,6 @@ class WebtoonPageHolder(
 
         removeErrorLayout()
         frame.recycle()
-        progressIndicator.setProgress(0)
         progressContainer.isVisible = true
     }
 
@@ -134,12 +133,7 @@ class WebtoonPageHolder(
                 when (state) {
                     Page.State.Queue -> setQueued()
                     Page.State.LoadPage -> setLoading()
-                    Page.State.DownloadImage -> {
-                        setDownloading()
-                        page.progressFlow.collectLatest { value ->
-                            progressIndicator.setProgress(value)
-                        }
-                    }
+                    Page.State.DownloadImage -> setDownloading()
                     Page.State.Ready -> setImage()
                     is Page.State.Error -> setError(state.error)
                 }
@@ -152,7 +146,7 @@ class WebtoonPageHolder(
      */
     private fun setQueued() {
         progressContainer.isVisible = true
-        progressIndicator.show()
+        loadingIndicator.show()
         removeErrorLayout()
     }
 
@@ -161,7 +155,7 @@ class WebtoonPageHolder(
      */
     private fun setLoading() {
         progressContainer.isVisible = true
-        progressIndicator.show()
+        loadingIndicator.show()
         removeErrorLayout()
     }
 
@@ -170,7 +164,7 @@ class WebtoonPageHolder(
      */
     private fun setDownloading() {
         progressContainer.isVisible = true
-        progressIndicator.show()
+        loadingIndicator.show()
         removeErrorLayout()
     }
 
@@ -178,8 +172,6 @@ class WebtoonPageHolder(
      * Called when the page is ready.
      */
     private suspend fun setImage() {
-        progressIndicator.setProgress(0)
-
         val streamFn = page?.stream ?: return
 
         try {
@@ -227,19 +219,21 @@ class WebtoonPageHolder(
     }
 
     /**
-     * Creates a new progress bar.
+     * Creates the glyph, a quarter of the way down the strip so that a page taller than the screen
+     * still shows it near the top.
      */
-    private fun createProgressIndicator(): ReaderProgressIndicator {
+    private fun createLoadingIndicator(): ReaderLoadingIndicator {
         progressContainer = FrameLayout(context)
         frame.addView(progressContainer, MATCH_PARENT, parentHeight)
 
-        val progress = ReaderProgressIndicator(context).apply {
-            updateLayoutParams<FrameLayout.LayoutParams> {
-                updateMargins(top = parentHeight / 4)
-            }
-        }
-        progressContainer.addView(progress)
-        return progress
+        // A half-height box centres the glyph a quarter of the way down without shrinking
+        // progressContainer, whose height is what keeps the holder as tall as the screen.
+        val topHalf = FrameLayout(context)
+        progressContainer.addView(topHalf, MATCH_PARENT, parentHeight / 2)
+
+        val loading = ReaderLoadingIndicator(context)
+        topHalf.addView(loading)
+        return loading
     }
 
     /**

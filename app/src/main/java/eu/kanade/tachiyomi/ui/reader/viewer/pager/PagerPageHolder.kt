@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.ui.reader.model.ReaderPage
+import eu.kanade.tachiyomi.ui.reader.viewer.ReaderLoadingIndicator
 import eu.kanade.tachiyomi.ui.reader.viewer.ReaderPageErrorView
 import eu.kanade.tachiyomi.ui.reader.viewer.ReaderPageImageView
-import eu.kanade.tachiyomi.ui.reader.viewer.ReaderProgressIndicator
 import eu.kanade.tachiyomi.ui.reader.viewer.processPagedImage
 import eu.kanade.tachiyomi.widget.ViewPagerAdapter
 import kotlinx.coroutines.Dispatchers
@@ -38,9 +38,9 @@ class PagerPageHolder(
         get() = page
 
     /**
-     * Loading progress bar to indicate the current progress.
+     * Glyph shown while the page has no image to show yet.
      */
-    private var progressIndicator: ReaderProgressIndicator? = null // = ReaderProgressIndicator(readerThemedContext)
+    private var loadingIndicator: ReaderLoadingIndicator? = null
 
     /**
      * Error layout to show when the image fails to load.
@@ -69,10 +69,10 @@ class PagerPageHolder(
         loadJob = null
     }
 
-    private fun initProgressIndicator() {
-        if (progressIndicator == null) {
-            progressIndicator = ReaderProgressIndicator(context)
-            addView(progressIndicator)
+    private fun initLoadingIndicator() {
+        if (loadingIndicator == null) {
+            loadingIndicator = ReaderLoadingIndicator(context)
+            addView(loadingIndicator)
         }
     }
 
@@ -94,12 +94,7 @@ class PagerPageHolder(
                 when (state) {
                     Page.State.Queue -> setQueued()
                     Page.State.LoadPage -> setLoading()
-                    Page.State.DownloadImage -> {
-                        setDownloading()
-                        page.progressFlow.collectLatest { value ->
-                            progressIndicator?.setProgress(value)
-                        }
-                    }
+                    Page.State.DownloadImage -> setDownloading()
                     Page.State.Ready -> setImage()
                     is Page.State.Error -> setError(state.error)
                 }
@@ -111,8 +106,8 @@ class PagerPageHolder(
      * Called when the page is queued.
      */
     private fun setQueued() {
-        initProgressIndicator()
-        progressIndicator?.show()
+        initLoadingIndicator()
+        loadingIndicator?.show()
         removeErrorLayout()
     }
 
@@ -120,8 +115,8 @@ class PagerPageHolder(
      * Called when the page is loading.
      */
     private fun setLoading() {
-        initProgressIndicator()
-        progressIndicator?.show()
+        initLoadingIndicator()
+        loadingIndicator?.show()
         removeErrorLayout()
     }
 
@@ -129,8 +124,8 @@ class PagerPageHolder(
      * Called when the page is downloading.
      */
     private fun setDownloading() {
-        initProgressIndicator()
-        progressIndicator?.show()
+        initLoadingIndicator()
+        loadingIndicator?.show()
         removeErrorLayout()
     }
 
@@ -138,8 +133,6 @@ class PagerPageHolder(
      * Called when the page is ready.
      */
     private suspend fun setImage() {
-        progressIndicator?.setProgress(0)
-
         val streamFn = page.stream ?: return
 
         try {
@@ -186,13 +179,13 @@ class PagerPageHolder(
      * Called when the page has an error.
      */
     private fun setError(error: Throwable?) {
-        progressIndicator?.hide()
+        loadingIndicator?.hide()
         showErrorLayout(error)
     }
 
     override fun onImageLoaded() {
         super.onImageLoaded()
-        progressIndicator?.hide()
+        loadingIndicator?.hide()
     }
 
     /**

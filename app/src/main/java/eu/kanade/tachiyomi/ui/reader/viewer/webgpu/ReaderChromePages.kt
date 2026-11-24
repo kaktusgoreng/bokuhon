@@ -23,6 +23,7 @@ import ca.mpreg.webgpuviewer.viewer.ComposePageSize
 import ca.mpreg.webgpuviewer.viewer.ImagePage
 import eu.kanade.presentation.reader.ChapterTransition
 import eu.kanade.presentation.reader.ReaderError
+import eu.kanade.presentation.reader.ReaderLoadingIcon
 import eu.kanade.presentation.util.formattedMessage
 import eu.kanade.tachiyomi.ui.reader.model.ChapterTransition
 import eu.kanade.tachiyomi.ui.reader.model.ReaderChapter
@@ -112,32 +113,25 @@ class ErrorPage internal constructor(
     }
 }
 
-/** A page still downloading: the reader's progress ring. */
+/** A page still downloading: the still glyph, in the middle of the page. */
 class ProgressPage(viewer: WebGpuViewer) : ReaderComposePage(viewer) {
     init {
         isPlaceholder = true
     }
 
-    /**
-     * 0 to 1. On the page, not in the composition, which is dropped when the page goes out of
-     * reach. Written from the loader's collector; snapshot state takes writes from any thread.
-     */
-    var progress: Float
-        get() = progressState
-        set(value) {
-            progressState = value.fastCoerceIn(0f, 1f)
-        }
-
-    private var progressState by mutableFloatStateOf(0f)
-
     @Composable
     override fun PageContent() {
         if (viewer !is WebGpuViewerContinuous) {
-            CombinedCircularProgressIndicator(progress = { progress })
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                ReaderLoadingIcon()
+            }
             return
         }
-        // WebtoonPageHolder centred its spinner below a quarter-height top margin, which puts it
-        // at five eighths of the slot rather than halfway down.
+        // A quarter of the way down the strip, so that a page taller than the screen still shows
+        // it near the top.
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             Box(
                 modifier = Modifier
@@ -145,7 +139,7 @@ class ProgressPage(viewer: WebGpuViewer) : ReaderComposePage(viewer) {
                     .padding(top = maxHeight * STRIP_PROGRESS_TOP_FRACTION),
                 contentAlignment = Alignment.Center,
             ) {
-                CombinedCircularProgressIndicator(progress = { progress })
+                ReaderLoadingIcon()
             }
         }
     }

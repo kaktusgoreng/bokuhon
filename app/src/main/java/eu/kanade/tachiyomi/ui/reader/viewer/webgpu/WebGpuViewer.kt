@@ -1122,16 +1122,6 @@ open class WebGpuViewer(
 
         val watch = scope.launch(start = CoroutineStart.LAZY) {
             try {
-                val downloadProgressJob = launch {
-                    page.page.progressFlow.collect { value ->
-                        // Set under the lookup's lock, or an eviction's cleanup() lands between.
-                        synchronized(lock) {
-                            if (!pageInCache(page)) return@collect
-                            (page.imagePage as? ProgressPage)?.progress = value / 100f
-                        }
-                    }
-                }
-
                 page.page.statusFlow.takeWhile { state ->
                     // Evicted: stop watching, rather than holding the page until the download ends.
                     if (!synchronized(lock) { pageInCache(page) }) return@takeWhile false
@@ -1151,8 +1141,6 @@ open class WebGpuViewer(
                         Page.State.Ready -> false
                     }
                 }.collect {}
-
-                downloadProgressJob.cancel()
 
                 synchronized(lock) {
                     val status = page.page.status
