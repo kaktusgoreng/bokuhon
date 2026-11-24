@@ -1,9 +1,17 @@
 package eu.kanade.presentation.more.onboarding
 
 import android.content.ActivityNotFoundException
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,9 +19,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.more.settings.screen.SettingsDataScreen
 import eu.kanade.tachiyomi.util.system.toast
@@ -41,6 +53,8 @@ internal class StorageStep : OnboardingStep {
 
         val storagePref = remember { context.appGraph.storagePreferences.baseStorageDirectory }
         val pickStorageLocation = SettingsDataScreen.storageLocationPicker(storagePref)
+        val colors = LocalBokuhonColors.current
+        val helpLabel = stringResource(MR.strings.onboarding_storage_help_action)
 
         Column(
             modifier = Modifier.padding(16.dp),
@@ -54,31 +68,47 @@ internal class StorageStep : OnboardingStep {
                 ),
             )
 
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    try {
-                        pickStorageLocation.launch(null)
-                    } catch (e: ActivityNotFoundException) {
-                        context.toast(MR.strings.file_picker_error)
-                    }
-                },
+            // The help square takes its side from the button beside it, so the pair stays level.
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min),
+                horizontalArrangement = Arrangement.spacedBy(BokuhonPadding.small),
             ) {
-                Text(stringResource(MR.strings.onboarding_storage_action_select))
+                Button(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        try {
+                            pickStorageLocation.launch(null)
+                        } catch (e: ActivityNotFoundException) {
+                            context.toast(MR.strings.file_picker_error)
+                        }
+                    },
+                ) {
+                    Text(stringResource(MR.strings.onboarding_storage_action_select))
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .aspectRatio(1f, matchHeightConstraintsFirst = true)
+                        .border(1.dp, colors.outline)
+                        .clickable(role = Role.Button, onClick = { handler.openUri(SettingsDataScreen.HELP_URL) }),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = "?",
+                        modifier = Modifier.semantics { contentDescription = helpLabel },
+                    )
+                }
             }
 
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 8.dp),
-                color = LocalBokuhonColors.current.onPrimaryContainer,
+                color = colors.onPrimaryContainer,
             )
 
             Text(stringResource(MR.strings.onboarding_storage_help_info, stringResource(MR.strings.app_name)))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { handler.openUri(SettingsDataScreen.HELP_URL) },
-            ) {
-                Text(stringResource(MR.strings.onboarding_storage_help_action))
-            }
         }
 
         LaunchedEffect(Unit) {
