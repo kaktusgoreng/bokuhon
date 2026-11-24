@@ -278,6 +278,8 @@ private fun GridItemTitle(
     Text(
         modifier = modifier,
         text = title,
+        // Text falls back to the content colour, which would drop the style's own colour.
+        color = style.color,
         fontSize = 12.sp,
         lineHeight = 18.sp,
         minLines = minLines,
