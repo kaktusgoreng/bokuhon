@@ -1,6 +1,7 @@
 package tachiyomi.presentation.core.bokuhon
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -142,6 +143,8 @@ fun ProvideBokuhonTheme(isDark: Boolean, content: @Composable () -> Unit) {
         LocalBokuhonColors provides colors,
         LocalBokuhonTypography provides BokuhonTypography(),
         LocalBokuhonContentColor provides colors.onBackground,
+        // Lists stop dead at their ends: the stretch overscroll is motion like any other.
+        LocalOverscrollFactory provides null,
         content = content,
     )
 }
