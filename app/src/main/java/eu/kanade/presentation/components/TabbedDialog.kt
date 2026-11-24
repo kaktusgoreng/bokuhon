@@ -28,6 +28,7 @@ import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.PrimaryTabRow
 import tachiyomi.presentation.core.bokuhon.Tab
 import tachiyomi.presentation.core.components.material.TabText
+import tachiyomi.presentation.core.components.motion.pagerFlingBehavior
 import tachiyomi.presentation.core.i18n.stringResource
 
 object TabbedDialogPaddings {
@@ -60,7 +61,7 @@ fun TabbedDialog(
                     tabTitles.fastForEachIndexed { index, tab ->
                         Tab(
                             selected = pagerState.currentPage == index,
-                            onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
+                            onClick = { scope.launch { pagerState.scrollToPage(index) } },
                             text = { TabText(text = tab) },
                             unselectedContentColor = LocalBokuhonColors.current.onSurface,
                         )
@@ -74,6 +75,7 @@ fun TabbedDialog(
                 modifier = Modifier,
                 state = pagerState,
                 verticalAlignment = Alignment.Top,
+                flingBehavior = pagerFlingBehavior(pagerState),
                 pageContent = { page -> content(page) },
             )
         }

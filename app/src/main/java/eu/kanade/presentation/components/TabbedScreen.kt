@@ -25,6 +25,7 @@ import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.bokuhon.Tab
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.TabText
+import tachiyomi.presentation.core.components.motion.pagerFlingBehavior
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -67,7 +68,7 @@ fun TabbedScreen(
                 tabs.forEachIndexed { index, tab ->
                     Tab(
                         selected = state.currentPage == index,
-                        onClick = { scope.launch { state.animateScrollToPage(index) } },
+                        onClick = { scope.launch { state.scrollToPage(index) } },
                         text = { TabText(text = stringResource(tab.titleRes), badgeCount = tab.badgeNumber) },
                         unselectedContentColor = LocalBokuhonColors.current.onSurface,
                     )
@@ -78,6 +79,7 @@ fun TabbedScreen(
                 modifier = Modifier.fillMaxSize(),
                 state = state,
                 verticalAlignment = Alignment.Top,
+                flingBehavior = pagerFlingBehavior(state),
             ) { page ->
                 tabs[page].content(
                     PaddingValues(bottom = contentPadding.calculateBottomPadding()),

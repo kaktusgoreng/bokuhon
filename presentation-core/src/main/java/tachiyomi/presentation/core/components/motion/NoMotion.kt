@@ -9,7 +9,10 @@ import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.gestures.TargetedFlingBehavior
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.pager.PagerDefaults
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberUpdatedState
@@ -87,3 +90,8 @@ fun animateColorAsState(
     label: String = "ColorAnimation",
     finishedListener: ((Color) -> Unit)? = null,
 ): State<Color> = rememberUpdatedState(targetValue)
+
+/** Pages snap into place instead of sliding across after a swipe. */
+@Composable
+fun pagerFlingBehavior(state: PagerState): TargetedFlingBehavior =
+    PagerDefaults.flingBehavior(state = state, snapAnimationSpec = tween(0))

@@ -70,7 +70,7 @@ fun LibraryContent(
                 getItemCountForCategory = getItemCountForCategory,
                 onTabItemClick = {
                     scope.launch {
-                        pagerState.animateScrollToPage(it)
+                        pagerState.scrollToPage(it)
                     }
                 },
             )

@@ -24,6 +24,7 @@ import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.components.motion.pagerFlingBehavior
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.util.plus
 
@@ -47,6 +48,7 @@ fun LibraryPager(
         modifier = Modifier.fillMaxSize(),
         state = state,
         verticalAlignment = Alignment.Top,
+        flingBehavior = pagerFlingBehavior(state),
     ) { page ->
         if (page !in ((state.currentPage - 1)..(state.currentPage + 1))) {
             // To make sure only one offscreen page is being composed
