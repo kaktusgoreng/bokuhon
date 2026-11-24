@@ -130,20 +130,10 @@ data object SettingsMainScreen : NavKey {
                         val selected = indexSelected == index
                         var modifier: Modifier = Modifier
                         var contentColor = LocalBokuhonContentColor.current
-                        if (twoPane) {
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp)
-                                .clip(RectangleShape)
-                                .then(
-                                    if (selected) {
-                                        Modifier.background(LocalBokuhonColors.current.surfaceVariant)
-                                    } else {
-                                        Modifier
-                                    },
-                                )
-                            if (selected) {
-                                contentColor = LocalBokuhonColors.current.onSurfaceVariant
-                            }
+                        // Selected reads like the rail: ink across the whole row, paper for its content.
+                        if (twoPane && selected) {
+                            modifier = Modifier.background(LocalBokuhonColors.current.primary)
+                            contentColor = LocalBokuhonColors.current.onPrimary
                         }
                         CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) {
                             TextPreferenceWidget(
@@ -151,6 +141,7 @@ data object SettingsMainScreen : NavKey {
                                 title = stringResource(item.titleRes),
                                 subtitle = item.formatSubtitle(),
                                 icon = item.icon,
+                                iconTint = contentColor,
                                 onPreferenceClick = { navigator.navigate(item.screen, twoPane) },
                             )
                         }
