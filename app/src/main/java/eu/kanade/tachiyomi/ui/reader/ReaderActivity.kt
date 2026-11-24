@@ -196,6 +196,8 @@ class ReaderActivity : BaseActivity() {
 
             LaunchedEffect(brightness) { setWindowBrightness(brightness) }
 
+            LaunchedEffect(state.menuVisible) { applySystemBarVisibility() }
+
             val forceNavigationOverlay = remember { settingsViewModel.takeNavigationOverlayForNewUser() }
             LaunchedEffect(navigation) {
                 if (navigation == null) return@LaunchedEffect
@@ -601,13 +603,16 @@ class ReaderActivity : BaseActivity() {
     }
 
     /**
-     * Applies the fullscreen preference to the system bars.
+     * Shows the system bars while the menu is visible and hides them otherwise, in fullscreen.
      *
-     * The system bars keep the state they get here: showing or hiding them is animated by the
-     * platform, so following the menu with them smeared the page on every tap.
+     * Only fullscreen ever toggles them: there the viewer ignores the system bar insets, so the
+     * page keeps its size. With fullscreen off the bars stay visible and the page is inset by them.
      */
     private fun applySystemBarVisibility() {
-        if (readerPreferences.fullscreen.get()) {
+        val show = !readerPreferences.fullscreen.get() || viewModel.state.value.menuVisible
+        if (show) {
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+        } else {
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         }
     }
