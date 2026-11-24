@@ -46,7 +46,7 @@ fun SourceIcon(
         }
         source.isLocal() -> {
             Image(
-                painter = painterResource(R.mipmap.ic_local_source),
+                painter = painterResource(R.drawable.ic_local_source),
                 contentDescription = null,
                 modifier = modifier.then(defaultModifier),
             )
