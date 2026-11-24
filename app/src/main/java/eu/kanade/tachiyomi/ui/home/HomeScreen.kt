@@ -4,7 +4,6 @@ import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
@@ -49,7 +48,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.result.LocalResultEventBus
 import androidx.navigation3.runtime.result.ResultEffect
-import eu.kanade.presentation.util.rememberAnimatedVectorPainter
+import eu.kanade.presentation.util.rememberStaticVectorPainter
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.ui.browse.BrowseShowExtensionsEvent
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
@@ -87,16 +86,17 @@ sealed interface TopLevelRoute : NavKey {
         get() = "TabReselectEvent:$this"
 
     @Composable
-    fun options(isSelected: Boolean): TabOptions
+    fun options(): TabOptions
 
     @Serializable
     data object Library : TopLevelRoute {
         @Composable
-        override fun options(isSelected: Boolean): TabOptions {
-            val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_library)
+        override fun options(): TabOptions {
             return TabOptions(
                 title = stringResource(MR.strings.label_library),
-                icon = rememberAnimatedVectorPainter(image, isSelected),
+                icon = rememberStaticVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.animated_library),
+                ),
             )
         }
     }
@@ -104,11 +104,12 @@ sealed interface TopLevelRoute : NavKey {
     @Serializable
     data object Updates : TopLevelRoute {
         @Composable
-        override fun options(isSelected: Boolean): TabOptions {
-            val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_updates)
+        override fun options(): TabOptions {
             return TabOptions(
                 title = stringResource(MR.strings.label_recent_updates),
-                icon = rememberAnimatedVectorPainter(image, isSelected),
+                icon = rememberStaticVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.animated_updates),
+                ),
             )
         }
     }
@@ -116,11 +117,12 @@ sealed interface TopLevelRoute : NavKey {
     @Serializable
     data object History : TopLevelRoute {
         @Composable
-        override fun options(isSelected: Boolean): TabOptions {
-            val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_history)
+        override fun options(): TabOptions {
             return TabOptions(
                 title = stringResource(MR.strings.label_recent_manga),
-                icon = rememberAnimatedVectorPainter(image, isSelected),
+                icon = rememberStaticVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.animated_history),
+                ),
             )
         }
     }
@@ -128,12 +130,12 @@ sealed interface TopLevelRoute : NavKey {
     @Serializable
     data object Browse : TopLevelRoute {
         @Composable
-        override fun options(isSelected: Boolean): TabOptions {
-            val enter = AnimatedImageVector.animatedVectorResource(R.drawable.animated_browse_enter)
-            val exit = AnimatedImageVector.animatedVectorResource(R.drawable.animated_browse_exit)
+        override fun options(): TabOptions {
             return TabOptions(
                 title = stringResource(MR.strings.browse),
-                icon = rememberAnimatedVectorPainter(enter, exit, isSelected),
+                icon = rememberStaticVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.animated_browse_enter),
+                ),
             )
         }
     }
@@ -141,12 +143,12 @@ sealed interface TopLevelRoute : NavKey {
     @Serializable
     data object More : TopLevelRoute {
         @Composable
-        override fun options(isSelected: Boolean): TabOptions {
-            val enter = AnimatedImageVector.animatedVectorResource(R.drawable.animated_more_enter)
-            val exit = AnimatedImageVector.animatedVectorResource(R.drawable.animated_more_exit)
+        override fun options(): TabOptions {
             return TabOptions(
                 title = stringResource(MR.strings.label_more),
-                icon = rememberAnimatedVectorPainter(enter, exit, isSelected),
+                icon = rememberStaticVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.animated_more_enter),
+                ),
             )
         }
     }
@@ -258,7 +260,7 @@ private fun TabletNavigationRail(tabNavigator: Navigator) {
             TABS.fastForEach { tab ->
                 val resultEventBus = LocalResultEventBus.current
                 val selected = tabNavigator.current == tab
-                val options = tab.options(selected)
+                val options = tab.options()
                 val contentColor = if (selected) colors.onPrimary else colors.onSurface
                 Column(
                     modifier = Modifier
@@ -321,7 +323,7 @@ private fun BottomNavigationBar(tabNavigator: Navigator) {
             TABS.fastForEach { tab ->
                 val resultEventBus = LocalResultEventBus.current
                 val selected = tabNavigator.current == tab
-                val options = tab.options(selected)
+                val options = tab.options()
                 val contentColor = if (selected) colors.onPrimary else colors.onSurface
                 Column(
                     modifier = Modifier
