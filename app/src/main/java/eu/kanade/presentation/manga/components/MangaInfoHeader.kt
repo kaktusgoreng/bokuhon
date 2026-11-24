@@ -705,6 +705,9 @@ private fun RowScope.MangaActionButton(
         onClick = onClick,
         modifier = Modifier.weight(1f),
         onLongClick = onLongClick,
+        // The labels sit in a quarter of the pane; TextButton's 12dp sides are what broke words
+        // like "Tracking" in half.
+        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
