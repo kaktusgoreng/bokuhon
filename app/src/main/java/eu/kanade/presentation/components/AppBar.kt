@@ -192,16 +192,20 @@ fun AppBarActions(
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
-    actions.filterIsInstance<AppBar.Action>().map {
-        IconButton(
-            onClick = it.onClick,
-            enabled = it.enabled,
-        ) {
-            Icon(
-                imageVector = it.icon,
-                tint = it.iconTint ?: LocalBokuhonContentColor.current,
-                contentDescription = it.title,
-            )
+    actions.forEach {
+        when (it) {
+            is AppBar.Action -> IconButton(
+                onClick = it.onClick,
+                enabled = it.enabled,
+            ) {
+                Icon(
+                    imageVector = it.icon,
+                    tint = it.iconTint ?: LocalBokuhonContentColor.current,
+                    contentDescription = it.title,
+                )
+            }
+            is AppBar.CustomAction -> it.content()
+            is AppBar.OverflowAction -> Unit
         }
     }
 
@@ -391,5 +395,10 @@ sealed interface AppBar {
     data class OverflowAction(
         val title: String,
         val onClick: () -> Unit,
+    ) : AppBarAction
+
+    /** An action the caller draws itself, for controls that change as they work. */
+    class CustomAction(
+        val content: @Composable () -> Unit,
     ) : AppBarAction
 }
