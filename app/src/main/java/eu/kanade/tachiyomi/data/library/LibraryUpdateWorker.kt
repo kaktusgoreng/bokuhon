@@ -36,7 +36,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
@@ -487,6 +490,14 @@ class LibraryUpdateWorker(private val context: Context, workerParams: WorkerPara
                 context.workManager.cancelUniqueWork(WORK_NAME_AUTO)
             }
         }
+
+        /**
+         * True while a library update is running, the span the progress notification covers.
+         */
+        fun runningFlow(workManager: WorkManager): Flow<Boolean> = workManager
+            .getWorkInfosByTagFlow(TAG)
+            .map { infos -> infos.any { it.state == WorkInfo.State.RUNNING } }
+            .distinctUntilChanged()
 
         suspend fun startNow(
             workManager: WorkManager,

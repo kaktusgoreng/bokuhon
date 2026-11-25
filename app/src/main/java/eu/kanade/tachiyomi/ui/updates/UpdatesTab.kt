@@ -33,11 +33,13 @@ fun UpdatesTab() {
     val viewModel = metroViewModel<UpdatesViewModel>()
     val settingsViewModel = metroViewModel<UpdatesSettingsViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val isUpdateRunning by viewModel.isUpdateRunning.collectAsStateWithLifecycle()
 
     UpdateScreen(
         state = state,
         snackbarHostState = viewModel.snackbarHostState,
         lastUpdated = viewModel.lastUpdated,
+        isUpdateRunning = isUpdateRunning,
         onClickCover = { item -> navigator.push(MangaRoute(item.update.mangaId)) },
         onSelectAll = viewModel::toggleAllSelection,
         onInvertSelection = viewModel::invertSelection,

@@ -6,11 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
@@ -22,7 +18,6 @@ import eu.kanade.presentation.manga.components.MangaBottomActionMenu
 import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import eu.kanade.tachiyomi.ui.updates.UpdatesViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import mihon.icons.materialsymbols.MaterialSymbols
@@ -42,13 +37,13 @@ import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun UpdateScreen(
     state: UpdatesViewModel.State,
     snackbarHostState: SnackbarHostState,
     lastUpdated: Long,
+    isUpdateRunning: Boolean,
     onClickCover: (UpdatesItem) -> Unit,
     onSelectAll: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
@@ -69,23 +64,12 @@ fun UpdateScreen(
 
     val scope = rememberCoroutineScope()
 
-    var isRefreshing by remember { mutableStateOf(false) }
-    val onRefresh: () -> Unit = {
-        scope.launch {
-            if (!onUpdateLibrary()) return@launch
-            // Fake refresh status but hide it after a second as it's a long running task
-            isRefreshing = true
-            delay(1.seconds)
-            isRefreshing = false
-        }
-    }
-
     Scaffold(
         topBar = { scrollBehavior ->
             UpdatesAppBar(
                 onCalendarClicked = { onCalendarClicked() },
-                onUpdateLibrary = onRefresh,
-                isRefreshing = isRefreshing,
+                onUpdateLibrary = { scope.launch { onUpdateLibrary() } },
+                isRefreshing = isUpdateRunning,
                 onFilterClicked = { onFilterClicked() },
                 hasFilters = hasActiveFilters,
                 actionModeCounter = state.selected.size,
