@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import eu.kanade.presentation.more.settings.widget.PrefsHorizontalPadding
+import eu.kanade.presentation.more.settings.widget.PrefsVerticalPadding
+import eu.kanade.presentation.more.settings.widget.TitleFontSize
+import eu.kanade.presentation.more.settings.widget.TitleLineHeight
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Delete
 import mihon.icons.materialsymbols.rounded.DragHandle
@@ -14,7 +19,6 @@ import mihon.icons.materialsymbols.rounded.Edit
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
-import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.ElevatedCard
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
@@ -30,28 +34,30 @@ fun ReorderableCollectionItemScope.CategoryListItem(
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(modifier = modifier) {
+        // Laid out like the rows in More
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onRename)
-                .padding(vertical = BokuhonPadding.small)
-                .padding(
-                    start = BokuhonPadding.small,
-                    end = BokuhonPadding.medium,
-                ),
+                .padding(vertical = PrefsVerticalPadding)
+                .padding(horizontal = PrefsHorizontalPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 imageVector = MaterialSymbols.Rounded.DragHandle,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(BokuhonPadding.medium)
+                    .padding(end = 8.dp)
                     .draggableHandle(),
             )
             Text(
                 text = category.name,
                 style = LocalBokuhonTypography.current.titleLarge,
-                modifier = Modifier.weight(1f),
+                fontSize = TitleFontSize,
+                lineHeight = TitleLineHeight,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = PrefsHorizontalPadding),
             )
             IconButton(onClick = onRename) {
                 Icon(
