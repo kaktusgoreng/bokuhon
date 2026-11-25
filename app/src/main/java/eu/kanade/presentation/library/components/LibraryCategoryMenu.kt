@@ -1,7 +1,6 @@
 package eu.kanade.presentation.library.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -13,18 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.components.DropdownMenu
-import mihon.icons.materialsymbols.MaterialSymbols
-import mihon.icons.materialsymbols.rounded.KeyboardArrowDown
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.DropdownMenuItem
 import tachiyomi.presentation.core.bokuhon.HorizontalDivider
-import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
@@ -45,23 +42,24 @@ internal fun LibraryCategoryMenu(
     val colors = LocalBokuhonColors.current
     var expanded by remember { mutableStateOf(false) }
 
+    val category = categories.getOrNull(selectedIndex)
+    // The default category is the library itself, so only a narrowing of it gets the black box
+    val isFiltered = category != null && !category.isSystemCategory
+
     Row(
         modifier = Modifier
-            .border(1.dp, colors.onSurface)
+            .background(if (isFiltered) colors.onSurface else Color.Transparent)
             .clickable { expanded = true }
             .padding(horizontal = BokuhonPadding.small, vertical = BokuhonPadding.extraSmall),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = categories.getOrNull(selectedIndex)?.visualName.orEmpty(),
+            text = category?.visualName.orEmpty(),
+            color = if (isFiltered) colors.surface else colors.onSurface,
             style = LocalBokuhonTypography.current.titleMedium,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.widthIn(max = 160.dp),
-        )
-        Icon(
-            imageVector = MaterialSymbols.Rounded.KeyboardArrowDown,
-            contentDescription = null,
         )
     }
 
