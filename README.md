@@ -23,17 +23,13 @@ e-ink panel.
   and black outlines that match Boox's own UI, with no shadows or elevation.
 * **Fewer, lighter layers.** Material 3 is gone; the UI is drawn with a small set of its own
   composables on the Android SDK, which also brings the APK size down.
-* **Reader aimed at e-ink.** Static page-number badge that hides itself, centred loading
-  indicator, no page-turn animation, and bars that show the system status and navigation bars.
 * **Screen-aware layout.** Any window that is near square counts as a tablet, so the two-pane
   layout follows the device rather than a fixed size.
-* **Follows the system language**, including when it is set in Mandarin and other locales.
 
 ## Requirements
 
 * Android 8.0 or higher.
-* Developed and tested against Boox hardware (Go 6 Gen II, Palma) in emulators.
-
+  
 ## Building
 
 ```sh
