@@ -90,26 +90,22 @@ fun AdaptiveSheet(
             )
         }
     } else {
+        // 0 is the sheet on screen, 1 is dragged off the bottom
         val anchoredDraggableState = rememberSaveable(saver = AnchoredDraggableState.Saver()) {
-            AnchoredDraggableState(initialValue = 1)
+            AnchoredDraggableState(initialValue = 0)
         }
         val flingBehavior = AnchoredDraggableDefaults.flingBehavior(
             state = anchoredDraggableState,
             positionalThreshold = { _: Float -> with(density) { 56.dp.toPx() } },
             animationSpec = sheetAnimationSpec,
         )
-        val internalOnDismissRequest = {
-            if (anchoredDraggableState.settledValue == 0) {
-                scope.launch { anchoredDraggableState.settle(sheetAnimationSpec) }
-            }
-        }
         Box(
             modifier = Modifier
                 .clickable(
                     interactionSource = null,
                     indication = null,
                     enabled = enableImplicitDismiss,
-                    onClick = internalOnDismissRequest,
+                    onClick = onDismissRequest,
                 )
                 .fillMaxSize()
                 .background(LocalBokuhonColors.current.scrim.copy(alpha = 0.32f))
@@ -171,9 +167,7 @@ fun AdaptiveSheet(
             )
 
             LaunchedEffect(anchoredDraggableState) {
-                scope.launch { anchoredDraggableState.settle(sheetAnimationSpec) }
                 snapshotFlow { anchoredDraggableState.settledValue }
-                    .drop(1)
                     .filter { it == 1 }
                     .collectLatest {
                         onDismissRequest()
