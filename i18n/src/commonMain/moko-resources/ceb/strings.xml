@@ -75,7 +75,6 @@
     <string name="action_display_cover_only_grid">Cover-only grid</string>
     <string name="action_display_download_badge">Gi-download nga mga kapitulo</string>
     <string name="action_display_language_badge">Pinulongan</string>
-    <string name="action_display_show_tabs">Ipakita ang mga tab sa kategorya</string>
     <string name="action_display_show_number_of_items">Ipakita ang gidaghanon sa mga butang</string>
     <string name="action_disable">Pag-disable</string>
     <string name="action_unpin">Unpin</string>
@@ -114,16 +113,6 @@
     <string name="pref_category_downloads">Mga pag-download</string>
     <string name="pref_category_tracking">Pagsubay</string>
     <string name="pref_category_advanced">Abante</string>
-    <string name="pref_category_theme">Tema</string>
-    <string name="theme_dark">Sa</string>
-    <string name="pref_app_theme">Tema sa app</string>
-    <string name="theme_monet">Dinamiko</string>
-    <string name="theme_greenapple">Berde nga mansanas</string>
-    <string name="theme_midnightdusk">Sa tungang gabii sa kilumkilom</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_tealturquoise">Teal ug Turquoise</string>
-    <string name="theme_yinyang">Yin ug Yang</string>
-    <string name="theme_yotsuba">Yotsuba</string>
     <string name="pref_date_format">Pormat sa petsa</string>
     <string name="lock_with_biometrics">Kinahanglan nga ablihan</string>
     <string name="lock_when_idle">I-lock kung walay trabaho</string>
@@ -158,16 +147,12 @@
     <string name="action_share">Ipaambit</string>
     <string name="action_open_log">Bukas nga log</string>
     <string name="action_restore">Iuli</string>
-    <string name="theme_light">Off</string>
     <string name="pref_category_about">Mahitungod sa</string>
     <string name="lock_never">Dili gayud</string>
     <string name="action_webview_forward">Sa unahan</string>
     <string name="action_start_downloading_now">Sugdi ang pag-download karon</string>
-    <string name="theme_system">Sunda ang sistema</string>
-    <string name="theme_strawberrydaiquiri">Strawberry Daiquiri</string>
     <string name="pref_manage_notifications">Pagdumala sa mga pahibalo</string>
     <string name="pref_category_security">Seguridad</string>
-    <string name="pref_dark_theme_pure_black">Purong itom nga dark mode</string>
     <string name="lock_always">Kanunay</string>
     <string name="secure_screen_summary">Ang luwas nga screen nagtago sa mga sulod sa app sa dihang nagbalhin-balhin og mga app ug nag-block sa mga screenshot</string>
     <string name="pref_library_update_interval">Awtomatikong mga update</string>
@@ -362,7 +347,6 @@
     <string name="delete_category">Pagtangtang sa kategorya</string>
     <string name="internal_error">Internal nga Sayop: Susiha ang mga crash log para sa dugang nga impormasyon</string>
     <string name="pref_navigate_pan">Pag-navigate sa pan</string>
-    <string name="theme_lavender">Lavender</string>
     <string name="action_remove_everything">Kuhaa ang tanan</string>
     <string name="pref_app_language">Pinulongan sa app</string>
     <string name="used_cache">Gigamit: %1$s</string>
@@ -377,7 +361,6 @@
     <string name="pref_dump_crash_logs_summary">Gitipigan ang mga log sa sayup sa usa ka file aron ipaambit sa mga nag-develop</string>
     <string name="pref_clear_database_summary">I-delete ang history para sa manga nga wala ma-save sa imong library</string>
     <string name="pref_disable_battery_optimization">I-disable ang pag-optimize sa baterya</string>
-    <string name="pref_tablet_ui_mode">Tablet UI</string>
     <string name="pref_landscape_zoom">I-zoom ang hulagway sa talan-awon</string>
     <string name="battery_optimization_disabled">Ang pag-optimize sa baterya gi-disable na</string>
     <string name="battery_optimization_setting_activity_not_found">Dili maablihan ang mga setting sa device</string>

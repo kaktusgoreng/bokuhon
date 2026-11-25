@@ -123,7 +123,6 @@
     <string name="action_display_unread_badge">Unread chapters</string>
     <string name="action_display_local_badge">Local source</string>
     <string name="action_display_language_badge">Language</string>
-    <string name="action_display_show_tabs">Show category tabs</string>
     <string name="action_display_show_number_of_items">Show number of items</string>
     <string name="action_display_show_continue_reading_button">Continue reading button</string>
     <string name="action_disable">Disable</string>
@@ -179,7 +178,6 @@
     <string name="onboarding_action_finish">Get started</string>
     <string name="onboarding_storage_info">Select a folder where %1$s will store chapter downloads, backups, and more.\n\nA dedicated folder is recommended.\n\nSelected folder: %2$s</string>
     <string name="onboarding_storage_action_select">Select a folder</string>
-    <string name="onboarding_storage_help_info">Updating from an older version and not sure what to select? Refer to the storage guide for more information.</string>
     <string name="onboarding_storage_help_action">Storage guide</string>
     <string name="app_migrating_title">Finishing the update</string>
     <string name="app_migrating_summary">Getting things ready after the update. This can take a few minutes, so keep the app open.</string>
@@ -219,26 +217,6 @@
     <string name="pref_advanced_summary">Dump crash logs, battery optimizations</string>
 
       <!-- General section -->
-    <string name="pref_category_theme">Theme</string>
-    <string name="pref_app_theme">App theme</string>
-    <string name="theme_system">System</string>
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Dark</string>
-    <string name="theme_monet">Dynamic</string>
-    <string name="theme_catppuccin">Catppuccin</string>
-    <string name="theme_tokyonight">Tokyo Night</string>
-    <string name="theme_greenapple">Green Apple</string>
-    <string name="theme_lavender">Lavender</string>
-    <string name="theme_midnightdusk">Midnight Dusk</string>
-    <string name="theme_monochrome">Monochrome</string>
-    <string name="theme_nord">Nord</string>
-    <string name="theme_strawberrydaiquiri">Strawberry Daiquiri</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_tealturquoise">Teal &amp; Turquoise</string>
-    <string name="theme_yinyang">Yin &amp; Yang</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_tidalwave">Tidal Wave</string>
-    <string name="pref_dark_theme_pure_black">Pure black dark mode</string>
     <string name="pref_relative_format">Relative timestamps</string>
     <!-- "Today" instead of "2023-12-31" -->
     <string name="pref_relative_format_summary">\"%1$s\" instead of \"%2$s\"</string>
@@ -516,7 +494,6 @@
     <string name="pref_low">Low</string>
     <string name="pref_lowest">Lowest</string>
     <string name="pref_webtoon_disable_zoom_out">Disable zoom out</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">Transition animation</string>
     <string name="pref_transition_animation_dual">Transition animation (dual)</string>
     <string name="transition_animation_basic">Basic</string>
@@ -685,7 +662,6 @@
     <string name="battery_optimization_disabled">Battery optimization is already disabled</string>
     <string name="battery_optimization_setting_activity_not_found">Couldn\'t open device settings</string>
     <string name="about_dont_kill_my_app">Some manufacturers have additional app restrictions that kill background services. This website has more info on how to fix it.</string>
-    <string name="pref_tablet_ui_mode">Tablet UI</string>
     <string name="pref_verbose_logging">Verbose logging</string>
     <string name="pref_verbose_logging_summary">Print verbose logs to system log (reduces app performance)</string>
     <string name="pref_redact_sensitive_headers">Redact sensitive headers</string>
@@ -733,7 +709,6 @@
     <string name="downloaded_chapters">Downloaded chapters</string>
     <!-- For badges/buttons on library covers. -->
     <string name="overlay_header">Overlay</string>
-    <string name="tabs_header">Tabs</string>
 
     <!-- Browse source -->
     <!-- missing prompt after Compose rewrite #7901 -->

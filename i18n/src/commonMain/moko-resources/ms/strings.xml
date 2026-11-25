@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Bab terkini</string>
     <string name="action_view_chapters">Buka bab</string>
     <string name="action_cancel_all">Batalkan semua</string>
-    <string name="theme_light">Terang</string>
-    <string name="theme_dark">Gelap</string>
-    <string name="theme_system">Sistem</string>
     <string name="pref_manage_notifications">Uruskan pemberitahuan</string>
     <string name="pref_category_security">Keselamatan dan privasi</string>
     <string name="lock_with_biometrics">Memerlukan buka kunci</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Segar semula metadata secara automatik</string>
     <string name="action_migrate">Pindah sumber</string>
     <string name="action_display_comfortable_grid">Grid selesa</string>
-    <string name="tabs_header">Tab</string>
-    <string name="action_display_show_tabs">Tunjuk tab kategori</string>
     <string name="page_list_empty_error">Tiada muka surat ditemui</string>
     <string name="action_disable_all">Matikan semua</string>
     <string name="action_enable_all">Hidupkan semua</string>
@@ -392,7 +387,6 @@
     <string name="download_insufficient_space">Tidak dapat memuat turun bab kerana kekurangan ruang storan</string>
     <string name="action_global_search_query">Cari untuk \"%1$s\" menggunakan carian keseluruhan</string>
     <string name="pref_category_reading_mode">Mod membaca</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="no_pinned_sources">Tiada sumber yang disematkan</string>
     <string name="channel_progress">Kemajuan</string>
     <string name="channel_complete">Selesai</string>
@@ -485,19 +479,10 @@
     <string name="tracking_guide">Panduan penjejakan</string>
     <string name="information_empty_category_dialog">Anda belum mempunyai kategori.</string>
     <string name="action_start_downloading_now">Mula memuat turun sekarang</string>
-    <string name="pref_dark_theme_pure_black">Mod gelap hitam asli</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin &amp; Yang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_midnightdusk">Tengah malam senja</string>
-    <string name="theme_greenapple">Epal Hijau</string>
-    <string name="theme_monet">Dinamik</string>
-    <string name="pref_app_theme">Tema aplikasi</string>
     <string name="enhanced_tracking_info">Menyediakan fungsi yang dipertingkatkan untuk sumber tertentu. Entri akan dijejaki secara automatik apabila ditambahkan ke pustaka.</string>
     <string name="restore_miui_warning">Sandaran/memulih mungkin tidak berfungsi dengan betul jika pengoptimuman MIUI dinyahaktifkan.</string>
     <string name="about_dont_kill_my_app">Sesetengah pengeluar ada sekatan tambahan pada aplikasi yang akan menghentikan perkidmatan latar belakang. Laman web ini ada maklumat cara membaikinya.</string>
     <string name="enhanced_services">Penjejak dipertingkat</string>
-    <string name="theme_strawberrydaiquiri">Strawberry Daiquiri</string>
     <string name="pref_lowest">Terendah</string>
     <string name="pref_low">Rendah</string>
     <string name="pref_high">Tinggi</string>
@@ -506,13 +491,11 @@
     <string name="label_background_activity">Aktiviti latar belakang</string>
     <string name="pref_inverted_colors">Songsang</string>
     <string name="relative_time_today">Hari ini</string>
-    <string name="theme_tealturquoise">Teal &amp; Turquoise</string>
     <string name="confirm_lock_change">Sahkan untuk mengesahkan perubahan</string>
     <string name="label_default">Lalai</string>
     <string name="pref_category_appearance">Penampilan</string>
     <string name="action_track">Jejak</string>
     <string name="getting_started_guide">Panduan penggunaan</string>
-    <string name="pref_tablet_ui_mode">UI tablet</string>
     <string name="pref_remove_exclude_categories">Kategori dikecualikan</string>
     <string name="help_translate">Bantu menterjemah</string>
     <string name="ext_app_info">Maklumat aplikasi</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Muka hadapan tersuai</string>
     <string name="not_installed">Tidak dipasang</string>
     <string name="pref_app_language">Bahasa aplikasi</string>
-    <string name="theme_lavender">Lavender</string>
     <string name="description_placeholder">Tiada deskripsi</string>
     <string name="delete_category_confirmation">Adakah anda ingin padam kategori \"%s\"?</string>
     <string name="internal_error">RalatDalam: semak log kerosakan untuk maklumat lanjut</string>
@@ -598,7 +580,6 @@
     <string name="update_already_running">Kemas kini sedang berjalan</string>
     <string name="error_user_agent_string_blank">Untaian agen pengguna tidak boleh kosong</string>
     <string name="auto_download_while_reading">Muat turun automatik semasa membaca</string>
-    <string name="theme_tidalwave">Tidal Wave</string>
     <string name="download_ahead">Muat turun maju</string>
     <string name="download_ahead_info">Hanya berguna sekiranya bab sekarang + seterusnya telah dimuat turun.</string>
     <string name="are_you_sure">Adakah anda pasti?</string>
@@ -700,7 +681,6 @@
     <string name="unlock_app_title">Buka kunci %s</string>
     <string name="pref_library_update_smart_update">Kemaskini pintar</string>
     <string name="action_move_to_bottom_all_for_series">Gerak siri ke bawah</string>
-    <string name="theme_nord">Nord</string>
     <string name="action_apply">Gunakan</string>
     <string name="action_revert_to_default">Kembali ke lalai</string>
     <string name="not_selected">Tidak dipilih</string>
@@ -729,7 +709,6 @@
     <string name="pref_storage_usage">Penggunaan storan</string>
     <string name="manga_interval_custom_amount">Kekerapan kemas kini tersuai:</string>
     <string name="no_scanlators_found">Tiada scanlator dijumpai</string>
-    <string name="onboarding_storage_help_info">Mengemaskini daripada versi lama dan tidak pasti pilihan yang patut diambil? Rujuk pada panduan storan untuk maklumat lanjut.</string>
     <string name="onboarding_permission_notifications">Kebenaran pemberitahuan</string>
     <string name="onboarding_guides_returning_user">Memasang semula %s?</string>
     <string name="no_location_set">Tiada lokasi storan ditetapkan</string>
@@ -771,10 +750,8 @@
     <string name="onboarding_permission_crashlytics_description">Hantar log ranap tanpa nama kepada pemaju.</string>
     <string name="onboarding_permission_analytics">Benarkan analisis</string>
     <string name="onboarding_permission_analytics_description">Hantar data penggunaan tanpa nama untuk meningkatkan ciri aplikasi.</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="action_add_anyway">Tambah sahaja</string>
     <string name="pref_display_profile">Paparan profil tersuai</string>
-    <string name="theme_monochrome">Monokrom</string>
     <string name="pref_display_images_description">Memaparkan imej dalam huraian manga</string>
     <string name="pref_security">Keselamatan</string>
     <string name="pref_firebase">Analitik dan Log Ranap</string>
@@ -882,7 +859,6 @@
     <string name="pref_vertical_navigator">Guna pengemudi bab menegak dalam</string>
     <string name="pref_vertical_navigator_height">Tinggi pengemudi menegak</string>
     <string name="pref_webtoon_vertical_navigator_on_left">Letak pengemudi menegak pada sebelah kiri</string>
-    <string name="theme_tokyonight">Tokyo Night</string>
     <string name="download_bookmarked">Ditanda</string>
     <string name="considering">Dalam fikiran</string>
     <string name="action_filter_excluded_scanlators">Tapis scanlator dikecualikan</string>

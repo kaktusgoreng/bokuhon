@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Последняя глава</string>
     <string name="action_view_chapters">Просмотреть главы</string>
     <string name="action_cancel_all">Отменить всё</string>
-    <string name="theme_light">Светлая</string>
-    <string name="theme_dark">Тёмная</string>
-    <string name="theme_system">Система</string>
     <string name="pref_manage_notifications">Управление уведомлениями</string>
     <string name="pref_category_security">Безопасность и конфиденциальность</string>
     <string name="lock_with_biometrics">Блокировка биометрией</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Обновлять метаданные</string>
     <string name="action_display_comfortable_grid">Удобная сетка</string>
     <string name="action_migrate">Перенести</string>
-    <string name="tabs_header">Вкладки</string>
-    <string name="action_display_show_tabs">Показать вкладки категорий</string>
     <string name="page_list_empty_error">Страницы не найдены</string>
     <string name="action_enable_all">Включить всё</string>
     <string name="action_disable_all">Отключить всё</string>
@@ -391,7 +386,6 @@
     <string name="download_insufficient_space">Не удалось загрузить главы из-за малого объема хранилища</string>
     <string name="action_global_search_query">Искать \"%1$s\" глобально</string>
     <string name="pref_category_reading_mode">Режим чтения</string>
-    <string name="pref_category_theme">Тема</string>
     <string name="action_sort_date_added">Последнее добавление серии</string>
     <string name="no_pinned_sources">У вас нет закреплённых источников</string>
     <string name="channel_complete">Завершено</string>
@@ -485,19 +479,10 @@
     <string name="tracking_guide">Руководство по отслеживанию</string>
     <string name="information_empty_category_dialog">Ваша библиотека не имеет категорий.</string>
     <string name="action_start_downloading_now">Начать загрузку сейчас</string>
-    <string name="theme_greenapple">Зелёное Яблоко</string>
-    <string name="pref_app_theme">Тема приложения</string>
-    <string name="pref_dark_theme_pure_black">Тёмный режим с чистым чёрным</string>
-    <string name="theme_yotsuba">Ёцуба</string>
-    <string name="theme_yinyang">Инь и Янь</string>
-    <string name="theme_tako">Тако</string>
-    <string name="theme_strawberrydaiquiri">Клубничный Дайкири</string>
-    <string name="theme_midnightdusk">Полуночные Сумерки</string>
     <string name="about_dont_kill_my_app">У некоторых производителей есть дополнительные ограничения для приложений, которые убивают фоновые службы. На этом сайте есть более подробная информация о том, как это исправить.</string>
     <string name="restore_miui_warning">Резервная копия/Восстановление может не работать должным образом, если отключена «Оптимизация MIUI».</string>
     <string name="enhanced_tracking_info">Предоставляет расширенные возможности для определённых источников. Серии будут автоматически отслеживаться при добавлении в библиотеку.</string>
     <string name="enhanced_services">Расширенные сервисы отслеживания</string>
-    <string name="theme_monet">Динамическая</string>
     <string name="label_background_activity">Фоновая активность</string>
     <string name="pref_lowest">Самая низкая</string>
     <string name="pref_low">Низкая</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Чувствительность скрытия меню при прокрутке</string>
     <string name="pref_inverted_colors">Цвета наоборот</string>
     <string name="relative_time_today">Сегодня</string>
-    <string name="theme_tealturquoise">Бирюзовая</string>
     <string name="confirm_lock_change">Выполните аутентификацию, чтобы подтвердить изменение</string>
     <string name="label_default">По умолчанию</string>
     <string name="pref_category_appearance">Отображение</string>
     <string name="getting_started_guide">Руководство по началу работы с приложением</string>
     <string name="action_track">Отслеживать</string>
-    <string name="pref_tablet_ui_mode">Планшетный интерфейс</string>
     <string name="pref_remove_exclude_categories">Исключённые категории</string>
     <string name="help_translate">Помочь с переводом</string>
     <string name="ext_app_info">О приложении</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Пользовательская обложка</string>
     <string name="not_installed">Не установлено</string>
     <string name="pref_app_language">Язык приложения</string>
-    <string name="theme_lavender">Лаванда</string>
     <string name="description_placeholder">Без описания</string>
     <string name="internal_error">InternalError: Проверьте журнал сбоев для дополнительной информации</string>
     <string name="delete_category_confirmation">Хотите ли вы удалить категорию \"%s\"?</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_updates_description">Посмотреть недавно обновлённые серии в библиотеке</string>
     <string name="update_already_running">Обновление уже запущено</string>
     <string name="error_user_agent_string_blank">User agent не может быть пустым</string>
-    <string name="theme_tidalwave">Приливная Волна</string>
     <string name="download_ahead">Загрузить наперёд</string>
     <string name="auto_download_while_reading">При чтении</string>
     <string name="download_ahead_info">Работает только если текущая + следующая главы уже загружены.</string>
@@ -751,9 +732,7 @@
     <string name="manga_interval_custom_amount">Настраиваемая частота обновления:</string>
     <string name="pref_library_update_smart_update">Умное обновление</string>
     <string name="onboarding_storage_help_action">Руководство по хранению</string>
-    <string name="onboarding_storage_help_info">Обновляетесь со старой версии и не знаете, что выбрать? Обратите внимание на руководство по хранению для большей информации.</string>
     <string name="manga_interval_expected_update_soon">Скоро</string>
-    <string name="theme_nord">Север</string>
     <string name="ext_revoke_trust">Убрать доверие к ненадёжным расширениям</string>
     <string name="pref_webtoon_disable_zoom_out">Отключить уменьшение масштаба</string>
     <string name="action_add_anyway">Добавить в любом случае</string>
@@ -793,7 +772,6 @@
     <string name="pref_auto_update_manga_on_mark_read">Обновлять прогресс, когда отмечено как «Прочитано»</string>
     <string name="pref_incognito_mode_extension_summary">Приостановить историю чтения для расширений</string>
     <string name="label_auto">Авто</string>
-    <string name="theme_monochrome">Монохром</string>
     <string name="tracked_privately">Отслеживается приватно</string>
     <string name="action_toggle_private_on">Отслеживать приватно</string>
     <string name="action_toggle_private_off">Отслеживать публично</string>
@@ -827,7 +805,6 @@
     <string name="migrationConfigScreen.selectPinnedLabel">Выбрать закреплённые источники</string>
     <string name="migrationConfigScreen.continueButtonText">Продолжить</string>
     <string name="migrationConfigScreen.selectNoneLabel">Ничего не выбирать</string>
-    <string name="theme_catppuccin">Котопуссин</string>
     <string name="migrationConfigScreen.enhancedOptionsWarning">Эти настройки медленные и опасные, а также могут привести к ограничениям источников</string>
     <string name="migrationConfigScreen.dataToMigrateHeader">Какие данные перенести</string>
     <string name="migrationConfigScreen.removeDownloadsTitle">Удалить загрузки текущей серии после переноса</string>
@@ -897,11 +874,9 @@
     <string name="pref_vertical_navigator">Использовать вертикальную навигацию главы в</string>
     <string name="pref_vertical_navigator_height">Высота вертикальной навигации</string>
     <string name="downloading_with_progress">Загружается... (%d%%)</string>
-    <string name="theme_tokyonight">Токийская Ночь</string>
     <string name="pref_filter_update_categories_details">Обновления в исключённых категориях не будут показываться, даже если они находятся во включённых категориях.</string>
     <string name="pref_filter_upcoming_categories_details">Серии в исключённых категориях не будут показываться, даже если находятся в любых включённых категориях.</string>
     <string name="pref_high_quality_renderer">Использовать рендер высокого качества</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">Анимация перехода</string>
     <string name="transition_animation_flip_left">Перелистывать страницу (влево)</string>
     <string name="transition_animation_flip_right">Перелистывать страницу (вправо)</string>

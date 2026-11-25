@@ -34,13 +34,6 @@ class TopAppBarState(
     var heightOffset by mutableFloatStateOf(initialHeightOffset)
     var contentOffset by mutableFloatStateOf(initialContentOffset)
     var heightOffsetLimit by mutableFloatStateOf(initialHeightOffsetLimit)
-
-    val collapsedFraction: Float
-        get() = if (heightOffsetLimit != 0f) {
-            (heightOffset / heightOffsetLimit).coerceIn(0f, 1f)
-        } else {
-            0f
-        }
 }
 
 @Composable

@@ -57,20 +57,6 @@
     <string name="pref_category_security">Sauga</string>
     <string name="pref_manage_notifications">Tvarkyti pranešimus</string>
     <string name="pref_date_format">Datos formatas</string>
-    <string name="pref_dark_theme_pure_black">Visiškai juodas tamsus režimas</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Jin ir Jang</string>
-    <string name="theme_tealturquoise">Teal ir Turquoise</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Braškinis Daikiri</string>
-    <string name="theme_midnightdusk">Vidurnakčio saulėlydis</string>
-    <string name="theme_greenapple">Obuolių žalia</string>
-    <string name="theme_monet">Dinamiška</string>
-    <string name="pref_app_theme">Programos tema</string>
-    <string name="theme_dark">Įjungta</string>
-    <string name="theme_light">Išjungta</string>
-    <string name="theme_system">Pagal sistemą</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="pref_category_about">Apie</string>
     <string name="pref_category_advanced">Papildomi</string>
     <string name="pref_category_tracking">Sekimas</string>
@@ -109,7 +95,6 @@
     <string name="action_pin">Prisegti</string>
     <string name="action_disable">Išjungti</string>
     <string name="action_display_show_number_of_items">Rodyti įrašų skaičių</string>
-    <string name="action_display_show_tabs">Rodyti kategorijų korteles</string>
     <string name="action_display_local_badge">Vietinis šaltinis</string>
     <string name="action_display_download_badge">Atsisiųsti skyriai</string>
     <string name="action_display_list">Sąrašas</string>
@@ -394,7 +379,6 @@
     <string name="action_sort_unread_count">Neskaitytų skaičius</string>
     <string name="action_sort_last_manga_update">Paskutinis atnaujinimo patikrinimas</string>
     <string name="delete_category_confirmation">Ar tikrai norite ištrinti kategoriją \"%s\"?</string>
-    <string name="theme_lavender">Levandos</string>
     <string name="action_close">Uždaryti</string>
     <string name="pref_app_language">Programos kalba</string>
     <string name="action_remove_everything">Ištrinti viską</string>
@@ -491,7 +475,6 @@
     <string name="channel_errors">Klaidos</string>
     <string name="pref_verbose_logging_summary">Spausdinti verbalinius žurnalus į sistemos žurnalą (sumažina programos našumą)</string>
     <string name="pref_verbose_logging">Daugiažodis registravimas</string>
-    <string name="pref_tablet_ui_mode">Planšetinio kompiuterio UI</string>
     <string name="about_dont_kill_my_app">Kai kurie gamintojai taiko papildomus programėlių apribojimus, kurie išjungia fono paslaugas. Šioje svetainėje rasite daugiau informacijos, kaip tai ištaisyti.</string>
     <string name="website">Internetinis puslapis</string>
     <string name="version">Versija</string>
@@ -499,7 +482,6 @@
     <string name="last_used_source">Paskutinį kartą naudotas</string>
     <string name="chapter_not_found">Skyrius nerastas</string>
     <string name="publishing_finished">Skaitinis nepublikuojamas</string>
-    <string name="tabs_header">Skirtukai</string>
     <string name="pref_enable_acra">Siųsti strigčių ataskaitas</string>
     <string name="plan_to_read">Planuojama skaityti</string>
     <string name="no_more_results">Daugiau rezultatų nėra</string>
@@ -595,7 +577,6 @@
     <string name="chapter_progress">Puslapis: %1$d</string>
     <string name="transition_next">Kitas:</string>
     <string name="source_filter_empty_screen">Įdiegtų šaltinių nerasta</string>
-    <string name="theme_tidalwave">Potvynio banga</string>
     <string name="action_search_hint">Ieškoti…</string>
     <string name="error_user_agent_string_blank">Vartotojo agento eilutė negali būti tuščia</string>
     <string name="update_already_running">Atnaujinimas jau vykdomas</string>

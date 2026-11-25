@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">作品更新时间</string>
     <string name="action_view_chapters">查看章节</string>
     <string name="action_cancel_all">全部取消</string>
-    <string name="theme_light">浅色</string>
-    <string name="theme_dark">深色</string>
-    <string name="theme_system">跟随系统</string>
     <string name="pref_manage_notifications">通知管理</string>
     <string name="pref_category_security">隐私</string>
     <string name="lock_when_idle">切后台时锁定</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">自动刷新作品信息</string>
     <string name="action_migrate">迁移</string>
     <string name="action_display_comfortable_grid">松散网格</string>
-    <string name="tabs_header">标签</string>
-    <string name="action_display_show_tabs">显示分类标签</string>
     <string name="page_list_empty_error">没有图片</string>
     <string name="action_disable_all">全部关闭</string>
     <string name="action_enable_all">全部开启</string>
@@ -390,7 +385,6 @@
     <string name="download_insufficient_space">存储空间不足，无法下载章节</string>
     <string name="action_global_search_query">全局搜索 \"%1$s\"</string>
     <string name="pref_category_reading_mode">阅读模式</string>
-    <string name="pref_category_theme">主题</string>
     <string name="action_sort_date_added">收藏日期</string>
     <string name="pref_read_with_tapping_inverted">反转点按区域</string>
     <string name="no_pinned_sources">没有置顶图源</string>
@@ -487,17 +481,8 @@
     <string name="action_start_downloading_now">立即开始下载</string>
     <string name="about_dont_kill_my_app">部分厂商杀掉后台服务的现象比较严重，此网站提供了一些解决方法。</string>
     <string name="restore_miui_warning">如果关闭 MIUI 优化，备份与还原可能会出现问题。</string>
-    <string name="pref_dark_theme_pure_black">纯黑深色模式</string>
-    <string name="theme_yotsuba">四叶草</string>
-    <string name="theme_yinyang">阴阳</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">草莓黛绮莉</string>
-    <string name="theme_midnightdusk">午夜幽暗</string>
-    <string name="theme_greenapple">青苹果</string>
-    <string name="pref_app_theme">应用主题</string>
     <string name="enhanced_tracking_info">为特定图源提供增强功能。作品在添加到书架时会自动同步进度。</string>
     <string name="enhanced_services">增强平台</string>
-    <string name="theme_monet">动态</string>
     <string name="label_background_activity">后台活动</string>
     <string name="pref_lowest">最低</string>
     <string name="pref_low">低</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">滑动时隐藏菜单的灵敏度</string>
     <string name="pref_inverted_colors">反色</string>
     <string name="relative_time_today">今天</string>
-    <string name="theme_tealturquoise">青绿</string>
     <string name="confirm_lock_change">验证后完成修改</string>
     <string name="label_default">默认</string>
     <string name="pref_category_appearance">外观</string>
     <string name="action_track">记录进度</string>
     <string name="getting_started_guide">入门指南</string>
-    <string name="pref_tablet_ui_mode">平板界面</string>
     <string name="pref_remove_exclude_categories">排除的分类</string>
     <string name="help_translate">协助翻译</string>
     <string name="ext_app_info">应用信息</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">自定义封面</string>
     <string name="not_installed">未安装</string>
     <string name="pref_app_language">应用语言</string>
-    <string name="theme_lavender">薰衣草</string>
     <string name="description_placeholder">无简介</string>
     <string name="delete_category_confirmation">确定要删除 \"%s\" 分类吗？</string>
     <string name="delete_category">删除分类</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_updates_description">查看最近更新的作品</string>
     <string name="update_already_running">有其他更新尚未完成</string>
     <string name="error_user_agent_string_blank">User Agent 字符串不能为空</string>
-    <string name="theme_tidalwave">浪潮</string>
     <string name="download_ahead">预先下载</string>
     <string name="auto_download_while_reading">阅读时自动下载</string>
     <string name="download_ahead_info">要求当前章节和下一章节都已下载。</string>
@@ -745,14 +726,12 @@
     <string name="onboarding_guides_returning_user">如果你是重新安装了 %s，可以使用以下功能。</string>
     <string name="pref_library_update_smart_update">智能更新</string>
     <string name="onboarding_permission_notifications_description">用来发送书架更新等通知。</string>
-    <string name="onboarding_storage_help_info">如果你是从旧版更新而来，可以查看存储指南了解详情。</string>
     <string name="onboarding_storage_help_action">存储指南</string>
     <string name="pref_storage_location">存储位置</string>
     <string name="onboarding_storage_action_select">选择文件夹</string>
     <string name="onboarding_storage_info">选择一个文件夹供 %1$s 存放下载章节、备份文件等。 \n \n推荐使用一个专门的文件夹。 \n \n已选文件夹：%2$s</string>
     <string name="onboarding_storage_selection_required">必须选择一个文件夹</string>
     <string name="available_disk_space_info">%1$s / %2$s</string>
-    <string name="theme_nord">Nord</string>
     <string name="manga_interval_expected_update_soon">即将更新</string>
     <string name="ext_revoke_trust">撤销已信任的未知插件</string>
     <string name="pref_webtoon_disable_zoom_out">禁用缩小</string>
@@ -793,7 +772,6 @@
     <string name="trackers_updated_summary">进度记录平台已更新到 %d 章</string>
     <string name="pref_incognito_mode_extension_summary">暂停记录插件的阅读历史</string>
     <string name="label_auto">自动</string>
-    <string name="theme_monochrome">单色</string>
     <string name="pref_mark_duplicate_read_chapter_read">将重复的已读章节都标记为已读</string>
     <string name="author">作者</string>
     <string name="action_toggle_private_off">公开记录</string>
@@ -826,7 +804,6 @@
     <string name="migrationConfigScreen.selectEnabledLabel">选择已启用的图源</string>
     <string name="migrationConfigScreen.selectPinnedLabel">选择已置顶图源</string>
     <string name="migrationConfigScreen.continueButtonText">继续</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="migrationConfigScreen.availableHeader">可选</string>
     <string name="migrationConfigScreen.dataToMigrateHeader">需要迁移的数据</string>
     <string name="migrationConfigScreen.deepSearchModeTitle">高级搜索模式</string>
@@ -896,7 +873,6 @@
     <string name="pref_vertical_navigator">使用垂直章节导航</string>
     <string name="pref_vertical_navigator_height">垂直导航栏高度</string>
     <string name="considering">考虑到</string>
-    <string name="theme_tokyonight">东京夜色</string>
     <string name="downloading_with_progress">正在下载… (%d%%)</string>
     <string name="pref_filter_update_categories_details">同时属于包含和排除分类的作品更新将不予显示。</string>
     <string name="pref_filter_upcoming_categories_details">同时属于包含和排除分类的标题将不予显示。</string>
@@ -921,7 +897,6 @@
     <string name="ext_content_warning_mixed_description">此插件的来源可能包含安全内容和 18+ 内容。</string>
     <string name="ext_content_warning_nsfw_description">此扩展的来源主要包含 18+ 内容。</string>
     <string name="pref_high_quality_renderer">使用高质量渲染器</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">过渡动画</string>
     <string name="pref_transition_animation_dual">过渡动画（双页）</string>
     <string name="transition_animation_basic">默认</string>

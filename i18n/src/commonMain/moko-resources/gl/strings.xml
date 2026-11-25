@@ -122,10 +122,6 @@
     <string name="pref_category_security">Seguridade e privacidade</string>
     <string name="pref_manage_notifications">Xestionar notificacións</string>
     <string name="pref_date_format">Formato da data</string>
-    <string name="theme_dark">Activado</string>
-    <string name="theme_light">Desactivado</string>
-    <string name="theme_system">Utilizar o do sistema</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="pref_category_about">Acerca de</string>
     <string name="pref_category_advanced">Avanzado</string>
     <string name="pref_category_tracking">Seguimento</string>
@@ -155,7 +151,6 @@
     <string name="action_unpin">Quitar de fixados</string>
     <string name="action_pin">Fixar</string>
     <string name="action_disable">Deshabilitar</string>
-    <string name="action_display_show_tabs">Amosar laretas de categorías</string>
     <string name="action_display_download_badge">Capítulos descargados</string>
     <string name="action_display_comfortable_grid">Cuadrícula ampla</string>
     <string name="action_display_list">Lista</string>
@@ -232,11 +227,9 @@
     <string name="no_chapters_error">Non se atoparon capítulos</string>
     <string name="action_move_to_top_all_for_series">Mover a serie ao primeiro posto</string>
     <string name="action_start_downloading_now">Comezar a descarga agora</string>
-    <string name="pref_app_theme">Tema da aplicación</string>
     <string name="pref_tracking_summary">Sincronización unidireccional do progreso de lectura; sincronización mellorada</string>
     <string name="pref_browse_summary">Fontes, extensións, procura global</string>
     <string name="pref_advanced_summary">Envorcar os rexistros de erros, optimizacións de batería</string>
-    <string name="theme_tidalwave">Maremoto</string>
     <string name="relative_time_today">Hoxe</string>
     <string name="pref_update_only_completely_read">Con capítulos sin ler</string>
     <string name="pref_library_update_categories_details">Os elementos das categorías excluídas non se actualizarán aínda se están tamén nas categorías incluídas.</string>
@@ -291,7 +284,6 @@
     <string name="pref_auto_clear_chapter_cache">Borrar a caché dos capítulos ao pechar a aplicación</string>
     <string name="battery_optimization_setting_activity_not_found">Non se puideron abrir os axustes do dispositivo</string>
     <string name="pref_enable_acra">Enviar informes de erros</string>
-    <string name="tabs_header">Lapelas</string>
     <string name="no_more_results">Non hai máis resultados</string>
     <string name="last_used_source">Usado recentemente</string>
     <string name="latest">Máis recente</string>
@@ -394,21 +386,11 @@
     <string name="confirm_lock_change">Identifícate para confirmar o cambio</string>
     <string name="action_display_local_badge">Fonte local</string>
     <string name="action_remove_everything">Quitar todo</string>
-    <string name="theme_lavender">Lavanda</string>
     <string name="pref_read_with_tapping_inverted">Inverter as zonas de toque</string>
     <string name="nav_zone_right">Dereita</string>
     <string name="tracking_guide">Guía de seguimento</string>
     <string name="on_hiatus">En pausa</string>
     <string name="action_order_by_chapter_number">Por número de capítulo</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_monet">Dinámico</string>
-    <string name="theme_greenapple">Mazá verde</string>
-    <string name="theme_midnightdusk">Crepúsculo de medianoite</string>
-    <string name="theme_strawberrydaiquiri">Daiquiri de amorodo</string>
-    <string name="theme_tealturquoise">Azul mariño e turquesa</string>
-    <string name="theme_yinyang">Yin e Yang</string>
-    <string name="pref_dark_theme_pure_black">Modo negro puro</string>
     <string name="include">Incluír: %s</string>
     <string name="extension_api_error">Non se puido obter as extensións dispoñibles</string>
     <string name="pref_clear_database">Borrar a base de datos</string>
@@ -447,7 +429,6 @@
     <string name="clear_database_completed">Borráronse as entradas</string>
     <string name="pref_reset_viewer_flags_error">Non se puido restablecer a configuración do lector</string>
     <string name="label_background_activity">Actividade en segundo plano</string>
-    <string name="pref_tablet_ui_mode">Interface de tableta</string>
     <string name="pref_verbose_logging">Rexistro detallado</string>
     <string name="label_downloaded_only">Só os descargados</string>
     <string name="pref_incognito_mode">Modo incógnito</string>
@@ -683,8 +664,6 @@
     <string name="onboarding_action_next">Seguinte</string>
     <string name="onboarding_storage_selection_required">Debes elexir un cartafol</string>
     <string name="onboarding_storage_help_action">Guía de almacenamento</string>
-    <string name="onboarding_storage_help_info">Actualizaches dende unha versión máis antiga e non sabes que elixir? Bótalle unha ollada á guía de almacenamento.</string>
-    <string name="theme_nord">Nórdico</string>
     <string name="pref_relative_format">Marcas de tempo relativas</string>
     <string name="pref_library_update_smart_update">Actualizacións intelixentes</string>
     <string name="track_activity_name">Iniciar sesión no servizo de seguimento</string>
@@ -793,7 +772,6 @@
     <string name="ext_remove">Eliminar</string>
     <string name="pref_flash_duration">Duración do flash</string>
     <string name="label_auto">Automático</string>
-    <string name="theme_monochrome">Monocromo</string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">Ao rematar de ler un capítulo</string>
     <string name="possible_duplicates_title">Posibles duplicados</string>
     <string name="pref_update_library_manga_titles">Actualizar os títulos para que coincidan cos da fonte</string>

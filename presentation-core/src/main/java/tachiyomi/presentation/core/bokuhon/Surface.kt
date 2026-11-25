@@ -157,8 +157,4 @@ object CardDefaults {
         containerColor: Color = LocalBokuhonColors.current.surface,
         contentColor: Color = LocalBokuhonColors.current.onSurface,
     ) = CardColors(containerColor, contentColor)
-
-    @Composable
-    fun outlinedCardBorder(enabled: Boolean = true): BorderStroke =
-        BorderStroke(1.dp, LocalBokuhonColors.current.outline)
 }

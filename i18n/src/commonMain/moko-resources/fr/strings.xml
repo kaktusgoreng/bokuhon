@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Dernier chapitre</string>
     <string name="action_view_chapters">Voir les chapitres</string>
     <string name="action_cancel_all">Tout annuler</string>
-    <string name="theme_light">Clair</string>
-    <string name="theme_dark">Sombre</string>
-    <string name="theme_system">Système</string>
     <string name="pref_manage_notifications">Notifications</string>
     <string name="pref_category_security">Sécurité et confidentialité</string>
     <string name="lock_with_biometrics">Nécessite un déverrouillage</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Actualiser automatiquement les métadonnées</string>
     <string name="action_migrate">Migrer</string>
     <string name="action_display_comfortable_grid">Grille espacée</string>
-    <string name="tabs_header">Onglets</string>
-    <string name="action_display_show_tabs">Afficher les onglets des catégories</string>
     <string name="page_list_empty_error">Aucune page trouvée</string>
     <string name="action_disable_all">Tout désactiver</string>
     <string name="action_enable_all">Tout activer</string>
@@ -392,7 +387,6 @@
     <string name="action_global_search_query">Rechercher « %1$s » partout</string>
     <string name="action_sort_date_added">Date ajoutée</string>
     <string name="pref_category_reading_mode">Mode de lecture</string>
-    <string name="pref_category_theme">Thème</string>
     <string name="no_pinned_sources">Vous n\'avez aucune source épinglée</string>
     <string name="channel_complete">Compléter</string>
     <string name="channel_progress">Progression</string>
@@ -488,15 +482,6 @@
     <string name="restore_miui_warning">La sauvegarde/restauration peut ne pas fonctionner correctement si l\'optimisation MIUI est désactivée.</string>
     <string name="enhanced_tracking_info">Services qui fournissent des fonctionnalités améliorées pour des sources spécifiques. Les séries sont automatiquement suivies lorsqu\'elles sont ajoutées à votre bibliothèque.</string>
     <string name="enhanced_services">Services avancés</string>
-    <string name="pref_dark_theme_pure_black">Mode noir pur</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin &amp; Yang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Daiquiri aux fraises</string>
-    <string name="theme_midnightdusk">Crépuscule de minuit</string>
-    <string name="theme_greenapple">Pomme verte</string>
-    <string name="theme_monet">Dynamique</string>
-    <string name="pref_app_theme">Thème de l\'appli</string>
     <string name="about_dont_kill_my_app">Certains fabricants ont mis en place des restrictions supplémentaires sur les applications qui tuent les services d\'arrière-plan. Ce site Web contient plus d\'informations sur la manière de résoudre ce problème.</string>
     <string name="label_background_activity">Activité en arrière-plan</string>
     <string name="pref_lowest">Minimale</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Sensibilité pour masquer le menu lors du défilement</string>
     <string name="pref_inverted_colors">Inversé</string>
     <string name="relative_time_today">Aujourd\'hui</string>
-    <string name="theme_tealturquoise">Bleu canard et turquoise</string>
     <string name="confirm_lock_change">Authentifiez-vous pour confirmer les changements</string>
     <string name="pref_category_appearance">Apparence</string>
     <string name="label_default">Par défaut</string>
     <string name="action_track">Suivre</string>
     <string name="getting_started_guide">Guide de démarrage</string>
-    <string name="pref_tablet_ui_mode">Mode tablette</string>
     <string name="help_translate">Aider à traduire</string>
     <string name="pref_remove_exclude_categories">Catégories exclues</string>
     <string name="ext_app_info">Infos sur l\'application</string>
@@ -586,7 +569,6 @@
     <string name="not_installed">Non installé</string>
     <string name="pref_app_language">Langue de l\'application</string>
     <string name="description_placeholder">Aucune description</string>
-    <string name="theme_lavender">Lavande</string>
     <string name="delete_category">Effacer catégorie</string>
     <string name="delete_category_confirmation">Souhaitez-vous supprimer la catégorie « %s » ?</string>
     <string name="internal_error">ErreurInterne : Consultez vos rapports de plantage pour plus d\'informations</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">Le Widget n\'est pas disponible lorsque l\'application est verrouillée</string>
     <string name="error_user_agent_string_blank">La liste d\'agents utilisateurs ne peut être vide</string>
     <string name="update_already_running">Une mise à jour est déjà en cours</string>
-    <string name="theme_tidalwave">Raz-de-marée</string>
     <string name="download_ahead">Téléchargement anticipé</string>
     <string name="auto_download_while_reading">Téléchargement anticipé pendant la lecture</string>
     <string name="download_ahead_info">Fonctionne seulement si le chapitre actuel et le suivant sont déjà téléchargés.</string>
@@ -726,7 +707,6 @@
     <string name="onboarding_permission_install_apps_description">Pour installer des extensions de source.</string>
     <string name="onboarding_permission_ignore_battery_opts_description">Évite l\'interruption des mises à jour de bibliothèque, des téléchargements de chapitres, et des restaurations de sauvegardes.</string>
     <string name="onboarding_permission_install_apps">Permission d\'installer des applications</string>
-    <string name="onboarding_storage_help_info">Mise à jour depuis une ancienne version et pas sûr de quoi choisir ? Consultez le guide de stockage pour plus d\'informations.</string>
     <string name="onboarding_storage_help_action">Guide de stockage</string>
     <string name="onboarding_permission_notifications_description">Soyez notifié des mises à jour de la bibliothèque et autre.</string>
     <string name="pref_library_update_smart_update">Mise à jour intelligente</string>
@@ -746,7 +726,6 @@
     <string name="invalid_backup_file_error">Erreur complète :</string>
     <string name="ext_revoke_trust">Révoquer les extensions provenant d\'un répertoire additionnel</string>
     <string name="manga_interval_expected_update_soon">Bientôt</string>
-    <string name="theme_nord">Nord</string>
     <string name="action_create">Créer</string>
     <string name="track_delete_text">Cela arrêtera le suivi pour cette série.</string>
     <string name="file_null_uri_error">Aucun fichier sélectionné</string>
@@ -808,9 +787,7 @@
     <string name="action_edit_notes">Modifier les notes</string>
     <string name="clear_database_text">Vous êtes sur le point de supprimer des séries de la base de données</string>
     <string name="clear_database_history_warning">Les chapitres lus et la progression des séries hors bibliothèque seront perdus</string>
-    <string name="theme_monochrome">Monochrome</string>
     <string name="clear_db_exclude_read">Conserver les séries avec des chapitres lus</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="pref_hide_missing_chapter_indicators">Masquer les indicateurs de chapitre manquants</string>
     <string name="storage_failed_to_create_download_directory">Impossible de créer le répertoire de téléchargement</string>
     <string name="storage_failed_to_create_directory">Impossible de créer le répertoire : %s</string>

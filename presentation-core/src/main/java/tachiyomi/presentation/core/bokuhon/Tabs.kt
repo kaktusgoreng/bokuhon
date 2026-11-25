@@ -1,13 +1,10 @@
 package tachiyomi.presentation.core.bokuhon
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
@@ -50,32 +47,6 @@ fun PrimaryTabRow(
                     it.place(x, 0)
                     x += tabWidth
                 }
-            }
-        }
-        HorizontalDivider(color = LocalBokuhonColors.current.outlineVariant)
-    }
-}
-
-@Composable
-fun PrimaryScrollableTabRow(
-    selectedTabIndex: Int,
-    modifier: Modifier = Modifier,
-    containerColor: Color = LocalBokuhonColors.current.surface,
-    contentColor: Color = LocalBokuhonColors.current.onSurface,
-    edgePadding: androidx.compose.ui.unit.Dp = 0.dp,
-    tabs: @Composable () -> Unit,
-) {
-    Column(modifier = modifier.fillMaxWidth().background(containerColor)) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = edgePadding)
-                .selectableGroup(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            CompositionLocalProvider(LocalBokuhonContentColor provides contentColor) {
-                tabs()
             }
         }
         HorizontalDivider(color = LocalBokuhonColors.current.outlineVariant)

@@ -319,7 +319,6 @@
     <string name="action_global_search_query">Hledat \"%1$s\" globálně</string>
     <string name="pinned_sources">Připnuté</string>
     <string name="last_used_source">Naposledy použitý</string>
-    <string name="tabs_header">Karty</string>
     <string name="downloaded_chapters">Stažené kapitoly</string>
     <string name="manga_from_library">Z knihovny</string>
     <string name="email">Emailová adresa</string>
@@ -370,9 +369,6 @@
     <string name="secure_screen_summary">Secure screen skryje obsah aplikace při přepínání aplikací a blokuje tvorbu snímků obrazovky</string>
     <string name="secure_screen">Chráněná obrazovka</string>
     <string name="lock_with_biometrics">Vyžadovat odemknutí</string>
-    <string name="theme_dark">Tmavý</string>
-    <string name="theme_light">Světlý</string>
-    <string name="pref_category_theme">Vzhled</string>
     <string name="action_move_to_top">Přesunout nahoru</string>
     <string name="action_desc">Sestupně</string>
     <string name="action_asc">Vzestupně</string>
@@ -441,7 +437,6 @@
     <string name="none">Žádné</string>
     <string name="pref_library_update_categories_details">Položky ve vynechaných kategoriích nebudou aktualizovány, i kdyby byly také v zahrnutých kategoriích.</string>
     <string name="pref_category_display">Zobrazení</string>
-    <string name="action_display_show_tabs">Zobrazovat karty kategorií</string>
     <string name="update_check_eol">Tato verze systému Android již není podporována</string>
     <string name="clipboard_copy_error">Kopírování do schránky se nezdařilo</string>
     <string name="vertical_plus_viewer">Dlouhý pruh s mezerami</string>
@@ -449,7 +444,6 @@
     <string name="pref_read_with_tapping_inverted">Invertovat oblasti dotyku</string>
     <string name="pref_dual_page_split">Rozdělit široké stránky</string>
     <string name="pref_show_navigation_mode_summary">Krátce zobrazit, když je čtečka otevřena</string>
-    <string name="theme_system">Systém</string>
     <string name="action_show_errors">Klepněte pro zobrazení podrobností</string>
     <string name="action_sort_chapter_fetch_date">Datum načtení kapitoly</string>
     <string name="rotation_landscape">Na šířku</string>
@@ -488,15 +482,6 @@
     <string name="enhanced_tracking_info">Poskytují rozšířené funkce pro konkrétní zdroje. Záznamy jsou po přidání do knihovny automaticky sledovány.</string>
     <string name="enhanced_services">Vylepšené sledovače</string>
     <string name="tracking_guide">Návod ke sledování</string>
-    <string name="pref_dark_theme_pure_black">Čistě černý tmavý režim</string>
-    <string name="theme_yotsuba">Jotsuba</string>
-    <string name="theme_yinyang">Jin a Jang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Jahodové Daiquiri</string>
-    <string name="theme_midnightdusk">Půlnoční Soumrak</string>
-    <string name="theme_greenapple">Zelené Jablko</string>
-    <string name="theme_monet">Dynamické</string>
-    <string name="pref_app_theme">Motiv aplikace</string>
     <string name="label_background_activity">Činnost na pozadí</string>
     <string name="pref_hide_threshold">Citlivost pro skrytí menu při posouvání</string>
     <string name="pref_lowest">Nejnižší</string>
@@ -504,10 +489,8 @@
     <string name="pref_high">Vysoké</string>
     <string name="pref_highest">Nejvyšší</string>
     <string name="getting_started_guide">Příručka Začínáme</string>
-    <string name="pref_tablet_ui_mode">Uživatelské rozhraní tabletu</string>
     <string name="action_track">Sledovat</string>
     <string name="relative_time_today">Dnes</string>
-    <string name="theme_tealturquoise">Modrozelená a Tyrkysová</string>
     <string name="pref_category_appearance">Vzhled</string>
     <string name="confirm_lock_change">Potvrďte změnu ověřením</string>
     <string name="label_default">Výchozí</string>
@@ -586,7 +569,6 @@
     <string name="not_installed">Nenainstalováno</string>
     <string name="pref_app_language">Jazyk aplikace</string>
     <string name="description_placeholder">Bez popisu</string>
-    <string name="theme_lavender">Levandule</string>
     <string name="delete_category_confirmation">Přejete si smazat kategorii \"%s\"?</string>
     <string name="delete_category">Smazat kategorii</string>
     <string name="internal_error">InternalError: Zkontrolujte záznamy pádu pro další informace</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_updates_description">Podívejte se na své nedávno aktualizované záznamy v knihovně</string>
     <string name="update_already_running">Aktualizace již probíhá</string>
     <string name="error_user_agent_string_blank">Řetězec uživatelského agenta nemůže být prázdný</string>
-    <string name="theme_tidalwave">Přílivová Vlna</string>
     <string name="download_ahead">Stáhování dopředu</string>
     <string name="auto_download_while_reading">Automatické stahování při čtení</string>
     <string name="download_ahead_info">Funguje pouze v případě, že aktuální kapitola + následující kapitola jsou již staženy.</string>
@@ -751,10 +732,8 @@
     <string name="manga_interval_expected_update">Předpoklad vydání nových kapitol za zhruba %1$s, kontrola co %2$s.</string>
     <string name="manga_interval_custom_amount">Vlastní frekvence aktualizace:</string>
     <string name="onboarding_storage_help_action">Průvodce uložištěm</string>
-    <string name="theme_nord">Nord</string>
     <string name="ext_revoke_trust">Zrušit důvěryhodná neznámá rozšíření</string>
     <string name="manga_interval_expected_update_soon">Brzy</string>
-    <string name="onboarding_storage_help_info">Aktualizujete ze starší verze a nevíte, co vybrat? Další informace naleznete v průvodci úložištěm.</string>
     <string name="action_add_anyway">Přesto přidat</string>
     <string name="pref_webtoon_disable_zoom_out">Zakázat oddálení</string>
     <string name="pref_flash_duration_summary">%1$s ms</string>
@@ -794,7 +773,6 @@
     <string name="upcoming_guide">Návod k nadcházejícím kapitolám</string>
     <string name="label_auto">Automaticky</string>
     <string name="pref_mark_duplicate_read_chapter_read">Označit duplicitní přečtenou kapitolu jako přečtenou</string>
-    <string name="theme_monochrome">Černobílý</string>
     <string name="author">Autor</string>
     <string name="artist">Umělec</string>
     <string name="tracked_privately">Sledováno soukromě</string>
@@ -819,7 +797,6 @@
     <string name="storage_failed_to_create_directory">Nepodařilo se vytvořit adresář: %s</string>
     <string name="clear_database_text">Chystáte se odstranit položky z databáze</string>
     <string name="clear_db_exclude_read">Zachovat záznamy o přečtených kapitolách</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="pref_hide_missing_chapter_indicators">Skrýt indikátory chybějících kapitol</string>
     <string name="pref_disallow_non_ascii_filenames">Nepovolovat soubory s non-ASCII znaky</string>
     <string name="pref_disallow_non_ascii_filenames_details">Zajišťuje kompatibilitu s určitými úložnými médii, která nepodporují Unicode. Pokud je tato funkce povolena, budete muset ručně přejmenovat názvy složkek source a manga tak, že nahradíte non-ASCII znaky jejich malými hexadecimálními znaky v UTF-8. Názvy souborů kapitol není nutné přejmenovávat.</string>
@@ -896,12 +873,10 @@
     <string name="considering">S ohledem na</string>
     <string name="pref_vertical_navigator">Použijte svislý navigační panel kapitol v</string>
     <string name="pref_vertical_navigator_height">Vertikální výška navigátoru</string>
-    <string name="theme_tokyonight">Tokijská noc</string>
     <string name="downloading_with_progress">Stahování… (%d%%)</string>
     <string name="pref_filter_update_categories_details">Aktualizace v kategoriích, které byly vyloučeny, se nezobrazí, i když se zároveň nacházejí v některé ze zahrnutých kategorií.</string>
     <string name="pref_filter_upcoming_categories_details">Položky ve vyloučených kategoriích se nezobrazují, i když patří také do některé ze zahrnutých kategorií.</string>
     <string name="transition_animation_flip_right">Otočení stránky (doprava)</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="transition_animation_cube_inside">Krychle (vnitřek)</string>
     <string name="transition_animation_cube_outside">Krychle (vnějšek)</string>
     <string name="cutout_mode_avoid">Vyhnout se</string>

@@ -308,14 +308,10 @@
     <string name="notification_chapters_single">Kapitola %1$s</string>
     <string name="secure_screen">Zabezpečená obrazovka</string>
     <string name="action_show_errors">Ťuknutím zobrazíte podrobnosti</string>
-    <string name="theme_system">Podľa systému</string>
-    <string name="theme_tako">Tako</string>
     <string name="action_show_manga">Zobraziť záznam</string>
-    <string name="theme_yinyang">Yin a Yang</string>
     <string name="pref_category_appearance">Vzhľad</string>
     <string name="action_migrate">Migrovať</string>
     <string name="action_display_comfortable_grid">Komfortná mriežka</string>
-    <string name="action_display_show_tabs">Zobraziť karty kategórií</string>
     <string name="action_display_show_number_of_items">Zobraziť počet položiek</string>
     <string name="action_order_by_upload_date">Podľa dátumu nahratia</string>
     <string name="action_start">Začať</string>
@@ -334,17 +330,6 @@
     <string name="action_unpin">Odopnúť</string>
     <string name="label_warning">Upozornenie</string>
     <string name="action_filter_tracked">Sledované</string>
-    <string name="pref_category_theme">Téma</string>
-    <string name="theme_light">Vyp.</string>
-    <string name="theme_dark">Zap.</string>
-    <string name="pref_app_theme">Téma aplikácie</string>
-    <string name="theme_monet">Dynamické</string>
-    <string name="theme_greenapple">Zelené jablko</string>
-    <string name="theme_yotsuba">Jotsuba</string>
-    <string name="theme_midnightdusk">Polnočný súmrak</string>
-    <string name="pref_dark_theme_pure_black">Čisto čierny tmavý režim</string>
-    <string name="theme_strawberrydaiquiri">Jahodové Daiquiri</string>
-    <string name="theme_tealturquoise">Modrozelená a tyrkysová</string>
     <string name="pref_date_format">Formát dátumu</string>
     <string name="pref_manage_notifications">Spravovať oznámenia</string>
     <string name="pref_category_security">Bezpečnosť</string>
@@ -373,7 +358,6 @@
     <string name="nav_zone_next">Ďalší</string>
     <string name="restoring_backup_error">Obnovenie zálohy zlyhalo</string>
     <string name="restoring_backup_canceled">Obnovenie bolo zrušené</string>
-    <string name="tabs_header">Karty</string>
     <string name="error_user_agent_string_blank">Reťazec User-Agent nemôže byť prázdny</string>
     <string name="pref_reset_viewer_flags">Obnovenie nastavení čítačky pre jednotlivé série</string>
     <string name="clear_history_completed">História bola odstránená</string>
@@ -389,7 +373,6 @@
     <string name="complete_list">Kompletný zoznam</string>
     <string name="file_picker_error">Nenašla sa žiadna aplikácia na výber súborov</string>
     <string name="channel_complete">Kompletný</string>
-    <string name="theme_tidalwave">Prílivová vlna</string>
     <string name="pref_category_delete_chapters">Odstrániť kapitoly</string>
     <string name="save_chapter_as_cbz">Uložiť ako archív CBZ</string>
     <string name="split_tall_images_summary">Zlepšuje výkon čítačky</string>
@@ -415,7 +398,6 @@
     <string name="pref_low">Nízke</string>
     <string name="backup_restore_content_full">Údaje zo záložného súboru sa obnovia. \n \nBudete musieť nainštalovať všetky chýbajúce rozšírenia a potom sa prihlásiť do sledovacích služieb, aby ste ich mohli používať.</string>
     <string name="pref_reset_viewer_flags_error">Nepodarilo sa obnoviť nastavenia čítačky</string>
-    <string name="pref_tablet_ui_mode">Používateľské rozhranie tabletu</string>
     <string name="manga_from_library">Manga z knižnice</string>
     <string name="cancelled">Zrušené</string>
     <string name="on_hold_list">Zoznam pozastavených položiek</string>
@@ -577,7 +559,6 @@
     <string name="on">Zap.</string>
     <string name="chapter_settings_updated">Aktualizované predvolené nastavenia kapitol</string>
     <string name="pref_inverted_colors">Inverzný</string>
-    <string name="theme_lavender">Levanduľa</string>
     <string name="pref_download_new_categories_details">Mangy vo vylúčených kategóriách nebudú stiahnuté, aj keď sú tiež v zahrnutých kategóriách.</string>
     <string name="database_clean">Čistenie databázy</string>
     <string name="pref_clear_webview_data">Vymazanie údajov WebView</string>
@@ -657,7 +638,6 @@
     <string name="pref_onboarding_guide">Príručka na úvod</string>
     <string name="onboarding_description">Poďme najprv nastaviť nejaké veci. Vždy ich môžete neskôr zmeniť.</string>
     <string name="onboarding_storage_info">Vyberte priečinok, kde %1$s bude ukladať stiahnuté kapitoly, zálohy a ďalšie.\n\nOdporúčame použiť samostatný priečinok špecificky pre túto aplikáciu.\n\nVybraný priečinok: %2$s</string>
-    <string name="onboarding_storage_help_info">Aktualizujete zo staršej verzie, a nie ste si istí, čo vybrať? Viac informácií nájdete v príručke úložiska.</string>
     <string name="onboarding_storage_help_action">Príručka úložiska</string>
     <string name="onboarding_permission_install_apps_description">Na inštaláciu rozšírení zdrojov.</string>
     <string name="onboarding_permission_notifications">Povolenie posielania notifikácii</string>
@@ -686,7 +666,6 @@
     <string name="pref_backup_summary">Manuálne &amp; automatické zálohy, miesto v úložisku</string>
     <string name="pref_security_summary">Zamknutie aplikácie, bezpečná obrazovka</string>
     <string name="pref_advanced_summary">Uložiť záznamy o zlyhaní aplikácie, optimalizácie batérie</string>
-    <string name="theme_monochrome">Monochromatická</string>
     <string name="pref_relative_format">Relatívne časové značky</string>
     <string name="pref_relative_format_summary">\"%1$s\" namiesto \"%2$s\"</string>
     <string name="pref_display_images_description">Zobraziť obrázky v popisoch mangy</string>

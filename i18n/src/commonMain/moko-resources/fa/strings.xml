@@ -114,7 +114,6 @@
     <string name="local_source">منبع محلی</string>
     <string name="no_results_found">هیچ نتیجه ای یافت نشد</string>
     <string name="no_more_results">نتیجه بیشتری یافت نشد</string>
-    <string name="tabs_header">تب ها</string>
     <string name="pref_backup_interval">زمان پشتیبان گیری</string>
     <string name="pref_restore_backup_summ">بازگرداندن کتابخانه از فایل پشتیبان</string>
     <string name="pref_restore_backup">برگرداندن نسخه پشتیبان</string>
@@ -246,9 +245,6 @@
     <string name="pref_category_security">امنیت و حریم خصوصی</string>
     <string name="pref_manage_notifications">مدیریت اعلان‌ها</string>
     <string name="pref_date_format">فرمت تاریخ</string>
-    <string name="theme_dark">روشن</string>
-    <string name="theme_light">خاموش</string>
-    <string name="theme_system">تم پیش‌فرض سیستم</string>
     <string name="pref_category_about">درباره</string>
     <string name="pref_category_advanced">پیشرفته</string>
     <string name="pref_category_tracking">ردیابی</string>
@@ -277,7 +273,6 @@
     <string name="action_cancel">لغو</string>
     <string name="action_unpin">برداشتن پین</string>
     <string name="action_pin">پین</string>
-    <string name="action_display_show_tabs">نمایش برگه های دسته بندی</string>
     <string name="action_display_download_badge">قسمت‌های دانلود شده</string>
     <string name="action_display_comfortable_grid">چشم نواز</string>
     <string name="action_display_list">لیست</string>
@@ -390,7 +385,6 @@
     <string name="label_network">شبکه</string>
     <string name="backup_restore_missing_trackers">ردیابی هایی که به سیستم وارد نشده اند:</string>
     <string name="pref_category_reading_mode">حالت خواندن</string>
-    <string name="pref_category_theme">تم</string>
     <string name="action_disable">غیرفعال کردن</string>
     <string name="action_sort_date_added">تاریخ اضافه شدن</string>
     <string name="action_search_settings">جست و جوی تنضیمات</string>
@@ -458,16 +452,7 @@
     <string name="action_display_language_badge">زبان</string>
     <string name="action_show_manga">نمایش ورودی</string>
     <string name="cancel_all_for_series">لغو همه برای این سری</string>
-    <string name="pref_dark_theme_pure_black">حالت تاریک مشکی خالص</string>
     <string name="action_close">بستن</string>
-    <string name="pref_app_theme">تم برنامه</string>
-    <string name="theme_monet">پویا</string>
-    <string name="theme_greenapple">سیب سبز</string>
-    <string name="theme_midnightdusk">غروب نیمه‌شب</string>
-    <string name="theme_strawberrydaiquiri">داکری توت‌فرنگی</string>
-    <string name="theme_tealturquoise">آبی و فیروزه‌ای</string>
-    <string name="theme_yinyang">یین و یانگ</string>
-    <string name="theme_yotsuba">یوتسوبا</string>
     <string name="action_move_to_top_all_for_series">انتقال سری به بالا</string>
     <string name="action_start_downloading_now">همین الان شروع به دانلود کن</string>
     <string name="action_show_errors">برای دیدن جزئیات لمس کنید</string>
@@ -507,7 +492,6 @@
     <string name="pref_lowest">پایین‌ترین</string>
     <string name="pref_viewer_nav">مناطق قابل لمس</string>
     <string name="on">روشن</string>
-    <string name="theme_tako">تاکو</string>
     <string name="off">خاموش</string>
     <string name="pref_show_navigation_mode">مناطق قابل لمس را نشان بده</string>
     <string name="ext_installer_shizuku_unavailable_dialog">برای استفاده از Shizuku به عنوان یک نصب‌کننده‌ی افزونه، آن را نصب و اجرا کنید.</string>
@@ -526,8 +510,6 @@
     <string name="cancelled">لغو شد</string>
     <string name="pref_security_summary">قفل برنامه، صفحه امن</string>
     <string name="pref_advanced_summary">گزارش‌های خرابی، بهینه‌سازی باتری</string>
-    <string name="theme_lavender">ارغوانی</string>
-    <string name="theme_tidalwave">تم جزر و مدی</string>
     <string name="pref_app_language">زبان برنامه</string>
     <string name="invalid_location">مکان نامعتبر: %s</string>
     <string name="pref_download_new_categories_details">ورودی ها در دسته بندی های حذف شده حتی اگر در دسته بندی های در نظر گرفته شده نیز باشند، دانلود نخواهند شد.</string>
@@ -639,7 +621,6 @@
     <string name="pref_dns_over_https">DNS بیش از HTTPS (DoH)</string>
     <string name="library_sync_complete">همگام سازی کتاب خانه کامل شد</string>
     <string name="transition_animation_flip_right">ورق زدن (راست)</string>
-    <string name="webgpu_viewer">پردازش گرافیکی وب</string>
     <string name="ext_confirm_remove">افزونه حذف شود؟</string>
     <string name="extensionStoresScreen.deleteStore.body">آیا می‌خواهید فروشگاه افزونه \"%1$s\" (%2$s) را حذف کنید؟</string>
     <string name="upcoming_guide">راهنمای پیش‌رو</string>
@@ -682,7 +663,6 @@
     <string name="migrationListScreen.migrateDialog.copyLabel">کپی کردن</string>
     <string name="pref_flash_style_white">سفید</string>
     <string name="appwidget_unavailable_locked">هنگامی که قفل برنامه فعال است، ابزارک در دسترس نیست</string>
-    <string name="theme_monochrome">تک‌رنگ</string>
     <string name="migrationConfigScreen.prioritizeByChaptersTitle">تطبیق بر اساس شماره چپتر</string>
     <string name="transition_animation_stack_down">پشته (پایین)</string>
     <string name="donationCampaign.dismiss">نادیده‌‎گرفتن</string>
@@ -697,7 +677,6 @@
     <string name="pref_continuous_gap">شکاف</string>
     <string name="pref_reset_viewer_flags">بازنشانی تنظیمات خواندن برای هر سری</string>
     <string name="pref_dump_crash_logs_summary">گزارش‌های خطا را برای اشتراک‌گذاری با توسعه‌دهندگان در یک فایل ذخیره می‌کند</string>
-    <string name="onboarding_storage_help_info">قصد به‌روزرسانی از نسخه‌ای قدیمی‌تر را دارید و نمی‌دانید چه گزینه‌ای را انتخاب کنید؟ برای کسب اطلاعات بیشتر، به راهنمای فضای ذخیره‌سازی مراجعه کنید.</string>
     <string name="donationCampaign.paragraph3">به هر حال، پشتیبانی از می‌هون توسط من و داوطلبان ادامه خواهد یافت و این پروژه همچنان متن‌باز باقی خواهد ماند.</string>
     <string name="manga_interval_expected_update">پیش‌بینی می‌شود فصل‌های جدید حدود %1$s منتشر شوند؛ بررسی‌ها تقریباً هر %2$s یک‌بار انجام می‌شود.</string>
     <string name="action_add_anyway">به هر حال اضافه کن</string>
@@ -839,14 +818,12 @@
     <string name="track_delete_title">آیا ردیابی %s حذف شود؟</string>
     <string name="migrationListScreen.migrateActionLabel">مهاجرت کردن</string>
     <string name="migrationListScreen.matchWithoutChapterToast">هیچ چپتری یافت نشد؛ از این عنوان نمی‌توان برای انتقال استفاده کرد</string>
-    <string name="pref_tablet_ui_mode">رابط کاربری تبلت</string>
     <string name="pref_disallow_non_ascii_filenames">عدم مجاز دانستن نام‌فایل‌های غیر ASCII</string>
     <string name="pref_mark_duplicate_read_chapter_read_new">پس از دریافت چپتر جدید</string>
     <string name="action_toggle_private_off">ردیابی عمومی</string>
     <string name="pref_update_library_manga_titles_summary">هشدار: اگر نام یک مانگا تغییر کند، آن مانگا از صف بارگیر (در صورت وجود) حذف خواهد شد.</string>
     <string name="pref_reset_viewer_flags_success">تمام تنظیمات خواندن بازنشانی شدند</string>
     <string name="migrationListScreen.migrateDialog.cancelLabel">لغو</string>
-    <string name="theme_tokyonight">شبِ توکیو</string>
     <string name="pref_verbose_logging">گزارش‌گیری طولانی</string>
     <string name="hour_short">%dساعت</string>
     <string name="migrationConfigScreen.availableHeader">در‌دسترس</string>
@@ -874,7 +851,6 @@
     <string name="migrationListScreen.migrateDialog.migrateLabel">مهاجرت</string>
     <string name="migrationListScreen.skipActionLabel">مهاجرت نکنید</string>
     <string name="track_finished_reading_date">تاریخ پایان</string>
-    <string name="theme_catppuccin">کت‌پاچین</string>
     <string name="pref_transition_animation">انیمیشن انتقال</string>
     <string name="storage_failed_to_create_directory">ایجاد دایرکتوری ناموفق بود: %s</string>
     <string name="pref_vertical_navigator_height">ارتفاع ناوبری عمودی</string>
@@ -928,5 +904,4 @@
     <string name="migrationConfigScreen.enhancedOptionsWarning">این گزینه‌ها کند و خطرناک هستند و ممکن است منجر به اعمال محدودیت‌هایی از سوی منابع شوند</string>
     <string name="migrationListScreen.progressDialog.cancelLabel">لغو</string>
     <string name="supportUsScreen.contactForDetailsMessage">برای گزینه‌های جایگزین یا هرگونه سؤال مرتبط، به سرور دیسکورد ما بپیوندید.</string>
-    <string name="theme_nord">نورد</string>
 </resources>

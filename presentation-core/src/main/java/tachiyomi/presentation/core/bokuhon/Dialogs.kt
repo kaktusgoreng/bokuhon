@@ -127,24 +127,3 @@ fun AlertDialog(
         }
     }
 }
-
-@Composable
-fun BasicAlertDialog(
-    onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
-    properties: DialogProperties = DialogProperties(),
-    content: @Composable () -> Unit,
-) {
-    DialogOverlay(onDismissRequest = onDismissRequest, properties = properties) {
-        Surface(
-            modifier = modifier
-                .fillMaxWidth()
-                .widthIn(max = 560.dp)
-                .sizeIn(minWidth = 280.dp),
-            color = LocalBokuhonColors.current.surfaceVariant,
-            border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
-        ) {
-            content()
-        }
-    }
-}

@@ -132,8 +132,6 @@
     <string name="pref_category_security">אבטחה ופרטיות</string>
     <string name="pref_manage_notifications">ניהול התראות</string>
     <string name="pref_date_format">תבנית תאריך</string>
-    <string name="theme_dark">פעיל</string>
-    <string name="theme_light">כבוי</string>
     <string name="pref_category_about">אודות</string>
     <string name="pref_category_advanced">מתקדם</string>
     <string name="pref_category_downloads">הורדות</string>
@@ -303,18 +301,15 @@
     <string name="information_no_recent">אין עידכונים אחרונים</string>
     <string name="action_filter_bookmarked">בסימניות</string>
     <string name="label_default">ברירת המחדל</string>
-    <string name="pref_app_theme">ערכת נושא של האפליקציה</string>
     <string name="action_start_downloading_now">התחל להוריד עכשיו</string>
     <string name="action_pin">נעץ</string>
     <string name="secure_screen">מסך מאובטח</string>
     <string name="pref_library_columns">פריטים בכל שורה</string>
-    <string name="theme_system">עקוב אחר המערכת</string>
     <string name="pref_library_update_refresh_metadata_summary">בדוק אם יש כריכה ופרטים חדשים בעת עדכון הספרייה</string>
     <string name="action_sort_count">כמות הפריטים הכוללת</string>
     <string name="action_search_settings">חיפוש בהגדרות</string>
     <string name="action_select_inverse">היפוך הבחירה</string>
     <string name="action_display_language_badge">שפה</string>
-    <string name="action_display_show_tabs">הצגת לשוניות קטגוריה</string>
     <string name="action_display_show_number_of_items">הצגת כמות פריטי הקטגוריה</string>
     <string name="action_disable">השבתה</string>
     <string name="action_unpin">הסר נעיצה</string>
@@ -327,7 +322,6 @@
     <string name="confirm_lock_change">נדרש אימות לאישור השינוי</string>
     <string name="pref_category_reader">מצב קריאה</string>
     <string name="pref_category_tracking">מעקב</string>
-    <string name="pref_category_theme">ערכת נושא</string>
     <string name="relative_time_today">היום</string>
     <string name="pref_category_display">תצוגה</string>
     <string name="action_enable_all">הפעלת הכול</string>
@@ -336,21 +330,12 @@
     <string name="action_migrate">העברה</string>
     <string name="action_display_comfortable_grid">רשת מרווחת</string>
     <string name="action_display_local_badge">מקור מקומי</string>
-    <string name="theme_tealturquoise">טורקיז צהבהב</string>
-    <string name="pref_dark_theme_pure_black">מצב שחור כהה טהור</string>
-    <string name="theme_greenapple">ירוק תפוח</string>
-    <string name="theme_strawberrydaiquiri">תות דאיקירי</string>
-    <string name="theme_yinyang">יין ויאנג</string>
-    <string name="theme_yotsuba">ארבעה עלים</string>
     <string name="action_show_errors">לחץ כדי לראות פרטים</string>
     <string name="pref_category_appearance">מראה</string>
-    <string name="theme_midnightdusk">דמדומי חצות</string>
-    <string name="theme_tako">טאקו</string>
     <string name="pref_library_update_refresh_metadata">רענן נתונים באופן אוטומטי</string>
     <string name="action_filter_tracked">במעקב</string>
     <string name="action_sort_date_added">תאריך הוספת הסדרה לספרייה</string>
     <string name="action_sort_chapter_fetch_date">תאריך שליפת הפרק מהמקור</string>
-    <string name="theme_monet">דינמי</string>
     <string name="pref_library_update_categories_details">פריט הנמצא בקטגוריית מנועי העדכונים לא יעודכן גם אם הוא נכלל בקטגורייה אחרת שכן מתעדכנת.</string>
     <string name="action_show_manga">הצגת הפריט</string>
     <string name="pref_update_only_completely_read">עם פרק(ים) שלא נקרא(ו)</string>
@@ -419,7 +404,6 @@
     <string name="action_track">מעקב</string>
     <string name="pref_auto_clear_chapter_cache">נקה את זיכרון המטמון של הפרקים כשהאפליקציה עולה</string>
     <string name="clear_database_source_item_count">יש %1$d פריטים שנמצאים במסד הנתונים אבל לא בספרייה</string>
-    <string name="tabs_header">לשוניות</string>
     <string name="action_global_search_query">חפש את \"%1$s\" גלובלית</string>
     <string name="unknown_status">מצב לא ידוע</string>
     <string name="licensed">מורשה, בעל רישיון</string>
@@ -554,7 +538,6 @@
     <string name="remove_manga">פעולה זו תסיר את \"%s\" מהספרייה</string>
     <string name="label_started">הותחלו</string>
     <string name="label_downloaded">בהורדות</string>
-    <string name="theme_tidalwave">גלים</string>
     <string name="action_set_interval">הגדרת תדירות</string>
     <string name="action_filter_interval_custom">תדירות עדכון מותאמת אישית</string>
     <string name="unknown_title">כותרת לא מוכרת</string>
@@ -573,7 +556,6 @@
     <string name="delete_downloaded">מחיקת פרקים שהורדו</string>
     <string name="action_sort_next_updated">העדכון הצפוי הבא</string>
     <string name="pref_advanced_summary">הורד קבצי קריסה, אופטימיזציה לסוללה</string>
-    <string name="theme_lavender">לבנדר</string>
     <string name="information_cloudflare_help">לחץ כאן לעזרה עם Cloudflare</string>
     <string name="download_notifier_split_page_not_found">עמוד %d לא נמצא בעת פיצול</string>
     <string name="appwidget_updates_description">צפה בפריטי הספריה העדכניים ביותר</string>
@@ -644,7 +626,6 @@
     <string name="pref_page_rotate_invert">החלף אוריינטציה של עמודים רחבים מסובבים</string>
     <string name="backup_restore_missing_trackers">מעקבים שדורשים התחברות:</string>
     <string name="complete_list">רשימת פריטים שהושלמו</string>
-    <string name="pref_tablet_ui_mode">ממשק משתמש טאבלט</string>
     <string name="fdroid_warning">F-Droid builds לא נתמכים באופן רשמי. \nלחץ כדי ללמוד עוד.</string>
     <string name="track_delete_title">להסיר את %s ממעקב?</string>
     <string name="track_delete_text">פעולה זו תסיר מקומית את חיבור הפריט לשירות המעקב.</string>
@@ -706,7 +687,6 @@
     <string name="onboarding_description">נגדיר כמה דברים תחילה. ניתן לשנות אותם בכל עת בהגדרות מאוחר יותר.</string>
     <string name="onboarding_storage_help_action">מדריך אחסון</string>
     <string name="onboarding_permission_install_apps">הרשאה להתקנת אפליקציות</string>
-    <string name="theme_monochrome">מונוכרום</string>
     <string name="pref_security">אבטחה</string>
     <string name="pref_firebase">ניתוח נתונים ודוחות קריסה</string>
     <string name="pref_behavior">התנהגות</string>
@@ -716,7 +696,6 @@
     <string name="pref_onboarding_guide">מדריך התחלה</string>
     <string name="action_edit_notes">ערוך הערות</string>
     <string name="action_notes">הערות</string>
-    <string name="theme_nord">נורד</string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">לאחר קריאה של אחד מהפרקים הכפולים</string>
     <string name="ext_remove">הסר</string>
     <string name="selected">נבחרים</string>

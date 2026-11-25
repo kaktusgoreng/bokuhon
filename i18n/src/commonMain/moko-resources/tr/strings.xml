@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Son bölüm</string>
     <string name="action_view_chapters">Bölümleri görüntüle</string>
     <string name="action_cancel_all">Tümünü iptal et</string>
-    <string name="theme_light">Açık</string>
-    <string name="theme_dark">Koyu</string>
-    <string name="theme_system">Sistem</string>
     <string name="pref_manage_notifications">Bildirimleri yönet</string>
     <string name="pref_category_security">Güvenlik ve gizlilik</string>
     <string name="lock_with_biometrics">Kilit açma gerektir</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Üst veriyi otomatik yenile</string>
     <string name="action_migrate">Taşı</string>
     <string name="action_display_comfortable_grid">Rahat ızgara</string>
-    <string name="tabs_header">Sekmeler</string>
-    <string name="action_display_show_tabs">Kategori sekmelerini göster</string>
     <string name="page_list_empty_error">Sayfa bulunamadı</string>
     <string name="action_disable_all">Tümünü devre dışı bırak</string>
     <string name="action_enable_all">Tümünü etkinleştir</string>
@@ -392,7 +387,6 @@
     <string name="action_sort_date_added">Eklendiği tarih</string>
     <string name="action_global_search_query">\"%1$s\" için genel arama</string>
     <string name="pref_category_reading_mode">Okuma modu</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="no_pinned_sources">Sabitlenmiş kaynağınız yok</string>
     <string name="channel_complete">Tamamlandı</string>
     <string name="channel_progress">İlerleme</string>
@@ -489,15 +483,6 @@
     <string name="restore_miui_warning">MIUI iyileştirmesi devre dışıysa yedekleme/geri yükleme düzgün çalışmayabilir.</string>
     <string name="enhanced_tracking_info">Belirli kaynaklar için gelişmiş özellikler sağlar. Girdiler, kitaplığınıza eklendiğinde otomatik olarak izlenir.</string>
     <string name="enhanced_services">Gelişmiş izleyiciler</string>
-    <string name="pref_dark_theme_pure_black">Tamamen karanlık koyu mod</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin &amp; Yang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Çilekli Kokteyl</string>
-    <string name="theme_midnightdusk">Alacakaranlık</string>
-    <string name="theme_greenapple">Yeşil Elma</string>
-    <string name="theme_monet">Dinamik</string>
-    <string name="pref_app_theme">Uygulama teması</string>
     <string name="label_background_activity">Arka plan etkinliği</string>
     <string name="pref_lowest">En düşük</string>
     <string name="pref_low">Düşük</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Kaydırmada menüyü gizleme duyarlılığı</string>
     <string name="pref_inverted_colors">Ters Çevrilmiş</string>
     <string name="relative_time_today">Bugün</string>
-    <string name="theme_tealturquoise">Ördekbaşı &amp; Turkuaz</string>
     <string name="confirm_lock_change">Değişikliği onaylamak için kimlik doğrula</string>
     <string name="label_default">Varsayılan</string>
     <string name="pref_category_appearance">Görünüm</string>
     <string name="action_track">İzle</string>
     <string name="getting_started_guide">Başlangıç kılavuzu</string>
-    <string name="pref_tablet_ui_mode">Tablet arayüzü</string>
     <string name="pref_remove_exclude_categories">Hariç tutulan kategoriler</string>
     <string name="help_translate">Çeviriye yardım edin</string>
     <string name="ext_app_info">Uygulama bilgisi</string>
@@ -586,7 +569,6 @@
     <string name="not_installed">Yüklü değil</string>
     <string name="pref_app_language">Uygulama dili</string>
     <string name="description_placeholder">Açıklama yok</string>
-    <string name="theme_lavender">Lavanta</string>
     <string name="delete_category">Kategoriyi sil</string>
     <string name="delete_category_confirmation">\"%s\" kategorisini silmek istiyor musunuz?</string>
     <string name="internal_error">İç Hata: Daha çok bilgi için çökme günlüklerine bakın</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_updates_description">Son güncellenen kitaplık girdilerinizi görün</string>
     <string name="update_already_running">Bir güncelleme zaten çalışıyor</string>
     <string name="error_user_agent_string_blank">Kullanıcı aracısı boş olamaz</string>
-    <string name="theme_tidalwave">Gelgit Dalgası</string>
     <string name="download_ahead">Önceden indir</string>
     <string name="auto_download_while_reading">Okurken otomatik indir</string>
     <string name="download_ahead_info">Yalnızca geçerli bölüm ile bir sonraki bölüm zaten indirildiyse çalışır.</string>
@@ -750,9 +731,7 @@
     <string name="invalid_backup_file_error">Tüm hata:</string>
     <string name="onboarding_storage_help_action">Depolama kılavuzu</string>
     <string name="manga_interval_custom_amount">Özel güncelleme sıklığı:</string>
-    <string name="onboarding_storage_help_info">Eski bir sürümden güncelleme yapıyorsunuz ve neyi seçeceğinizden emin değil misiniz? Daha fazla bilgi için depolama kılavuzuna bakın.</string>
     <string name="pref_library_update_smart_update">Akıllı güncelleme</string>
-    <string name="theme_nord">Nord</string>
     <string name="ext_revoke_trust">Güvenilmiş bilinmeyen uzantıları geri al</string>
     <string name="manga_interval_expected_update_soon">Yakında</string>
     <string name="action_copy_link">Bağlantıyı kopyala</string>
@@ -793,7 +772,6 @@
     <string name="trackers_updated_summary">İzleyiciler %d. bölüme güncellendi</string>
     <string name="pref_incognito_mode_extension_summary">Uzantı için okuma geçmişini duraklat</string>
     <string name="label_auto">Otomatik</string>
-    <string name="theme_monochrome">Monokrom</string>
     <string name="tracked_privately">Gizli olarak izlendi</string>
     <string name="library_exported">Kitaplık Dışa Aktarıldı</string>
     <string name="author">Yazar</string>
@@ -820,7 +798,6 @@
     <string name="logging_in">Giriş yapılıyor…</string>
     <string name="pref_update_library_manga_titles">Kitaplıktaki mangaların başlıklarını kaynakla eşleşecek şekilde güncelle</string>
     <string name="pref_update_library_manga_titles_summary">Uyarı: Eğer bir manga yeniden adlandırılırsa (eğer mevcutsa) indirme sırasından kaldırılacaktır.</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="migrationConfigScreen.availableHeader">Mevcut</string>
     <string name="migrationConfigScreen.selectEnabledLabel">Etkin kaynakları seç</string>
     <string name="migrationConfigScreen.selectPinnedLabel">Sabitlenmiş kaynakları seç</string>
@@ -896,7 +873,6 @@
     <string name="pref_vertical_navigator">Dikey bölüm gezintisi kullan</string>
     <string name="pref_vertical_navigator_height">Dikey gezinti göstergesi yüksekliği</string>
     <string name="considering">Düşünülüyor</string>
-    <string name="theme_tokyonight">Tokyo Gecesi</string>
     <string name="downloading_with_progress">İndiriliyor… (%d%%)</string>
     <string name="pref_filter_update_categories_details">Hariç tutulan kategorilerdeki güncellemeler, dahil edilen kategorilerde olsalar bile gösterilmeyecektir.</string>
     <string name="pref_filter_upcoming_categories_details">Hariç tutulan kategorilerdeki girdiler gizlendi. Bu girdiler dahil edilen kategorilerde olsalar bile gösterilmez.</string>
@@ -928,7 +904,6 @@
     <string name="pref_load_ahead_only_over_wifi">Yalnızı Wi-Fi ile önden yükle</string>
     <string name="pref_load_ahead_only_over_wifi_summary">Yalnızca okuduğunuz sayfaya yakın olan sayfaları yükleyerek mobil veri tasarruf sağlar</string>
     <string name="pref_high_quality_renderer">Yüksek kalite işleyici kullan</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">Geçiş animasyonu</string>
     <string name="pref_transition_animation_dual">Geçiş animasyonu (çift)</string>
     <string name="transition_animation_basic">Basit</string>

@@ -325,11 +325,6 @@
     <string name="pref_grayscale">그레이스케일</string>
     <string name="pref_dual_page_split">넓은 페이지 분할</string>
     <string name="action_display_comfortable_grid">보기 편한 격자</string>
-    <string name="pref_dark_theme_pure_black">다크 모드에 검정색 사용</string>
-    <string name="pref_app_theme">앱 테마</string>
-    <string name="theme_dark">다크</string>
-    <string name="theme_light">라이트</string>
-    <string name="theme_system">시스템</string>
     <string name="action_disable_all">모두 비활성화</string>
     <string name="spen_next_page">다음 페이지</string>
     <string name="confirm_lock_change">변경 확인을 위해 인증이 필요합니다</string>
@@ -434,8 +429,6 @@
     <string name="pref_auto_clear_chapter_cache">앱 실행 시 회차 캐시 삭제</string>
     <string name="clear_database_source_item_count">서재에 없는 항목이 데이터베이스에 %1$d개 있습니다</string>
     <string name="about_dont_kill_my_app">일부 제조사는 백그라운드 서비스를 종료하는 추가적인 제한 사항이 있습니다. 자세한 사항은 웹사이트를 참조하세요.</string>
-    <string name="pref_tablet_ui_mode">태블릿 UI</string>
-    <string name="tabs_header">탭</string>
     <string name="pinned_sources">핀 설정됨</string>
     <string name="action_global_search_query">\"%1$s\"를 전체 검색합니다</string>
     <string name="local_source_help_guide">로컬 저장소 사용법</string>
@@ -488,15 +481,11 @@
     <string name="spen_previous_page">이전 페이지</string>
     <string name="action_show_manga">항목 표시</string>
     <string name="action_desc">내림차순</string>
-    <string name="theme_monet">다이내믹</string>
     <string name="action_display_cover_only_grid">표지만 있는 격자</string>
     <string name="action_newest">최신 순</string>
-    <string name="pref_category_theme">테마</string>
-    <string name="theme_midnightdusk">황혼</string>
     <string name="ext_obsolete">연결된 스토어 없음</string>
     <string name="no_results_found">검색 결과가 없습니다</string>
     <string name="pref_dual_page_invert_summary">넓은 페이지 분할 시 배치가 읽는 방향과 다를 경우</string>
-    <string name="action_display_show_tabs">카테고리 탭 보이기</string>
     <string name="action_sort_chapter_fetch_date">챕터를 가져온 날짜순</string>
     <string name="action_sort_count">전체 항목 개수순</string>
     <string name="action_webview_back">뒤로</string>
@@ -507,8 +496,6 @@
     <string name="action_move_to_bottom">맨 아래로 이동</string>
     <string name="action_asc">오름차순</string>
     <string name="action_oldest">오래된 순</string>
-    <string name="theme_tealturquoise">옥색</string>
-    <string name="theme_strawberrydaiquiri">딸기 칵테일</string>
     <string name="extension_api_error">사용 가능한 확장 앱 가져오기 실패</string>
     <string name="exclude">제외: %s</string>
     <string name="tracking_info">트래킹 서비스에 항목 진행 상황을 업데이트합니다. 트래킹 버튼을 이용하여 각각의 항목 별로 트래킹을 설정하세요.</string>
@@ -542,10 +529,6 @@
     <string name="pref_update_only_started">읽지 않은 항목 건너뛰기</string>
     <string name="action_move_to_top_all_for_series">이 시리즈를 맨 위로 이동</string>
     <string name="action_webview_refresh">새로고침</string>
-    <string name="theme_greenapple">청사과</string>
-    <string name="theme_tako">문어</string>
-    <string name="theme_yinyang">음양</string>
-    <string name="theme_yotsuba">요츠바</string>
     <string name="action_show_errors">터치하여 자세히 보기</string>
     <string name="update_72hour">3일</string>
     <string name="restrictions">제한: %s</string>
@@ -573,7 +556,6 @@
     <string name="pref_reset_viewer_flags_summary">모든 시리즈의 읽기 모드와 화면 방향 초기화</string>
     <string name="pref_app_language">앱 언어</string>
     <string name="not_installed">설치되지 않음</string>
-    <string name="theme_lavender">라벤더</string>
     <string name="network_not_metered">무제한 네트워크에서만</string>
     <string name="delete_category_confirmation">\"%s\" 카테고리를 삭제하시겠습니까?</string>
     <string name="delete_category">카테고리 삭제</string>
@@ -595,7 +577,6 @@
     <string name="on_hold_list">보류 목록</string>
     <string name="download_notifier_split_page_not_found">분리 중 페이지 %d을 찾을 수 없습니다</string>
     <string name="appwidget_unavailable_locked">앱 잠금 사용 중에는 위젯을 이용할 수 없습니다</string>
-    <string name="theme_tidalwave">파도</string>
     <string name="update_already_running">업데이트가 이미 실행 중입니다</string>
     <string name="error_user_agent_string_blank">사용자 에이전트 문자열은 비워 둘 수 없습니다</string>
     <string name="download_ahead">미리 다운로드</string>
@@ -715,7 +696,6 @@
     <string name="onboarding_action_skip">건너뛰기</string>
     <string name="onboarding_permission_ignore_battery_opts_description">시간이 많이 걸리는 서재 업데이트, 다운로드 및 백업 복원이 중단되지 않도록 합니다.</string>
     <string name="pref_library_update_smart_update">스마트 업데이트</string>
-    <string name="onboarding_storage_help_info">이전 버전에서 업데이트하는데 무엇을 선택해야 할지 모르시나요? 자세한 내용은 저장공간 가이드를 참조하세요.</string>
     <string name="onboarding_permission_ignore_battery_opts">백그라운드 배터리 사용</string>
     <string name="onboarding_permission_action_grant">허용</string>
     <string name="onboarding_guides_new_user">%s가 처음입니까? 시작 가이드를 확인하는 것을 추천합니다.</string>
@@ -754,7 +734,6 @@
     <string name="last_auto_backup_info">마지막 자동 백업: %s</string>
     <string name="relative_time_span_never">없음</string>
     <string name="available_disk_space_info">사용가능: %1$s / 전체: %2$s</string>
-    <string name="theme_nord">Nord</string>
     <string name="label_upcoming">곧 공개</string>
     <string name="label_auto">자동</string>
     <string name="action_sort_random">무작위</string>
@@ -767,8 +746,6 @@
     <string name="onboarding_permission_crashlytics_description">개발자에게 익명화된 로그를 전송합니다.</string>
     <string name="onboarding_permission_analytics">분석 허가</string>
     <string name="onboarding_permission_analytics_description">익명화된 사용 데이터를 전송하여 앱 기능 개선에 기여합니다.</string>
-    <string name="theme_catppuccin">캣푸친(Catppuccin)</string>
-    <string name="theme_monochrome">모노크롬</string>
     <string name="pref_display_images_description">만화 설명에 이미지를 렌더링합니다</string>
     <string name="pref_security">보안</string>
     <string name="pref_firebase">분석 및 크래시 로그</string>
@@ -896,7 +873,6 @@
     <string name="pref_vertical_navigator">세로 챕터 탐색기 사용</string>
     <string name="pref_vertical_navigator_height">세로 탐색기 높이</string>
     <string name="considering">고려 중</string>
-    <string name="theme_tokyonight">도쿄 나이트</string>
     <string name="downloading_with_progress">다운로드 중… (%d%%)</string>
     <string name="pref_filter_update_categories_details">제외된 카테고리 업데이트는 포함되는 카테고리가 있어도 표시되지 않습니다.</string>
     <string name="pref_filter_upcoming_categories_details">제외 범주에 속한 작품은 포함 범주에 속해 있더라도 표시되지 않습니다.</string>
@@ -928,7 +904,6 @@
     <string name="pref_load_ahead_only_over_wifi">Wi-Fi 연결 시에만 미리 불러오기</string>
     <string name="pref_load_ahead_only_over_wifi_summary">읽고 있는 페이지 근처의 페이지만 불러와 모바일 데이터를 절약합니다</string>
     <string name="pref_high_quality_renderer">고화질 렌더러 사용</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">전환 애니메이션</string>
     <string name="pref_transition_animation_dual">전환 애니메이션(양면)</string>
     <string name="transition_animation_basic">기본</string>

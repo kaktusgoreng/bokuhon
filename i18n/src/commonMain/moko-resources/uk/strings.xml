@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Останній розділ</string>
     <string name="action_view_chapters">Подивитись розділи</string>
     <string name="action_cancel_all">Скасувати все</string>
-    <string name="theme_light">Світла</string>
-    <string name="theme_dark">Темна</string>
-    <string name="theme_system">Системна</string>
     <string name="pref_manage_notifications">Керування сповіщеннями</string>
     <string name="pref_category_security">Безпека і конфіденційність</string>
     <string name="lock_with_biometrics">Потрібно розблокувати</string>
@@ -349,7 +346,6 @@
     <string name="sort_by_upload_date">За датою завантаження</string>
     <string name="local_source_help_guide">Посібник місцевого джерела</string>
     <string name="last_used_source">Останній використаний</string>
-    <string name="tabs_header">Вкладки</string>
     <string name="downloaded_only_summary">Фільтрувати усі записи в вашій бібліотеці</string>
     <string name="check_for_updates">Перевірити оновлення</string>
     <string name="battery_optimization_setting_activity_not_found">Не вдалось відкрити налаштування пристрою</string>
@@ -365,7 +361,6 @@
     <string name="invalid_backup_file_missing_manga">Бекап не містить жодних записів бібліотеки.</string>
     <string name="invalid_backup_file">Невірний файл резервної копії:</string>
     <string name="tracking_info">Одностороння синхронізація для оновлення прогресу розділу у зовнішніх сервісах стеження. Налаштуйте відстеження окремих записів за допомогою кнопки відстеження.</string>
-    <string name="action_display_show_tabs">Показувати вкладки категорій</string>
     <string name="action_display_comfortable_grid">Зручна сітка</string>
     <string name="recent_manga_time">Розд. %1$s - %2$s</string>
     <string name="viewer">Режим читання</string>
@@ -391,7 +386,6 @@
     <string name="download_insufficient_space">Не вдалось завантажити розділи через нестачу місця в сховищі</string>
     <string name="action_global_search_query">Шукати \"%1$s\" глобально</string>
     <string name="pref_category_reading_mode">Режим читання</string>
-    <string name="pref_category_theme">Тема</string>
     <string name="action_sort_date_added">Дата додавання</string>
     <string name="no_pinned_sources">У вас немає закріплених джерел</string>
     <string name="channel_errors">Помилки</string>
@@ -494,25 +488,14 @@
     <string name="pref_high">Висока</string>
     <string name="pref_highest">Найвища</string>
     <string name="pref_hide_threshold">Чутливість приховування меню при прокручуванні</string>
-    <string name="pref_dark_theme_pure_black">Чистий чорний темний режим</string>
-    <string name="theme_yotsuba">Йоцуба</string>
-    <string name="theme_yinyang">Інь та Янь</string>
-    <string name="theme_tako">Тако</string>
-    <string name="theme_strawberrydaiquiri">Полуничний Дайкірі</string>
-    <string name="theme_midnightdusk">Опівнічні Сутінки</string>
-    <string name="theme_greenapple">Зелене яблуко</string>
-    <string name="theme_monet">Динамічна</string>
-    <string name="pref_app_theme">Тема застосунку</string>
     <string name="action_start_downloading_now">Розпочати завантаження зараз</string>
     <string name="pref_inverted_colors">Інвертовано</string>
     <string name="relative_time_today">Сьогодні</string>
-    <string name="theme_tealturquoise">Бірюзова</string>
     <string name="confirm_lock_change">Виконайте автентифікацію, щоб підтвердити зміну</string>
     <string name="label_default">Типово</string>
     <string name="pref_category_appearance">Вигляд</string>
     <string name="action_track">Стежити</string>
     <string name="getting_started_guide">Посібник з початку роботи</string>
-    <string name="pref_tablet_ui_mode">Планшетний інтерфейс</string>
     <string name="help_translate">Допомогти з перекладом</string>
     <string name="ext_installer_pref">Встановлювач</string>
     <string name="ext_installer_shizuku_stopped">Shizuku не запущений</string>
@@ -564,7 +547,6 @@
     <string name="action_sort_last_manga_update">Остання перевірка оновлень</string>
     <string name="action_sort_unread_count">Кількість непрочитаного</string>
     <string name="pref_reset_viewer_flags_summary">Скидує режим читання та орієнтацію всіх серій</string>
-    <string name="theme_lavender">Лаванда</string>
     <string name="description_placeholder">Без опису</string>
     <string name="pref_reset_viewer_flags">Скинути налаштування читалки для кожної серії</string>
     <string name="pref_reset_viewer_flags_success">Скидання всіх налаштувань</string>
@@ -601,7 +583,6 @@
     <string name="download_ahead">Завантажувати наперед</string>
     <string name="download_ahead_info">Працює, якщо поточний розділ + наступний вже завантажені.</string>
     <string name="remove_manga">Ви збираєтесь видалити \"%s\" з вашої бібліотеки</string>
-    <string name="theme_tidalwave">Приливна Хвиля</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="update_already_running">Оновлення вже розпочато</string>
     <string name="error_user_agent_string_blank">Рядок User agent не може бути пустим</string>
@@ -731,10 +712,8 @@
     <string name="onboarding_permission_notifications_description">Отримувати сповіщення про оновлення бібліотек та інше.</string>
     <string name="pref_library_update_smart_update">Розумні оновлення</string>
     <string name="manga_interval_expected_update">Нові розділи передбачено будуть випущені приблизно в %1$s, перевіряючи кожні %2$s.</string>
-    <string name="onboarding_storage_help_info">Оновлюєтесь з попередньої версії і не впевнені яку обрати? Перегляньте гайд по сховищу для додаткової інформації.</string>
     <string name="onboarding_storage_help_action">Гайд по сховищу</string>
     <string name="manga_interval_custom_amount">Своя частота оновлення:</string>
-    <string name="theme_nord">Північ</string>
     <string name="no_location_set">Не встановлено місце сховища</string>
     <string name="pref_storage_location">Місце сховища</string>
     <string name="onboarding_permission_action_grant">Отримати</string>
@@ -779,7 +758,6 @@
     <string name="remove_private_extension_message">Дійсно видалити \"%s\"?</string>
     <string name="pref_download_new_unread_chapters_only">Пропустити завантаження копій прочитаних розділів</string>
     <string name="label_auto">Автоматичний</string>
-    <string name="theme_monochrome">Монохромний режим</string>
     <string name="pref_behavior">Поведінка</string>
     <string name="action_notes">Примітки</string>
     <string name="action_edit_notes">Редагувати примітки</string>
@@ -815,6 +793,5 @@
     <string name="clear_db_exclude_read">Зберегти записи з прочитаними розділами</string>
     <string name="label_support_us">Підтримати нас</string>
     <string name="action_webview_close_tab">Закрити вкладку</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="pref_display_images_description">Рендерити зображення в описах манґи</string>
 </resources>

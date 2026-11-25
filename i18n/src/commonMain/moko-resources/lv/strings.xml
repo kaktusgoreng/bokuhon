@@ -119,7 +119,6 @@
     <string name="action_unpin">Atspraust</string>
     <string name="action_pin">Piespraust</string>
     <string name="action_disable">Atspējot</string>
-    <string name="action_display_show_tabs">Rādīt kategoriju cilnes</string>
     <string name="update_check_no_new_updates">Nav pieejamas jaunas nodaļas</string>
     <string name="update_check_confirm">Lejuplādēt</string>
     <string name="landscape">Ainava</string>
@@ -136,10 +135,6 @@
     <string name="pref_category_security">Drošība un privātums</string>
     <string name="pref_manage_notifications">Pārvaldiet paziņojumus</string>
     <string name="pref_date_format">Datuma formāts</string>
-    <string name="theme_dark">Ieslēgts</string>
-    <string name="theme_light">Izslēgts</string>
-    <string name="theme_system">Sekot sistēmu</string>
-    <string name="pref_category_theme">Motīvs</string>
     <string name="pref_category_library">Bibliotēka</string>
     <string name="action_webview_refresh">Atjaunot</string>
     <string name="action_webview_forward">Uz priekšu</string>
@@ -190,7 +185,6 @@
     <string name="ext_install_service_notif">Instalē paplašinājumu…</string>
     <string name="ext_installer_pref">Instalētājs</string>
     <string name="ext_installer_shizuku_stopped">Shizuku nedarbojas</string>
-    <string name="theme_monet">Dinamisks</string>
     <string name="action_sort_count">Visi ieraksti</string>
     <string name="cancel_all_for_series">Atcelt visu šai sērijai</string>
     <string name="action_order_by_upload_date">Pēc augšupielādes datuma</string>
@@ -228,15 +222,6 @@
     <string name="filter_mode_overlay">Parklājums</string>
     <string name="action_move_to_top_all_for_series">Pārvietot sēriju uz augšu</string>
     <string name="pref_category_appearance">Izskats</string>
-    <string name="pref_app_theme">Aplikācijas tēma</string>
-    <string name="theme_greenapple">Zaļš Ābols</string>
-    <string name="theme_midnightdusk">Pusnakts Krēsla</string>
-    <string name="theme_strawberrydaiquiri">Zemeņu Daikirs</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_tealturquoise">Teāls un Tirkīzs</string>
-    <string name="theme_yinyang">Jiņ &amp; Jan</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="pref_dark_theme_pure_black">Pilnīgi melns tumšais režīms</string>
     <string name="pref_app_language">Aplikācijas valoda</string>
     <string name="pref_update_only_completely_read">Ar nelasītu(ām) nodaļu(ām)</string>
     <string name="pref_update_only_started">Kas nav sāktas</string>
@@ -385,7 +370,6 @@
     <string name="pref_clear_database_summary">Dzēst vēsturi ierakstiem, kas nav saglabāti jūsu bibliotēkā</string>
     <string name="pref_reset_viewer_flags">Atiestatīt atsevišķu sēriju lasītāja iestatījumus</string>
     <string name="pref_reset_viewer_flags_summary">Atiestatīt katras sērijas lasīšanas režīmu un orientāciju</string>
-    <string name="pref_tablet_ui_mode">Planšetdatora lietotāja interfeiss</string>
     <string name="pref_verbose_logging">Verbose reģistrēšana</string>
     <string name="website">Tīmekļa vietne</string>
     <string name="version">Versija</string>
@@ -431,7 +415,6 @@
     <string name="pinned_sources">Piesprausts</string>
     <string name="other_source">Citi</string>
     <string name="logout_success">Tagad jūs esat izrakstījies</string>
-    <string name="tabs_header">Cilnes</string>
     <string name="local_source">Lokālais avots</string>
     <string name="browse">Pārlūkot</string>
     <string name="local_source_help_guide">Lokālo avotu rokasgrāmata</string>
@@ -503,7 +486,6 @@
     <string name="copy">Kopēt</string>
     <string name="score">Vērtējums</string>
     <string name="clear_history_completed">Vēsture izdzēsta</string>
-    <string name="theme_lavender">Lavanda</string>
     <string name="local_invalid_format">Nederīgs nodaļas formāts</string>
     <string name="local_filter_order_by">Kārtot pēc</string>
     <string name="add_to_library">Pievienot bibliotēkai</string>
@@ -594,7 +576,6 @@
     <string name="pref_reader_summary">Lasīšanas režīmi, displejs, navigācija</string>
     <string name="pref_advanced_summary">Avārijas žurnāli, akumulatora optimizācija</string>
     <string name="pref_backup_summary">Manuālā un automātiskā dublēšana</string>
-    <string name="theme_tidalwave">Paisuma vilnis</string>
     <string name="multi_lang">Vairāku</string>
     <string name="download_ahead">Lejupielādēt uz priekšu</string>
     <string name="download_ahead_info">Darbojas tikai ja pašreizējā nodaļa + nākošā nodaļa ir jau lejupielādēta.</string>

@@ -292,9 +292,6 @@
     <string name="action_sort_latest_chapter">Por capítulo más reciente</string>
     <string name="action_view_chapters">Ver capítulos</string>
     <string name="action_cancel_all">Cancelar todo</string>
-    <string name="theme_light">Claro</string>
-    <string name="theme_dark">Oscuro</string>
-    <string name="theme_system">Del sistema</string>
     <string name="pref_manage_notifications">Gestionar notificaciones</string>
     <string name="pref_category_security">Seguridad y privacidad</string>
     <string name="lock_with_biometrics">Desbloqueo biométrico</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Actualizar automáticamente los metadatos</string>
     <string name="action_display_comfortable_grid">Cuadrícula amplia</string>
     <string name="action_migrate">Migrar</string>
-    <string name="tabs_header">Pestañas</string>
-    <string name="action_display_show_tabs">Mostrar pestañas de categorías</string>
     <string name="page_list_empty_error">No se encontraron páginas</string>
     <string name="action_disable_all">Desactivar todos</string>
     <string name="action_enable_all">Activar todos</string>
@@ -391,7 +386,6 @@
     <string name="download_insufficient_space">No se pudo descargar ningún capítulo, queda muy poco espacio</string>
     <string name="action_global_search_query">Buscar por «%1$s» en todas las fuentes</string>
     <string name="pref_category_reading_mode">Modo de lectura</string>
-    <string name="pref_category_theme">Esquema de colores</string>
     <string name="action_sort_date_added">Por antigüedad en la biblioteca</string>
     <string name="no_pinned_sources">Todavía no has anclado ninguna fuente</string>
     <string name="channel_complete">Terminadas</string>
@@ -464,16 +458,7 @@
     <string name="pref_reader_actions">Acciones</string>
     <string name="pref_grayscale">Escala de grises</string>
     <string name="restore_miui_warning">Es posible que las funciones de copia de respaldo y restauración no funcionen correctamente si la opción «Optimización de MIUI» está desactivada.</string>
-    <string name="theme_midnightdusk">Crepúsculo de medianoche</string>
-    <string name="theme_strawberrydaiquiri">Daiquiri de fresa</string>
-    <string name="pref_dark_theme_pure_black">Modo oscuro negro puro</string>
-    <string name="theme_tako">Tako</string>
     <string name="restrictions">Restricciones: %s</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin y yang</string>
-    <string name="theme_greenapple">Manzana verde</string>
-    <string name="theme_monet">Dinámico</string>
-    <string name="pref_app_theme">Esquema de colores</string>
     <string name="action_start_downloading_now">Empezar la descarga</string>
     <string name="cancel_all_for_series">Cancelar todo para esta serie</string>
     <string name="action_display_local_badge">Contenido local</string>
@@ -501,7 +486,6 @@
     <string name="label_background_activity">Actividad en segundo plano</string>
     <string name="action_track">Seguir</string>
     <string name="getting_started_guide">Guía de introducción</string>
-    <string name="pref_tablet_ui_mode">Interfaz de tableta</string>
     <string name="pref_lowest">Más baja</string>
     <string name="pref_low">Baja</string>
     <string name="pref_high">Alta</string>
@@ -509,7 +493,6 @@
     <string name="pref_hide_threshold">Sensibilidad para ocultar automáticamente el menú al desplazarse</string>
     <string name="pref_inverted_colors">Invertir colores</string>
     <string name="relative_time_today">Hoy</string>
-    <string name="theme_tealturquoise">Azul marino y turquesa</string>
     <string name="pref_category_appearance">Apariencia</string>
     <string name="confirm_lock_change">Identifícate para confirmar el cambio</string>
     <string name="label_default">Original</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Portada personalizada</string>
     <string name="not_installed">Sin instalar</string>
     <string name="pref_app_language">Idioma de la aplicación</string>
-    <string name="theme_lavender">Lavanda</string>
     <string name="description_placeholder">Sin descripción</string>
     <string name="delete_category">Borrar categoría</string>
     <string name="delete_category_confirmation">¿Quieres borrar la categoría «%s»?</string>
@@ -596,7 +578,6 @@
     <string name="appwidget_updates_description">Aquí aparecerá el contenido más reciente de tu biblioteca</string>
     <string name="appwidget_unavailable_locked">El widget no está disponible cuando el bloqueo de aplicación está activo</string>
     <string name="update_already_running">Ya se está actualizando</string>
-    <string name="theme_tidalwave">Marea</string>
     <string name="error_user_agent_string_blank">La cadena con el agente de usuario («user agent») no puede estar vacía</string>
     <string name="download_ahead_info">Solo funciona si el capítulo actual y el que va después ya están descargados.</string>
     <string name="download_ahead">Descargar por adelantado</string>
@@ -750,9 +731,7 @@
     <string name="manga_interval_expected_update">Se espera que el siguiente número salga en aproximadamente %1$s, la aplicación busca actualizaciones cada %2$s.</string>
     <string name="manga_interval_custom_amount">Frecuencia de actualización personalizada:</string>
     <string name="pref_library_update_smart_update">Actualizaciones inteligentes</string>
-    <string name="onboarding_storage_help_info">¿Acabas de actualizar desde una versión más antigua y no sabes qué hacer? Échale un vistazo a la guía de almacenamiento.</string>
     <string name="onboarding_storage_help_action">Guía de almacenamiento</string>
-    <string name="theme_nord">Norteño</string>
     <string name="manga_interval_expected_update_soon">Pronto</string>
     <string name="ext_revoke_trust">Dejar de marcar todas la extensiones desconocidas como de confianza</string>
     <string name="pref_webtoon_disable_zoom_out">Desactivar alejar</string>
@@ -794,7 +773,6 @@
     <string name="pref_incognito_mode_extension_summary">Pausa el historial de lectura para las obras que dependan de esta extensión</string>
     <string name="tracked_privately">Seguimiento privado</string>
     <string name="label_auto">Automático</string>
-    <string name="theme_monochrome">Monocromo</string>
     <string name="export">Exportar</string>
     <string name="library_exported">La biblioteca se ha exportado</string>
     <string name="library_list">Elementos en la biblioteca</string>
@@ -827,7 +805,6 @@
     <string name="migrationConfigScreen.selectNoneLabel">Cancelar selección</string>
     <string name="migrationConfigScreen.selectPinnedLabel">Selec. fuentes ancladas</string>
     <string name="migrationConfigScreen.selectEnabledLabel">Selec. fuentes activas</string>
-    <string name="theme_catppuccin">Miaupuchino</string>
     <string name="migrationConfigScreen.removeDownloadsTitle">Borrar las descargas del título actual tras la migración</string>
     <string name="migrationConfigScreen.enhancedOptionsWarning">Los ajustes de aquí abajo pueden hacer que funcione más lento y te bloqueen de forma temporal las fuentes en línea</string>
     <string name="migrationConfigScreen.dataToMigrateHeader">Datos que migrar</string>

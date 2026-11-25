@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="theme_dark">अन</string>
-    <string name="theme_light">अफ</string>
-    <string name="pref_category_theme">थीम</string>
     <string name="pref_category_about">बारेमा</string>
     <string name="pref_category_advanced">उन्नत सेटिंग्स</string>
     <string name="pref_category_tracking">ट्र्याकिङ</string>
@@ -36,7 +33,6 @@
     <string name="action_pin">पिन</string>
     <string name="action_disable">असक्षम गर्नुहोस्</string>
     <string name="action_display_show_number_of_items">वस्तुहरूको संख्या देखाउनुहोस्</string>
-    <string name="action_display_show_tabs">वर्ग ट्याबहरू देखाउनुहोस्</string>
     <string name="action_display_download_badge">डाउनलोड गरिएका अध्यायहरू</string>
     <string name="action_display_comfortable_grid">आरामदायक ग्रिड</string>
     <string name="action_display_list">सूची</string>
@@ -140,17 +136,6 @@
     <string name="pref_category_security">सुरक्षा र गोपनीयता</string>
     <string name="pref_manage_notifications">सूचनाहरू व्यवस्थापन गर्नुहोस्</string>
     <string name="pref_date_format">मिति ढाँचा</string>
-    <string name="pref_dark_theme_pure_black">शुद्ध कालो डार्क मोड</string>
-    <string name="theme_yotsuba">योत्सुबा</string>
-    <string name="theme_yinyang">यिन र यांग</string>
-    <string name="theme_tealturquoise">टील र फिरोजा</string>
-    <string name="theme_tako">टाको</string>
-    <string name="theme_strawberrydaiquiri">स्ट्रबेरी दाइक्वरी</string>
-    <string name="theme_midnightdusk">मिडनाइट डस्क</string>
-    <string name="theme_greenapple">हरियो स्याउ</string>
-    <string name="theme_monet">गतिशील</string>
-    <string name="pref_app_theme">एपको थीम</string>
-    <string name="theme_system">सिस्टम पालना गर्नुहोस्</string>
     <string name="pref_category_appearance">रूप</string>
     <string name="action_start_downloading_now">अहिले डाउनलोड गर्न सुरु गर्नुहोस्</string>
     <string name="action_show_errors">विवरणहरू हेर्न ट्याप गर्नुहोस्</string>
@@ -160,7 +145,6 @@
     <string name="action_open_in_web_view">WebView मा खोल्नुहोस्</string>
     <string name="confirm_lock_change">परिवर्तन पुष्टि गर्न प्रमाणित गर्नुहोस्</string>
     <string name="label_default">पूर्वनिर्धारित</string>
-    <string name="pref_tablet_ui_mode">ट्याब्लेट UI</string>
     <string name="battery_optimization_setting_activity_not_found">यन्त्रको सेटिंग्स खोल्न सकिएन</string>
     <string name="pref_incognito_mode_summary">पढिएको इतिहास रोक्छ</string>
     <string name="pref_incognito_mode">गुप्त मोड</string>
@@ -391,7 +375,6 @@
     <string name="local_source">लोकल स्रोत</string>
     <string name="other_source">अन्य</string>
     <string name="manga_from_library">पुस्तकालयबाट</string>
-    <string name="tabs_header">ट्याबहरू</string>
     <string name="latest">नवीनतम</string>
     <string name="local_filter_order_by">द्वारा अर्डर गर्नुहोस्</string>
     <string name="date">मिति</string>
@@ -566,7 +549,6 @@
     <string name="pref_reader_summary">पढ्ने मोड, प्रदर्शन, नेभिगेसन</string>
     <string name="pref_downloads_summary">स्वचालित डाउनलोड, अगाडि डाउनलोड गर्ने</string>
     <string name="pref_browse_summary">स्रोतहरू, एक्सटेन्शनहरू, ग्लोबल खोज</string>
-    <string name="theme_lavender">ल्याभेन्डर</string>
     <string name="pref_app_language">एप को भाषा</string>
     <string name="auto_download_while_reading">पढ्दा स्वत: डाउनलोड गर्नुहोस्</string>
     <string name="pref_backup_summary">म्यानुअल र स्वचालित ब्याकअप, भण्डारण स्पेस</string>
@@ -583,7 +565,6 @@
     <string name="download_ahead">अगाडि डाउनलोड गर्नुहोस्</string>
     <string name="pref_appearance_summary">थीम, मिति र समय ढाँचा</string>
     <string name="download_ahead_info">हालको अध्याय + अर्को पहिले नै डाउनलोड गरिएमा मात्र काम गर्दछ।</string>
-    <string name="theme_tidalwave">समुन्द्री लहर</string>
     <string name="ext_info_version">संस्करण</string>
     <string name="ext_info_language">भाषा</string>
     <string name="action_not_now">अहिले हैन</string>
@@ -724,7 +705,6 @@
     <string name="onboarding_permission_notifications">सूचना अनुमति</string>
     <string name="onboarding_permission_action_grant">प्रदान गर्नुहोस्</string>
     <string name="onboarding_guides_new_user">%s मा नयाँ हुनुहुन्छ? हामी स्टार्टिङ गाइड जाँच गर्न सिफारिस गर्छौं।</string>
-    <string name="theme_nord">नोर्ड</string>
     <string name="pref_library_update_smart_update">स्मार्ट अपडेट</string>
     <string name="action_bar_up_description">माथि नेभिगेट गर्नुहोस्</string>
     <string name="action_revert_to_default">पूर्वनिर्धारितमा फर्कनुहोस्</string>
@@ -736,7 +716,6 @@
     <string name="onboarding_permission_install_apps_description">स्रोत एक्सटेन्शन स्थापना गर्न को लागि।</string>
     <string name="onboarding_permission_notifications_description">पुस्तकालय अपडेट्स र थपका लागि सूचना प्राप्त गर्नुहोस्।</string>
     <string name="onboarding_permission_ignore_battery_opts_description">लामो समयदेखि चलिरहेको पुस्तकालय अपडेट्स, डाउनलोड्स, र ब्याकअप रिस्टोरमा अवरोधहरू बेवास्ता गर्नुहोस्।</string>
-    <string name="onboarding_storage_help_info">पुरानो संस्करणबाट अपडेट गर्दै र के चयन गर्ने निश्चित छैन? थप जानकारीको लागि भण्डारण गाइड हेर्नुहोस्।</string>
     <string name="onboarding_permission_ignore_battery_opts">ब्याकग्राउण्ड ब्याट्री प्रयोग</string>
     <string name="onboarding_guides_returning_user">%s पुन: स्थापना गर्दै हुनुहुन्छ?</string>
     <string name="ext_permission_install_apps_warning">एक्सटेन्शनहरू स्थापना गर्न अनुमति आवश्यक छ। प्रदान गर्न यहाँ ट्याप गर्नुहोस्।</string>
@@ -794,7 +773,6 @@
     <string name="pref_incognito_mode_extension_summary">एक्सटेन्शनमा पढिएको इतिहास रोक्नुहोस्</string>
     <string name="label_auto">अटो</string>
     <string name="pref_mark_duplicate_read_chapter_read">पढिएको अध्यायको डुप्लिकेटलाई पढिएको रूपमा चिन्ह लगाउनुहोस्</string>
-    <string name="theme_monochrome">मोनोक्रोम</string>
     <string name="action_toggle_private_on">निजी रूपमा ट्र्याक गर्नुहोस्</string>
     <string name="action_toggle_private_off">सार्वजनिक रूपमा ट्र्याक गरिएको</string>
     <string name="export">निर्यात</string>
@@ -820,7 +798,6 @@
     <string name="possible_duplicates_summary">तपाईंको पुस्तकालयमा उस्तै नामका इन्ट्रीहरू छन्।\n\nस्थानान्तरण गर्न वा जे भए पनि थप्नको लागि इन्ट्री चयन गर्नुहोस्।</string>
     <string name="clear_database_text">तपाईं डाटाबेसबाट इन्ट्रीहरू हटाउन लाग्दै हुनुहुन्छ</string>
     <string name="storage_failed_to_create_download_directory">डाउनलोड directory सिर्जना गर्न असफल भयो</string>
-    <string name="theme_catppuccin">क्याटपुचिन</string>
     <string name="pref_display_images_description">mangaको विवरणहरूमा तस्वीर देखाउनुहोस</string>
     <string name="pref_hide_missing_chapter_indicators">छुटेका अध्याय सूचकहरू लुकाउनुहोस्</string>
     <string name="migrationConfigScreen.selectedHeader">चयन गरिएको</string>

@@ -44,10 +44,6 @@
     <string name="action_display_list">Тізім</string>
     <string name="action_display_download_badge">Жүктелген тараулар</string>
     <string name="secure_screen">Қолданба экранын қорғау</string>
-    <string name="pref_app_theme">Қолданба кейпі</string>
-    <string name="theme_monet">Динамикалық</string>
-    <string name="theme_greenapple">Жасыл Алма</string>
-    <string name="theme_midnightdusk">Ымырт</string>
     <string name="pref_category_tracking">Аңду</string>
     <string name="pref_category_about">Ақпарат</string>
     <string name="action_close">Жабу</string>
@@ -56,16 +52,6 @@
     <string name="pref_category_reader">Оқыма</string>
     <string name="pref_category_downloads">Жүктеулер</string>
     <string name="pref_category_advanced">Толығырақ</string>
-    <string name="pref_category_theme">Кейіп</string>
-    <string name="theme_system">Жүйе бойынша</string>
-    <string name="theme_light">Өшірулі</string>
-    <string name="theme_dark">Қосулы</string>
-    <string name="theme_strawberrydaiquiri">Құлпынай Дайкири</string>
-    <string name="theme_tako">Тако</string>
-    <string name="theme_yotsuba">Йотсуба</string>
-    <string name="theme_tealturquoise">Қызғылт пен жасыл</string>
-    <string name="pref_dark_theme_pure_black">Қап-қараңғы режим</string>
-    <string name="theme_yinyang">Инь мен Йянь</string>
     <string name="relative_time_today">Бүгін</string>
     <string name="update_never">Өшірулі</string>
     <string name="update_6hour">Әр 6 сағат сайын</string>
@@ -126,7 +112,6 @@
     <string name="action_display_mode">Бейнебет режимі</string>
     <string name="action_display_local_badge">Локалды дереккөз</string>
     <string name="action_display_language_badge">Тіл</string>
-    <string name="action_display_show_tabs">Санат қойындыларын көрсету</string>
     <string name="action_display_show_number_of_items">Элементтер санын көрсету</string>
     <string name="action_disable">Өшіру</string>
     <string name="action_pin">Бекіту</string>
@@ -247,7 +232,6 @@
     <string name="delete_category_confirmation">«%s» деген санатты жойғыңыз келеді ме?</string>
     <string name="delete_category">Санатты жою</string>
     <string name="internal_error">Ішкі қателік: Қосымша ақпарат алу үшін қателіктер тіркеуін тексеріңіз</string>
-    <string name="theme_lavender">Лаванда</string>
     <string name="pref_skip_filtered_chapters">Сүзілген тарауларлы өткізіп жіберу</string>
     <string name="action_remove_everything">Барлығын жою</string>
     <string name="filter_mode_overlay">Қабаттасу</string>
@@ -329,7 +313,6 @@
     <string name="tapping_inverted_horizontal">Көлденең</string>
     <string name="auto_download_while_reading">Оқығанда дағдылы жүктеу</string>
     <string name="download_ahead">Алдын ала жүктеу</string>
-    <string name="theme_tidalwave">Көтерілу Толқыны</string>
     <string name="filter_mode_lighten">Жарық қылу</string>
     <string name="filter_mode_darken">Қараңғы қылу</string>
     <string name="pref_read_with_tapping_inverted">Басу аймағын терістету</string>
@@ -411,9 +394,7 @@
     <string name="backup_restore_content_full">Сақтық көшірме файлынан дерек қалпына келеді. \n \nОны қолдану үшін сізге түгел жетпей тұрған кеңейтулерді жүктеп, бақылау қызметтеріне кіру керек.</string>
     <string name="chapter_not_found">Тарау табылмады</string>
     <string name="action_track">Бақылау</string>
-    <string name="pref_tablet_ui_mode">Планшетті интерфейс</string>
     <string name="pref_incognito_mode">Инкогнито режимі</string>
-    <string name="tabs_header">Қойындылар</string>
     <string name="no_more_results">Басқа нәтиже жоқ</string>
     <string name="username">Пайдаланушының есімі</string>
     <string name="requires_app_restart">Күшіне ену үшін қолданбаны қайта іске қосу қажет</string>

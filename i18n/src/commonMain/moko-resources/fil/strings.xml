@@ -20,7 +20,6 @@
     <string name="action_unpin">I-unpin</string>
     <string name="action_pin">I-pin</string>
     <string name="action_disable">Di-paganahin</string>
-    <string name="action_display_show_tabs">Ipakita ang mga tab ng kategorya</string>
     <string name="action_display_download_badge">Bilang ng kabanatang na-download</string>
     <string name="action_display_comfortable_grid">Kumportableng grid</string>
     <string name="action_display_list">Listahan</string>
@@ -99,9 +98,6 @@
     <string name="pref_manage_notifications">Pamahalaan ang mga abiso</string>
     <string name="pref_category_security">Seguridad at privacy</string>
     <string name="pref_date_format">Pormat ng petsa</string>
-    <string name="theme_dark">Madilim</string>
-    <string name="theme_light">Maliwanag</string>
-    <string name="theme_system">Sistema</string>
     <string name="pref_category_about">Patungkol</string>
     <string name="pref_category_advanced">Karagdagan</string>
     <string name="pref_category_tracking">Pagta-track</string>
@@ -231,7 +227,6 @@
     <string name="fourth_to_last">Pang-apat sa huling kabanata</string>
     <string name="third_to_last">Pangatlo sa huling kabanata</string>
     <string name="pref_category_reading_mode">Pagbasa</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="action_sort_date_added">Petsa ng pagdagdag</string>
     <string name="tapping_inverted_both">Pareho</string>
     <string name="tapping_inverted_vertical">Patayo</string>
@@ -345,7 +340,6 @@
     <string name="local_source">Lokal na source</string>
     <string name="no_results_found">Walang nakitang resulta</string>
     <string name="no_more_results">Wala na\'ng resulta</string>
-    <string name="tabs_header">Mga Tab</string>
     <string name="updating_category">Ina-update ang kategorya</string>
     <string name="unknown_error">Di matukoy na error</string>
     <string name="logout_success">Naka-logout ka na</string>
@@ -489,15 +483,6 @@
     <string name="restore_miui_warning">Maaaring hindi gumana nang maayos ang pag-backup/pag-restore kung nakasara ang MIUI optimization.</string>
     <string name="enhanced_tracking_info">Nagbibigay ng mga pinahusay na mga feature para sa ilang mga source. Awtomatikong tina-track ang mga entry kapag naidagdag ito sa iyong aklatan.</string>
     <string name="enhanced_services">Pinahusay na mga tracker</string>
-    <string name="theme_midnightdusk">Hatinggabi</string>
-    <string name="theme_greenapple">Berdeng Mansanas</string>
-    <string name="theme_monet">Nagbabago</string>
-    <string name="pref_app_theme">Tema</string>
-    <string name="pref_dark_theme_pure_black">Purong itim</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin at Yang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Presas</string>
     <string name="label_background_activity">Aktibidad sa background</string>
     <string name="pref_lowest">Pinakamababa</string>
     <string name="pref_low">Mababa</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Sensitivity para sa pagtatago ng menu sa scroll</string>
     <string name="pref_inverted_colors">Baligtad</string>
     <string name="relative_time_today">Ngayon</string>
-    <string name="theme_tealturquoise">Teal at Turquoise</string>
     <string name="pref_category_appearance">Hitsura</string>
     <string name="confirm_lock_change">Patotohanan para makumpirma ang pagbabago</string>
     <string name="label_default">Default</string>
     <string name="action_track">I-Track</string>
     <string name="getting_started_guide">Gabay sa Pagsisimula</string>
-    <string name="pref_tablet_ui_mode">Pang-tablet na UI</string>
     <string name="help_translate">Tumulong sa pagsalin</string>
     <string name="pref_remove_exclude_categories">Mga na-ibukod na mga kategorya</string>
     <string name="ext_app_info">Tungkol sa app</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Custom na pabalat</string>
     <string name="not_installed">Di naka-install</string>
     <string name="pref_app_language">Wika ng app</string>
-    <string name="theme_lavender">Lila</string>
     <string name="description_placeholder">Walang paglalarawan</string>
     <string name="delete_category">Burahin ang kategorya</string>
     <string name="internal_error">InternalError: Tingnan ang mga crash log para sa karagdagang impormasyon</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">Di available ang widget kapag nakabukas ang lock</string>
     <string name="update_already_running">May ina-update sa ngayon</string>
     <string name="error_user_agent_string_blank">Hindi dapat blangko ang user agent string</string>
-    <string name="theme_tidalwave">Daluyong</string>
     <string name="download_ahead">I-download agad</string>
     <string name="auto_download_while_reading">Awtomatikong mag-download habang nagbabasa</string>
     <string name="download_ahead_info">Gumagana lamang sa kasalukuyang kabanata + ang susunod ay na-download na.</string>
@@ -748,11 +729,9 @@
     <string name="invalid_backup_file_error">Buong error:</string>
     <string name="ext_permission_install_apps_warning">Kinakailangan ng permiso para mag-install ng mga extension. I-tap upang mapayagan ito.</string>
     <string name="private_settings">Kasali ang mga sensitibong setting (hal., mga tracker login token)</string>
-    <string name="onboarding_storage_help_info">Nag-a-update mula sa isang mas lumang bersyon at hindi sigurado kung ano ang pipiliin? Sumangguni sa gabay sa storage para sa higit pang impormasyon.</string>
     <string name="pref_library_update_smart_update">Matalas na pag-update</string>
     <string name="onboarding_storage_help_action">Gabay sa storage</string>
     <string name="manga_interval_custom_amount">Custom na frequency sa pag-update:</string>
-    <string name="theme_nord">Nord</string>
     <string name="manga_interval_expected_update_soon">Malapit na</string>
     <string name="ext_revoke_trust">Bawiin ang mga pinagkakatiwalaang hindi kilalang extension</string>
     <string name="pref_webtoon_disable_zoom_out">Patayin ang pag-zoom out</string>
@@ -801,7 +780,6 @@
     <string name="action_toggle_private_on">Pribadong I-track</string>
     <string name="export">I-export</string>
     <string name="library_list">Listahan ng Aklatan</string>
-    <string name="theme_monochrome">Monokromatiko</string>
     <string name="pref_mark_duplicate_read_chapter_read">Markahan ang duplikadong nabasang kabanata bilang nabasa na</string>
     <string name="action_display_unread_badge">Di nabasang kabanata</string>
     <string name="pref_behavior">Pagkilos</string>
@@ -865,7 +843,6 @@
     <string name="pref_download_concurrent_pages">Kasabay na pag-download ng pahina</string>
     <string name="pref_download_concurrent_pages_summary">Mga pahina na nai-download nang sabay-sabay kada source</string>
     <string name="action_webview_close_tab">Isara ang tab</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="migrationConfigScreen.availableHeader">Maaaring Magamit</string>
     <string name="action_filter_excluded_scanlators">Isala ang na-ibukod na mga scanlator</string>
     <string name="download_bookmarked">Na-bookmark</string>
@@ -899,7 +876,6 @@
     <string name="downloading_with_progress">Dina-download… (%d%%)</string>
     <string name="pref_filter_update_categories_details">Hindi ipapakita ang mga update sa mga nakabukod na kategorya, kahit kabilang pa ang mga ito sa mga napiling kategorya.</string>
     <string name="pref_filter_upcoming_categories_details">Hindi ipapakita ang mga update sa mga nakabukod na kategorya, kahit kabilang pa ang mga ito sa mga napiling kategorya.</string>
-    <string name="theme_tokyonight">Tokyo sa Gabi</string>
     <string name="pref_category_extensions">Mga extension</string>
     <string name="pref_allowed_content_warnings">Pinayagan ang mga babala sa nilalaman</string>
     <string name="pref_apply_content_warnings_to_installed">Ilapat rin ito sa mga na-install na extension</string>
@@ -920,7 +896,6 @@
     <string name="ext_content_warning_nsfw">18+</string>
     <string name="ext_content_warning_mixed_description">Ang mga source mula sa extension na ito ay maaaring maglaman ng parehong ligtas at 18+ na nilalaman.</string>
     <string name="ext_content_warning_nsfw_description">Ang mga source mula sa extension na ito ay pangunahing nakatuon sa nilalaman para sa mga nasa 18+ taong gulang.</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="transition_animation_fade">Kupas</string>
     <string name="transition_animation_flip_right">Pabuklat ng pahina (kanan)</string>
     <string name="transition_animation_cube_inside">Kubo (Loob)</string>

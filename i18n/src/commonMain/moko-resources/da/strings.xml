@@ -82,7 +82,6 @@
     <string name="action_display_local_badge">Lokale manga</string>
     <string name="action_filter_tracked">Sporet</string>
     <string name="action_move_category">Vælg kategorier</string>
-    <string name="action_display_show_tabs">Vis kategorifaner</string>
     <string name="confirm_lock_change">Godkend for at bekræfte ænding</string>
     <string name="action_display_show_number_of_items">Vis antal genstande</string>
     <string name="action_disable">Deaktivér</string>
@@ -124,20 +123,6 @@
     <string name="pref_category_library">Bibliotek</string>
     <string name="pref_category_advanced">Avanceret</string>
     <string name="pref_category_about">Om</string>
-    <string name="pref_category_theme">Tema</string>
-    <string name="theme_system">Følg system</string>
-    <string name="theme_light">Fra</string>
-    <string name="theme_dark">Til</string>
-    <string name="pref_app_theme">App tema</string>
-    <string name="theme_monet">Dynamisk</string>
-    <string name="theme_greenapple">Æble grøn</string>
-    <string name="theme_midnightdusk">Skumring</string>
-    <string name="theme_strawberrydaiquiri">Jordbær Daiquiri</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_tealturquoise">Blågrøn &amp; Turquoise</string>
-    <string name="theme_yinyang">Yin-yang</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="pref_dark_theme_pure_black">Kulsort</string>
     <string name="pref_date_format">Dato format</string>
     <string name="pref_manage_notifications">Håndter notifikationer</string>
     <string name="pref_category_security">Sikkerhed</string>
@@ -171,7 +156,6 @@
     <string name="pref_update_only_started">Der ikke er blevet startet</string>
     <string name="multi_lang">Multi</string>
     <string name="delete_category_confirmation">Ønsker du at slette kategorien \"%s\"?</string>
-    <string name="theme_tidalwave">Tidevandsbølge</string>
     <string name="pref_library_update_refresh_metadata_summary">Søg efter nyt cover og detaljer, når biblioteket opdateres</string>
     <string name="pref_library_update_refresh_metadata">Opdater automatisk metadata</string>
     <string name="default_category">Standard kategori</string>
@@ -179,7 +163,6 @@
     <string name="action_sort_unread_count">Antal ulæst</string>
     <string name="delete_category">Slet kategori</string>
     <string name="exclude">Ekskluder: %s</string>
-    <string name="theme_lavender">Lavendel</string>
     <string name="default_category_summary">Spørg altid</string>
     <string name="pref_library_update_categories_details">Manga i ekskluderede kategorier vil ikke blive opdateret selv hvis de også er i inkluderede kategorier.</string>
     <string name="all">Alle</string>

@@ -228,9 +228,6 @@
     <string name="action_sort_latest_chapter">Последње поглавље</string>
     <string name="action_view_chapters">Погледај поглавља</string>
     <string name="action_cancel_all">Откажи све</string>
-    <string name="theme_light">Светла</string>
-    <string name="theme_dark">Тамна</string>
-    <string name="theme_system">По систему</string>
     <string name="pref_manage_notifications">Управљај обавештењима</string>
     <string name="pref_category_security">Безбедност и приватност</string>
     <string name="lock_when_idle">Закључај приликом мировања</string>
@@ -341,9 +338,7 @@
     <string name="file_select_cover">Изаберите слику за омот</string>
     <string name="notification_first_add_to_library">Морате прво додати наслов у колекцију</string>
     <string name="notification_cover_update_failed">Ажурирање омота није успјело</string>
-    <string name="pref_category_theme">Тема</string>
     <string name="action_disable">Онемогући</string>
-    <string name="action_display_show_tabs">Прикажи наслове категорија</string>
     <string name="action_display_comfortable_grid">Шира мрежа</string>
     <string name="action_migrate">Мигрирај</string>
     <string name="action_start">Почни</string>
@@ -363,9 +358,6 @@
     <string name="action_order_by_upload_date">По датуму постављања</string>
     <string name="action_display_language_badge">Језик</string>
     <string name="action_order_by_chapter_number">По броју поглавља</string>
-    <string name="pref_app_theme">Тема апликације</string>
-    <string name="theme_greenapple">Зелена јабука</string>
-    <string name="theme_yotsuba">Јоцуба</string>
     <string name="action_asc">Растуће</string>
     <string name="label_default">Подразумевано</string>
     <string name="action_start_downloading_now">Покрени преузимање одмах</string>
@@ -374,13 +366,6 @@
     <string name="action_desc">Опадајуће</string>
     <string name="action_show_errors">Прикажи детаље</string>
     <string name="pref_category_appearance">Изглед</string>
-    <string name="theme_monet">Динамично</string>
-    <string name="theme_midnightdusk">Поноћни сумрак</string>
-    <string name="theme_strawberrydaiquiri">Даикири јагода</string>
-    <string name="theme_tako">Тако</string>
-    <string name="theme_tealturquoise">Плавозелена и тиркизна</string>
-    <string name="theme_yinyang">Јин и јанг</string>
-    <string name="pref_dark_theme_pure_black">Потпуно црна тема</string>
     <string name="pref_category_reading_mode">Начин читања</string>
     <string name="ext_installer_pref">Инсталер</string>
     <string name="pref_category_auto_download">Аутоматско преузимање</string>
@@ -388,7 +373,6 @@
     <string name="restore_miui_warning">Резервна копија/враћање можда неће радити исправно ако није омогућена MIUI оптимизација.</string>
     <string name="backup_info">Чувајте резервне копије и на другим местима.</string>
     <string name="pref_dns_over_https">DNS преко HTTPS-а (DoH)</string>
-    <string name="pref_tablet_ui_mode">Изглед за таблет</string>
     <string name="requires_app_restart">Захтева поновно покретање апликације</string>
     <string name="pref_dump_crash_logs_summary">Чува евиденцију грешака у датотеку за дељење са програмерима</string>
     <string name="label_background_activity">Активност у позадини</string>
@@ -403,7 +387,6 @@
     <string name="nav_zone_next">След.</string>
     <string name="pref_verbose_logging">Детаљно извештавање</string>
     <string name="pref_incognito_mode_summary">Зауставља праћење историје читања</string>
-    <string name="tabs_header">Картице</string>
     <string name="unknown_status">Непознат статус</string>
     <string name="local_filter_order_by">Поређај по</string>
     <string name="enhanced_services">Побољшани сервиси за праћење</string>
@@ -592,7 +575,6 @@
     <string name="label_started">Започето</string>
     <string name="label_local">Локално</string>
     <string name="label_downloaded">Преузето</string>
-    <string name="theme_lavender">Лаванда</string>
     <string name="pref_app_language">Језик апликације</string>
     <string name="ext_info_version">Верзија</string>
     <string name="invalid_location">Неважећа локација: %s</string>
@@ -660,7 +642,6 @@
     <string name="pref_reset_viewer_flags">Ресетуј подешавања читача по наслову</string>
     <string name="source_empty_screen">Извор није пронађен</string>
     <string name="source_filter_empty_screen">Није пронађен инсталирани извор</string>
-    <string name="theme_tidalwave">Цунами</string>
     <string name="pref_user_agent_string">Подразумеван низ корисничког агента</string>
     <string name="track_error">%1$s грешка: %2$s</string>
     <string name="information_required_plain">*неопходно</string>
@@ -734,8 +715,6 @@
     <string name="onboarding_description">Хајде да обавимо нека подешавања. Ако желиш можеш их касније променити у подешавањима.</string>
     <string name="no_location_set">Није постављена локација за складиштење</string>
     <string name="onboarding_storage_info">Одабери путању у коју ће %1$s чувати преузимања поглавља, резервне копије и друго. \n \nПрепоручујемо коришћење засебне путање \n \nОдабрана путања: %2$s</string>
-    <string name="theme_nord">Норд</string>
-    <string name="onboarding_storage_help_info">Ажурураш са старије верзије и не знаш шта да изабереш? Потражи информације у водичу складиштења.</string>
     <string name="onboarding_storage_help_action">Водич складиштења</string>
     <string name="ext_permission_install_apps_warning">За инсталацију додатака потребне су дозволе. Додирни овде за одобрење</string>
     <string name="invalid_backup_file_error">Грешка:</string>

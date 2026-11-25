@@ -286,9 +286,6 @@
     <string name="action_sort_latest_chapter">最新章の更新順</string>
     <string name="action_view_chapters">章を見る</string>
     <string name="action_cancel_all">すべてキャンセル</string>
-    <string name="theme_light">ライト</string>
-    <string name="theme_dark">ダーク</string>
-    <string name="theme_system">システム</string>
     <string name="pref_manage_notifications">通知設定</string>
     <string name="pref_category_security">セキュリティとプライバシー</string>
     <string name="lock_with_biometrics">ロック解除が必要です</string>
@@ -300,7 +297,6 @@
     <string name="action_newest">最新</string>
     <string name="label_sources">ソース</string>
     <string name="local_source">ローカルソース</string>
-    <string name="tabs_header">タブ</string>
     <string name="email">メールアドレス</string>
     <string name="downloaded_only_summary">ライブラリにある項目はフィルターされます</string>
     <string name="label_downloaded_only">ダウンロード済みのみ</string>
@@ -345,7 +341,6 @@
     <string name="action_oldest">最古</string>
     <string name="action_unpin">ピン留めを外す</string>
     <string name="action_pin">ピン留め</string>
-    <string name="action_display_show_tabs">カテゴリータブを表示</string>
     <string name="action_display_comfortable_grid">快適グリッド</string>
     <string name="action_migrate">移行</string>
     <string name="action_disable_all">すべて無効にする</string>
@@ -394,7 +389,6 @@
     <string name="download_insufficient_space">空き領域不足のため、章をダウンロードできませんでした</string>
     <string name="no_pinned_sources">ピン留めされたソースはありません</string>
     <string name="action_global_search_query">グローバルで「%1$s」を探す</string>
-    <string name="pref_category_theme">テーマ</string>
     <string name="action_sort_date_added">ライブラリへの追加日付順</string>
     <string name="channel_errors">エラー</string>
     <string name="backup_restore_missing_trackers">ログインしていないトラッカー:</string>
@@ -484,16 +478,7 @@
     <string name="action_display_local_badge">ローカルソース</string>
     <string name="rotation_landscape">横向き</string>
     <string name="rotation_portrait">縦向き</string>
-    <string name="pref_dark_theme_pure_black">真っ黒モード</string>
-    <string name="theme_yotsuba">四つ葉</string>
-    <string name="theme_yinyang">陰陽</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">ストロベリー・ダイキリ</string>
-    <string name="theme_midnightdusk">黄昏</string>
-    <string name="theme_greenapple">青りんご</string>
-    <string name="pref_app_theme">アプリテーマ</string>
     <string name="action_start_downloading_now">ダウンロードを開始します</string>
-    <string name="theme_monet">ダイナミック</string>
     <string name="about_dont_kill_my_app">一部のメーカーは、バックグラウンド サービスを停止させる追加のアプリ制限を設けています。この問題を解決する方法については、こちらのウェブサイトに詳しい情報が掲載されています。</string>
     <string name="label_background_activity">バックグラウンドアクティビティ</string>
     <string name="restore_miui_warning">MIUI 最適化が無効になっている場合、バックアップおよび復元が正常に機能しない可能性があります。</string>
@@ -505,11 +490,9 @@
     <string name="relative_time_today">今日</string>
     <string name="help_translate">翻訳に協力</string>
     <string name="getting_started_guide">入門ガイド</string>
-    <string name="pref_tablet_ui_mode">タブレット UI</string>
     <string name="action_track">追跡</string>
     <string name="pref_remove_exclude_categories">除外対象カテゴリー</string>
     <string name="pref_hide_threshold">メニューを自動非表示するスクロール量</string>
-    <string name="theme_tealturquoise">ティール &amp; ターコイズ</string>
     <string name="pref_category_appearance">外観</string>
     <string name="confirm_lock_change">変更を確認するために認証してください</string>
     <string name="label_default">デフォルト</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">カスタム表紙</string>
     <string name="not_installed">未インストール</string>
     <string name="pref_app_language">アプリ言語</string>
-    <string name="theme_lavender">ラベンダー</string>
     <string name="description_placeholder">説明がありません</string>
     <string name="delete_category_confirmation">カテゴリー「%s」を削除しますか？</string>
     <string name="delete_category">カテゴリーを削除</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">アプリロックが有効になっている場合、ウィジェットは利用できません</string>
     <string name="update_already_running">アップデートはすでに進行中です</string>
     <string name="error_user_agent_string_blank">ユーザーエージェント文字列は空白にすることはできません</string>
-    <string name="theme_tidalwave">津波</string>
     <string name="download_ahead">事前ダウンロード</string>
     <string name="auto_download_while_reading">読書中に自動でダウンロード</string>
     <string name="download_ahead_info">現在の章と次の章が既にダウンロードされている場合にのみ機能します。</string>
@@ -752,8 +733,6 @@
     <string name="private_settings">トラッカーログイン情報などの機密性の高い情報を含む</string>
     <string name="manga_interval_expected_update_soon">間もなく</string>
     <string name="ext_revoke_trust">不明な拡張機能の信頼を取り消す</string>
-    <string name="onboarding_storage_help_info">古いバージョンからアップデートする場合で、どのオプションを選択すればよいか分からない場合は、ストレージ ガイドを参照してください。</string>
-    <string name="theme_nord">Nord</string>
     <string name="pref_library_update_smart_update">スマート・アップデート</string>
     <string name="pref_webtoon_disable_zoom_out">ズームアウトを無効にする</string>
     <string name="action_add_anyway">追加</string>
@@ -813,8 +792,6 @@
     <string name="clear_db_exclude_read">読んだ章ごとに項目を残しておく</string>
     <string name="possible_duplicates_title">重複の可能性</string>
     <string name="label_auto">自動</string>
-    <string name="theme_catppuccin">キャットプッチン</string>
-    <string name="theme_monochrome">モノクロ</string>
     <string name="pref_display_images_description">マンガの描写で画像をレンダリングする</string>
     <string name="pref_hide_missing_chapter_indicators">欠落している章のインジケーターを非表示にする</string>
     <string name="library_list">ライブラリリスト</string>
@@ -895,7 +872,6 @@
     <string name="migrationConfigScreen.prioritizeByChaptersTitle">章番号に基づいて一致</string>
     <string name="migrationConfigScreen.prioritizeByChaptersSubtitle">有効にすると、最も先の検索結果を選択します。無効にすると、ソースの優先順位に従って最初の検索結果を選択します。</string>
     <string name="migrationListScreen.matchWithoutChapterToast">章が見つかりませんでした。この項目は移行に使用できません</string>
-    <string name="theme_tokyonight">Tokyo Night</string>
     <string name="extensionStoresScreen.addStoreInput.inputLabel">拡張機能ストアのインデックス URL</string>
     <string name="downloading_with_progress">ダウンロード中… (%d%%)</string>
     <string name="pref_filter_update_categories_details">除外対象カテゴリーに含まれる更新情報は、たとえそれらが対象カテゴリーにも含まれている場合でも表示されません。</string>

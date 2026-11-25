@@ -15,7 +15,6 @@
     <string name="action_pin">Замацаваць</string>
     <string name="action_disable">Адключыць</string>
     <string name="action_display_show_number_of_items">Паказаць колькасць элементаў</string>
-    <string name="action_display_show_tabs">Паказваць укладкі катэгорый</string>
     <string name="action_display_local_badge">Лакальная крыніца</string>
     <string name="action_display_download_badge">Спампаваныя раздзелы</string>
     <string name="action_display_list">Спіс</string>
@@ -134,19 +133,6 @@
     <string name="pref_category_security">Бяспека і прыватнасць</string>
     <string name="pref_manage_notifications">Кіраванне апавяшчэннямі</string>
     <string name="pref_date_format">Фармат даты</string>
-    <string name="pref_dark_theme_pure_black">Чорная</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Інь і Ян</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Клубнічны дайкiры</string>
-    <string name="theme_midnightdusk">Паўночнае змярканне</string>
-    <string name="theme_greenapple">Зялёны яблык</string>
-    <string name="theme_monet">Дынамічная</string>
-    <string name="pref_app_theme">Тэма праграмы</string>
-    <string name="theme_dark">Цёмная</string>
-    <string name="theme_light">Светлая</string>
-    <string name="theme_system">Сістэмная</string>
-    <string name="pref_category_theme">Тэма</string>
     <string name="pref_category_about">Пра праграму</string>
     <string name="pref_category_advanced">Дадаткова</string>
     <string name="pref_category_tracking">Адсочванне</string>
@@ -251,7 +237,6 @@
     <string name="pref_image_scale_type">Маштабаванне</string>
     <string name="pref_inverted_colors">Інвертаваныя</string>
     <string name="relative_time_today">Сёння</string>
-    <string name="theme_tealturquoise">Бірузовая</string>
     <string name="pref_category_appearance">Выгляд</string>
     <string name="confirm_lock_change">Аўтэнтыфікуйцеся, каб падтвердзіць змену</string>
     <string name="label_default">Па змаўчанні</string>
@@ -315,7 +300,6 @@
     <string name="action_display_language_badge">Мова</string>
     <string name="network_not_metered">Толькі ў безлімітнай сетцы</string>
     <string name="ext_info_language">Мова</string>
-    <string name="theme_lavender">Лаванда</string>
     <string name="pref_app_language">Мова праграмы</string>
     <string name="pref_update_only_completely_read">Прапускаць з непрачытаным(і) раздзелам(і)</string>
     <string name="ext_installer_shizuku_stopped">Shizuku не запушчаны</string>
@@ -371,7 +355,6 @@
     <string name="onboarding_storage_info">Абярыце тэчку, дзе %1$s будзе захоўваць спампаваныя раздзелы, рэзервовыя копіі ды іншае.\n\nРэкамендуецца абраць асобную тэчку.\n\nВыбраная тэчка: %2$s</string>
     <string name="onboarding_storage_action_select">Абраць тэчку</string>
     <string name="onboarding_storage_selection_required">Неабходна абраць тэчку</string>
-    <string name="onboarding_storage_help_info">Абнаўляецеся са старой версіі і не ведаеце, што выбраць? Звярніцеся да дапаможніка па сховішчы для дадатковых зведак.</string>
     <string name="onboarding_storage_help_action">Дапаможнік па сховішчы</string>
     <string name="onboarding_permission_install_apps">Дазвол на ўсталёўку праграм</string>
     <string name="onboarding_permission_install_apps_description">Для ўсталёўкі пашырэнняў крыніц.</string>
@@ -395,10 +378,6 @@
     <string name="pref_backup_summary">Ручныя і аўтаматычныя рэзервоўкі, сховішча</string>
     <string name="pref_security_summary">Блакіроўка праграмы, абарона экрана</string>
     <string name="pref_advanced_summary">Выгрузка журнала збояў, аптымізацыя батарэі</string>
-    <string name="theme_catppuccin">Catppuccin</string>
-    <string name="theme_monochrome">Манахром</string>
-    <string name="theme_nord">Nord</string>
-    <string name="theme_tidalwave">Tidal Wave</string>
     <string name="pref_relative_format">Адносныя пазнакі часу</string>
     <string name="pref_relative_format_summary">«%1$s» замест « %2$s»</string>
     <string name="pref_display_images_description">Адлюстроўваць выявы ў апісаннях твораў</string>
@@ -547,7 +526,6 @@
     <string name="battery_optimization_disabled">Аптымізацыя батарэі ўжо адключана</string>
     <string name="battery_optimization_setting_activity_not_found">Не ўдалося адкрыць налады прылады</string>
     <string name="about_dont_kill_my_app">Некаторыя вытворцы маюць дадатковыя абмежаванні для праграм, якія забіваюць фонавыя службы. Тут ёсць зведкі, як гэта выправіць.</string>
-    <string name="pref_tablet_ui_mode">Планшэтны інтэрфейс</string>
     <string name="pref_verbose_logging">Падрабязнае журналяванне</string>
     <string name="pref_verbose_logging_summary">Запісваць падрабязнасці у сістэмны журнал (зніжае прадукцыйнасць праграмы)</string>
     <string name="pref_debug_info">Зведкі адладкі</string>
@@ -585,7 +563,6 @@
     <string name="downloaded_chapters">Спампаваныя раздзелы</string>
     <string name="intervals_header">Інтэрвалы</string>
     <string name="overlay_header">Накладанне</string>
-    <string name="tabs_header">Укладкі</string>
     <string name="no_more_results">Больш няма вынікаў</string>
     <string name="no_results_found">Нічога не знойдзена</string>
     <string name="local_source">Лакальная крыніца</string>
@@ -870,7 +847,6 @@
     <string name="migrationListScreen.migrateDialog.migrateLabel">Міграваць</string>
     <string name="migrationListScreen.matchWithoutChapterToast">Няма раздзелаў, твор не падыходзіць для міграцыі</string>
     <string name="transition_animation_flip_right">Гартанне управа</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="extensionStoresScreen.deleteStore.body">Ці выдаліць краму пашырэнняў «%1$s» (%2$s)?</string>
     <string name="supportUsScreen.currentlySupportedBy">Зараз Mihon падтрымліваюць %d+ спонсараў. Мы ўдзячныя кожнаму з вас. Зробім Mihon яшчэ лепей разам.</string>
     <string name="transition_animation_cube_inside">Куб (унутры)</string>
@@ -911,7 +887,6 @@
     <string name="supportUsScreen.donationPlatform.patreon">Patreon (рэкамендуецца)</string>
     <string name="pref_webtoon_vertical_navigator_on_left">Размясціць вертыкальную навігацыю злева</string>
     <string name="extensionStoresScreen.deleteStore.title">Выдаліць краму пашырэнняў</string>
-    <string name="theme_tokyonight">Tokyo Night</string>
     <string name="extensionStoresScreen.addStore.alreadyExists">Гэтая крама пашырэнняў ужо дададзена</string>
     <string name="transition_animation_fade_white">Згасанне праз белы</string>
     <string name="pref_high_quality_renderer">Ужыць высокаякасны рэндэрар</string>

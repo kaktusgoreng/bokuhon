@@ -101,7 +101,6 @@ data class BokuhonColors(
     fun surfaceColorAtElevation(elevation: Dp): Color = surface
 
     val container: Color get() = surfaceVariant
-    val onContainer: Color get() = onSurface
 }
 
 val BokuhonPaper = Color(0xFFF7F7F7)

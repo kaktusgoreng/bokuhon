@@ -52,7 +52,6 @@
     <string name="action_display_list">სია</string>
     <string name="action_display_comfortable_grid">კომფორტული ბადე</string>
     <string name="action_display_download_badge">გადმოწერის ნიშნაკი</string>
-    <string name="action_display_show_tabs">კატეგორიის ჩანართების ჩვენება</string>
     <string name="action_cancel">გააუქმე</string>
     <string name="action_cancel_all">გააუქმე ყველა</string>
     <string name="action_sort">დალაგება</string>
@@ -79,9 +78,6 @@
     <string name="pref_category_tracking">თვალყურის დევნება</string>
     <string name="pref_category_advanced">დამატებით</string>
     <string name="pref_category_about">ინფორმაცია</string>
-    <string name="theme_system">სისტემური</string>
-    <string name="theme_light">მსუბუქი</string>
-    <string name="theme_dark">ჩართული</string>
     <string name="pref_date_format">თარიღის ფორმატი</string>
     <string name="pref_manage_notifications">შეტყობინებების მართვა</string>
     <string name="pref_category_security">უსაფრთხოება და კონფიდენციალობა</string>
@@ -231,7 +227,6 @@
     <string name="logout_success">გამოსვლა წარმატებით მოხერხდა</string>
     <string name="unknown_error">დაფიქსირდა უცნობი შეცდომა</string>
     <string name="updating_category">კატეგორია ახლდება</string>
-    <string name="tabs_header">ჩანართები</string>
     <string name="no_more_results">შედეგების სიის დასასრული</string>
     <string name="no_results_found">შედეგი ვერ მოიძებნა</string>
     <string name="local_source">ლოცალური წყარო</string>
@@ -389,7 +384,6 @@
     <string name="requires_app_restart">ასამოქმედებლად საჭიროა აპლიკაციის გადატვირთვა</string>
     <string name="label_network">ქსელი</string>
     <string name="pref_category_reading_mode">კითხვის რეჟიმი</string>
-    <string name="pref_category_theme">თემა</string>
     <string name="action_disable">გამორთვა</string>
     <string name="action_start">დაწყება</string>
     <string name="action_sort_date_added">დამატების თარიღი</string>
@@ -400,9 +394,6 @@
     <string name="action_display_show_number_of_items">საგნების რაოდენობის ჩვენება</string>
     <string name="action_search_settings">პარამეტრების ძიება</string>
     <string name="action_start_downloading_now">დაიწყე ჩამოტვირთვა</string>
-    <string name="theme_greenapple">მწვანე ვაშლი</string>
-    <string name="theme_monet">დინამიური</string>
-    <string name="pref_app_theme">აპლიკაციის თემა</string>
     <string name="label_warning">გაფრთხილება</string>
     <string name="confirm_lock_change">აუთენტიკაცია ცვლილების დასადასტურებლად</string>
     <string name="pref_category_appearance">გარეგნობა</string>

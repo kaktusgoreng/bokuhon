@@ -59,10 +59,6 @@
     <string name="pref_category_security">Sekureco kaj privateco</string>
     <string name="pref_manage_notifications">Administri sciigojn</string>
     <string name="pref_date_format">Data formo</string>
-    <string name="theme_dark">Malhela</string>
-    <string name="theme_light">Hela</string>
-    <string name="theme_system">Sistema</string>
-    <string name="pref_category_theme">Etoso</string>
     <string name="pref_category_about">Pri</string>
     <string name="pref_category_downloads">Elŝutoj</string>
     <string name="pref_category_reader">Legilo</string>
@@ -180,7 +176,6 @@
     <string name="action_show_errors">Tuŝeti pro vidi detalojn</string>
     <string name="action_reset">Restartigi</string>
     <string name="action_display_show_number_of_items">Montri nombron da elementoj</string>
-    <string name="action_display_show_tabs">Montri kategoriajn langetojn</string>
     <string name="action_display_download_badge">Elŝutitaj ĉapitroj</string>
     <string name="action_display_grid">Kompakta krado</string>
     <string name="action_display">Montrado</string>
@@ -281,7 +276,6 @@
     <string name="other_source">Aliaj</string>
     <string name="no_results_found">Neniu rezulto trovita</string>
     <string name="no_more_results">Sen pliaj rezultoj</string>
-    <string name="tabs_header">Langetoj</string>
     <string name="manga_from_library">De biblioteko</string>
     <string name="unknown_error">Nekonata eraro</string>
     <string name="logout_success">Vi nun estas elsalutinta</string>
@@ -330,9 +324,6 @@
     <string name="on">Ŝaltita</string>
     <string name="pref_library_columns">Elementoj vice</string>
     <string name="relative_time_today">Hodiaŭ</string>
-    <string name="theme_yinyang">Jino kaj jango</string>
-    <string name="theme_greenapple">Verda pomo</string>
-    <string name="pref_app_theme">Apa etoso</string>
     <string name="pref_category_appearance">Aspekto</string>
     <string name="action_start_downloading_now">Komenci elŝuti nun</string>
     <string name="action_webview_refresh">Reŝargi</string>
@@ -379,9 +370,6 @@
     <string name="untrusted_extension">Malfidinda etendaĵo</string>
     <string name="charging">Dum ŝargado</string>
     <string name="lock_when_idle">Ŝlosi kiam senokupa</string>
-    <string name="pref_dark_theme_pure_black">Klara nigra reĝimo</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_midnightdusk">Meznokta krepusko</string>
     <string name="loading">Ŝargado…</string>
     <string name="cancel_all_for_series">Nuligi ĉiujn por ĉi tiu serio</string>
     <string name="confirm_lock_change">Aŭtentigi por konfirmi ŝanĝon</string>
@@ -401,10 +389,6 @@
     <string name="ext_pending">Atendanta</string>
     <string name="pref_update_only_non_completed">Preterpasi elementojn kun \"Finita\" statuso</string>
     <string name="restrictions">Limigoj: %s</string>
-    <string name="theme_yotsuba">Jocuba</string>
-    <string name="theme_tealturquoise">Bluverda k verdblua</string>
-    <string name="theme_strawberrydaiquiri">Fraga dajkirio</string>
-    <string name="theme_monet">Dinamika</string>
     <string name="pref_category_tracking">Sekvado</string>
     <string name="action_display_local_badge">Loka fonto</string>
     <string name="action_sort_chapter_fetch_date">Ĉapitra elŝuta dato</string>
@@ -432,7 +416,6 @@
     <string name="notification_incognito_text">Malŝalti inkognitan reĝimon</string>
     <string name="pref_incognito_mode">Inkognita reĝimo</string>
     <string name="pref_enable_acra">Sendadi prikolapsajn raportojn</string>
-    <string name="pref_tablet_ui_mode">Tabulkomputila fasado</string>
     <string name="pref_disable_battery_optimization">Malŝalti baterian optimumigon</string>
     <string name="channel_common">Ofta</string>
     <string name="cover_updated">Kovrilo aktualigita</string>
@@ -480,8 +463,6 @@
     <string name="invalid_backup_file_error">Tuta eraro:</string>
     <string name="source_settings">Agordoj de la fonto</string>
     <string name="app_settings">Apaj agordoj</string>
-    <string name="theme_nord">Nordo</string>
-    <string name="theme_tidalwave">Cunamo</string>
     <string name="pref_relative_format_summary">\"%1$s\" anstataŭ \"%2$s\"</string>
     <string name="pref_app_language">Apa lingvo</string>
     <string name="ext_update_all">Ĝisdatigi ĉiujn</string>
@@ -520,7 +501,6 @@
     <string name="onboarding_permission_action_grant">Permesi</string>
     <string name="onboarding_guides_new_user">Ĉu vi estas en %s unua foje? Ni rekomendas kontroli komencantan gvidilon.</string>
     <string name="pref_backup_summary">Permanaj k aŭtomataj savkopioj, konserveja spaco</string>
-    <string name="theme_lavender">Lavendo</string>
     <string name="pref_relative_format">Relativaj tempindikoj</string>
     <string name="scanlator">Skantradukisto</string>
     <string name="action_show_manga">Montri elementon</string>
@@ -541,7 +521,6 @@
     <string name="action_sort_tracker_score">Sekvila takso</string>
     <string name="action_display_cover_only_grid">Nur-kovrila krado</string>
     <string name="internal_error">InternalError: Kontrolu prikolapsajn protokolojn por pliaj informoj</string>
-    <string name="onboarding_storage_help_info">Ĉu vi ĝisdatigas de pli malnova versio kaj ne certas kion elekti? Kontrolu la konservejan gvidilon por pliaj informoj.</string>
     <string name="onboarding_action_finish">Komencu</string>
     <string name="action_add_anyway">Aldoni ĉiuokaze</string>
     <string name="onboarding_permission_ignore_battery_opts_description">Malebligi interrompojn por longedaŭraj bibliotekaj ĝisdatigoj, elŝutoj kaj savkopiaj restaŭroj.</string>
@@ -689,7 +668,6 @@
     <string name="action_notes">Notoj</string>
     <string name="action_edit_notes">Redakti notojn</string>
     <string name="action_display_unread_badge">Mallegi ĉapitron</string>
-    <string name="theme_monochrome">Unukolora</string>
     <string name="pref_behavior">Konduto</string>
     <string name="pref_mark_duplicate_read_chapter_read_new">Post akiro de nova ĉapitro</string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">Post legado de ĉapitro</string>
@@ -857,7 +835,6 @@
     <string name="migrationListScreen.migrateDialog.cancelLabel">Nuligi</string>
     <string name="migrationListScreen.progressDialog.cancelLabel">Nuligi</string>
     <string name="migrationListScreen.matchWithoutChapterToast">Neniu ĉapitro trovita, ĉi tiu elemento ne povas esti uzota por migri</string>
-    <string name="theme_catppuccin">Katpuĉino</string>
     <string name="pref_display_images_description">Montri bildojn en mangaaj priskriboj</string>
     <string name="pref_hide_missing_chapter_indicators">Kaŝi mankantajn ĉapitrajn indikilojn</string>
     <string name="tracked_privately">Sekvata private</string>
@@ -893,7 +870,6 @@
     <string name="donationCampaign.paragraph3">Sendepende de tio, Mihon daŭre estos prizorgata de mi kaj la volontuloj, kaj ĝi restos malfermitkoda.</string>
     <string name="donationCampaign.contactPlatform">Discord</string>
     <string name="donationCampaign.dismiss">Kaŝi</string>
-    <string name="theme_tokyonight">Tokia nokto</string>
     <string name="downloading_with_progress">Elŝutado… (%d%%)</string>
     <string name="pref_vertical_navigator">Uzi vertikalan ĉapitran navigilon en</string>
     <string name="pref_vertical_navigator_height">Alto de vertikala navigilo</string>
@@ -926,7 +902,6 @@
     <string name="pref_load_ahead_only_over_wifi">Antaŭŝargi nur per vifio</string>
     <string name="pref_load_ahead_only_over_wifi_summary">Ŝparas poŝtelefonretajn datumojn per ŝargado de nur la paĝoj proksimaj al tiu, kiun vi legas</string>
     <string name="pref_high_quality_renderer">Uzi altkvalitan bildigilon</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">Transpasa animacio</string>
     <string name="pref_transition_animation_dual">Transpasa animacio (duobla)</string>
     <string name="transition_animation_basic">Baza</string>

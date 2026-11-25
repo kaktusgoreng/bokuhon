@@ -14,9 +14,6 @@
     <string name="pref_category_security">ಭದ್ರತೆ</string>
     <string name="pref_manage_notifications">ಸೂಚನೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ</string>
     <string name="pref_date_format">ದಿನಾಂಕ ಸ್ವರೂಪ</string>
-    <string name="theme_system">ಸಿಸ್ಟಮ್ ಅನುಕರಿಸಿ</string>
-    <string name="theme_dark">ಆನ್</string>
-    <string name="theme_light">ಆಫ</string>
     <string name="pref_category_about">ಅಪ್ಲಿಕೇಶನ್ ಬಗ್ಗೆ</string>
     <string name="pref_category_advanced">ಸುಧಾರಿತ</string>
     <string name="pref_category_tracking">ಟ್ರ್ಯಾಕಿಂಗ್</string>
@@ -368,10 +365,8 @@
     <string name="pref_library_update_refresh_metadata">ಮೆಟಾಡೇಟಾವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ರಿಫ್ರೆಶ್ ಮಾಡಿ</string>
     <string name="action_migrate">ಮೂಲ ಸ್ಥಳಾಂತರ</string>
     <string name="page_list_empty_error">ಯಾವುದೇ ಪುಟಗಳು ಸಿಕ್ಕಿಲ್ಲ</string>
-    <string name="tabs_header">ಟ್ಯಾಬ್‌ಗಳು</string>
     <string name="pref_show_reading_mode_summary">ರೀಡರ್ ತೆರೆದಾಗ ಪ್ರಸ್ತುತ ಮೋಡ್ ಅನ್ನು ಸಂಕ್ಷಿಪ್ತವಾಗಿ ತೋರಿಸಿ</string>
     <string name="pref_show_reading_mode">ಓದುವ ರೀತಿ ತೋರಿಸಿ</string>
-    <string name="action_display_show_tabs">ವರ್ಗ ಟ್ಯಾಬ್‌ಗಳನ್ನು ತೋರಿಸಿ</string>
     <string name="action_display_comfortable_grid">ಆರಾಮದಾಯಕ ಗ್ರಿಡ್</string>
     <string name="action_disable_all">ಎಲ್ಲವನ್ನೂ ನಿಷ್ಕ್ರಿಯೆಗೊಳಿಸಿ</string>
     <string name="action_enable_all">ಎಲ್ಲವನ್ನೂ ಸಕ್ರಿಯಗೊಳಿಸಿ</string>
@@ -391,7 +386,6 @@
     <string name="requires_app_restart">ಅನ್ವಯಿಸಲು ಅಪ್ಲಿಕೇಶನ್ ಮರುಪ್ರಾರಂಭದ ಅಗತ್ಯವಿದೆ</string>
     <string name="label_network">ಅಡ್ವಾನ್ಸ್ಡ್ ಸೆಕ್ಷನ್</string>
     <string name="pref_category_reading_mode">ಓದುವ ಮೊಡ್</string>
-    <string name="pref_category_theme">ಜನರಲ್ ಸೆಲೆಕ್ಷನ್</string>
     <string name="action_sort_date_added">ಹಾಕಿದ್ದ ದಿನಾಂಕ</string>
     <string name="no_pinned_sources">ಯಾವುದೆ ಪಿನ್ ಮಾಡಿರುವ ಸೋರ್ಸ್ ಗಳು ಇಲ್ಲ</string>
     <string name="channel_complete">ಪೂರ್ಣ</string>

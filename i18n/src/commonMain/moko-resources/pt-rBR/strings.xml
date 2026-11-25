@@ -291,9 +291,6 @@
     <string name="action_sort_latest_chapter">Último capítulo</string>
     <string name="action_view_chapters">Visualizar os capítulos</string>
     <string name="action_cancel_all">Cancelar todos</string>
-    <string name="theme_light">Claro</string>
-    <string name="theme_dark">Escuro</string>
-    <string name="theme_system">Sistema</string>
     <string name="pref_manage_notifications">Gerenciar notificações</string>
     <string name="pref_category_security">Segurança e privacidade</string>
     <string name="lock_with_biometrics">Exigir desbloqueio</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Atualizar os metadados automaticamente</string>
     <string name="action_migrate">Migrar</string>
     <string name="action_display_comfortable_grid">Grade confortável</string>
-    <string name="action_display_show_tabs">Mostrar as abas de categoria</string>
-    <string name="tabs_header">Abas</string>
     <string name="page_list_empty_error">Nenhuma página encontrada</string>
     <string name="action_disable_all">Desativar todas</string>
     <string name="action_enable_all">Ativar todas</string>
@@ -392,7 +387,6 @@
     <string name="action_sort_date_added">Data de inclusão</string>
     <string name="action_global_search_query">Pesquisar por \"%1$s\" globalmente</string>
     <string name="pref_category_reading_mode">Modo de leitura</string>
-    <string name="pref_category_theme">Tema</string>
     <string name="no_pinned_sources">Você não tem fontes fixadas</string>
     <string name="channel_progress">Andamento</string>
     <string name="channel_complete">Concluído</string>
@@ -487,17 +481,8 @@
     <string name="action_start_downloading_now">Começar o download agora</string>
     <string name="about_dont_kill_my_app">Algumas fabricantes possuem restrições adicionais de aplicativos que encerram os serviços em segundo plano. Este site possui mais informações sobre como corrigir este problema.</string>
     <string name="restore_miui_warning">O backup e restauração podem não funcionar corretamente se a Otimização da MIUI estiver desabilitada.</string>
-    <string name="pref_dark_theme_pure_black">Modo noturno com preto absoluto</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Yin &amp; Yang</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Daiquiri de Morango</string>
-    <string name="theme_midnightdusk">Aurora-da-noite</string>
-    <string name="theme_greenapple">Maçã-verde</string>
-    <string name="pref_app_theme">Tema do aplicativo</string>
     <string name="enhanced_tracking_info">Oferecem recursos aprimorados para fontes específicas. Os itens são automaticamente monitorados quando adicionados em sua biblioteca.</string>
     <string name="enhanced_services">Monitoradores aprimorados</string>
-    <string name="theme_monet">Dinâmico</string>
     <string name="label_background_activity">Atividade em segundo plano</string>
     <string name="pref_lowest">Mais baixa</string>
     <string name="pref_low">Baixa</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Sensibilidade para ocultar o menu na rolagem</string>
     <string name="pref_inverted_colors">Invertido</string>
     <string name="relative_time_today">Hoje</string>
-    <string name="theme_tealturquoise">Azul-petróleo &amp; Turquesa</string>
     <string name="confirm_lock_change">Autentique-se para confirmar a mudança</string>
     <string name="label_default">Padrão</string>
     <string name="pref_category_appearance">Aparência</string>
     <string name="action_track">Monitorar</string>
     <string name="getting_started_guide">Guia de introdução</string>
-    <string name="pref_tablet_ui_mode">Interface de tablet</string>
     <string name="pref_remove_exclude_categories">Categorias ignoradas</string>
     <string name="help_translate">Ajudar a traduzir</string>
     <string name="ext_app_info">Informações</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Capa personalizada</string>
     <string name="not_installed">Não instalado</string>
     <string name="pref_app_language">Idioma do aplicativo</string>
-    <string name="theme_lavender">Lavanda</string>
     <string name="description_placeholder">Sem descrição</string>
     <string name="delete_category">Deletar categoria</string>
     <string name="delete_category_confirmation">Você deseja deletar a categoria \"%s\"?</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">Widget não disponível quando o bloqueio do aplicativo está habilitado</string>
     <string name="update_already_running">Uma atualização já está em andamento</string>
     <string name="error_user_agent_string_blank">O valor do User-Agent não pode ficar em branco</string>
-    <string name="theme_tidalwave">Onda Tidal</string>
     <string name="download_ahead">Fazer download a frente</string>
     <string name="auto_download_while_reading">Download automático durante a leitura</string>
     <string name="download_ahead_info">Funciona somente se o capítulo atual e próximo já estão disponíveis offline.</string>
@@ -751,9 +732,7 @@
     <string name="invalid_backup_file_error">Erro completo:</string>
     <string name="pref_library_update_smart_update">Atualização inteligente</string>
     <string name="onboarding_storage_help_action">Guia de armazenamento</string>
-    <string name="onboarding_storage_help_info">Atualizando de uma versão anterior e não tem certeza do que selecionar? Consulte o guia de armazenamento para mais informações.</string>
     <string name="manga_interval_expected_update_soon">Em breve</string>
-    <string name="theme_nord">Nord</string>
     <string name="ext_revoke_trust">Revogar a confiabilidade de extensões desconhecidas</string>
     <string name="pref_webtoon_disable_zoom_out">Desativar redução de zoom</string>
     <string name="action_add_anyway">Adicionar de qualquer maneira</string>
@@ -800,7 +779,6 @@
     <string name="action_toggle_private_on">Rastrear privadamente</string>
     <string name="action_toggle_private_off">Rastrear publicamente</string>
     <string name="action_display_unread_badge">Capítulos não lidos</string>
-    <string name="theme_monochrome">Monocromático</string>
     <string name="pref_mark_duplicate_read_chapter_read_new">Depois de buscar um novo capítulo</string>
     <string name="non_library_settings">Todas as entradas lidas</string>
     <string name="library_list">Lista da biblioteca</string>
@@ -859,7 +837,6 @@
     <string name="pref_hide_missing_chapter_indicators">Ocultar indicadores de capítulos ausentes</string>
     <string name="action_edit_notes">Editar anotações</string>
     <string name="action_notes">Anotações</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="action_webview_close_tab">Fechar aba</string>
     <string name="pref_display_images_description">Renderizar imagens em descrições de mangá</string>
     <string name="pref_disallow_non_ascii_filenames">Não permitir nomes de arquivos não ASCII</string>
@@ -896,7 +873,6 @@
     <string name="pref_vertical_navigator">Usar o navegador de capítulos vertical em</string>
     <string name="pref_vertical_navigator_height">Altura do navegador vertical</string>
     <string name="considering">Considerando</string>
-    <string name="theme_tokyonight">Noite em Tóquio</string>
     <string name="downloading_with_progress">Fazendo download…(%d%%)</string>
     <string name="pref_filter_update_categories_details">Atualizações nas categorias excluídas não serão exibidas mesmo que eles também estejam nas categorias incluídas.</string>
     <string name="pref_filter_upcoming_categories_details">Títulos nas categorias excluídas não serão exibidas, mesmo que eles também estejam nas categorias incluídas.</string>
@@ -921,7 +897,6 @@
     <string name="ext_content_warning_mixed_description">Fontes dessa extensão pode conter conteúdos tanto seguros quanto 18+.</string>
     <string name="ext_content_warning_nsfw_description">Fontes dessa extensão tem foco principal em conteúdos 18+.</string>
     <string name="pref_high_quality_renderer">Usar renderização de alta qualidade</string>
-    <string name="webgpu_viewer">WebGPU</string>
     <string name="pref_transition_animation">Animação de transição</string>
     <string name="pref_transition_animation_dual">Animação de transição (duplo)</string>
     <string name="transition_animation_basic">Básico</string>

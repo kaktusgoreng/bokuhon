@@ -76,13 +76,6 @@ class SnackbarHostState {
             data.continuation?.takeIf { it.isActive }?.resume(SnackbarResult.Dismissed)
         }
     }
-
-    fun performAction() {
-        currentSnackbarData?.let { data ->
-            currentSnackbarData = null
-            data.continuation?.takeIf { it.isActive }?.resume(SnackbarResult.ActionPerformed)
-        }
-    }
 }
 
 class SnackbarData internal constructor(
@@ -94,10 +87,6 @@ class SnackbarData internal constructor(
 ) {
     fun dismiss() {
         continuation?.takeIf { it.isActive }?.resume(SnackbarResult.Dismissed)
-    }
-
-    fun performAction() {
-        continuation?.takeIf { it.isActive }?.resume(SnackbarResult.ActionPerformed)
     }
 }
 

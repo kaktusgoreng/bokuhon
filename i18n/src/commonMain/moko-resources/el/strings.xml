@@ -337,9 +337,6 @@
     <string name="pref_category_security">Ασφάλεια και ιδιωτικότητα</string>
     <string name="pref_manage_notifications">Διαχείριση ειδοποιήσεων</string>
     <string name="pref_date_format">Μορφή ημερομηνίας</string>
-    <string name="theme_system">Σύστημα</string>
-    <string name="theme_dark">Σκοτεινό</string>
-    <string name="theme_light">Φωτεινό</string>
     <string name="action_move_to_bottom">Μετακίνηση στον πάτο</string>
     <string name="action_move_to_top">Μετακίνηση στην κορυφή</string>
     <string name="action_cancel_all">Ακύρωση όλων</string>
@@ -368,8 +365,6 @@
     <string name="pref_library_update_refresh_metadata">Αυτόματη ανανέωση μεταδεδομένων</string>
     <string name="action_migrate">Μεταφορά</string>
     <string name="action_display_comfortable_grid">Άνετο πλέγμα</string>
-    <string name="tabs_header">Καρτέλες</string>
-    <string name="action_display_show_tabs">Εμφάνιση καρτελών κατηγοριών</string>
     <string name="page_list_empty_error">Δεν βρέθηκαν σελίδες</string>
     <string name="action_disable_all">Απενεργοποίηση όλων</string>
     <string name="action_enable_all">Ενεργοποίηση όλων</string>
@@ -391,7 +386,6 @@
     <string name="download_insufficient_space">Δεν ήταν δυνατή η λήψη κεφαλαίων λόγω χαμηλού αποθηκευτικού χώρου</string>
     <string name="action_global_search_query">Αναζήτηση του \"%1$s\" καθολικά</string>
     <string name="pref_category_reading_mode">Λειτουργία ανάγνωσης</string>
-    <string name="pref_category_theme">Θέμα</string>
     <string name="action_sort_date_added">Ημερομηνία προσθήκης</string>
     <string name="no_pinned_sources">Δεν έχετε καρφιτσωμένες πηγές</string>
     <string name="channel_complete">Ολοκληρωμένο</string>
@@ -485,19 +479,10 @@
     <string name="tracking_guide">Οδηγός tracking</string>
     <string name="information_empty_category_dialog">Δεν έχετε κατηγορίες ακόμα.</string>
     <string name="action_start_downloading_now">Έναρξη λήψης τώρα</string>
-    <string name="theme_midnightdusk">Midnight Dusk</string>
-    <string name="theme_greenapple">Πράσινο Μήλο</string>
-    <string name="pref_app_theme">Θέμα εφαρμογής</string>
     <string name="about_dont_kill_my_app">Ορισμένοι κατασκευαστές έχουν πρόσθετους περιορισμούς εφαρμογών που εξουδετερώνουν τις υπηρεσίες παρασκηνίου. Αυτός ο ιστότοπος έχει περισσότερες πληροφορίες για το πώς να το διορθώσετε.</string>
     <string name="restore_miui_warning">Η δημιουργία αντιγράφων ασφαλείας/επαναφορά ενδέχεται να μη λειτουργεί σωστά εάν είναι απενεργοποιημένη η Βελτιστοποίηση MIUI.</string>
-    <string name="pref_dark_theme_pure_black">Απόλυτα μαύρη σκοτεινή λειτουργία</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="theme_yinyang">Γιν και Γιανγκ</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_strawberrydaiquiri">Φράουλα Daiquiri</string>
     <string name="enhanced_tracking_info">Παρέχει βελτιωμένες δυνατότητες για συγκεκριμένες πηγές. Οι καταχωρήσεις παρακολουθούνται αυτόματα όταν προστίθενται στη βιβλιοθήκη σας.</string>
     <string name="enhanced_services">Ενισχυμένοι trackers</string>
-    <string name="theme_monet">Δυναμικό</string>
     <string name="label_background_activity">Δραστηριότητα παρασκηνίου</string>
     <string name="pref_lowest">Χαμηλότερη</string>
     <string name="pref_low">Χαμηλή</string>
@@ -506,13 +491,11 @@
     <string name="pref_hide_threshold">Ευαισθησία για την απόκρυψη του μενού κατά την κύλιση</string>
     <string name="pref_inverted_colors">Αντεστραμμένο</string>
     <string name="relative_time_today">Σήμερα</string>
-    <string name="theme_tealturquoise">Teal &amp; Τιρκουάζ</string>
     <string name="confirm_lock_change">Έλεγχος ταυτότητας για επιβεβαίωση αλλαγής</string>
     <string name="label_default">Προεπιλογή</string>
     <string name="pref_category_appearance">Εμφάνιση</string>
     <string name="action_track">Παρακολούθηση</string>
     <string name="getting_started_guide">Οδηγός για τα πρώτα βήματα</string>
-    <string name="pref_tablet_ui_mode">Διεπαφή χρήστη tablet</string>
     <string name="pref_remove_exclude_categories">Εξαιρούμενες κατηγορίες</string>
     <string name="help_translate">Βοηθήστε στη μετάφραση</string>
     <string name="ext_app_info">Πληροφορίες εφαρμογής</string>
@@ -585,7 +568,6 @@
     <string name="custom_cover">Προσαρμοσμένο εξώφυλλο</string>
     <string name="not_installed">Δεν έχει εγκατασταθεί</string>
     <string name="pref_app_language">Γλώσσα εφαρμογής</string>
-    <string name="theme_lavender">Λεβάντα</string>
     <string name="description_placeholder">Χωρίς περιγραφή</string>
     <string name="delete_category">Διαγραφή κατηγορίας</string>
     <string name="delete_category_confirmation">Θέλετε να διαγράψετε την κατηγορία \"%s\";</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">Το widget δεν είναι διαθέσιμο όταν είναι ενεργοποιημένο το κλείδωμα εφαρμογών</string>
     <string name="update_already_running">Εκτελείται ήδη μια ενημέρωση</string>
     <string name="error_user_agent_string_blank">Η συμβολοσειρά πράκτορα χρήστη δεν μπορεί να είναι κενή</string>
-    <string name="theme_tidalwave">Παλιρροϊκό κύμα</string>
     <string name="download_ahead">Λήψη εκ των προτέρων</string>
     <string name="auto_download_while_reading">Αυτόματη λήψη κατά την ανάγνωση</string>
     <string name="download_ahead_info">Λειτουργεί μόνο εάν το τρέχον κεφάλαιο + το επόμενο έχουν ήδη ληφθεί.</string>
@@ -747,11 +728,9 @@
     <string name="ext_permission_install_apps_warning">Απαιτούνται δικαιώματα για την εγκατάσταση επεκτάσεων. Πατήστε εδώ για παραχώρηση.</string>
     <string name="private_settings">Συμπεριλάβετε ευαίσθητες ρυθμίσεις (π.χ. διακριτικά σύνδεσης παρακολούθησης)</string>
     <string name="invalid_backup_file_error">Πλήρες σφάλμα:</string>
-    <string name="onboarding_storage_help_info">Ενημερώνετε από μια παλαιότερη έκδοση και δεν είστε σίγουροι τι να επιλέξετε; Ανατρέξτε στον οδηγό αποθήκευσης για περισσότερες πληροφορίες.</string>
     <string name="onboarding_storage_help_action">Οδηγός αποθήκευσης</string>
     <string name="manga_interval_expected_update">Τα νέα κεφάλαια προβλέπεται να κυκλοφορήσουν σε περίπου %1$s, ελέγχοντας κάθε %2$s.</string>
     <string name="manga_interval_custom_amount">Προσαρμοσμένη συχνότητα ενημέρωσης:</string>
-    <string name="theme_nord">Nord</string>
     <string name="pref_library_update_smart_update">Έξυπνη ενημέρωση</string>
     <string name="manga_interval_expected_update_soon">Σύντομα</string>
     <string name="ext_revoke_trust">Ανάκληση αξιόπιστων άγνωστων επεκτάσεων</string>
@@ -795,7 +774,6 @@
     <string name="label_auto">Αυτόματο</string>
     <string name="export">Εξαγωγή</string>
     <string name="library_list">Κατάλογος Βιβλιοθήκης</string>
-    <string name="theme_monochrome">Μονόχρωμο</string>
     <string name="pref_mark_duplicate_read_chapter_read">Επισήμανση διπλότυπου αναγνωσμένου κεφαλαίου ως αναγνωσμένο</string>
     <string name="pref_mark_duplicate_read_chapter_read_new">Μετά τη λήψη του νέου κεφαλαίου</string>
     <string name="action_display_unread_badge">Μη αναγνωσμένα κεφάλαια</string>
@@ -823,7 +801,6 @@
     <string name="migrationListScreen.exitDialog.stopLabel">Σταμάτημα</string>
     <string name="possible_duplicates_summary">Έχετε καταχωρήσεις στη βιβλιοθήκη σας με παρόμοιο όνομα.\n\nΕπιλέξτε μια καταχώρηση για να τη μεταφέρετε ή να την προσθέσετε ούτως ή άλλως.</string>
     <string name="possible_duplicates_title">Πιθανά διπλότυπα</string>
-    <string name="theme_catppuccin">Catppuccin</string>
     <string name="pref_update_library_manga_titles">Ενημέρωση τίτλων manga της βιβλιοθήκης για να ταιριάζουν με την πηγή</string>
     <string name="pref_update_library_manga_titles_summary">Προειδοποίηση: αν ένα manga μετονομαστεί, θα αφαιρεθεί από την ουρά λήψης (αν υπάρχει).</string>
     <string name="migrationConfigScreen.selectEnabledLabel">Επιλογή ενεργοποιημένων πηγών</string>

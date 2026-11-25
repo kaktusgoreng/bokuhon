@@ -326,10 +326,6 @@
     <string name="pref_category_security">ความปลอดภัยและความเป็นส่วนตัว</string>
     <string name="pref_manage_notifications">จัดการการแจ้งเตือน</string>
     <string name="pref_date_format">รูปแบบวันที่</string>
-    <string name="theme_dark">มืด</string>
-    <string name="theme_light">สว่าง</string>
-    <string name="theme_system">ระบบ</string>
-    <string name="pref_category_theme">ธีม</string>
     <string name="pref_category_library">คลัง</string>
     <string name="action_webview_refresh">โหลดซ้ำ</string>
     <string name="action_webview_forward">ไปข้างหน้า</string>
@@ -349,7 +345,6 @@
     <string name="action_pin">ตรึง</string>
     <string name="action_disable">ปิดการใช้งาน</string>
     <string name="action_display_show_number_of_items">แสดงจำนวน</string>
-    <string name="action_display_show_tabs">แสดงแท็บหมวดหมู่</string>
     <string name="action_display_comfortable_grid">ตารางแบบเต็มที</string>
     <string name="action_migrate">โยกย้าย</string>
     <string name="action_start">เริ่ม</string>
@@ -408,7 +403,6 @@
     <string name="action_global_search_query">ค้นหา \"%1$s\" ในทั้งหมด</string>
     <string name="pinned_sources">ที่ตรึงไว้</string>
     <string name="last_used_source">ใช้ล่าสุด</string>
-    <string name="tabs_header">แท็บ</string>
     <string name="downloaded_chapters">ตอนที่ดาวน์โหลดแล้ว</string>
     <string name="manga_from_library">จากคลัง</string>
     <string name="logout_success">ออกจากระบบแล้ว</string>
@@ -506,16 +500,11 @@
     <string name="unread">ยังไม่ได้อ่าน</string>
     <string name="pref_inverted_colors">สลับสี</string>
     <string name="action_sort_count">รายการทั้งหมด</string>
-    <string name="pref_tablet_ui_mode">UI แท็บเล็ต</string>
     <string name="clear_database_source_item_count">มี %1$d รายการ ที่ไม่ได้อยู่ในคลังในฐานข้อมูล</string>
     <string name="database_clean">ไม่มีอะไรให้ต้องล้าง</string>
     <string name="about_dont_kill_my_app">ผู้ผลิตบางรายมีข้อจำกัดเพิ่มเติมของแอปที่ปิดบริการพื้นหลัง เว็บไซต์นี้มีข้อมูลเพิ่มเติมเกี่ยวกับวิธีการแก้ไข</string>
     <string name="pref_verbose_logging">การบันทึกอย่างละเอียด</string>
     <string name="pref_category_appearance">ลักษณะ</string>
-    <string name="pref_app_theme">ธีมแอพ</string>
-    <string name="theme_monet">ไดนามิก</string>
-    <string name="theme_greenapple">กรีนแอปเปิ้ล</string>
-    <string name="theme_midnightdusk">มิดไนท์ดัสก์</string>
     <string name="pref_low">ช้า</string>
     <string name="pref_lowest">ช้ามาก</string>
     <string name="pref_highest">เร็วที่สุด</string>
@@ -529,12 +518,6 @@
     <string name="label_warning">คำเตือน</string>
     <string name="action_display_local_badge">แหล่งที่มาในเครื่อง</string>
     <string name="action_display_language_badge">ภาษา</string>
-    <string name="theme_strawberrydaiquiri">สตรอว์เบอร์รีแด๊กเคอรี่</string>
-    <string name="theme_tako">ทาโกะ</string>
-    <string name="theme_tealturquoise">ทีลและเทอร์ควอยซ์</string>
-    <string name="theme_yinyang">หยินหยาง</string>
-    <string name="theme_yotsuba">โยทซึบะ</string>
-    <string name="pref_dark_theme_pure_black">โหมดมืดดำสนิท</string>
     <string name="update_72hour">ทุก 3 วัน</string>
     <string name="restrictions">ข้อจำกัด: %s</string>
     <string name="connected_to_wifi">เฉพาะขณะเชื่อมต่อ Wi-Fi</string>
@@ -586,7 +569,6 @@
     <string name="not_installed">ยังไม่ถูกติดตั้ง</string>
     <string name="pref_app_language">ภาษาของแอพ</string>
     <string name="description_placeholder">ไม่มีคำอธิบาย</string>
-    <string name="theme_lavender">ลาเวนเดอร์</string>
     <string name="delete_category_confirmation">ต้องการจะลบหมวดหมู่ \"%s\" ไหม?</string>
     <string name="delete_category">ลบหมวดหมู่</string>
     <string name="internal_error">InternalError: ตรวจสอบบันทึกการแครชสำหรับข้อมูลเพิ่มเติม</string>
@@ -597,7 +579,6 @@
     <string name="appwidget_unavailable_locked">วิดเจ็ตไม่พร้อมใช้งานขณะการล็อกแอปเปิดไว้</string>
     <string name="error_user_agent_string_blank">สตริงตัวแทนผู้ใช้ไม่สามารถทิ้งว่างเปล่าไว้ได้</string>
     <string name="update_already_running">กำลังอัปเดตอยู่แล้ว</string>
-    <string name="theme_tidalwave">ไทเดลเวฟ</string>
     <string name="download_ahead">ดาวน์โหลดล่วงหน้า</string>
     <string name="auto_download_while_reading">ดาวน์โหลดอัตโนมัติขณะกำลังอ่าน</string>
     <string name="download_ahead_info">ใช้ได้เฉพาะกับตอนปัจจุบัน + ตอนถัด ๆ ไปดาวน์โหลดไว้อยู่แล้ว</string>
@@ -753,8 +734,6 @@
     <string name="onboarding_storage_help_action">คู่มือการจัดเก็บข้อมูล</string>
     <string name="ext_revoke_trust">เพิกถอนส่วนขยายที่ไม่รู้จักที่เชื่อถือไว้</string>
     <string name="manga_interval_expected_update_soon">เร็ว ๆ นี้</string>
-    <string name="onboarding_storage_help_info">กำลังอัปเดตจากเวอร์ชันเก่าและไม่แน่ใจว่าจะเลือกอะไรใช่ไหม? โปรดดูคู่มือการจัดเก็บข้อมูลสำหรับข้อมูลเพิ่มเติม</string>
-    <string name="theme_nord">นอร์ด</string>
     <string name="action_copy_link">คัดลอกลิงก์</string>
     <string name="action_sort_random">สุ่ม</string>
     <string name="onboarding_permission_analytics">อนุญาตให้เก็บข้อมูลไปวิเคราะห์</string>
@@ -795,8 +774,6 @@
     <string name="action_display_unread_badge">ตอนที่ยังไม่ได้อ่าน</string>
     <string name="action_notes">โน้ต</string>
     <string name="action_edit_notes">แก้ไขโน้ต</string>
-    <string name="theme_catppuccin">แคทปุชชิน</string>
-    <string name="theme_monochrome">โมโนโครม</string>
     <string name="pref_behavior">พฤติกรรม</string>
     <string name="pref_mark_duplicate_read_chapter_read">ทำเครื่องหมายตอนซ้ำที่อ่านแล้วว่าอ่านแล้ว</string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">หลังจากอ่านตอน</string>

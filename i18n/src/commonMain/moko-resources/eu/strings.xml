@@ -224,7 +224,6 @@
     <string name="pref_custom_brightness">Distira pertsonalizatua</string>
     <string name="filter_mode_multiply">Biderkatu</string>
     <string name="creating_backup_error">Babeskopia egiteak huts egin du</string>
-    <string name="theme_midnightdusk">Gauerdiko ilunabarra</string>
     <string name="ext_installed">Instalatuak</string>
     <string name="ext_app_info">Aplikazioaren informazioa</string>
     <string name="pref_page_transitions">Animatu orrialdeen trantsizioak</string>
@@ -270,7 +269,6 @@
     <string name="pref_clear_database">Garbitu datu-basea</string>
     <string name="pref_dump_crash_logs_summary">Erroreen erregistroak fitxategi batean gordetzen ditu garatzaileekin partekatzeko</string>
     <string name="updating_category">Kategoria eguneratzen</string>
-    <string name="tabs_header">Fitxak</string>
     <string name="sort_by_number">Kapitulu zenbakiaren arabera</string>
     <string name="sort_by_upload_date">Igoera dataren arabera</string>
     <string name="confirm_set_image_as_cover">Irudi hau azaleko arte gisa erabili?</string>
@@ -313,9 +311,7 @@
     <string name="action_display_list">Zerrendatu</string>
     <string name="action_display_download_badge">Deskargatutako kapituluak</string>
     <string name="action_display_show_number_of_items">Erakutsi elementu kantitatea</string>
-    <string name="action_display_show_tabs">Erakutsi kategorien fitxak</string>
     <string name="pref_category_about">Honi buruz</string>
-    <string name="pref_category_theme">Gaia</string>
     <string name="pref_dump_crash_logs">Sortu erroreen erregistroak</string>
     <string name="notification_chapters_single">%1$s Kapitulua</string>
     <string name="notification_chapters_multiple">%1$s Kapituluak</string>
@@ -382,12 +378,6 @@
     <string name="action_sort">Ordenatu</string>
     <string name="action_order_by_upload_date">Igoera dataren arabera</string>
     <string name="action_order_by_chapter_number">Kapitulu zenbakiaren arabera</string>
-    <string name="theme_system">Sistemarena erabili</string>
-    <string name="theme_light">Itzali</string>
-    <string name="theme_dark">Piztu</string>
-    <string name="pref_app_theme">Aplikazioaren gaia</string>
-    <string name="theme_monet">Dinamikoa</string>
-    <string name="theme_greenapple">Sagar Berdea</string>
     <string name="pref_date_format">Dataren formatua</string>
     <string name="pref_manage_notifications">Kudeatu jakinarazpenak</string>
     <string name="pref_category_security">Segurtasuna</string>
@@ -470,12 +460,6 @@
     <string name="pref_category_tracking">Jarraipena</string>
     <string name="pref_category_advanced">Aurreratua</string>
     <string name="action_display_language_badge">Hizkuntza</string>
-    <string name="theme_strawberrydaiquiri">Marrubi Daiquiri-a</string>
-    <string name="theme_tako">Tako</string>
-    <string name="theme_tealturquoise">Urdin-berdea eta turkesa</string>
-    <string name="theme_yinyang">Yin eta Yang</string>
-    <string name="theme_yotsuba">Yotsuba</string>
-    <string name="pref_dark_theme_pure_black">Beltz hutseko modu iluna</string>
     <string name="update_never">Itzali</string>
     <string name="update_6hour">6 orduro</string>
     <string name="update_12hour">12 orduro</string>
@@ -515,7 +499,6 @@
     <string name="download_queue_error">Ezin izan dira kapituluak deskargatu. Berriro saia zaitezke deskargen atalean</string>
     <string name="save_chapter_as_cbz">Gorde CBZ artxibo gisa</string>
     <string name="pref_refresh_library_covers">Eguneratu liburutegiko manga azalak</string>
-    <string name="pref_tablet_ui_mode">Tablet interfazea</string>
     <string name="share_page_info">%1$s: %2$s, %3$d orrialdea</string>
     <string name="information_empty_category_dialog">Oraindik ez duzu kategoriarik sortu.</string>
     <string name="extension_api_error">Ezin izan da luzapenen zerrenda lortu</string>
