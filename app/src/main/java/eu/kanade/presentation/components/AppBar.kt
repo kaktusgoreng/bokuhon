@@ -2,6 +2,7 @@ package eu.kanade.presentation.components
 
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,6 +59,7 @@ import tachiyomi.presentation.core.util.clearFocusOnSoftKeyboardHide
 import tachiyomi.presentation.core.util.runOnEnterKeyPressed
 import tachiyomi.presentation.core.util.secondaryItemAlpha
 import tachiyomi.presentation.core.util.showSoftKeyboard
+import tachiyomi.presentation.core.bokuhon.DropdownMenu as BokuhonDropdownMenu
 
 @Composable
 fun AppBar(
@@ -211,27 +213,30 @@ fun AppBarActions(
 
     val overflowActions = actions.filterIsInstance<AppBar.OverflowAction>()
     if (overflowActions.isNotEmpty()) {
-        IconButton(
-            onClick = { showMenu = !showMenu },
-        ) {
-            Icon(
-                MaterialSymbols.Rounded.MoreVert,
-                contentDescription = stringResource(MR.strings.action_menu_overflow_description),
-            )
-        }
-
-        DropdownMenu(
-            expanded = showMenu,
-            onDismissRequest = { showMenu = false },
-        ) {
-            overflowActions.map {
-                DropdownMenuItem(
-                    onClick = {
-                        it.onClick()
-                        showMenu = false
-                    },
-                    text = { Text(it.title, fontWeight = FontWeight.Normal) },
+        // Anchored to the button so the menu opens below it, as the library category picker does
+        Box {
+            IconButton(
+                onClick = { showMenu = !showMenu },
+            ) {
+                Icon(
+                    MaterialSymbols.Rounded.MoreVert,
+                    contentDescription = stringResource(MR.strings.action_menu_overflow_description),
                 )
+            }
+
+            BokuhonDropdownMenu(
+                expanded = showMenu,
+                onDismissRequest = { showMenu = false },
+            ) {
+                overflowActions.map {
+                    DropdownMenuItem(
+                        onClick = {
+                            it.onClick()
+                            showMenu = false
+                        },
+                        text = { Text(it.title, fontWeight = FontWeight.Normal) },
+                    )
+                }
             }
         }
     }
