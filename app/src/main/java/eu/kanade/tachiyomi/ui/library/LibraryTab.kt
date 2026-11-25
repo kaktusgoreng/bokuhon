@@ -14,13 +14,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.util.fastAll
+import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.result.LocalResultEventBus
 import androidx.navigation3.runtime.result.ResultEffect
 import dev.zacsweers.metrox.viewmodel.metroViewModel
+import eu.kanade.presentation.category.components.CategoryCreateDialog
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.library.DeleteLibraryMangaDialog
 import eu.kanade.presentation.library.LibrarySettingsDialog
+import eu.kanade.presentation.library.components.LibraryCategoryMenu
 import eu.kanade.presentation.library.components.LibraryContent
 import eu.kanade.presentation.library.components.LibraryToolbar
 import eu.kanade.presentation.manga.components.LibraryBottomActionMenu
@@ -81,10 +84,9 @@ fun LibraryTab() {
     }
 
     Scaffold(
-        topBar = { scrollBehavior ->
+        topBar = {
             val title = state.getToolbarTitle(
                 defaultTitle = stringResource(MR.strings.label_library),
-                defaultCategoryTitle = stringResource(MR.strings.label_default),
                 page = state.coercedActiveCategoryIndex,
             )
             LibraryToolbar(
@@ -112,7 +114,16 @@ fun LibraryTab() {
                 searchQuery = state.searchQuery,
                 onSearchQueryChange = viewModel::search,
                 // For scroll overlay when no tab
-                scrollBehavior = scrollBehavior.takeIf { !state.showCategoryTabs },
+                scrollBehavior = null,
+                categoryMenu = {
+                    LibraryCategoryMenu(
+                        categories = state.displayedCategories,
+                        selectedIndex = state.coercedActiveCategoryIndex,
+                        getItemCountForCategory = state::getItemCountForCategory,
+                        onSelectCategory = viewModel::updateActiveCategoryIndex,
+                        onCreateCategory = viewModel::openCreateCategoryDialog,
+                    )
+                },
             )
         },
         bottomBar = {
@@ -159,7 +170,6 @@ fun LibraryTab() {
                     contentPadding = contentPadding,
                     currentPage = state.coercedActiveCategoryIndex,
                     hasActiveFilters = state.hasActiveFilters,
-                    showPageTabs = state.showCategoryTabs || !state.searchQuery.isNullOrEmpty(),
                     onChangeCurrentPage = viewModel::updateActiveCategoryIndex,
                     onClickManga = { navigator.push(MangaRoute(it)) },
                     onContinueReadingClicked = { it: LibraryManga ->
@@ -184,7 +194,6 @@ fun LibraryTab() {
                     onGlobalSearchClicked = {
                         navigator.push(GlobalSearchRoute(viewModel.state.value.searchQuery ?: ""))
                     },
-                    getItemCountForCategory = { state.getItemCountForCategory(it) },
                     getDisplayMode = { viewModel.getDisplayMode() },
                     getColumnsForOrientation = { viewModel.getColumnsForOrientation(it) },
                     getItemsForCategory = { state.getItemsForCategory(it) },
@@ -214,6 +223,13 @@ fun LibraryTab() {
                     viewModel.clearSelection()
                     viewModel.setMangaCategories(dialog.manga, include, exclude)
                 },
+            )
+        }
+        is LibraryViewModel.Dialog.CreateCategory -> {
+            CategoryCreateDialog(
+                onDismissRequest = onDismissRequest,
+                onCreate = viewModel::createCategory,
+                categories = state.libraryData.categories.fastMap { it.name },
             )
         }
         is LibraryViewModel.Dialog.DeleteManga -> {

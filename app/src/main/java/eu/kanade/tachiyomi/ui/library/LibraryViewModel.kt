@@ -54,6 +54,7 @@ import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.util.lang.SubscriberGate
 import tachiyomi.core.common.util.lang.compareToWithCollator
 import tachiyomi.core.common.util.lang.pausedWhileUnsubscribed
+import tachiyomi.domain.category.interactor.CreateCategoryWithName
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
@@ -84,6 +85,7 @@ class LibraryViewModel(
     @AppCoroutineScope private val appScope: CoroutineScope,
     private val getLibraryManga: GetLibraryManga,
     private val getCategories: GetCategories,
+    private val createCategoryWithName: CreateCategoryWithName,
     private val getTracksPerManga: GetTracksPerManga,
     private val getNextChapters: GetNextChapters,
     private val getChaptersByMangaId: GetChaptersByMangaId,
@@ -111,7 +113,6 @@ class LibraryViewModel(
     private val activeCategoryIndex = MutableStateFlow(libraryPreferences.lastUsedCategory.get())
 
     private val displayPreferences = combine(
-        libraryPreferences.categoryTabs.changes(),
         libraryPreferences.categoryNumberOfItems.changes(),
         libraryPreferences.showContinueReadingButton.changes(),
         ::DisplayPreferences,
@@ -195,7 +196,6 @@ class LibraryViewModel(
             searchQuery = searchQuery,
             selection = selection,
             hasActiveFilters = hasActiveFilters,
-            showCategoryTabs = display.showCategoryTabs,
             showMangaCount = display.showMangaCount,
             showMangaContinueButton = display.showMangaContinueButton,
             dialog = dialog,
@@ -207,7 +207,6 @@ class LibraryViewModel(
         .stateIn(viewModelScope + subscriberGate, subscriberGate.whileSubscribed(5.seconds), State())
 
     private data class DisplayPreferences(
-        val showCategoryTabs: Boolean,
         val showMangaCount: Boolean,
         val showMangaContinueButton: Boolean,
     )
@@ -742,6 +741,16 @@ class LibraryViewModel(
         }
     }
 
+    fun openCreateCategoryDialog() {
+        dialog.update { Dialog.CreateCategory }
+    }
+
+    fun createCategory(name: String) {
+        viewModelScope.launch {
+            createCategoryWithName.await(name)
+        }
+    }
+
     fun openDeleteMangaDialog() {
         dialog.update { Dialog.DeleteManga(selectedManga) }
     }
@@ -752,6 +761,7 @@ class LibraryViewModel(
 
     sealed interface Dialog {
         data object SettingsSheet : Dialog
+        data object CreateCategory : Dialog
         data class ChangeCategory(
             val manga: List<Manga>,
             val initialSelection: List<CheckboxState<Category>>,
@@ -796,7 +806,6 @@ class LibraryViewModel(
         val searchQuery: String? = null,
         val selection: Set</* Manga */ Long> = setOf(),
         val hasActiveFilters: Boolean = false,
-        val showCategoryTabs: Boolean = false,
         val showMangaCount: Boolean = false,
         val showMangaContinueButton: Boolean = false,
         val dialog: Dialog? = null,
@@ -830,26 +839,16 @@ class LibraryViewModel(
         }
 
         fun getItemCountForCategory(category: Category): Int? {
-            return if (showMangaCount || !searchQuery.isNullOrEmpty()) groupedFavorites[category]?.size else null
+            return if (showMangaCount) groupedFavorites[category]?.size else null
         }
 
         fun getToolbarTitle(
             defaultTitle: String,
-            defaultCategoryTitle: String,
             page: Int,
         ): LibraryToolbarTitle {
             val category = displayedCategories.getOrNull(page) ?: return LibraryToolbarTitle(defaultTitle)
-            val categoryName = category.let {
-                if (it.isSystemCategory) defaultCategoryTitle else it.name
-            }
-            val title = if (showCategoryTabs) defaultTitle else categoryName
-            val count = when {
-                !showMangaCount -> null
-                !showCategoryTabs -> getItemCountForCategory(category)
-                // Whole library count
-                else -> libraryData.favorites.size
-            }
-            return LibraryToolbarTitle(title, count)
+            val count = if (showMangaCount) getItemCountForCategory(category) else null
+            return LibraryToolbarTitle(defaultTitle, count)
         }
     }
 }
