@@ -18,6 +18,7 @@ import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.ElevatedCard
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -49,6 +50,7 @@ fun ReorderableCollectionItemScope.CategoryListItem(
             )
             Text(
                 text = category.name,
+                style = LocalBokuhonTypography.current.titleLarge,
                 modifier = Modifier.weight(1f),
             )
             IconButton(onClick = onRename) {
