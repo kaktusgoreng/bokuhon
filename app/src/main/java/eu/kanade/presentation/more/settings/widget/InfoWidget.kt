@@ -1,9 +1,9 @@
 package eu.kanade.presentation.more.settings.widget
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
@@ -20,14 +20,15 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
 internal fun InfoWidget(text: String) {
-    Column(
+    Row(
         modifier = Modifier
             .padding(
                 horizontal = PrefsHorizontalPadding,
                 vertical = BokuhonPadding.medium,
             )
             .secondaryItemAlpha(),
-        verticalArrangement = Arrangement.spacedBy(BokuhonPadding.medium),
+        // The icon lines up with the first line of a paragraph, not with the middle of it.
+        verticalAlignment = Alignment.Top,
     ) {
         Icon(
             imageVector = MaterialSymbols.Rounded.Info,
@@ -35,6 +36,7 @@ internal fun InfoWidget(text: String) {
         )
         Text(
             text = text,
+            modifier = Modifier.padding(start = BokuhonPadding.medium),
             style = LocalBokuhonTypography.current.bodySmall,
         )
     }
