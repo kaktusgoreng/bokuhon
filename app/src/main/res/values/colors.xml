@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splash">#F6F3EA</color>
-    <color name="splash_icon">#16130F</color>
+    <color name="splash">#141414</color>
+    <color name="splash_icon">#F7F7F7</color>
 
     <color name="accent_blue">#141414</color>
     <color name="icon_background">#FAFAFA</color>

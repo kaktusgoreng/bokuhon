@@ -584,20 +584,20 @@ class MainActivity : BaseActivity() {
     }
 
     /**
-     * Sets custom splash screen exit animation on devices prior to Android 12.
-     *
-     * When custom animation is used, status and navigation bar color will be set to transparent and will be restored
-     * after the animation is finished.
+     * Drops the splash as soon as it is ready to go, skipping the icon zoom and fade every version
+     * plays by default, which smear a full repaint across an e-ink panel.
      */
     @Suppress("Deprecation")
     private fun setSplashScreenExitAnimation(splashScreen: SplashScreen?) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S && splashScreen != null) {
+        if (splashScreen == null) return
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             window.statusBarColor = Color.TRANSPARENT
             window.navigationBarColor = Color.TRANSPARENT
+        }
 
-            splashScreen.setOnExitAnimationListener { splashProvider ->
-                splashProvider.remove()
-            }
+        splashScreen.setOnExitAnimationListener { splashProvider ->
+            splashProvider.remove()
         }
     }
 

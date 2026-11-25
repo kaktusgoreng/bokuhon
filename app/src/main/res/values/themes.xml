@@ -90,6 +90,7 @@
 
     <!--== Splash Theme ==-->
     <style name="Theme.Tachiyomi.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowAnimationStyle">@null</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_bokuhon_splash</item>
         <item name="windowSplashScreenBackground">@color/splash</item>
         <item name="postSplashScreenTheme">@style/Theme.Tachiyomi</item>
