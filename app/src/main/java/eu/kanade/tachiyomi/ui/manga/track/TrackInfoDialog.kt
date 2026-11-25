@@ -1004,11 +1004,12 @@ fun TrackInfoDialog(
 ) {
     val sheetNavigator = rememberNavigator(TrackInfoDialogHomeRoute(mangaId, mangaTitle, sourceId))
 
-    CompositionLocalProvider(LocalNavigator provides sheetNavigator) {
-        AdaptiveSheet(
-            onDismissRequest = onDismissRequest,
-            enableImplicitDismiss = !sheetNavigator.canPop,
-        ) {
+    AdaptiveSheet(
+        onDismissRequest = onDismissRequest,
+        enableImplicitDismiss = !sheetNavigator.canPop,
+    ) {
+        // The sheet's body is drawn by the dialog host, so the provider has to be inside it
+        CompositionLocalProvider(LocalNavigator provides sheetNavigator) {
             NavigatorDisplay(
                 navigator = sheetNavigator,
                 sizeTransform = SizeTransform(),

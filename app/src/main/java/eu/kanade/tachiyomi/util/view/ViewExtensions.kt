@@ -11,6 +11,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.inputmethod.EditorInfoCompat
@@ -21,10 +22,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import mihon.app.di.appGraph
+import tachiyomi.presentation.core.bokuhon.BokuhonDialogHost
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTextStyle
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
+import tachiyomi.presentation.core.bokuhon.ProvideBokuhonDialogHost
 
 inline fun ComponentActivity.setComposeContent(
     parent: CompositionContext? = null,
@@ -37,7 +40,11 @@ inline fun ComponentActivity.setComposeContent(
                 LocalBokuhonContentColor provides LocalBokuhonColors.current.onBackground,
                 LocalMetroViewModelFactory provides appGraph.viewModelFactory,
             ) {
-                content()
+                // Inside the provider above: dialog bodies are composed by the host, not where
+                // they're opened, and their screens need the factory to build view models
+                ProvideBokuhonDialogHost(host = remember { BokuhonDialogHost() }) {
+                    content()
+                }
             }
         }
     }
