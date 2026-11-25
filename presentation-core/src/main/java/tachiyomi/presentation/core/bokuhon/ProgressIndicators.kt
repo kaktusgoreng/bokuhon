@@ -14,7 +14,9 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
 object ProgressIndicatorDefaults {
@@ -147,6 +149,7 @@ private fun LinearIndicator(
     progress: Float?,
     fraction: Float,
 ) {
+    val reversed = LocalLayoutDirection.current == LayoutDirection.Rtl
     Canvas(
         modifier = modifier
             .fillMaxWidth()
@@ -154,16 +157,18 @@ private fun LinearIndicator(
     ) {
         drawRect(color = trackColor)
         if (progress != null) {
+            val filled = size.width * progress.coerceIn(0f, 1f)
             drawRect(
                 color = color,
-                size = Size(size.width * progress.coerceIn(0f, 1f), size.height),
+                topLeft = Offset(if (reversed) size.width - filled else 0f, 0f),
+                size = Size(filled, size.height),
             )
         } else {
             val segment = size.width * 0.3f
             val start = (size.width + segment) * fraction - segment
             drawRect(
                 color = color,
-                topLeft = Offset(start, 0f),
+                topLeft = Offset(if (reversed) size.width - start - segment else start, 0f),
                 size = Size(segment, size.height),
             )
         }

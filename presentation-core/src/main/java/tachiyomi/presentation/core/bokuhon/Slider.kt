@@ -22,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 
@@ -100,10 +102,12 @@ private fun SliderImpl(
     vertical: Boolean,
 ) {
     val source = interactionSource ?: remember { MutableInteractionSource() }
+    val reversed = !vertical && LocalLayoutDirection.current == LayoutDirection.Rtl
 
-    // A vertical slider runs bottom-to-top; the drag math is flipped so the top is the max value.
+    // A vertical slider runs bottom-to-top and a horizontal one runs right-to-left in RTL, so the
+    // drag math is flipped where the track's start isn't its left or top edge.
     fun fractionToValue(fraction: Float): Float {
-        val f = if (vertical) 1f - fraction else fraction
+        val f = if (vertical || reversed) 1f - fraction else fraction
         return state.valueAt(f)
     }
 
@@ -129,7 +133,7 @@ private fun SliderImpl(
                 }
             }
         }
-        .pointerInput(enabled, vertical, state.trackRange, state.steps) {
+        .pointerInput(enabled, vertical, reversed, state.trackRange, state.steps) {
             if (!enabled) return@pointerInput
             detectTapGestures { offset ->
                 val size = if (vertical) this.size.height else this.size.width
@@ -137,7 +141,7 @@ private fun SliderImpl(
                 update(fractionToValue(position / size))
             }
         }
-        .pointerInput(enabled, vertical, state.trackRange, state.steps) {
+        .pointerInput(enabled, vertical, reversed, state.trackRange, state.steps) {
             if (!enabled) return@pointerInput
             var dragStart: DragInteraction.Start? = null
             val onStart: (Offset) -> Unit = { offset ->
@@ -213,16 +217,19 @@ private fun SliderImpl(
                 val centerY = size.height / 2
                 val left = 8.dp.toPx()
                 val right = size.width - 8.dp.toPx()
-                val activeX = left + (right - left) * fraction
+                val activeX = left + (right - left) * (if (reversed) 1f - fraction else fraction)
                 drawRect(
                     color = c.surfaceVariant,
                     topLeft = Offset(left, centerY - trackHeight / 2),
                     size = Size(right - left, trackHeight),
                 )
+                // In RTL the track fills from its right end, the direction the thumb moves towards.
+                val fillStart = if (reversed) activeX else left
+                val fillEnd = if (reversed) right else activeX
                 drawRect(
                     color = c.primary,
-                    topLeft = Offset(left, centerY - trackHeight / 2),
-                    size = Size((activeX - left).coerceAtLeast(0f), trackHeight),
+                    topLeft = Offset(fillStart, centerY - trackHeight / 2),
+                    size = Size((fillEnd - fillStart).coerceAtLeast(0f), trackHeight),
                 )
                 val thumb = 14.dp.toPx()
                 drawRect(

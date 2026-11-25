@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,7 +60,8 @@ fun ReaderPageIndicator(
         Text(
             text = "$currentPage / $totalPages",
             color = colors.onSurface,
-            style = LocalBokuhonTypography.current.bodySmall,
+            // Page numbers read left to right even in an RTL language.
+            style = LocalBokuhonTypography.current.bodySmall.copy(textDirection = TextDirection.Ltr),
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp,
         )
