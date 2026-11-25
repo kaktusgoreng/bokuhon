@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.more.settings.widget.PrefsHorizontalPadding
-import eu.kanade.presentation.more.settings.widget.PrefsVerticalPadding
 import eu.kanade.presentation.more.settings.widget.TitleFontSize
 import eu.kanade.presentation.more.settings.widget.TitleLineHeight
 import mihon.icons.materialsymbols.MaterialSymbols
@@ -19,6 +18,7 @@ import mihon.icons.materialsymbols.rounded.Edit
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.bokuhon.BokuhonPadding
 import tachiyomi.presentation.core.bokuhon.ElevatedCard
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
@@ -34,12 +34,12 @@ fun ReorderableCollectionItemScope.CategoryListItem(
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(modifier = modifier) {
-        // Laid out like the rows in More
+        // The 48dp row buttons plus 4dp add up to the 56dp height of the rows in More
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onRename)
-                .padding(vertical = PrefsVerticalPadding)
+                .padding(vertical = BokuhonPadding.extraSmall)
                 .padding(horizontal = PrefsHorizontalPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {

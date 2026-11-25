@@ -44,8 +44,6 @@ internal fun LibraryCategoryMenu(
     onCreateCategory: () -> Unit,
 ) {
     val colors = LocalBokuhonColors.current
-    // Sized with the toolbar title so the picker reads at a glance on e-ink
-    val textStyle = LocalBokuhonTypography.current.titleLarge
     var expanded by remember { mutableStateOf(false) }
 
     Box {
@@ -58,7 +56,7 @@ internal fun LibraryCategoryMenu(
         ) {
             Text(
                 text = categories.getOrNull(selectedIndex)?.visualName.orEmpty(),
-                style = textStyle,
+                style = LocalBokuhonTypography.current.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.widthIn(max = 160.dp),
@@ -84,13 +82,11 @@ internal fun LibraryCategoryMenu(
                     },
                     text = {
                         Row(
-                            modifier = Modifier.widthIn(max = 240.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
                                 text = category.visualName,
                                 color = contentColor,
-                                style = textStyle,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier.weight(1f, fill = false),
@@ -99,7 +95,6 @@ internal fun LibraryCategoryMenu(
                                 Text(
                                     text = "$count",
                                     color = contentColor,
-                                    style = textStyle,
                                     modifier = Modifier.padding(start = BokuhonPadding.small),
                                 )
                             }
@@ -122,7 +117,6 @@ internal fun LibraryCategoryMenu(
                     Text(
                         text = stringResource(MR.strings.action_add_category),
                         color = colors.onSurface,
-                        style = textStyle,
                     )
                 },
             )
