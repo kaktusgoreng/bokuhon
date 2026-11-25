@@ -20,7 +20,8 @@ internal fun LibraryTabs(
     val currentPageIndex = pagerState.currentPage.coerceAtMost(categories.lastIndex)
     PrimaryScrollableTabRow(
         selectedTabIndex = currentPageIndex,
-        edgePadding = 0.dp,
+        // The first tab's label lines up with the toolbar title above it.
+        edgePadding = 8.dp,
     ) {
         categories.forEachIndexed { index, category ->
             Tab(

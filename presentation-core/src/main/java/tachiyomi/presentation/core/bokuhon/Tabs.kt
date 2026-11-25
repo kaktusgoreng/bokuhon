@@ -32,7 +32,7 @@ fun PrimaryTabRow(
     contentColor: Color = LocalBokuhonColors.current.onSurface,
     tabs: @Composable () -> Unit,
 ) {
-    val height = with(LocalDensity.current) { 48.dp.roundToPx() }
+    val height = with(LocalDensity.current) { 52.dp.roundToPx() }
     Column(modifier = modifier.fillMaxWidth().background(containerColor)) {
         Layout(
             content = tabs,
@@ -101,7 +101,6 @@ fun Tab(
                 enabled = enabled,
                 role = Role.Tab,
             )
-            .padding(horizontal = 8.dp)
             .drawBehind {
                 if (selected) {
                     val thickness = 2.dp.toPx()
@@ -111,12 +110,13 @@ fun Tab(
                         size = Size(size.width, thickness),
                     )
                 }
-            },
+            }
+            .padding(horizontal = 8.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
     ) {
         CompositionLocalProvider(
             LocalBokuhonContentColor provides if (selected) selectedContentColor else unselectedContentColor,
-            LocalBokuhonTextStyle provides LocalBokuhonTypography.current.labelLarge,
+            LocalBokuhonTextStyle provides LocalBokuhonTypography.current.titleMedium,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 icon?.invoke()
