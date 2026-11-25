@@ -16,6 +16,7 @@ import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
+import eu.kanade.presentation.components.SquareAction
 import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.manga.components.MangaBottomActionMenu
 import eu.kanade.tachiyomi.data.download.model.Download
@@ -37,7 +38,6 @@ import tachiyomi.presentation.core.bokuhon.SnackbarHost
 import tachiyomi.presentation.core.bokuhon.SnackbarHostState
 import tachiyomi.presentation.core.bokuhon.TopAppBarScrollBehavior
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
-import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
@@ -69,11 +69,23 @@ fun UpdateScreen(
 
     val scope = rememberCoroutineScope()
 
+    var isRefreshing by remember { mutableStateOf(false) }
+    val onRefresh: () -> Unit = {
+        scope.launch {
+            if (!onUpdateLibrary()) return@launch
+            // Fake refresh status but hide it after a second as it's a long running task
+            isRefreshing = true
+            delay(1.seconds)
+            isRefreshing = false
+        }
+    }
+
     Scaffold(
         topBar = { scrollBehavior ->
             UpdatesAppBar(
                 onCalendarClicked = { onCalendarClicked() },
-                onUpdateLibrary = { scope.launch { onUpdateLibrary() } },
+                onUpdateLibrary = onRefresh,
+                isRefreshing = isRefreshing,
                 onFilterClicked = { onFilterClicked() },
                 hasFilters = hasActiveFilters,
                 actionModeCounter = state.selected.size,
@@ -97,53 +109,36 @@ fun UpdateScreen(
         when {
             state.isLoading -> LoadingScreen(Modifier.padding(contentPadding))
             else -> {
-                var isRefreshing by remember { mutableStateOf(false) }
+                if (state.items.isEmpty()) {
+                    Column(
+                        modifier = Modifier
+                            .padding(contentPadding)
+                            .fillMaxSize(),
+                    ) {
+                        UpdatesLastUpdatedHeader(lastUpdated = lastUpdated)
+                        EmptyScreen(
+                            stringRes = if (hasActiveFilters) {
+                                MR.strings.error_no_match
+                            } else {
+                                MR.strings.information_no_recent
+                            },
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                } else {
+                    FastScrollLazyColumn(
+                        contentPadding = contentPadding,
+                    ) {
+                        updatesLastUpdatedItem(lastUpdated)
 
-                PullRefresh(
-                    refreshing = isRefreshing,
-                    onRefresh = {
-                        scope.launch {
-                            if (!onUpdateLibrary()) return@launch
-                            // Fake refresh status but hide it after a second as it's a long running task
-                            isRefreshing = true
-                            delay(1.seconds)
-                            isRefreshing = false
-                        }
-                    },
-                    enabled = !state.selectionMode,
-                    indicatorPadding = contentPadding,
-                ) {
-                    if (state.items.isEmpty()) {
-                        Column(
-                            modifier = Modifier
-                                .padding(contentPadding)
-                                .fillMaxSize(),
-                        ) {
-                            UpdatesLastUpdatedHeader(lastUpdated = lastUpdated)
-                            EmptyScreen(
-                                stringRes = if (hasActiveFilters) {
-                                    MR.strings.error_no_match
-                                } else {
-                                    MR.strings.information_no_recent
-                                },
-                                modifier = Modifier.weight(1f),
-                            )
-                        }
-                    } else {
-                        FastScrollLazyColumn(
-                            contentPadding = contentPadding,
-                        ) {
-                            updatesLastUpdatedItem(lastUpdated)
-
-                            updatesUiItems(
-                                uiModels = state.getUiModel(),
-                                selectionMode = state.selectionMode,
-                                onUpdateSelected = onUpdateSelected,
-                                onClickCover = onClickCover,
-                                onClickUpdate = onOpenChapter,
-                                onDownloadChapter = onDownloadChapter,
-                            )
-                        }
+                        updatesUiItems(
+                            uiModels = state.getUiModel(),
+                            selectionMode = state.selectionMode,
+                            onUpdateSelected = onUpdateSelected,
+                            onClickCover = onClickCover,
+                            onClickUpdate = onOpenChapter,
+                            onDownloadChapter = onDownloadChapter,
+                        )
                     }
                 }
             }
@@ -155,6 +150,7 @@ fun UpdateScreen(
 private fun UpdatesAppBar(
     onCalendarClicked: () -> Unit,
     onUpdateLibrary: () -> Unit,
+    isRefreshing: Boolean,
     onFilterClicked: () -> Unit,
     hasFilters: Boolean,
     // For action mode
@@ -186,11 +182,15 @@ private fun UpdatesAppBar(
                         icon = MaterialSymbols.Rounded.CalendarMonth,
                         onClick = onCalendarClicked,
                     ),
-                    AppBar.Action(
-                        title = stringResource(MR.strings.action_update_library),
-                        icon = MaterialSymbols.Rounded.Refresh,
-                        onClick = onUpdateLibrary,
-                    ),
+                    AppBar.CustomAction {
+                        SquareAction(
+                            icon = MaterialSymbols.Rounded.Refresh,
+                            contentDescription = stringResource(MR.strings.action_update_library),
+                            filled = isRefreshing,
+                            enabled = !isRefreshing,
+                            onClick = onUpdateLibrary,
+                        )
+                    },
                 ),
             )
         },
