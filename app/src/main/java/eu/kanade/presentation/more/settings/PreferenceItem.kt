@@ -33,7 +33,7 @@ import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.util.collectAsState
 
 val LocalPreferenceHighlighted = compositionLocalOf(structuralEqualityPolicy()) { false }
-val LocalPreferenceMinHeight = compositionLocalOf(structuralEqualityPolicy()) { 56.dp }
+val LocalPreferenceMinHeight = compositionLocalOf(structuralEqualityPolicy()) { 48.dp }
 
 @Composable
 fun StatusWrapper(

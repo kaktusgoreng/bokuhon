@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.runtime.Composable
@@ -81,6 +83,9 @@ internal fun BasePreferenceWidget(
                     fontSize = TitleFontSize,
                 )
             }
+            if (subcomponent != null && !title.isNullOrBlank()) {
+                Spacer(Modifier.height(SubtitleTopPadding))
+            }
             subcomponent?.invoke(this)
         }
         if (widget != null) {
@@ -128,6 +133,7 @@ internal fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
 
 internal val TrailingWidgetBuffer = 16.dp
 internal val PrefsHorizontalPadding = 16.dp
-internal val PrefsVerticalPadding = 16.dp
+internal val PrefsVerticalPadding = 8.dp
+internal val SubtitleTopPadding = 4.dp
 internal val TitleFontSize = 16.sp
 internal val DisabledAlpha = 0.38f
