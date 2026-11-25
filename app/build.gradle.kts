@@ -123,12 +123,6 @@ android {
         getByName("benchmark").res.directories.add("src/debug/res")
     }
 
-    androidResources {
-        // Only the locales we ship; the other ~64 were megabytes of translated strings in
-        // resources.arsc. The i18n module builds its language list from the same property.
-        localeFilters += providers.gradleProperty("locales").get().split(",")
-    }
-
     splits {
         abi {
             isEnable = true
