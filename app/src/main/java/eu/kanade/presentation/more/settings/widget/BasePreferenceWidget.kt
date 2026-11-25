@@ -81,6 +81,7 @@ internal fun BasePreferenceWidget(
                     maxLines = 2,
                     style = LocalBokuhonTypography.current.titleLarge,
                     fontSize = TitleFontSize,
+                    lineHeight = TitleLineHeight,
                 )
             }
             if (subcomponent != null && !title.isNullOrBlank()) {
@@ -133,7 +134,10 @@ internal fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
 
 internal val TrailingWidgetBuffer = 16.dp
 internal val PrefsHorizontalPadding = 16.dp
-internal val PrefsVerticalPadding = 8.dp
+internal val PrefsVerticalPadding = 16.dp
 internal val SubtitleTopPadding = 4.dp
 internal val TitleFontSize = 16.sp
+
+// titleLarge's own 28sp leading is for its 22sp size; at 16sp it spaces wrapped titles apart.
+internal val TitleLineHeight = 20.sp
 internal val DisabledAlpha = 0.38f

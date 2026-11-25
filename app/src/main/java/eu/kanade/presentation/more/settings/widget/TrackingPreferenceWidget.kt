@@ -69,6 +69,7 @@ fun TrackingPreferenceWidget(
                         maxLines = 1,
                         style = LocalBokuhonTypography.current.titleLarge,
                         fontSize = TitleFontSize,
+                        lineHeight = TitleLineHeight,
                         fontWeight = FontWeight.Medium,
                     )
                     val displayName = tracker.getDisplayUsername()

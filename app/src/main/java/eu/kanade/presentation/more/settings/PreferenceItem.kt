@@ -21,6 +21,7 @@ import eu.kanade.presentation.more.settings.widget.PrefsVerticalPadding
 import eu.kanade.presentation.more.settings.widget.SwitchPreferenceWidget
 import eu.kanade.presentation.more.settings.widget.TextPreferenceWidget
 import eu.kanade.presentation.more.settings.widget.TitleFontSize
+import eu.kanade.presentation.more.settings.widget.TitleLineHeight
 import eu.kanade.presentation.more.settings.widget.TrackingPreferenceWidget
 import eu.kanade.tachiyomi.data.track.RefreshResult
 import eu.kanade.tachiyomi.util.system.toast
@@ -33,7 +34,7 @@ import tachiyomi.presentation.core.components.motion.AnimatedVisibility
 import tachiyomi.presentation.core.util.collectAsState
 
 val LocalPreferenceHighlighted = compositionLocalOf(structuralEqualityPolicy()) { false }
-val LocalPreferenceMinHeight = compositionLocalOf(structuralEqualityPolicy()) { 48.dp }
+val LocalPreferenceMinHeight = compositionLocalOf(structuralEqualityPolicy()) { 56.dp }
 
 @Composable
 fun StatusWrapper(
@@ -97,7 +98,10 @@ internal fun PreferenceItem(
                             }
                         }
                     },
-                    titleStyle = LocalBokuhonTypography.current.titleLarge.copy(fontSize = TitleFontSize),
+                    titleStyle = LocalBokuhonTypography.current.titleLarge.copy(
+                        fontSize = TitleFontSize,
+                        lineHeight = TitleLineHeight,
+                    ),
                     modifier = Modifier.padding(
                         horizontal = PrefsHorizontalPadding,
                         vertical = PrefsVerticalPadding,
