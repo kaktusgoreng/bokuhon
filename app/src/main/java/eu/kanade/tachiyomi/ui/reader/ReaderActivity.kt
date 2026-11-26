@@ -129,6 +129,9 @@ class ReaderActivity : BaseActivity() {
     private val graph: AppGraph by lazy { metroGraph() }
 
     companion object {
+        /** How long the reader has to go without drawing for the page it moved to to count as done. */
+        private const val PANEL_REFRESH_SETTLE_MILLIS = 100L
+
         fun newIntent(context: Context, mangaId: Long?, chapterId: Long?): Intent {
             return Intent(context, ReaderActivity::class.java).apply {
                 putExtra("manga", mangaId)
@@ -156,7 +159,7 @@ class ReaderActivity : BaseActivity() {
             when {
                 !readerPreferences.onyxRefreshModes.get() || !OnyxEpd.isSupported -> false
                 else -> {
-                    repaintAfterDraw(view)
+                    refreshWhenSettled(view)
                     true
                 }
             }
@@ -164,22 +167,43 @@ class ReaderActivity : BaseActivity() {
     }
     private val navigationOverlayState = ReaderNavigationOverlayState()
 
+    private var panelRefresh: Runnable? = null
+    private var drawObserver: ViewTreeObserver? = null
+    private var drawListener: ViewTreeObserver.OnDrawListener? = null
+
     /**
-     * Asks the panel for a full refresh once the frame carrying the new page has been drawn.
-     * A page change is reported before that frame, and refreshing then cleans the page being left
-     * behind while the new one still goes out on a partial waveform.
+     * Repaints the panel once the reader has stopped drawing the page it moved to. The page bitmap
+     * arrives after the change and goes out on a partial waveform, so refreshing at the change
+     * cleans the page being left behind; waiting for the drawing to settle puts the full refresh
+     * over what is on screen.
      */
-    private fun repaintAfterDraw(view: View) {
-        val observer = view.viewTreeObserver
-        val listener = object : ViewTreeObserver.OnDrawListener {
-            override fun onDraw() {
-                view.post {
-                    observer.removeOnDrawListener(this)
-                    OnyxEpd.refreshWithFullWaveform(view)
+    private fun refreshWhenSettled(view: View) {
+        val refresh = panelRefresh ?: Runnable {
+            panelRefresh = null
+            drawObserver?.let { observer -> drawListener?.let(observer::removeOnDrawListener) }
+            drawObserver = null
+            drawListener = null
+            OnyxEpd.repaint()
+        }.also { panelRefresh = it }
+
+        if (drawListener == null) {
+            val observer = view.viewTreeObserver
+            val listener = object : ViewTreeObserver.OnDrawListener {
+                override fun onDraw() {
+                    // Every further draw pushes the refresh out; it lands when the page is complete.
+                    panelRefresh?.let {
+                        view.removeCallbacks(it)
+                        view.postDelayed(it, PANEL_REFRESH_SETTLE_MILLIS)
+                    }
                 }
             }
+            drawObserver = observer
+            drawListener = listener
+            observer.addOnDrawListener(listener)
         }
-        observer.addOnDrawListener(listener)
+
+        view.removeCallbacks(refresh)
+        view.postDelayed(refresh, PANEL_REFRESH_SETTLE_MILLIS)
     }
 
     private val windowInsetsController by lazy { WindowInsetsControllerCompat(window, window.decorView) }
@@ -420,6 +444,10 @@ class ReaderActivity : BaseActivity() {
      * Called when the activity is destroyed. Cleans up the viewer and any view.
      */
     override fun onDestroy() {
+        drawObserver?.let { observer -> drawListener?.let(observer::removeOnDrawListener) }
+        drawObserver = null
+        drawListener = null
+        panelRefresh = null
         super.onDestroy()
         viewer?.destroy()
         menuToggleToast?.cancel()

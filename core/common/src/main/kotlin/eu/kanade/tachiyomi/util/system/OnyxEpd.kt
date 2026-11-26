@@ -1,7 +1,6 @@
 package eu.kanade.tachiyomi.util.system
 
 import android.os.Build
-import android.view.View
 import com.onyx.android.sdk.api.device.epd.EpdController
 import com.onyx.android.sdk.api.device.epd.UpdateMode
 import com.onyx.android.sdk.device.Device
@@ -42,13 +41,13 @@ object OnyxEpd {
     val isSupported: Boolean get() = device != null
 
     /**
-     * Has the next frame, the one carrying [view]'s current content, drawn with a full
-     * ghost-clearing waveform. Refreshing before that frame would clean the previous content and
-     * leave the new content to a partial waveform, so callers invalidate rather than repaint.
+     * Repaints the whole screen with a full, ghost-clearing waveform. It has to come after the
+     * content it is meant to clean: marking a view for the next frame asks for the same waveform
+     * through the invalidate path, which the panel answers with a partial update.
      */
-    fun refreshWithFullWaveform(view: View): Boolean {
+    fun repaint(): Boolean {
         if (device == null) return false
-        return runCatching { EpdController.invalidate(view, UpdateMode.GC) }
+        return runCatching { EpdController.repaintEveryThing(UpdateMode.GC) }
             .onFailure { logcat(LogPriority.WARN, it) { "Onyx panel: full refresh refused" } }
             .isSuccess
     }
