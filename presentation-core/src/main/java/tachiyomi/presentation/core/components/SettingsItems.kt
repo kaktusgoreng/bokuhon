@@ -1,6 +1,8 @@
 package tachiyomi.presentation.core.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -360,6 +362,7 @@ private fun DropdownItemFrame(
 ) {
     var anchor by remember { mutableStateOf<LayoutCoordinates?>(null) }
     val contentColor = LocalBokuhonContentColor.current
+    val colorScheme = LocalBokuhonColors.current
 
     Column {
         Row(
@@ -367,6 +370,7 @@ private fun DropdownItemFrame(
                 .onGloballyPositioned { anchor = it }
                 .clickable(onClick = onToggle)
                 .fillMaxWidth()
+                .border(1.dp, LocalBokuhonColors.current.onSurface)
                 .padding(
                     horizontal = SettingsItemsPaddings.Horizontal,
                     vertical = SettingsItemsPaddings.Vertical,
@@ -385,22 +389,10 @@ private fun DropdownItemFrame(
             )
             Text(
                 text = value,
-                // Takes only what it needs, so a long setting name keeps its words and the value
-                // gives way instead.
-                modifier = Modifier.weight(1f, fill = false),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.End,
                 style = LocalBokuhonTypography.current.bodyMedium,
-            )
-            Icon(
-                imageVector = if (expanded) {
-                    MaterialSymbols.Rounded.KeyboardArrowUp
-                } else {
-                    MaterialSymbols.Rounded.KeyboardArrowDown
-                },
-                contentDescription = null,
-                tint = contentColor,
             )
         }
 
@@ -422,17 +414,15 @@ private fun DropdownItemFrame(
                             val bounds = anchor?.boundsInWindow()
                             val top = bounds?.top?.roundToInt() ?: anchorBounds.top
                             val bottom = bounds?.bottom?.roundToInt() ?: anchorBounds.bottom
-                            val right = bounds?.right?.roundToInt() ?: anchorBounds.right
+                            val left = bounds?.left?.roundToInt() ?: anchorBounds.left
 
                             val y = if (bottom + popupContentSize.height <= windowSize.height) {
                                 bottom
                             } else {
                                 (top - popupContentSize.height).coerceAtLeast(0)
                             }
-                            // Hanging from the row's own edge, where its value and arrow are, rather
-                            // than from the window's left side.
-                            val x = (right - popupContentSize.width)
-                                .coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
+                            // Starting at the row's own left edge, where its label is.
+                            val x = left.coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
                             return IntOffset(x, y)
                         }
                     }
@@ -442,33 +432,32 @@ private fun DropdownItemFrame(
                     color = LocalBokuhonColors.current.surface,
                     border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 ) {
-                    // Sized by its widest choice: the popup's window would otherwise stretch it
+                    // As wide as its longest choice: the popup's window would otherwise stretch it
                     // across the screen.
-                    Column(modifier = Modifier.width(IntrinsicSize.Max).widthIn(min = 220.dp)) {
+                    Column(modifier = Modifier.width(IntrinsicSize.Max)) {
                         options.forEachIndexed { index, option ->
+                            val selected = isSelected(index)
                             Row(
                                 modifier = Modifier
                                     .clickable { onOptionClick(index) }
                                     .fillMaxWidth()
+                                    // The chosen one is ink with white text, the way the rest of the
+                                    // app says "selected".
+                                    .background(
+                                        if (selected) colorScheme.primary else colorScheme.surface,
+                                    )
                                     .padding(
                                         horizontal = SettingsItemsPaddings.Horizontal,
                                         vertical = SettingsItemsPaddings.Vertical * 2,
                                     ),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(12.dp),
                             ) {
                                 Text(
                                     text = option,
                                     modifier = Modifier.weight(1f),
+                                    color = if (selected) colorScheme.onPrimary else contentColor,
                                     style = LocalBokuhonTypography.current.bodyMedium,
                                 )
-                                if (isSelected(index)) {
-                                    Icon(
-                                        imageVector = MaterialSymbols.Rounded.Check,
-                                        contentDescription = null,
-                                        tint = contentColor,
-                                    )
-                                }
                             }
                         }
                     }

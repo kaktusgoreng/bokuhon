@@ -81,7 +81,7 @@ fun AdaptiveSheet(
                     .padding(vertical = 16.dp)
                     .then(modifier),
                 shape = RectangleShape,
-                color = LocalBokuhonColors.current.surfaceContainerHigh,
+                color = LocalBokuhonColors.current.surface,
                 border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 content = {
                     BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
@@ -158,7 +158,7 @@ fun AdaptiveSheet(
                     .navigationBarsPadding()
                     .statusBarsPadding(),
                 shape = RectangleShape,
-                color = LocalBokuhonColors.current.surfaceContainerHigh,
+                color = LocalBokuhonColors.current.surface,
                 border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 content = {
                     BackHandler(enabled = enableImplicitDismiss, onBack = onDismissRequest)
