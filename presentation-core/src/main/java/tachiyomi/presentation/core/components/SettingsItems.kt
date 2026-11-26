@@ -36,6 +36,7 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.IntOffset
@@ -293,10 +294,6 @@ fun SliderItemPreview() {
  * A setting shown as its current value, with the choices in a menu that drops under it when tapped:
  * shorter than a row of chips for anything with more than two or three options, which is most of the
  * reader's choices.
- *
- * The menu is placed from the row's position in the window rather than from the bounds Compose hands
- * a popup: inside the reader's sheet those arrive at the window's corner, so the menu opened nowhere
- * near its row.
  */
 @Composable
 fun DropdownItem(
@@ -306,6 +303,61 @@ fun DropdownItem(
     onSelect: (Int) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
+
+    DropdownItemFrame(
+        label = label,
+        value = options.getOrNull(selectedIndex).orEmpty(),
+        expanded = expanded,
+        onToggle = { expanded = !expanded },
+        onDismiss = { expanded = false },
+        options = options,
+        isSelected = { it == selectedIndex },
+        onOptionClick = { index ->
+            onSelect(index)
+            expanded = false
+        },
+    )
+}
+
+/**
+ * The same row, for a setting that takes any number of choices: tapping one switches it and leaves
+ * the menu open, so several can be picked in one go.
+ */
+@Composable
+fun MultiDropdownItem(
+    label: String,
+    options: List<String>,
+    selectedIndices: Set<Int>,
+    onToggle: (Int) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val summary = options.filterIndexed { index, _ -> index in selectedIndices }
+        .joinToString(", ")
+        .ifEmpty { "None" }
+
+    DropdownItemFrame(
+        label = label,
+        value = summary,
+        expanded = expanded,
+        onToggle = { expanded = !expanded },
+        onDismiss = { expanded = false },
+        options = options,
+        isSelected = { it in selectedIndices },
+        onOptionClick = onToggle,
+    )
+}
+
+@Composable
+private fun DropdownItemFrame(
+    label: String,
+    value: String,
+    expanded: Boolean,
+    onToggle: () -> Unit,
+    onDismiss: () -> Unit,
+    options: List<String>,
+    isSelected: (Int) -> Boolean,
+    onOptionClick: (Int) -> Unit,
+) {
     var anchor by remember { mutableStateOf<LayoutCoordinates?>(null) }
     val contentColor = LocalBokuhonContentColor.current
 
@@ -313,7 +365,7 @@ fun DropdownItem(
         Row(
             modifier = Modifier
                 .onGloballyPositioned { anchor = it }
-                .clickable { expanded = !expanded }
+                .clickable(onClick = onToggle)
                 .fillMaxWidth()
                 .padding(
                     horizontal = SettingsItemsPaddings.Horizontal,
@@ -325,14 +377,20 @@ fun DropdownItem(
             Text(
                 text = label,
                 modifier = Modifier.weight(1f),
-                maxLines = 1,
+                // Some of these names are long; wrapping beats cutting them short, and rows with a
+                // short name still take a single line.
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 style = LocalBokuhonTypography.current.bodyMedium,
             )
             Text(
-                text = options.getOrNull(selectedIndex).orEmpty(),
+                text = value,
+                // Takes only what it needs, so a long setting name keeps its words and the value
+                // gives way instead.
+                modifier = Modifier.weight(1f, fill = false),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End,
                 style = LocalBokuhonTypography.current.bodyMedium,
             )
             Icon(
@@ -348,7 +406,7 @@ fun DropdownItem(
 
         if (expanded) {
             Popup(
-                onDismissRequest = { expanded = false },
+                onDismissRequest = onDismiss,
                 properties = PopupProperties(focusable = true),
                 popupPositionProvider = remember {
                     object : PopupPositionProvider {
@@ -358,15 +416,16 @@ fun DropdownItem(
                             layoutDirection: LayoutDirection,
                             popupContentSize: IntSize,
                         ): IntOffset {
+                            // Placed from the row's position in the window rather than from the
+                            // bounds Compose hands a popup: inside the reader's sheet those arrive
+                            // at the window's corner, so the menu opened nowhere near its row.
                             val bounds = anchor?.boundsInWindow()
                             val top = bounds?.top?.roundToInt() ?: anchorBounds.top
                             val bottom = bounds?.bottom?.roundToInt() ?: anchorBounds.bottom
                             val right = bounds?.right?.roundToInt() ?: anchorBounds.right
 
-                            val below = bottom
-                            val fitsBelow = below + popupContentSize.height <= windowSize.height
-                            val y = if (fitsBelow) {
-                                below
+                            val y = if (bottom + popupContentSize.height <= windowSize.height) {
+                                bottom
                             } else {
                                 (top - popupContentSize.height).coerceAtLeast(0)
                             }
@@ -389,10 +448,7 @@ fun DropdownItem(
                         options.forEachIndexed { index, option ->
                             Row(
                                 modifier = Modifier
-                                    .clickable {
-                                        onSelect(index)
-                                        expanded = false
-                                    }
+                                    .clickable { onOptionClick(index) }
                                     .fillMaxWidth()
                                     .padding(
                                         horizontal = SettingsItemsPaddings.Horizontal,
@@ -406,7 +462,7 @@ fun DropdownItem(
                                     modifier = Modifier.weight(1f),
                                     style = LocalBokuhonTypography.current.bodyMedium,
                                 )
-                                if (index == selectedIndex) {
+                                if (isSelected(index)) {
                                     Icon(
                                         imageVector = MaterialSymbols.Rounded.Check,
                                         contentDescription = null,

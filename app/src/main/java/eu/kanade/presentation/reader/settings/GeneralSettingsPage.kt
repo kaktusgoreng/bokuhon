@@ -15,6 +15,7 @@ import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.CheckboxItem
+import tachiyomi.presentation.core.components.MultiDropdownItem
 import tachiyomi.presentation.core.components.SettingsChipRow
 import tachiyomi.presentation.core.components.SliderItem
 import tachiyomi.presentation.core.i18n.pluralStringResource
@@ -71,22 +72,23 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
 
     val verticalNavigatorModes by viewModel.preferences.verticalNavigator.collectAsState()
 
-    SettingsChipRow(MR.strings.pref_vertical_navigator) {
-        ReadingMode.entries.filter { it != ReadingMode.DEFAULT }.forEach { mode ->
-            FilterChip(
-                selected = verticalNavigatorModes.contains(mode),
-                onClick = {
-                    val newModes = if (verticalNavigatorModes.contains(mode)) {
-                        verticalNavigatorModes - mode
-                    } else {
-                        verticalNavigatorModes + mode
-                    }
-                    viewModel.preferences.verticalNavigator.set(newModes)
-                },
-                label = { Text(stringResource(mode.stringRes)) },
-            )
-        }
-    }
+    val navigatorModes = ReadingMode.entries.filter { it != ReadingMode.DEFAULT }
+    MultiDropdownItem(
+        label = stringResource(MR.strings.pref_vertical_navigator),
+        options = navigatorModes.map { stringResource(it.stringRes) },
+        selectedIndices = navigatorModes.mapIndexedNotNull { index, mode ->
+            index.takeIf { verticalNavigatorModes.contains(mode) }
+        }.toSet(),
+        onToggle = { index ->
+            val mode = navigatorModes[index]
+            val newModes = if (verticalNavigatorModes.contains(mode)) {
+                verticalNavigatorModes - mode
+            } else {
+                verticalNavigatorModes + mode
+            }
+            viewModel.preferences.verticalNavigator.set(newModes)
+        },
+    )
 
     if (verticalNavigatorModes.isNotEmpty()) {
         val verticalNavigatorHeightPref = viewModel.preferences.verticalNavigatorHeight
