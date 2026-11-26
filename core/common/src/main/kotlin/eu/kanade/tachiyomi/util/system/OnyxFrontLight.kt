@@ -4,9 +4,7 @@ import android.content.Context
 import android.provider.Settings
 import com.onyx.android.sdk.api.device.brightness.BaseBrightnessProvider
 import com.onyx.android.sdk.api.device.brightness.BrightnessController
-import com.onyx.android.sdk.api.device.brightness.CTMBrightnessProvider
 import com.onyx.android.sdk.api.device.brightness.CTMTemperatureProvider
-import com.onyx.android.sdk.api.device.brightness.FLBrightnessProvider
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 
@@ -34,9 +32,14 @@ object OnyxFrontLight {
     /** Last lit level per channel type. */
     private val levels = mutableMapOf<Int, Int>()
 
+    /**
+     * Every channel that lights the panel: one on a plain front light, two on a warm and cold one,
+     * one for brightness on a CTM panel. The temperature channel is the tint, not a light.
+     */
+
     private fun channels(context: Context): List<BaseBrightnessProvider> = runCatching {
         BrightnessController.getBrightnessType(context)
-        BrightnessController.providerMap.values.filter { it is FLBrightnessProvider || it is CTMBrightnessProvider }
+        BrightnessController.providerMap.values.filter { it !is CTMTemperatureProvider }
     }.getOrDefault(emptyList())
 
     private fun tint(context: Context): BaseBrightnessProvider? = runCatching {
