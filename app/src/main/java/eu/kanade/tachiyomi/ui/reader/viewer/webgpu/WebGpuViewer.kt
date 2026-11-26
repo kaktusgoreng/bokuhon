@@ -47,6 +47,7 @@ import eu.kanade.tachiyomi.ui.reader.viewer.Viewer
 import eu.kanade.tachiyomi.ui.reader.viewer.collectChanges
 import eu.kanade.tachiyomi.ui.reader.viewer.mouseWheelPaging
 import eu.kanade.tachiyomi.ui.reader.viewer.position
+import eu.kanade.tachiyomi.util.system.DeviceUtil
 import eu.kanade.tachiyomi.util.system.createReaderThemeContext
 import eu.kanade.tachiyomi.util.system.readerBackgroundColor
 import kotlinx.coroutines.CancellationException
@@ -882,7 +883,16 @@ open class WebGpuViewer(
 
         val isDual = isDualPageMode()
         viewerState.apply {
-            transition = when (if (isDual) pageSettings.transitionAnimationDual else pageSettings.transitionAnimation) {
+            transition = when (
+                // An e-paper panel leaves every frame of a transition behind as ghosting.
+                if (DeviceUtil.isEink) {
+                    TransitionAnimation.NONE
+                } else if (isDual) {
+                    pageSettings.transitionAnimationDual
+                } else {
+                    pageSettings.transitionAnimation
+                }
+            ) {
                 TransitionAnimation.BASIC -> if (isVertical) TransitionBasic.Vertical else TransitionBasic
                 TransitionAnimation.FLIP -> TransitionFlip
                 TransitionAnimation.FLIP_LEFT -> TransitionFlipLeft

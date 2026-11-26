@@ -36,6 +36,6 @@ class VerticalPagerViewer(activity: ReaderActivity) : PagerViewer(activity) {
      * Creates a new vertical pager.
      */
     override fun createPager(): Pager {
-        return Pager(activity, isHorizontal = false)
+        return Pager(activity, pagerIsHorizontal = false)
     }
 }

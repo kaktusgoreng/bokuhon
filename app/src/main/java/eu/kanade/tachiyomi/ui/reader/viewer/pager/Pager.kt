@@ -4,8 +4,11 @@ import android.content.Context
 import android.view.HapticFeedbackConstants
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.VelocityTracker
+import android.view.ViewConfiguration
 import androidx.viewpager.widget.DirectionalViewPager
 import eu.kanade.tachiyomi.ui.reader.viewer.GestureDetectorWithLongTap
+import kotlin.math.abs
 
 /**
  * Pager implementation that listens for tap and long tap and allows temporarily disabling touch
@@ -14,8 +17,43 @@ import eu.kanade.tachiyomi.ui.reader.viewer.GestureDetectorWithLongTap
  */
 open class Pager(
     context: Context,
-    isHorizontal: Boolean = true,
-) : DirectionalViewPager(context, isHorizontal) {
+    /**
+     * Whether this pager pages sideways. Also tells a [DragHandler] which axis to watch.
+     */
+    val pagerIsHorizontal: Boolean = true,
+) : DirectionalViewPager(context, pagerIsHorizontal) {
+
+    /**
+     * Takes a drag away from the pager, so the reader can turn the page its own way: swapping it
+     * outright on an e-ink panel, whose every intermediate frame ghosts, or curling it elsewhere.
+     */
+    interface DragHandler {
+        /**
+         * The first drag past the touch slop. [towardsStart] is true for a drag towards the edge
+         * the pages start from - leftwards on a sideways pager, upwards on a vertical one.
+         *
+         * @return false to leave the gesture to the pager.
+         */
+        fun onDragStart(towardsStart: Boolean): Boolean
+
+        /** How far the finger has come, past the slop, in pixels. */
+        fun onDragMove(distance: Float) = Unit
+
+        /** Finger lifted. [velocity] is in pixels per second, positive towards the start edge. */
+        fun onDragEnd(velocity: Float) = Unit
+
+        fun onDragCancel() = Unit
+    }
+
+    var dragHandler: DragHandler? = null
+
+    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
+    private var dragTracking = false
+    private var dragActive = false
+    private var dragStartX = 0f
+    private var dragStartY = 0f
+    private var dragTowardsStart = false
+    private var velocityTracker: VelocityTracker? = null
 
     /**
      * Tap listener function to execute when a tap is detected.
@@ -70,6 +108,7 @@ open class Pager(
      * views manipulate [requestDisallowInterceptTouchEvent].
      */
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        if (handleDrag(ev)) return true
         return try {
             super.onInterceptTouchEvent(ev)
         } catch (e: IllegalArgumentException) {
@@ -82,6 +121,8 @@ open class Pager(
      * [requestDisallowInterceptTouchEvent].
      */
     override fun onTouchEvent(ev: MotionEvent): Boolean {
+        // A drag the handler owns must not reach the pager, or it would drag the page along too.
+        if (handleDrag(ev)) return true
         return try {
             super.onTouchEvent(ev)
         } catch (e: NullPointerException) {
@@ -91,6 +132,79 @@ open class Pager(
         } catch (e: IllegalArgumentException) {
             false
         }
+    }
+
+    private fun primaryDistance(ev: MotionEvent): Float =
+        if (pagerIsHorizontal) ev.x - dragStartX else ev.y - dragStartY
+
+    private fun crossDistance(ev: MotionEvent): Float =
+        if (pagerIsHorizontal) ev.y - dragStartY else ev.x - dragStartX
+
+    /**
+     * Watches the gesture for [dragHandler].
+     *
+     * @return true when the handler owns this gesture and the pager must keep its hands off it.
+     */
+    private fun handleDrag(ev: MotionEvent): Boolean {
+        val handler = dragHandler ?: return false
+
+        when (ev.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                dragTracking = true
+                dragActive = false
+                dragStartX = ev.x
+                dragStartY = ev.y
+                velocityTracker?.recycle()
+                velocityTracker = VelocityTracker.obtain().also { it.addMovement(ev) }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                velocityTracker?.addMovement(ev)
+                if (!dragTracking) return false
+
+                if (!dragActive) {
+                    val along = primaryDistance(ev)
+                    // The finger has to be going along the pager rather than across it.
+                    if (abs(along) <= touchSlop || abs(along) < abs(crossDistance(ev))) return false
+                    dragTowardsStart = along < 0
+                    dragActive = handler.onDragStart(dragTowardsStart)
+                    if (!dragActive) {
+                        stopDrag()
+                        return false
+                    }
+                }
+
+                handler.onDragMove(abs(primaryDistance(ev)) - touchSlop)
+                return true
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                val wasActive = dragActive
+                if (wasActive) {
+                    if (ev.actionMasked == MotionEvent.ACTION_UP) {
+                        velocityTracker?.computeCurrentVelocity(1000)
+                        val speed = abs(
+                            if (pagerIsHorizontal) {
+                                velocityTracker?.xVelocity ?: 0f
+                            } else {
+                                velocityTracker?.yVelocity ?: 0f
+                            },
+                        )
+                        handler.onDragEnd(if (dragTowardsStart) -speed else speed)
+                    } else {
+                        handler.onDragCancel()
+                    }
+                }
+                stopDrag()
+                return wasActive
+            }
+        }
+        return dragActive
+    }
+
+    private fun stopDrag() {
+        dragTracking = false
+        dragActive = false
+        velocityTracker?.recycle()
+        velocityTracker = null
     }
 
     /**

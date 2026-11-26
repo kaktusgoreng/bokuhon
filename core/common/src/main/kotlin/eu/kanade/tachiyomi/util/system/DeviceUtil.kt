@@ -55,6 +55,38 @@ object DeviceUtil {
         }
     }
 
+    /**
+     * Any Android e-paper device, from the vendor list in `EINK-DEVICES.md`. The reader turns pages
+     * without animation on these: every frame of a slide is ghosting on a panel this slow.
+     *
+     * Matched on vendor names rather than model numbers, so new models from known vendors are
+     * covered. Lenovo and "Minimal" are left out on purpose - their names are too generic to match
+     * on and would catch ordinary LCD devices.
+     */
+    val isEink: Boolean by lazy {
+        val identity = listOf(Build.MANUFACTURER, Build.BRAND, Build.MODEL, Build.DEVICE, Build.PRODUCT)
+            .joinToString(" ")
+            .lowercase()
+        einkVendors.any { identity.contains(it) }
+    }
+
+    private val einkVendors = listOf(
+        "onyx", "boox", // BOOX, the only vendor with a public display SDK
+        "bigme",
+        "hisense",
+        "meebook",
+        "moaan", "inkpalm", // Moaan (Xiaomi)
+        "ireader",
+        "supernote", "ratta",
+        "hyread", "pubook", "pubu",
+        "penstar",
+        "mudita",
+        "viwoods",
+        "dasung", "not-ereader",
+        "iflytek", "aiflytek",
+        "huion", // Ink EB1011
+    )
+
     val oneUiVersion: Double? by lazy {
         try {
             val semPlatformIntField = Build.VERSION::class.java.getDeclaredField("SEM_PLATFORM_INT")

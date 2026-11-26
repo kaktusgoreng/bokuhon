@@ -1,7 +1,10 @@
 package eu.kanade.tachiyomi.ui.reader.viewer.pager
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.ColorFilter
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.FrameLayout
@@ -30,10 +33,13 @@ import eu.kanade.tachiyomi.ui.reader.viewer.Viewer
 import eu.kanade.tachiyomi.ui.reader.viewer.collectChanges
 import eu.kanade.tachiyomi.ui.reader.viewer.mouseWheelPaging
 import eu.kanade.tachiyomi.ui.reader.viewer.position
+import eu.kanade.tachiyomi.util.system.DeviceUtil
+import eu.kanade.tachiyomi.widget.ViewPagerAdapter
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import mihon.app.di.appGraph
 import tachiyomi.core.common.util.system.logcat
+import kotlin.math.abs
 import kotlin.math.min
 
 /**
@@ -82,6 +88,11 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             },
         )
 
+    /** The curl drawn over the pager while a swipe turns the page. */
+    private val curl = PageCurlView(activity)
+    private var curlActive = false
+    private var curlForward = true
+
     private val pagerItems = PagerItems(isReversed = this is R2LPagerViewer)
 
     /**
@@ -126,6 +137,47 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             )
             activity.onViewerTap(pos)
         }
+        pager.dragHandler = object : Pager.DragHandler {
+            override fun onDragStart(towardsStart: Boolean): Boolean {
+                // A zoomed page keeps its drag: the image view and the pager pan it themselves.
+                if (isPagePannable()) return false
+
+                val forward = isForwardSwipe(towardsStart)
+                if (DeviceUtil.isEink) {
+                    // Nothing between one page and the next is worth showing on a panel this slow.
+                    turnPage(forward, animate = false)
+                    return true
+                }
+                return pager.pagerIsHorizontal && startCurl(forward)
+            }
+
+            override fun onDragMove(distance: Float) {
+                if (curlActive) curl.setProgress(distance / curlTravel())
+            }
+
+            override fun onDragEnd(velocity: Float) {
+                if (!curlActive) return
+                curlActive = false
+
+                val forward = curlForward
+                val finished = curl.progress > CURL_COMMIT_PROGRESS || abs(velocity) > CURL_FLING_VELOCITY
+                if (finished) {
+                    curl.animateTo(1f, CURL_SETTLE_MILLIS) {
+                        turnPage(forward, animate = false)
+                        curl.clear()
+                    }
+                } else {
+                    curl.animateTo(0f, CURL_SETTLE_MILLIS) { curl.clear() }
+                }
+            }
+
+            override fun onDragCancel() {
+                if (!curlActive) return
+                curlActive = false
+                curl.animateTo(0f, CURL_SETTLE_MILLIS) { curl.clear() }
+            }
+        }
+
         pager.longTapListener = f@{
             if (activity.viewModel.state.value.menuVisible || general.longTapEnabled) {
                 val item = adapter.items.getOrNull(pager.currentItem)
@@ -159,6 +211,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
 
     override fun destroy() {
         super.destroy()
+        curl.clear()
         scope.cancel()
     }
 
@@ -181,7 +234,13 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             pager.children.filterIsInstance<PagerPageHolder>().forEach { it.pageColorFilter = pageFilter }
         }
         AndroidView(
-            factory = { context -> DisallowInterceptBarrier(context).apply { addView(pager) } },
+            factory = { context ->
+                DisallowInterceptBarrier(context).apply {
+                    addView(pager)
+                    // Above the pages and never in the way: it takes its gestures through the pager.
+                    addView(curl, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+                }
+            },
             modifier = modifier.mouseWheelPaging(this),
         )
     }
@@ -193,6 +252,74 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
         pager.children
             .filterIsInstance(PagerPageHolder::class.java)
             .firstOrNull { it.item == page }
+
+    /** The holder showing [item], page or chapter transition alike. */
+    private fun holderFor(item: Any): View? =
+        pager.children.firstOrNull { (it as? ViewPagerAdapter.PositionableView)?.item == item }
+
+    /** Whether the current page is zoomed in far enough to move under the finger. */
+    private fun isPagePannable(): Boolean {
+        val page = tracker.currentPage as? ReaderPage ?: return false
+        val holder = getPageHolder(page) ?: return false
+        return paged.navigateToPan && (holder.canPanLeft() || holder.canPanRight())
+    }
+
+    /**
+     * A drag towards the edge the pages start from goes forward in a left-to-right reader and in
+     * a vertical one, and backwards in a right-to-left one.
+     */
+    private fun isForwardSwipe(towardsStart: Boolean): Boolean =
+        if (pager.pagerIsHorizontal) towardsStart != isReversed else towardsStart
+
+    private fun turnPage(forward: Boolean, animate: Boolean) {
+        val target = pager.currentItem + if (forward) 1 else -1
+        if (target in 0 until adapter.count) {
+            pager.setCurrentItem(target, animate)
+        }
+    }
+
+    /**
+     * Where the sheet leaves the page: the edge a single page is read towards. A two-page spread
+     * would hand its gutter here instead, which is the middle of the screen.
+     */
+    private fun curlAnchor(): Float = if (isReversed) 0f else 1f
+
+    /** How far the finger has to travel for the sheet to come all the way over. */
+    private fun curlTravel(): Float {
+        val width = pager.width.toFloat()
+        val anchor = curlAnchor()
+        return if (isReversed) width - anchor * width else anchor * width
+    }
+
+    /**
+     * Photographs both pages and puts the curl between them. The pager stays where it is until the
+     * sheet has finished folding, so letting go of a curl never turns the page behind your back.
+     */
+    private fun startCurl(forward: Boolean): Boolean {
+        val target = pager.currentItem + if (forward) 1 else -1
+        if (target !in 0 until adapter.count) return true
+
+        val current = adapter.items.getOrNull(pager.currentItem) ?: return false
+        val next = adapter.items.getOrNull(target) ?: return false
+        val over = snapshot(holderFor(current)) ?: return false
+        val under = snapshot(holderFor(next))
+
+        curlForward = forward
+        curlActive = true
+        curl.begin(over, under, curlAnchor(), !isReversed)
+        return true
+    }
+
+    /** Draws [view] straight into a bitmap the size of the pager. */
+    private fun snapshot(view: View?): Bitmap? {
+        val width = pager.width
+        val height = pager.height
+        if (view == null || width <= 0 || height <= 0) return null
+        return runCatching {
+            Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                .also { view.draw(Canvas(it)) }
+        }.getOrNull()
+    }
 
     /**
      * Tells this viewer to set the given [chapters] as active. If the pager is currently idle,
@@ -248,6 +375,13 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
      */
     protected open val isReversed = false
 
+    /**
+     * Whether a page turn is drawn at all. An e-paper panel cannot show a slide without leaving
+     * every frame of it behind as ghosting, so there it always jumps.
+     */
+    private val animateTurns: Boolean
+        get() = general.usePageTransitions && !DeviceUtil.isEink
+
     override fun moveForward() = if (isReversed) moveLeft() else moveRight()
 
     override fun moveBackward() = if (isReversed) moveRight() else moveLeft()
@@ -261,7 +395,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             if (holder != null && paged.navigateToPan && holder.canPanRight()) {
                 holder.panRight()
             } else {
-                pager.setCurrentItem(pager.currentItem + 1, general.usePageTransitions)
+                pager.setCurrentItem(pager.currentItem + 1, animateTurns)
             }
         }
     }
@@ -275,7 +409,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             if (holder != null && paged.navigateToPan && holder.canPanLeft()) {
                 holder.panLeft()
             } else {
-                pager.setCurrentItem(pager.currentItem - 1, general.usePageTransitions)
+                pager.setCurrentItem(pager.currentItem - 1, animateTurns)
             }
         }
     }
@@ -302,6 +436,15 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
         adapter.cleanupPageSplit()
     }
 }
+
+/** How far a page has to be folded before letting go finishes the turn. */
+private const val CURL_COMMIT_PROGRESS = 0.3f
+
+/** ... or how fast it has to be thrown. */
+private const val CURL_FLING_VELOCITY = 400f
+
+/** How long the sheet takes to finish folding, or to fall back. */
+private const val CURL_SETTLE_MILLIS = 140L
 
 /**
  * Keeps [requestDisallowInterceptTouchEvent] from reaching Compose. Its interop filter cancels the
