@@ -1,11 +1,9 @@
 package eu.kanade.tachiyomi.util.system
 
-import android.os.Build
 import com.onyx.android.sdk.api.device.epd.EpdController
 import com.onyx.android.sdk.api.device.epd.UpdateMode
 import com.onyx.android.sdk.device.Device
 import logcat.LogPriority
-import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tachiyomi.core.common.util.system.logcat
 
 /**
@@ -22,12 +20,7 @@ object OnyxEpd {
 
     private val device by lazy {
         val resolved = if (DeviceUtil.isOnyx) {
-            // The firmware keeps its EPD members behind the hidden API, and Android denies those to
-            // apps by default; the SDK can only reach the panel once they are exempt. The hidden API
-            // only exists from Android 9 on.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                runCatching { HiddenApiBypass.addHiddenApiExemptions("") }
-            }
+            exemptOnyxHiddenApi()
             runCatching { Device.currentDevice() }.getOrNull()
         } else {
             null

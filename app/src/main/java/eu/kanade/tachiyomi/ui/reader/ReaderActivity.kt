@@ -97,6 +97,7 @@ import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.Action
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.NavigationRegion
 import eu.kanade.tachiyomi.ui.webview.WebViewActivity
 import eu.kanade.tachiyomi.util.system.OnyxEpd
+import eu.kanade.tachiyomi.util.system.OnyxFrontLight
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.readerBackgroundColor
 import eu.kanade.tachiyomi.util.system.toShareIntent
@@ -566,6 +567,12 @@ class ReaderActivity : BaseActivity() {
         val isPagerType = ReadingMode.isPagerType(viewModel.getMangaReadingMode())
         val cropEnabled = if (isPagerType) cropBorderPaged else cropBorderWebtoon
 
+        val frontLight = remember { OnyxFrontLight.isAvailable(this@ReaderActivity) }
+        var frontLightOn by remember { mutableStateOf(OnyxFrontLight.isOn(this@ReaderActivity)) }
+        LaunchedEffect(state.menuVisible) {
+            if (state.menuVisible) frontLightOn = OnyxFrontLight.isOn(this@ReaderActivity)
+        }
+
         val verticalNavigatorModes by readerPreferences.verticalNavigator.collectAsState()
         val verticalNavigator = verticalNavigatorModes.contains(readingMode)
         val verticalNavigatorOnLeft by readerPreferences.verticalNavigatorOnLeft.collectAsState()
@@ -621,6 +628,8 @@ class ReaderActivity : BaseActivity() {
             ),
             onClickOrientation = viewModel::openOrientationModeSelectDialog,
             cropEnabled = cropEnabled,
+            frontLightOn = if (frontLight) frontLightOn else null,
+            onClickFrontLight = { frontLightOn = OnyxFrontLight.toggle(this@ReaderActivity) },
             onClickCropBorder = {
                 val enabled = viewModel.toggleCropBorders()
                 menuToggleToast?.cancel()

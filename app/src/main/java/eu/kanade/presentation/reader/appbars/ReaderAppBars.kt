@@ -61,6 +61,8 @@ fun ReaderAppBars(
     onClickOrientation: () -> Unit,
     cropEnabled: Boolean,
     onClickCropBorder: () -> Unit,
+    frontLightOn: Boolean?,
+    onClickFrontLight: () -> Unit,
     onClickSettings: () -> Unit,
 ) {
     val backgroundColor = LocalBokuhonColors.current.surface
@@ -151,6 +153,8 @@ fun ReaderAppBars(
                     onClickOrientation = onClickOrientation,
                     cropEnabled = cropEnabled,
                     onClickCropBorder = onClickCropBorder,
+                    frontLightOn = frontLightOn,
+                    onClickFrontLight = onClickFrontLight,
                     onClickSettings = onClickSettings,
                 )
             }

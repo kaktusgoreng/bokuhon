@@ -12,6 +12,8 @@ import mihon.icons.custommaterialsymbols.CustomMaterialSymbols
 import mihon.icons.custommaterialsymbols.rounded.CropOff
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Crop
+import mihon.icons.materialsymbols.rounded.LightMode
+import mihon.icons.materialsymbols.rounded.LightOff
 import mihon.icons.materialsymbols.rounded.Settings
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Icon
@@ -26,6 +28,9 @@ fun ReaderBottomBar(
     onClickOrientation: () -> Unit,
     cropEnabled: Boolean,
     onClickCropBorder: () -> Unit,
+    /** Null where the device has no front light the app can reach, which is everywhere but BOOX. */
+    frontLightOn: Boolean?,
+    onClickFrontLight: () -> Unit,
     onClickSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -54,6 +59,19 @@ fun ReaderBottomBar(
                 imageVector = if (cropEnabled) MaterialSymbols.Rounded.Crop else CustomMaterialSymbols.Rounded.CropOff,
                 contentDescription = stringResource(MR.strings.pref_crop_borders),
             )
+        }
+
+        if (frontLightOn != null) {
+            IconButton(onClick = onClickFrontLight) {
+                Icon(
+                    imageVector = if (frontLightOn) {
+                        MaterialSymbols.Rounded.LightMode
+                    } else {
+                        MaterialSymbols.Rounded.LightOff
+                    },
+                    contentDescription = stringResource(MR.strings.pref_front_light),
+                )
+            }
         }
 
         IconButton(onClick = onClickSettings) {
