@@ -1,23 +1,30 @@
 package eu.kanade.presentation.reader.appbars
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.Role
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import mihon.icons.custommaterialsymbols.CustomMaterialSymbols
 import mihon.icons.custommaterialsymbols.rounded.CropOff
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.Crop
-import mihon.icons.materialsymbols.rounded.LightMode
 import mihon.icons.materialsymbols.rounded.LightOff
 import mihon.icons.materialsymbols.rounded.Settings
+import mihon.icons.materialsymbols.roundedfilled.Lightbulb
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.IconButton
+import tachiyomi.presentation.core.bokuhon.IconButtonDefaults
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
@@ -62,14 +69,24 @@ fun ReaderBottomBar(
         }
 
         if (frontLightOn != null) {
-            IconButton(onClick = onClickFrontLight) {
+            // Its state is carried by the square itself: lit is ink with a white bulb, unlit is paper
+            // with a crossed black one, the same way the rest of the app says "on".
+            val colors = LocalBokuhonColors.current
+            Box(
+                modifier = Modifier
+                    .size(IconButtonDefaults.Size)
+                    .background(if (frontLightOn) colors.primary else colors.surface)
+                    .clickable(role = Role.Button, onClick = onClickFrontLight),
+                contentAlignment = Alignment.Center,
+            ) {
                 Icon(
                     imageVector = if (frontLightOn) {
-                        MaterialSymbols.Rounded.LightMode
+                        MaterialSymbols.RoundedFilled.Lightbulb
                     } else {
                         MaterialSymbols.Rounded.LightOff
                     },
                     contentDescription = stringResource(MR.strings.pref_front_light),
+                    tint = if (frontLightOn) colors.onPrimary else colors.onSurface,
                 )
             }
         }
