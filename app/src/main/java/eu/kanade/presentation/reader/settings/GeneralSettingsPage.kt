@@ -7,6 +7,8 @@ import androidx.compose.runtime.getValue
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsViewModel
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
+import eu.kanade.tachiyomi.util.system.DeviceUtil
+import eu.kanade.tachiyomi.util.system.OnyxEpd
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.FilterChip
@@ -37,6 +39,11 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
     val readerTheme by viewModel.preferences.readerTheme.collectAsState()
 
     val flashPageState by viewModel.preferences.flashOnPageChange.collectAsState()
+
+    // The same rules as Settings -> Reader -> E-Ink: where the panel refreshes the page itself
+    // there is nothing for the drawn flash to do, and only its cadence still applies.
+    val onyxRefreshModes by viewModel.preferences.onyxRefreshModes.collectAsState()
+    val panelRefreshes = DeviceUtil.isOnyx && OnyxEpd.isSupported && onyxRefreshModes
 
     val flashMillisPref = viewModel.preferences.flashDurationMillis
     val flashMillis by flashMillisPref.collectAsState()
@@ -132,11 +139,19 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
         pref = viewModel.preferences.pageTransitions,
     )
 
-    CheckboxItem(
-        label = stringResource(MR.strings.pref_flash_page),
-        pref = viewModel.preferences.flashOnPageChange,
-    )
-    if (flashPageState) {
+    if (DeviceUtil.isOnyx) {
+        CheckboxItem(
+            label = stringResource(MR.strings.pref_onyx_refresh_modes),
+            pref = viewModel.preferences.onyxRefreshModes,
+        )
+    }
+    if (!panelRefreshes) {
+        CheckboxItem(
+            label = stringResource(MR.strings.pref_flash_page),
+            pref = viewModel.preferences.flashOnPageChange,
+        )
+    }
+    if (flashPageState && !panelRefreshes) {
         SliderItem(
             value = flashMillis / ReaderPreferences.MILLI_CONVERSION,
             valueRange = 1..15,
@@ -145,6 +160,8 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
             onChange = { flashMillisPref.set(it * ReaderPreferences.MILLI_CONVERSION) },
             pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
+    }
+    if (flashPageState || panelRefreshes) {
         SliderItem(
             value = flashInterval,
             valueRange = 1..10,
@@ -155,6 +172,8 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
             },
             pillColor = LocalBokuhonColors.current.surfaceContainerHighest,
         )
+    }
+    if (flashPageState && !panelRefreshes) {
         SettingsChipRow(MR.strings.pref_flash_with) {
             flashColors.map { (labelRes, value) ->
                 FilterChip(
