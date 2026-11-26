@@ -60,4 +60,9 @@ dependencies {
     testRuntimeOnly(libs.junit.platform.launcher)
 
     implementation(libs.metro.runtime)
+
+    // BOOX's own EPD control (BSD-3), the only way a third-party app reaches the panel, and the
+    // exemption its calls need: the firmware's EPD members are hidden from third-party apps.
+    implementation("com.onyx.android.sdk:onyxsdk-device:1.3.7")
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:6.2")
 }

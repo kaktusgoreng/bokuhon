@@ -23,6 +23,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven(url = "https://www.jitpack.io")
+        maven(url = "https://repo.boox.com/repository/maven-public/")
     }
 }
 

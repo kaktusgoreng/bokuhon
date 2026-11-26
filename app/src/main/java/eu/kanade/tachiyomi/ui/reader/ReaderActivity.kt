@@ -8,6 +8,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -154,16 +156,31 @@ class ReaderActivity : BaseActivity() {
             when {
                 !readerPreferences.onyxRefreshModes.get() || !OnyxEpd.isSupported -> false
                 else -> {
-                    // A page change is reported before the new page is drawn, so painting now would
-                    // clean the page being left behind and leave the new one to a partial update.
-                    // The next frame is the first one that already has the new page on it.
-                    view.postOnAnimation { OnyxEpd.repaint(view = view) }
+                    repaintAfterDraw(view)
                     true
                 }
             }
         }
     }
     private val navigationOverlayState = ReaderNavigationOverlayState()
+
+    /**
+     * Asks the panel for a full refresh once the frame carrying the new page has been drawn.
+     * A page change is reported before that frame, and refreshing then cleans the page being left
+     * behind while the new one still goes out on a partial waveform.
+     */
+    private fun repaintAfterDraw(view: View) {
+        val observer = view.viewTreeObserver
+        val listener = object : ViewTreeObserver.OnDrawListener {
+            override fun onDraw() {
+                view.post {
+                    observer.removeOnDrawListener(this)
+                    OnyxEpd.refreshWithFullWaveform(view)
+                }
+            }
+        }
+        observer.addOnDrawListener(listener)
+    }
 
     private val windowInsetsController by lazy { WindowInsetsControllerCompat(window, window.decorView) }
 
