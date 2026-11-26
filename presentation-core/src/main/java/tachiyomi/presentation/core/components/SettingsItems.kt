@@ -1,5 +1,6 @@
 package tachiyomi.presentation.core.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -7,12 +8,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.FlowRowScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,11 +31,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntRect
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupPositionProvider
+import androidx.compose.ui.window.PopupProperties
 import dev.icerock.moko.resources.StringResource
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.ArrowDownward
@@ -66,6 +80,7 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.collectAsState
 import tachiyomi.presentation.core.util.secondaryItemAlpha
+import kotlin.math.roundToInt
 
 object SettingsItemsPaddings {
     val Horizontal = 24.dp
@@ -275,10 +290,13 @@ fun SliderItemPreview() {
 }
 
 /**
- * A setting shown as its current value, with the choices dropping down beneath it when tapped:
+ * A setting shown as its current value, with the choices in a menu that drops under it when tapped:
  * shorter than a row of chips for anything with more than two or three options, which is most of the
- * reader's choices. The choices are drawn in place rather than in a popup, which the dialogs the
- * reader settings live in place at the window corner instead of under the row.
+ * reader's choices.
+ *
+ * The menu is placed from the row's position in the window rather than from the bounds Compose hands
+ * a popup: inside the reader's sheet those arrive at the window's corner, so the menu opened nowhere
+ * near its row.
  */
 @Composable
 fun DropdownItem(
@@ -288,11 +306,13 @@ fun DropdownItem(
     onSelect: (Int) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var anchor by remember { mutableStateOf<LayoutCoordinates?>(null) }
     val contentColor = LocalBokuhonContentColor.current
 
     Column {
         Row(
             modifier = Modifier
+                .onGloballyPositioned { anchor = it }
                 .clickable { expanded = !expanded }
                 .fillMaxWidth()
                 .padding(
@@ -327,34 +347,71 @@ fun DropdownItem(
         }
 
         if (expanded) {
-            options.forEachIndexed { index, option ->
-                Row(
-                    modifier = Modifier
-                        .clickable {
-                            onSelect(index)
-                            expanded = false
+            Popup(
+                onDismissRequest = { expanded = false },
+                properties = PopupProperties(focusable = true),
+                popupPositionProvider = remember {
+                    object : PopupPositionProvider {
+                        override fun calculatePosition(
+                            anchorBounds: IntRect,
+                            windowSize: IntSize,
+                            layoutDirection: LayoutDirection,
+                            popupContentSize: IntSize,
+                        ): IntOffset {
+                            val bounds = anchor?.boundsInWindow()
+                            val top = bounds?.top?.roundToInt() ?: anchorBounds.top
+                            val bottom = bounds?.bottom?.roundToInt() ?: anchorBounds.bottom
+                            val left = bounds?.left?.roundToInt() ?: anchorBounds.left
+
+                            val below = bottom
+                            val fitsBelow = below + popupContentSize.height <= windowSize.height
+                            val y = if (fitsBelow) {
+                                below
+                            } else {
+                                (top - popupContentSize.height).coerceAtLeast(0)
+                            }
+                            val x = left.coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
+                            return IntOffset(x, y)
                         }
-                        .fillMaxWidth()
-                        .padding(
-                            start = SettingsItemsPaddings.Horizontal * 2,
-                            end = SettingsItemsPaddings.Horizontal,
-                            top = SettingsItemsPaddings.Vertical,
-                            bottom = SettingsItemsPaddings.Vertical,
-                        ),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    }
+                },
+            ) {
+                Surface(
+                    color = LocalBokuhonColors.current.surface,
+                    border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 ) {
-                    Text(
-                        text = option,
-                        modifier = Modifier.weight(1f),
-                        style = LocalBokuhonTypography.current.bodyMedium,
-                    )
-                    if (index == selectedIndex) {
-                        Icon(
-                            imageVector = MaterialSymbols.Rounded.Check,
-                            contentDescription = null,
-                            tint = contentColor,
-                        )
+                    // Sized by its widest choice: the popup's window would otherwise stretch it
+                    // across the screen.
+                    Column(modifier = Modifier.width(IntrinsicSize.Max).widthIn(min = 220.dp)) {
+                        options.forEachIndexed { index, option ->
+                            Row(
+                                modifier = Modifier
+                                    .clickable {
+                                        onSelect(index)
+                                        expanded = false
+                                    }
+                                    .fillMaxWidth()
+                                    .padding(
+                                        horizontal = SettingsItemsPaddings.Horizontal,
+                                        vertical = SettingsItemsPaddings.Vertical * 2,
+                                    ),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            ) {
+                                Text(
+                                    text = option,
+                                    modifier = Modifier.weight(1f),
+                                    style = LocalBokuhonTypography.current.bodyMedium,
+                                )
+                                if (index == selectedIndex) {
+                                    Icon(
+                                        imageVector = MaterialSymbols.Rounded.Check,
+                                        contentDescription = null,
+                                        tint = contentColor,
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
