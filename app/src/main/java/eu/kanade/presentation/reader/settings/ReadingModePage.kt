@@ -13,12 +13,11 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsViewModel
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import eu.kanade.tachiyomi.ui.reader.viewer.webgpu.WebGpuViewerSettings
 import tachiyomi.i18n.MR
-import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.CheckboxItem
+import tachiyomi.presentation.core.components.DropdownItem
 import tachiyomi.presentation.core.components.HeadingItem
-import tachiyomi.presentation.core.components.SettingsChipRow
 import tachiyomi.presentation.core.components.SliderItem
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
@@ -35,26 +34,20 @@ internal fun ColumnScope.ReadingModePage(viewModel: ReaderSettingsViewModel) {
     HeadingItem(MR.strings.pref_category_for_this_series)
     val manga by viewModel.mangaFlow.collectAsState()
     val readingMode = remember(manga) { ReadingMode.fromPreference(manga?.readingMode?.toInt()) }
-    SettingsChipRow(MR.strings.pref_category_reading_mode) {
-        ReadingMode.entries.map {
-            FilterChip(
-                selected = it == readingMode,
-                onClick = { viewModel.setReadingMode(it) },
-                label = { Text(stringResource(it.stringRes)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.pref_category_reading_mode),
+        options = ReadingMode.entries.map { stringResource(it.stringRes) },
+        selectedIndex = ReadingMode.entries.indexOf(readingMode),
+        onSelect = { viewModel.setReadingMode(ReadingMode.entries[it]) },
+    )
 
     val orientation = remember(manga) { ReaderOrientation.fromPreference(manga?.readerOrientation?.toInt()) }
-    SettingsChipRow(MR.strings.rotation_type) {
-        ReaderOrientation.entries.map {
-            FilterChip(
-                selected = it == orientation,
-                onClick = { viewModel.setOrientation(it) },
-                label = { Text(stringResource(it.stringRes)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.rotation_type),
+        options = ReaderOrientation.entries.map { stringResource(it.stringRes) },
+        selectedIndex = ReaderOrientation.entries.indexOf(orientation),
+        onSelect = { viewModel.setOrientation(ReaderOrientation.entries[it]) },
+    )
 
     val resolvedReadingMode by viewModel.readingMode.collectAsState()
     if (resolvedReadingMode.type is ReadingMode.ViewerType.Webtoon) {
@@ -78,26 +71,20 @@ private fun ColumnScope.PagerViewerSettings(viewModel: ReaderSettingsViewModel) 
     )
 
     val imageScaleType by viewModel.preferences.imageScaleType.collectAsState()
-    SettingsChipRow(MR.strings.pref_image_scale_type) {
-        ReaderPreferences.ImageScaleType.mapIndexed { index, it ->
-            FilterChip(
-                selected = imageScaleType == index + 1,
-                onClick = { viewModel.preferences.imageScaleType.set(index + 1) },
-                label = { Text(stringResource(it)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.pref_image_scale_type),
+        options = ReaderPreferences.ImageScaleType.map { stringResource(it) },
+        selectedIndex = imageScaleType - 1,
+        onSelect = { viewModel.preferences.imageScaleType.set(it + 1) },
+    )
 
     val zoomStart by viewModel.preferences.zoomStart.collectAsState()
-    SettingsChipRow(MR.strings.pref_zoom_start) {
-        ReaderPreferences.ZoomStart.mapIndexed { index, it ->
-            FilterChip(
-                selected = zoomStart == index + 1,
-                onClick = { viewModel.preferences.zoomStart.set(index + 1) },
-                label = { Text(stringResource(it)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.pref_zoom_start),
+        options = ReaderPreferences.ZoomStart.map { stringResource(it) },
+        selectedIndex = zoomStart - 1,
+        onSelect = { viewModel.preferences.zoomStart.set(it + 1) },
+    )
 
     CheckboxItem(
         label = stringResource(MR.strings.pref_crop_borders),
@@ -216,25 +203,19 @@ internal fun TapZonesItems(
     invertMode: ReaderPreferences.TappingInvertMode,
     onSelectInvertMode: (ReaderPreferences.TappingInvertMode) -> Unit,
 ) {
-    SettingsChipRow(MR.strings.pref_viewer_nav) {
-        ReaderPreferences.TapZones.mapIndexed { index, it ->
-            FilterChip(
-                selected = selected == index,
-                onClick = { onSelect(index) },
-                label = { Text(stringResource(it)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.pref_viewer_nav),
+        options = ReaderPreferences.TapZones.map { stringResource(it) },
+        selectedIndex = selected,
+        onSelect = onSelect,
+    )
 
     if (selected != 5) {
-        SettingsChipRow(MR.strings.pref_read_with_tapping_inverted) {
-            ReaderPreferences.TappingInvertMode.entries.map {
-                FilterChip(
-                    selected = it == invertMode,
-                    onClick = { onSelectInvertMode(it) },
-                    label = { Text(stringResource(it.titleRes)) },
-                )
-            }
-        }
+        DropdownItem(
+            label = stringResource(MR.strings.pref_read_with_tapping_inverted),
+            options = ReaderPreferences.TappingInvertMode.entries.map { stringResource(it.titleRes) },
+            selectedIndex = ReaderPreferences.TappingInvertMode.entries.indexOf(invertMode),
+            onSelect = { onSelectInvertMode(ReaderPreferences.TappingInvertMode.entries[it]) },
+        )
     }
 }

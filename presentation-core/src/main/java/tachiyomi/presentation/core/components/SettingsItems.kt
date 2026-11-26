@@ -3,6 +3,7 @@ package tachiyomi.presentation.core.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.FlowRowScope
@@ -28,13 +29,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.StringResource
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.ArrowDownward
 import mihon.icons.materialsymbols.rounded.ArrowUpward
+import mihon.icons.materialsymbols.rounded.Check
 import mihon.icons.materialsymbols.rounded.CheckBoxOutlineBlank
+import mihon.icons.materialsymbols.rounded.KeyboardArrowDown
+import mihon.icons.materialsymbols.rounded.KeyboardArrowUp
 import mihon.icons.materialsymbols.roundedfilled.CheckBox
 import mihon.icons.materialsymbols.roundedfilled.DisabledByDefault
 import tachiyomi.core.common.preference.Preference
@@ -48,6 +53,7 @@ import tachiyomi.presentation.core.bokuhon.ExposedDropdownMenuBox
 import tachiyomi.presentation.core.bokuhon.ExposedDropdownMenuDefaults
 import tachiyomi.presentation.core.bokuhon.Icon
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
+import tachiyomi.presentation.core.bokuhon.LocalBokuhonContentColor
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonTypography
 import tachiyomi.presentation.core.bokuhon.OutlinedTextField
 import tachiyomi.presentation.core.bokuhon.ProvideBokuhonTheme
@@ -264,6 +270,94 @@ fun SliderItemPreview() {
                     vertical = SettingsItemsPaddings.Vertical,
                 ),
             )
+        }
+    }
+}
+
+/**
+ * A setting shown as its current value, with the choices dropping down beneath it when tapped:
+ * shorter than a row of chips for anything with more than two or three options, which is most of the
+ * reader's choices. The choices are drawn in place rather than in a popup, which the dialogs the
+ * reader settings live in place at the window corner instead of under the row.
+ */
+@Composable
+fun DropdownItem(
+    label: String,
+    options: List<String>,
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val contentColor = LocalBokuhonContentColor.current
+
+    Column {
+        Row(
+            modifier = Modifier
+                .clickable { expanded = !expanded }
+                .fillMaxWidth()
+                .padding(
+                    horizontal = SettingsItemsPaddings.Horizontal,
+                    vertical = SettingsItemsPaddings.Vertical,
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Text(
+                text = label,
+                modifier = Modifier.weight(1f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = LocalBokuhonTypography.current.bodyMedium,
+            )
+            Text(
+                text = options.getOrNull(selectedIndex).orEmpty(),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = LocalBokuhonTypography.current.bodyMedium,
+            )
+            Icon(
+                imageVector = if (expanded) {
+                    MaterialSymbols.Rounded.KeyboardArrowUp
+                } else {
+                    MaterialSymbols.Rounded.KeyboardArrowDown
+                },
+                contentDescription = null,
+                tint = contentColor,
+            )
+        }
+
+        if (expanded) {
+            options.forEachIndexed { index, option ->
+                Row(
+                    modifier = Modifier
+                        .clickable {
+                            onSelect(index)
+                            expanded = false
+                        }
+                        .fillMaxWidth()
+                        .padding(
+                            start = SettingsItemsPaddings.Horizontal * 2,
+                            end = SettingsItemsPaddings.Horizontal,
+                            top = SettingsItemsPaddings.Vertical,
+                            bottom = SettingsItemsPaddings.Vertical,
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    Text(
+                        text = option,
+                        modifier = Modifier.weight(1f),
+                        style = LocalBokuhonTypography.current.bodyMedium,
+                    )
+                    if (index == selectedIndex) {
+                        Icon(
+                            imageVector = MaterialSymbols.Rounded.Check,
+                            contentDescription = null,
+                            tint = contentColor,
+                        )
+                    }
+                }
+            }
         }
     }
 }
