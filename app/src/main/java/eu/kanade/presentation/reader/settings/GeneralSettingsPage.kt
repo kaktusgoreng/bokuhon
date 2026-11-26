@@ -15,6 +15,7 @@ import tachiyomi.presentation.core.bokuhon.FilterChip
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
 import tachiyomi.presentation.core.bokuhon.Text
 import tachiyomi.presentation.core.components.CheckboxItem
+import tachiyomi.presentation.core.components.DropdownItem
 import tachiyomi.presentation.core.components.MultiDropdownItem
 import tachiyomi.presentation.core.components.SettingsChipRow
 import tachiyomi.presentation.core.components.SliderItem
@@ -55,15 +56,12 @@ internal fun ColumnScope.GeneralPage(viewModel: ReaderSettingsViewModel) {
     val flashColorPref = viewModel.preferences.flashColor
     val flashColor by flashColorPref.collectAsState()
 
-    SettingsChipRow(MR.strings.pref_reader_theme) {
-        themes.map { (labelRes, value) ->
-            FilterChip(
-                selected = readerTheme == value,
-                onClick = { viewModel.preferences.readerTheme.set(value) },
-                label = { Text(stringResource(labelRes)) },
-            )
-        }
-    }
+    DropdownItem(
+        label = stringResource(MR.strings.pref_reader_theme),
+        options = themes.map { stringResource(it.first) },
+        selectedIndex = themes.indexOfFirst { it.second == readerTheme },
+        onSelect = { viewModel.preferences.readerTheme.set(themes[it].second) },
+    )
 
     CheckboxItem(
         label = stringResource(MR.strings.pref_show_page_number),
