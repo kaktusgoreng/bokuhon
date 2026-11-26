@@ -1,7 +1,6 @@
 package tachiyomi.presentation.core.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.FlowRowScope
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -31,14 +29,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -94,8 +96,8 @@ object SettingsItemsPaddings {
 /** The box of [CheckboxItem] and [RadioItem], which the whole row is padded around. */
 private val CheckboxSize = 32.dp
 
-/** Tall enough for its boxed value to be an easy target on an e-ink panel. */
-private val DropdownRowHeight = 56.dp
+/** A comfortable target for a fingertip on a slow panel, and tall enough to read at arm's length. */
+private val DropdownOptionHeight = 48.dp
 
 @Composable
 fun HeadingItem(labelRes: StringResource) {
@@ -364,17 +366,25 @@ private fun DropdownItemFrame(
     isSelected: (Int) -> Boolean,
     onOptionClick: (Int) -> Unit,
 ) {
-    var anchor by remember { mutableStateOf<LayoutCoordinates?>(null) }
+    val density = LocalDensity.current
+    var valueBox by remember { mutableStateOf<LayoutCoordinates?>(null) }
+    var valueBoxWidth by remember { mutableStateOf(0.dp) }
     val contentColor = LocalBokuhonContentColor.current
     val colorScheme = LocalBokuhonColors.current
+    val measurer = rememberTextMeasurer()
+    val bodyMedium = LocalBokuhonTypography.current.bodyMedium
+    // The box is as wide as its widest choice, so it holds its size as the value changes.
+    // Measured rather than picked by length: a short label of wide glyphs can need more room
+    // than a long one of narrow glyphs, and these labels are translated.
+    val widestOption = remember(options, bodyMedium) {
+        options.maxByOrNull { measurer.measure(it, bodyMedium, maxLines = 1).size.width }.orEmpty()
+    }
 
     Column {
         Row(
             modifier = Modifier
-                .onGloballyPositioned { anchor = it }
                 .clickable(onClick = onToggle)
                 .fillMaxWidth()
-                .heightIn(min = DropdownRowHeight)
                 .padding(
                     horizontal = SettingsItemsPaddings.Horizontal,
                     vertical = SettingsItemsPaddings.Vertical,
@@ -394,6 +404,10 @@ private fun DropdownItemFrame(
             // Only the chosen value is boxed: that is the control, the label is not.
             Box(
                 modifier = Modifier
+                    .onGloballyPositioned {
+                        valueBox = it
+                        valueBoxWidth = with(density) { it.size.width.toDp() }
+                    }
                     .border(1.dp, colorScheme.onSurface)
                     .padding(horizontal = 12.dp, vertical = 6.dp),
             ) {
@@ -401,8 +415,18 @@ private fun DropdownItemFrame(
                     text = value,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.End,
+                    textAlign = TextAlign.Center,
                     style = LocalBokuhonTypography.current.bodyMedium,
+                )
+                // Invisible, but it keeps the box the width of the longest choice instead of
+                // resizing with whichever value happens to be picked.
+                Text(
+                    text = widestOption,
+                    modifier = Modifier
+                        .alpha(0f)
+                        .clearAndSetSemantics {},
+                    maxLines = 1,
+                    style = bodyMedium,
                 )
             }
         }
@@ -419,10 +443,11 @@ private fun DropdownItemFrame(
                             layoutDirection: LayoutDirection,
                             popupContentSize: IntSize,
                         ): IntOffset {
-                            // Placed from the row's position in the window rather than from the
-                            // bounds Compose hands a popup: inside the reader's sheet those arrive
-                            // at the window's corner, so the menu opened nowhere near its row.
-                            val bounds = anchor?.boundsInWindow()
+                            // Placed from the value box's position in the window rather than from
+                            // the bounds Compose hands a popup: inside the reader's sheet those
+                            // arrive at the window's corner, so the list opened nowhere near its
+                            // control. It hangs straight under the box, sharing its edges.
+                            val bounds = valueBox?.boundsInWindow()
                             val top = bounds?.top?.roundToInt() ?: anchorBounds.top
                             val bottom = bounds?.bottom?.roundToInt() ?: anchorBounds.bottom
                             val left = bounds?.left?.roundToInt() ?: anchorBounds.left
@@ -432,7 +457,6 @@ private fun DropdownItemFrame(
                             } else {
                                 (top - popupContentSize.height).coerceAtLeast(0)
                             }
-                            // Starting at the row's own left edge, where its label is.
                             val x = left.coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
                             return IntOffset(x, y)
                         }
@@ -443,30 +467,41 @@ private fun DropdownItemFrame(
                     color = LocalBokuhonColors.current.surface,
                     border = BorderStroke(1.dp, LocalBokuhonColors.current.onSurface),
                 ) {
-                    // As wide as its longest choice: the popup's window would otherwise stretch it
-                    // across the screen.
-                    Column(modifier = Modifier.width(IntrinsicSize.Max)) {
+                    // The same width as the box it drops from, so the two read as one control;
+                    // the popup's window would otherwise stretch it across the screen.
+                    Column(
+                        modifier = Modifier
+                            .width(valueBoxWidth)
+                            .padding(2.dp),
+                    ) {
                         options.forEachIndexed { index, option ->
                             val selected = isSelected(index)
-                            Row(
+                            Box(
                                 modifier = Modifier
-                                    .clickable { onOptionClick(index) }
                                     .fillMaxWidth()
-                                    // The chosen one is ink with white text, the way the rest of the
-                                    // app says "selected".
-                                    .background(
-                                        if (selected) colorScheme.primary else colorScheme.surface,
+                                    .heightIn(min = DropdownOptionHeight)
+                                    // The chosen one is outlined rather than filled: a block of ink
+                                    // in the list was heavier than the row it belongs to.
+                                    .then(
+                                        if (selected) {
+                                            Modifier.border(1.dp, colorScheme.onSurface)
+                                        } else {
+                                            Modifier
+                                        },
                                     )
-                                    .padding(
-                                        horizontal = SettingsItemsPaddings.Horizontal,
-                                        vertical = SettingsItemsPaddings.Vertical * 2,
-                                    ),
-                                verticalAlignment = Alignment.CenterVertically,
+                                    .clickable { onOptionClick(index) }
+                                    // Narrow enough that the longest choice still fits the box's
+                                    // width, which is what keeps the two edges aligned.
+                                    .padding(horizontal = 3.dp),
+                                contentAlignment = Alignment.Center,
                             ) {
                                 Text(
                                     text = option,
-                                    modifier = Modifier.weight(1f),
-                                    color = if (selected) colorScheme.onPrimary else contentColor,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center,
+                                    color = contentColor,
                                     style = LocalBokuhonTypography.current.bodyMedium,
                                 )
                             }
