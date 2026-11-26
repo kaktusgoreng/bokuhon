@@ -63,8 +63,11 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 object SettingsItemsPaddings {
     val Horizontal = 24.dp
-    val Vertical = 10.dp
+    val Vertical = 6.dp
 }
+
+/** The box of [CheckboxItem] and [RadioItem], which the whole row is padded around. */
+private val CheckboxSize = 32.dp
 
 @Composable
 fun HeadingItem(labelRes: StringResource) {
@@ -137,6 +140,9 @@ fun CheckboxItem(label: String, checked: Boolean, onClick: () -> Unit) {
             Checkbox(
                 checked = checked,
                 onCheckedChange = null,
+                // The row is the touch target; the box itself does not need to be a 48dp target as
+                // well, which is what made these rows read as a column of gaps.
+                modifier = Modifier.size(CheckboxSize),
             )
         },
         onClick = onClick,
