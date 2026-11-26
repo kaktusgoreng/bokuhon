@@ -13,7 +13,7 @@ import java.lang.reflect.Method
  * whose classes are hidden, every call answers false so the caller's own fallback stays in charge.
  *
  * Apps are meant to ask for transient modes only; the resting mode belongs to EinkWise and to the
- * user's per-app settings.
+ * user's per-app settings, which is why nothing here sets a display mode for a view.
  */
 object OnyxEpd {
 
@@ -23,7 +23,6 @@ object OnyxEpd {
         GC("GC"),
         DU("DU"),
         DU_QUALITY("DU_QUALITY"),
-        REGAL("REGAL"),
         ANIMATION("ANIMATION"),
     }
 
@@ -44,14 +43,10 @@ object OnyxEpd {
      */
     fun repaint(mode: Mode = Mode.GC, view: View? = null): Boolean = vendor?.repaint(mode, view) == true
 
-    /** Sets the mode the panel uses for [view]'s own partial updates, e.g. [Mode.REGAL] for pages. */
-    fun setViewMode(view: View, mode: Mode = Mode.REGAL): Boolean = vendor?.setViewMode(view, mode) == true
-
     private class Vendor(
         private val modes: Map<String, Any>,
         private val repaintAll: Method?,
         private val invalidate: Method?,
-        private val viewMode: Method?,
     ) {
         /** Once the firmware refuses a call, it is not asked again for the rest of the session. */
         private var failing = false
@@ -60,7 +55,6 @@ object OnyxEpd {
             append("available (")
             append("repaint=").append(repaintAll?.name ?: "-")
             append(", invalidate=").append(invalidate?.name ?: "-")
-            append(", view=").append(viewMode?.name ?: "-")
             append(", modes=").append(modes.size)
             append(", resting=").append(appScopeMode() ?: "-")
             append(")")
@@ -72,13 +66,6 @@ object OnyxEpd {
             repaintAll?.let { method -> if (call(method, null, constant)) return true }
             val method = invalidate ?: return false
             if (view == null) return false
-            return call(method, null, view, constant)
-        }
-
-        fun setViewMode(view: View, mode: Mode): Boolean {
-            if (failing) return false
-            val method = viewMode ?: return false
-            val constant = modes[mode.vendorName] ?: return false
             return call(method, null, view, constant)
         }
 
@@ -110,10 +97,9 @@ object OnyxEpd {
                 val repaintAll = controller.methodOrNull("repaintEveryThing", updateMode)
                 val invalidate = controller.methodOrNull("invalidate", View::class.java, updateMode)
                     ?: controller.methodOrNull("postInvalidate", View::class.java, updateMode)
-                val viewMode = controller.methodOrNull("setViewDefaultUpdateMode", View::class.java, updateMode)
 
-                if (repaintAll == null && invalidate == null && viewMode == null) return null
-                return Vendor(modes, repaintAll, invalidate, viewMode)
+                if (repaintAll == null && invalidate == null) return null
+                return Vendor(modes, repaintAll, invalidate)
             }
 
             /** The refresh mode EinkWise holds the app in, read only, so a report can name it. */

@@ -389,7 +389,7 @@
     <string name="pref_flash_page">Flash on page change</string>
     <string name="pref_flash_page_summ">Reduces ghosting on e-ink displays</string>
     <string name="pref_onyx_refresh_modes">Use BOOX refresh modes</string>
-    <string name="pref_onyx_refresh_modes_summ">Let the panel do the full refresh and keep pages in Regal</string>
+    <string name="pref_onyx_refresh_modes_summ">Let the panel refresh the page itself instead of the app drawing a flash</string>
     <string name="pref_flash_duration">Flash duration</string>
     <string name="pref_flash_duration_summary">%1$s ms</string>
     <string name="pref_flash_page_interval">Flash every</string>

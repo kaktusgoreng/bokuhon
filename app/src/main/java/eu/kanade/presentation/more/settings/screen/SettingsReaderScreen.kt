@@ -11,6 +11,7 @@ import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
 import eu.kanade.tachiyomi.util.system.DeviceUtil
+import eu.kanade.tachiyomi.util.system.OnyxEpd
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import kotlinx.serialization.Serializable
 import mihon.app.di.appGraph
@@ -123,6 +124,11 @@ data object SettingsReaderScreen : SearchableSettings {
     @Composable
     private fun getEInkGroup(readerPreferences: ReaderPreferences): Preference.PreferenceGroup {
         val flashPageState by readerPreferences.flashOnPageChange.collectAsState()
+        val onyxRefreshModes by readerPreferences.onyxRefreshModes.collectAsState()
+
+        // The panel refreshes pages itself where it can, which leaves nothing for the drawn flash
+        // or its length and colour to do; only the cadence still applies.
+        val panelRefreshes = DeviceUtil.isOnyx && OnyxEpd.isSupported && onyxRefreshModes
 
         val flashColorPref = readerPreferences.flashColor
 
@@ -133,6 +139,7 @@ data object SettingsReaderScreen : SearchableSettings {
                     preference = readerPreferences.flashOnPageChange,
                     title = stringResource(MR.strings.pref_flash_page),
                     subtitle = stringResource(MR.strings.pref_flash_page_summ),
+                    visible = !panelRefreshes,
                 ),
                 Preference.PreferenceItem.SwitchPreference(
                     preference = readerPreferences.onyxRefreshModes,
@@ -145,14 +152,14 @@ data object SettingsReaderScreen : SearchableSettings {
                     valueRange = ReaderPreferences.MILLI_CONVERSION.let { it..it * 15 step it },
                     title = stringResource(MR.strings.pref_flash_duration),
                     valueText = { stringResource(MR.strings.pref_flash_duration_summary, it) },
-                    visible = flashPageState,
+                    visible = flashPageState && !panelRefreshes,
                 ),
                 Preference.PreferenceItem.SliderPreference(
                     preference = readerPreferences.flashPageInterval,
                     valueRange = 1..10,
                     title = stringResource(MR.strings.pref_flash_page_interval),
                     valueText = { pluralStringResource(MR.plurals.pref_pages, it, it) },
-                    visible = flashPageState,
+                    visible = flashPageState || panelRefreshes,
                 ),
                 Preference.PreferenceItem.ListPreference(
                     preference = flashColorPref,
@@ -163,7 +170,7 @@ data object SettingsReaderScreen : SearchableSettings {
                             to stringResource(MR.strings.pref_flash_style_white_black),
                     ),
                     title = stringResource(MR.strings.pref_flash_with),
-                    visible = flashPageState,
+                    visible = flashPageState && !panelRefreshes,
                 ),
             ),
         )

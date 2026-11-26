@@ -8,7 +8,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -151,11 +150,17 @@ class ReaderActivity : BaseActivity() {
     private var readingModeToast: Toast? = null
     private val displayRefreshHost by lazy {
         DisplayRefreshHost(readerPreferences) {
-            // Flash on page change is still the switch; a real GC just replaces the drawn overlay
-            // where the panel can do it. Everywhere else repaint() answers false.
-            readerPreferences.flashOnPageChange.get() &&
-                readerPreferences.onyxRefreshModes.get() &&
-                OnyxEpd.repaint(view = window.decorView)
+            val view = window.decorView
+            when {
+                !readerPreferences.onyxRefreshModes.get() || !OnyxEpd.isSupported -> false
+                else -> {
+                    // A page change is reported before the new page is drawn, so painting now would
+                    // clean the page being left behind and leave the new one to a partial update.
+                    // The next frame is the first one that already has the new page on it.
+                    view.postOnAnimation { OnyxEpd.repaint(view = view) }
+                    true
+                }
+            }
         }
     }
     private val navigationOverlayState = ReaderNavigationOverlayState()
@@ -417,17 +422,6 @@ class ReaderActivity : BaseActivity() {
         super.onResume()
         viewModel.restartReadTimer()
         applySystemBarVisibility()
-        applyPanelPageMode()
-    }
-
-    /**
-     * Ask the panel for its text-optimised partial update over the pages so they stay crisp
-     * without the app resampling anything. Does nothing off BOOX devices.
-     */
-    private fun applyPanelPageMode() {
-        if (!readerPreferences.onyxRefreshModes.get()) return
-        val content = findViewById<View>(android.R.id.content) ?: return
-        OnyxEpd.setViewMode(content, OnyxEpd.Mode.REGAL)
     }
 
     /**
