@@ -145,7 +145,9 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
                 val forward = isForwardSwipe(towardsStart)
                 if (DeviceUtil.isEink) {
                     // Nothing between one page and the next is worth showing on a panel this slow.
-                    turnPage(forward, animate = false)
+                    // Moving the pager from inside a touch event leaves it to settle a second page
+                    // of its own, so the turn is posted instead.
+                    pager.post { turnPage(forward, animate = false) }
                     return true
                 }
                 return pager.pagerIsHorizontal && startCurl(forward)
