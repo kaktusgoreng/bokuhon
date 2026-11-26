@@ -30,22 +30,17 @@ class DisplayRefreshHost(
     internal val flashMillis = readerPreferences.flashDurationMillis
     internal val flashMode = readerPreferences.flashColor
 
+    // Read on every page turn rather than once, so a change to it applies to the panel refresh
+    // too, which never draws the flash below and so never moves the counter.
     internal val flashIntervalPref = readerPreferences.flashPageInterval
 
-    // Internal State for Flash
-    private var flashInterval = flashIntervalPref.get()
     private var timesCalled = 0
 
     fun flash() {
-        if (timesCalled % flashInterval == 0 && panelRefresh?.invoke() != true) {
+        if (timesCalled % flashIntervalPref.get().coerceAtLeast(1) == 0 && panelRefresh?.invoke() != true) {
             currentDisplayRefresh = true
         }
         timesCalled += 1
-    }
-
-    fun setInterval(interval: Int) {
-        flashInterval = interval
-        timesCalled = 0
     }
 }
 
@@ -57,7 +52,6 @@ fun DisplayRefreshHost(
     val currentDisplayRefresh = hostState.currentDisplayRefresh
     val refreshDuration by hostState.flashMillis.collectAsState()
     val flashMode by hostState.flashMode.collectAsState()
-    val flashInterval by hostState.flashIntervalPref.collectAsState()
 
     var currentColor by remember { mutableStateOf<Color?>(null) }
 
@@ -79,10 +73,6 @@ fun DisplayRefreshHost(
         }
         delay(refreshDurationHalf)
         hostState.currentDisplayRefresh = false
-    }
-
-    LaunchedEffect(flashInterval) {
-        hostState.setInterval(flashInterval)
     }
 
     Canvas(
