@@ -56,7 +56,8 @@ fun TabbedDialog(
                 PrimaryTabRow(
                     modifier = Modifier.weight(1f),
                     selectedTabIndex = pagerState.currentPage,
-                    containerColor = LocalBokuhonColors.current.surfaceContainerHigh,
+                    // Paper, not a grey band: the e-ink sheets are all one shade of white.
+                    containerColor = LocalBokuhonColors.current.surface,
                 ) {
                     tabTitles.fastForEachIndexed { index, tab ->
                         Tab(
