@@ -10,6 +10,7 @@ import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
+import eu.kanade.tachiyomi.util.system.DeviceUtil
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import kotlinx.serialization.Serializable
 import mihon.app.di.appGraph
@@ -132,6 +133,12 @@ data object SettingsReaderScreen : SearchableSettings {
                     preference = readerPreferences.flashOnPageChange,
                     title = stringResource(MR.strings.pref_flash_page),
                     subtitle = stringResource(MR.strings.pref_flash_page_summ),
+                ),
+                Preference.PreferenceItem.SwitchPreference(
+                    preference = readerPreferences.onyxRefreshModes,
+                    title = stringResource(MR.strings.pref_onyx_refresh_modes),
+                    subtitle = stringResource(MR.strings.pref_onyx_refresh_modes_summ),
+                    visible = DeviceUtil.isOnyx,
                 ),
                 Preference.PreferenceItem.SliderPreference(
                     preference = readerPreferences.flashDurationMillis,

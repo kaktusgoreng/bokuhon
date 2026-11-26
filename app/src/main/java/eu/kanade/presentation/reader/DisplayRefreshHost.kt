@@ -17,7 +17,14 @@ import tachiyomi.presentation.core.util.collectAsState
 import kotlin.time.Duration.Companion.milliseconds
 
 @Stable
-class DisplayRefreshHost(readerPreferences: ReaderPreferences) {
+class DisplayRefreshHost(
+    readerPreferences: ReaderPreferences,
+    /**
+     * Lets the panel do the full refresh itself, answering whether it did. The drawn flash below
+     * is what happens when it can't, which is everywhere but a BOOX device.
+     */
+    private val panelRefresh: (() -> Boolean)? = null,
+) {
 
     internal var currentDisplayRefresh by mutableStateOf(false)
     internal val flashMillis = readerPreferences.flashDurationMillis
@@ -30,7 +37,7 @@ class DisplayRefreshHost(readerPreferences: ReaderPreferences) {
     private var timesCalled = 0
 
     fun flash() {
-        if (timesCalled % flashInterval == 0) {
+        if (timesCalled % flashInterval == 0 && panelRefresh?.invoke() != true) {
             currentDisplayRefresh = true
         }
         timesCalled += 1

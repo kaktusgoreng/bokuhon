@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -94,6 +95,7 @@ import eu.kanade.tachiyomi.ui.reader.viewer.Viewer
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.Action
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.NavigationRegion
 import eu.kanade.tachiyomi.ui.webview.WebViewActivity
+import eu.kanade.tachiyomi.util.system.OnyxEpd
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.readerBackgroundColor
 import eu.kanade.tachiyomi.util.system.toShareIntent
@@ -147,7 +149,15 @@ class ReaderActivity : BaseActivity() {
 
     private var menuToggleToast: Toast? = null
     private var readingModeToast: Toast? = null
-    private val displayRefreshHost by lazy { DisplayRefreshHost(readerPreferences) }
+    private val displayRefreshHost by lazy {
+        DisplayRefreshHost(readerPreferences) {
+            // Flash on page change is still the switch; a real GC just replaces the drawn overlay
+            // where the panel can do it. Everywhere else repaint() answers false.
+            readerPreferences.flashOnPageChange.get() &&
+                readerPreferences.onyxRefreshModes.get() &&
+                OnyxEpd.repaint(view = window.decorView)
+        }
+    }
     private val navigationOverlayState = ReaderNavigationOverlayState()
 
     private val windowInsetsController by lazy { WindowInsetsControllerCompat(window, window.decorView) }
@@ -407,6 +417,17 @@ class ReaderActivity : BaseActivity() {
         super.onResume()
         viewModel.restartReadTimer()
         applySystemBarVisibility()
+        applyPanelPageMode()
+    }
+
+    /**
+     * Ask the panel for its text-optimised partial update over the pages so they stay crisp
+     * without the app resampling anything. Does nothing off BOOX devices.
+     */
+    private fun applyPanelPageMode() {
+        if (!readerPreferences.onyxRefreshModes.get()) return
+        val content = findViewById<View>(android.R.id.content) ?: return
+        OnyxEpd.setViewMode(content, OnyxEpd.Mode.REGAL)
     }
 
     /**

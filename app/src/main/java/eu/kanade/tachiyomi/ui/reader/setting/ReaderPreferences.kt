@@ -31,6 +31,9 @@ class ReaderPreferences(
 
     val flashOnPageChange: Preference<Boolean> = preferenceStore.getBoolean("pref_reader_flash", false)
 
+    /** Hand the full refresh to the panel and read pages in Regal. Only does anything on BOOX devices. */
+    val onyxRefreshModes: Preference<Boolean> = preferenceStore.getBoolean("pref_reader_onyx_refresh_modes", true)
+
     val flashDurationMillis: Preference<Int> = preferenceStore.getInt("pref_reader_flash_duration", MILLI_CONVERSION)
 
     val flashPageInterval: Preference<Int> = preferenceStore.getInt("pref_reader_flash_interval", 1)

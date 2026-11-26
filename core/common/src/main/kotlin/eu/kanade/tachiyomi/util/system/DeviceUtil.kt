@@ -48,6 +48,13 @@ object DeviceUtil {
         Build.MANUFACTURER.equals("samsung", ignoreCase = true)
     }
 
+    /** BOOX e-readers, whose firmware (EinkWise on 4.x) offers panel refresh modes to apps. */
+    val isOnyx: Boolean by lazy {
+        listOf(Build.MANUFACTURER, Build.BRAND, Build.MODEL).any {
+            it.contains("onyx", ignoreCase = true) || it.contains("boox", ignoreCase = true)
+        }
+    }
+
     val oneUiVersion: Double? by lazy {
         try {
             val semPlatformIntField = Build.VERSION::class.java.getDeclaredField("SEM_PLATFORM_INT")
