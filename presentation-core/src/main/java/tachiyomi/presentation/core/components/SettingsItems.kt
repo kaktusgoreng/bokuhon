@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -92,6 +93,9 @@ object SettingsItemsPaddings {
 
 /** The box of [CheckboxItem] and [RadioItem], which the whole row is padded around. */
 private val CheckboxSize = 32.dp
+
+/** Tall enough for its boxed value to be an easy target on an e-ink panel. */
+private val DropdownRowHeight = 56.dp
 
 @Composable
 fun HeadingItem(labelRes: StringResource) {
@@ -370,7 +374,7 @@ private fun DropdownItemFrame(
                 .onGloballyPositioned { anchor = it }
                 .clickable(onClick = onToggle)
                 .fillMaxWidth()
-                .border(1.dp, LocalBokuhonColors.current.onSurface)
+                .heightIn(min = DropdownRowHeight)
                 .padding(
                     horizontal = SettingsItemsPaddings.Horizontal,
                     vertical = SettingsItemsPaddings.Vertical,
@@ -387,13 +391,20 @@ private fun DropdownItemFrame(
                 overflow = TextOverflow.Ellipsis,
                 style = LocalBokuhonTypography.current.bodyMedium,
             )
-            Text(
-                text = value,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.End,
-                style = LocalBokuhonTypography.current.bodyMedium,
-            )
+            // Only the chosen value is boxed: that is the control, the label is not.
+            Box(
+                modifier = Modifier
+                    .border(1.dp, colorScheme.onSurface)
+                    .padding(horizontal = 12.dp, vertical = 6.dp),
+            ) {
+                Text(
+                    text = value,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.End,
+                    style = LocalBokuhonTypography.current.bodyMedium,
+                )
+            }
         }
 
         if (expanded) {
