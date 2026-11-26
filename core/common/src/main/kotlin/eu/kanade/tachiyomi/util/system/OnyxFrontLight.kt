@@ -1,25 +1,41 @@
 package eu.kanade.tachiyomi.util.system
 
 import android.content.Context
-import com.onyx.android.sdk.api.device.brightness.BaseBrightnessProvider
-import com.onyx.android.sdk.api.device.brightness.BrightnessController
-import com.onyx.android.sdk.api.device.brightness.CTMBrightnessProvider
-import com.onyx.android.sdk.api.device.brightness.CTMTemperatureProvider
-import com.onyx.android.sdk.api.device.brightness.FLBrightnessProvider
+import com.onyx.android.sdk.api.device.FrontLightController
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
+import java.lang.reflect.Method
 
 /**
- * The front light of a BOOX panel, through the vendor SDK. Onyx is the only e-paper vendor that
- * exposes one to apps, and its calls go through hidden firmware members, so this is gated on the
- * vendor and answers false rather than throwing anywhere it cannot reach the hardware.
+ * The front light of a BOOX panel, switched through the firmware's own toggle.
  *
- * A warm and cold panel lights through two channels, brightness and temperature, which the SDK
- * models as two providers; the single-brightness [FrontLightController] calls report -1 on them.
- * Only the brightness channel is switched, and the temperature one is written back to the level it
- * was on, so a light turned back on keeps the tint the user chose instead of coming up cold.
+ * That toggle is what the system's light control calls: it drives the brightness and temperature
+ * channels together and keeps the tint the panel was set to. The SDK's per-channel calls do not -
+ * opening the light resets its temperature to cold, which is why a light switched from the app came
+ * back white. The firmware entry point is hidden from apps, so it is reached by reflection and the
+ * exemption is applied first; off BOOX, or where it cannot be reached, everything answers false.
  */
 object OnyxFrontLight {
+
+    private class Control(private val getLightState: Method, private val toggleLight: Method) {
+        fun isOn(context: Context): Boolean = getLightState.invoke(null, context) as? Boolean ?: false
+
+        fun toggle(context: Context) {
+            toggleLight.invoke(null, context)
+        }
+
+        companion object {
+            private const val CONTROLLER = "android.onyx.hardware.DeviceController"
+
+            fun resolve(): Control? = runCatching {
+                val controller = Class.forName(CONTROLLER)
+                Control(
+                    getLightState = controller.getMethod("getLightState", Context::class.java),
+                    toggleLight = controller.getMethod("toggleLight", Context::class.java),
+                )
+            }.getOrNull()
+        }
+    }
 
     private val readable: Boolean by lazy {
         if (!DeviceUtil.isOnyx) return@lazy false
@@ -27,78 +43,29 @@ object OnyxFrontLight {
         true
     }
 
-    /** Last lit level per channel type, so switching back on returns to it. */
-    private val levels = mutableMapOf<Int, Int>()
+    private val control: Control? by lazy { if (readable) Control.resolve() else null }
 
-    private fun provider(context: Context): BaseBrightnessProvider? = runCatching {
-        // Initialises the provider map for this device, then hands back what it registered.
-        BrightnessController.getBrightnessType(context)
-        BrightnessController.providerMap.values.firstOrNull {
-            (it is FLBrightnessProvider || it is CTMBrightnessProvider) && it.maxIndex > 0
-        }
-    }.getOrNull()
-
-    private fun tint(context: Context): BaseBrightnessProvider? = runCatching {
-        BrightnessController.providerMap.values.firstOrNull { it is CTMTemperatureProvider }
-    }.getOrNull()
-
-    /**
-     * The tint the framework holds, which survives the light being off; the provider's own index does
-     * not, and turning the light on resets it to cold.
-     */
-    private fun systemTint(context: Context): Int? = runCatching {
-        android.provider.Settings.System.getInt(context.contentResolver, "screen_ctm_temperature")
-    }.getOrNull()
-
-    private fun remember(channel: BaseBrightnessProvider) {
-        runCatching { channel.index }.getOrNull()?.let { levels[channel.type] = it }
+    fun isAvailable(context: Context): Boolean {
+        if (control == null) return false
+        return runCatching {
+            FrontLightController.hasFLBrightness(context) || FrontLightController.hasCTMBrightness(context)
+        }.getOrDefault(false)
     }
 
-    fun isAvailable(context: Context): Boolean = readable && provider(context) != null
-
     fun isOn(context: Context): Boolean {
-        val light = provider(context) ?: return false
-        // The level stays where it was set while the light is off, so it cannot answer this.
-        return runCatching { light.isLightOn() }.getOrDefault(false)
+        val controller = control ?: return false
+        return runCatching { controller.isOn(context) }.getOrDefault(false)
     }
 
     /** Turns the light on or off and answers with the state it ended in. */
     fun toggle(context: Context): Boolean {
-        if (!readable) return false
-        val light = provider(context) ?: return false
-        val colour = tint(context)
+        val controller = control ?: return false
         val wasOn = isOn(context)
-
-        runCatching {
-            if (wasOn) {
-                remember(light)
-                colour?.let { channel ->
-                    (systemTint(context) ?: runCatching { channel.index }.getOrNull())
-                        ?.let { levels[channel.type] = it }
-                }
-                light.close()
-                // Some panels keep the light on after close and only stop at level zero.
-                if (isOn(context)) light.setIndex(0)
-            } else {
-                light.open()
-                val level = levels[light.type] ?: (light.maxIndex / 2).coerceAtLeast(1)
-                light.setIndex(level)
-                // The first call after a cold start only initialises the controller.
-                if (!isOn(context)) light.setIndex(level)
-                // Opening resets the tint to cold, so put back the one the user is used to.
-                colour?.let { channel ->
-                    (levels[channel.type] ?: systemTint(context))?.let(channel::setIndex)
-                }
-            }
-        }.onFailure {
-            logcat(LogPriority.WARN, it) { "Onyx front light: refused" }
-        }
-
-        logcat(LogPriority.DEBUG) {
-            "Onyx front light: wasOn=$wasOn now=${!wasOn} brightness=${light.index} tint=${colour?.index}"
-        }
-        // The panel can still report the old state for a moment after a write, so this answers what
-        // was asked for; the reader re-reads the light when its menu opens and corrects the icon.
+        runCatching { controller.toggle(context) }
+            .onFailure { logcat(LogPriority.WARN, it) { "Onyx front light: refused" } }
+        logcat(LogPriority.DEBUG) { "Onyx front light: wasOn=$wasOn now=${!wasOn} read=${isOn(context)}" }
+        // The panel lags a write, so this answers what was asked for; the reader re-reads the light
+        // when its menu opens and corrects the icon.
         return !wasOn
     }
 }
