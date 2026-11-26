@@ -43,11 +43,19 @@ fun Switch(
             .size(width = 52.dp, height = 32.dp)
             .background(trackColor)
             .border(2.dp, borderColor)
-            .toggleable(
-                value = checked,
-                enabled = enabled && onCheckedChange != null,
-                role = Role.Switch,
-                onValueChange = { onCheckedChange?.invoke(it) },
+            .then(
+                // Without a callback the row owns the toggle; a disabled toggleable here would still
+                // take the touch and swallow it, so nothing is attached at all.
+                if (onCheckedChange != null) {
+                    Modifier.toggleable(
+                        value = checked,
+                        enabled = enabled,
+                        role = Role.Switch,
+                        onValueChange = onCheckedChange,
+                    )
+                } else {
+                    Modifier
+                },
             ),
     ) {
         Box(
