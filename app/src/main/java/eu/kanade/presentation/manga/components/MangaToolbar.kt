@@ -90,17 +90,6 @@ fun MangaToolbar(
                         )
                         return@buildList
                     }
-                    add(
-                        AppBar.CustomAction {
-                            SquareAction(
-                                icon = MaterialSymbols.Rounded.Refresh,
-                                contentDescription = stringResource(MR.strings.action_webview_refresh),
-                                filled = isRefreshing,
-                                enabled = !isRefreshing,
-                                onClick = onClickRefresh,
-                            )
-                        },
-                    )
                     if (onClickDownload != null) {
                         add(
                             AppBar.Action(
@@ -117,6 +106,17 @@ fun MangaToolbar(
                                 contentDescription = stringResource(MR.strings.action_filter),
                                 filled = hasFilters,
                                 onClick = onClickFilter,
+                            )
+                        },
+                    )
+                    add(
+                        AppBar.CustomAction {
+                            SquareAction(
+                                icon = MaterialSymbols.Rounded.Refresh,
+                                contentDescription = stringResource(MR.strings.action_webview_refresh),
+                                filled = isRefreshing,
+                                enabled = !isRefreshing,
+                                onClick = onClickRefresh,
                             )
                         },
                     )
