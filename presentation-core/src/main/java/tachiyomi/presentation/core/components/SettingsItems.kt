@@ -361,7 +361,7 @@ fun DropdownItem(
                             val bounds = anchor?.boundsInWindow()
                             val top = bounds?.top?.roundToInt() ?: anchorBounds.top
                             val bottom = bounds?.bottom?.roundToInt() ?: anchorBounds.bottom
-                            val left = bounds?.left?.roundToInt() ?: anchorBounds.left
+                            val right = bounds?.right?.roundToInt() ?: anchorBounds.right
 
                             val below = bottom
                             val fitsBelow = below + popupContentSize.height <= windowSize.height
@@ -370,7 +370,10 @@ fun DropdownItem(
                             } else {
                                 (top - popupContentSize.height).coerceAtLeast(0)
                             }
-                            val x = left.coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
+                            // Hanging from the row's own edge, where its value and arrow are, rather
+                            // than from the window's left side.
+                            val x = (right - popupContentSize.width)
+                                .coerceIn(0, (windowSize.width - popupContentSize.width).coerceAtLeast(0))
                             return IntOffset(x, y)
                         }
                     }
