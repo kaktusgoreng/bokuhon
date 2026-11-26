@@ -67,6 +67,7 @@ fun LibraryTab() {
     val viewModel = metroViewModel<LibraryViewModel>()
     val settingsViewModel = metroViewModel<LibrarySettingsViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val isUpdateRunning by viewModel.isUpdateRunning.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -91,6 +92,7 @@ fun LibraryTab() {
             )
             LibraryToolbar(
                 hasActiveFilters = state.hasActiveFilters,
+                isRefreshing = isUpdateRunning,
                 selectedCount = state.selection.size,
                 title = title,
                 onClickUnselectAll = viewModel::clearSelection,
@@ -190,7 +192,6 @@ fun LibraryTab() {
                         viewModel.toggleRangeSelection(category, manga)
                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     },
-                    onRefresh = { onClickRefresh(state.activeCategory) },
                     onGlobalSearchClicked = {
                         navigator.push(GlobalSearchRoute(viewModel.state.value.searchQuery ?: ""))
                     },

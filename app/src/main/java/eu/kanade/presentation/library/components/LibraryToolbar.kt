@@ -14,9 +14,11 @@ import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
 import eu.kanade.presentation.components.SearchToolbar
+import eu.kanade.presentation.components.SquareAction
 import mihon.icons.materialsymbols.MaterialSymbols
 import mihon.icons.materialsymbols.rounded.FilterList
 import mihon.icons.materialsymbols.rounded.FlipToBack
+import mihon.icons.materialsymbols.rounded.Refresh
 import mihon.icons.materialsymbols.rounded.SelectAll
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.bokuhon.LocalBokuhonColors
@@ -29,6 +31,7 @@ import tachiyomi.presentation.core.i18n.stringResource
 @Composable
 fun LibraryToolbar(
     hasActiveFilters: Boolean,
+    isRefreshing: Boolean,
     selectedCount: Int,
     title: LibraryToolbarTitle,
     onClickUnselectAll: () -> Unit,
@@ -52,6 +55,7 @@ fun LibraryToolbar(
     else -> LibraryRegularToolbar(
         title = title,
         hasFilters = hasActiveFilters,
+        isRefreshing = isRefreshing,
         searchQuery = searchQuery,
         onSearchQueryChange = onSearchQueryChange,
         onClickFilter = onClickFilter,
@@ -67,6 +71,7 @@ fun LibraryToolbar(
 private fun LibraryRegularToolbar(
     title: LibraryToolbarTitle,
     hasFilters: Boolean,
+    isRefreshing: Boolean,
     searchQuery: String?,
     onSearchQueryChange: (String?) -> Unit,
     onClickFilter: () -> Unit,
@@ -109,13 +114,18 @@ private fun LibraryRegularToolbar(
                         iconTint = filterTint,
                         onClick = onClickFilter,
                     ),
+                    AppBar.CustomAction {
+                        SquareAction(
+                            icon = MaterialSymbols.Rounded.Refresh,
+                            contentDescription = stringResource(MR.strings.action_update_category),
+                            filled = isRefreshing,
+                            enabled = !isRefreshing,
+                            onClick = onClickRefresh,
+                        )
+                    },
                     AppBar.OverflowAction(
                         title = stringResource(MR.strings.action_update_library),
                         onClick = onClickGlobalUpdate,
-                    ),
-                    AppBar.OverflowAction(
-                        title = stringResource(MR.strings.action_update_category),
-                        onClick = onClickRefresh,
                     ),
                     AppBar.OverflowAction(
                         title = stringResource(MR.strings.action_open_random_manga),
