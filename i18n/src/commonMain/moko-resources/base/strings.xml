@@ -290,6 +290,7 @@
     <string name="pref_library_update_categories_details">Entries in excluded categories will not be updated even if they are also in included categories.</string>
     <string name="all">All</string>
     <string name="none">None</string>
+    <string name="multiple">Multiple</string>
     <string name="include">Include: %s</string>
     <string name="exclude">Exclude: %s</string>
 
