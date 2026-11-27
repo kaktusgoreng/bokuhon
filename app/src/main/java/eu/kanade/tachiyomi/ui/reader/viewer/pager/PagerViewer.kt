@@ -153,9 +153,8 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
                 return pager.pagerIsHorizontal && startCurl(forward, crossPosition)
             }
 
-            override fun onDragMove(distance: Float, crossPosition: Float) {
+            override fun onDragMove(distance: Float) {
                 if (!curlActive) return
-                curl.setApex(crossPosition / pager.height.coerceAtLeast(1))
                 val travelled = distance / curlTravel()
                 // A backward curl starts folded and unfolds with the drag, so its progress runs down.
                 curl.setProgress(if (curlForward) travelled else 1f - travelled)

@@ -51,7 +51,8 @@ class PageCurlView(context: Context) : View(context) {
 
     /**
      * Starts a curl. [over] is the page being taken away, [under] the one already in its place.
-     * [apex] is where the finger is down the page, so the crease can lean towards that corner.
+     * [apex] is where the finger went down, so the crease leans towards that corner for the whole
+     * drag, however far the finger then travels across the page.
      */
     fun begin(over: Bitmap, under: Bitmap?, anchor: Float, travelsLeft: Boolean, apex: Float) {
         clear()
@@ -62,12 +63,6 @@ class PageCurlView(context: Context) : View(context) {
         this.apex = apex.coerceIn(0f, 1f)
         progress = 0f
         invalidate()
-    }
-
-    /** Moves the corner the crease leans to, as the finger moves up or down. */
-    fun setApex(value: Float) {
-        apex = value.coerceIn(0f, 1f)
-        if (progress > 0f) invalidate()
     }
 
     fun setProgress(value: Float) {

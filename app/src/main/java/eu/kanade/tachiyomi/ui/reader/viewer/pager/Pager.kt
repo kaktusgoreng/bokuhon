@@ -31,14 +31,15 @@ open class Pager(
         /**
          * The first drag past the touch slop. [towardsStart] is true for a drag towards the edge
          * the pages start from - leftwards on a sideways pager, upwards on a vertical one.
-         * [crossPosition] is where the finger is on the other axis, in this view's coordinates.
+         * [crossPosition] is where the finger went down on the other axis, in this view's
+         * coordinates: the corner the page is held by for the whole drag.
          *
          * @return false to leave the gesture to the pager.
          */
         fun onDragStart(towardsStart: Boolean, crossPosition: Float): Boolean
 
-        /** How far the finger has come, past the slop, in pixels, and where it is across. */
-        fun onDragMove(distance: Float, crossPosition: Float) = Unit
+        /** How far the finger has come, past the slop, in pixels. */
+        fun onDragMove(distance: Float) = Unit
 
         /** Finger lifted. [velocity] is in pixels per second, positive towards the start edge. */
         fun onDragEnd(velocity: Float) = Unit
@@ -141,9 +142,6 @@ open class Pager(
     private fun crossDistance(ev: MotionEvent): Float =
         if (pagerIsHorizontal) ev.y - dragStartY else ev.x - dragStartX
 
-    private fun crossPosition(ev: MotionEvent): Float =
-        if (pagerIsHorizontal) ev.y else ev.x
-
     /**
      * Watches the gesture for [dragHandler].
      *
@@ -167,17 +165,19 @@ open class Pager(
 
                 if (!dragActive) {
                     val along = primaryDistance(ev)
-                    // The finger has to be going along the pager rather than across it.
-                    if (abs(along) <= touchSlop || abs(along) < abs(crossDistance(ev))) return false
+                    // The page is held by a corner, so a pull that goes more across than along is
+                    // still a page turn. A pull with no movement along the pager at all is not.
+                    if (abs(along) <= touchSlop) return false
                     dragTowardsStart = along < 0
-                    dragActive = handler.onDragStart(dragTowardsStart, crossPosition(ev))
+                    val grab = if (pagerIsHorizontal) dragStartY else dragStartX
+                    dragActive = handler.onDragStart(dragTowardsStart, grab)
                     if (!dragActive) {
                         stopDrag()
                         return false
                     }
                 }
 
-                handler.onDragMove(abs(primaryDistance(ev)) - touchSlop, crossPosition(ev))
+                handler.onDragMove(abs(primaryDistance(ev)) - touchSlop)
                 return true
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
