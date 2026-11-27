@@ -19,8 +19,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
@@ -191,56 +195,97 @@ private fun SliderImpl(
         val fraction = state.fractionOf(state.value)
         Canvas(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
             if (vertical) {
-                val trackWidth = 4.dp.toPx()
                 val centerX = size.width / 2
                 val top = 8.dp.toPx()
                 val bottom = size.height - 8.dp.toPx()
                 val activeY = bottom - (bottom - top) * fraction
-                drawRect(
-                    color = c.surfaceVariant,
-                    topLeft = Offset(centerX - trackWidth / 2, top),
-                    size = Size(trackWidth, bottom - top),
-                )
-                drawRect(
+                drawLine(
                     color = c.primary,
-                    topLeft = Offset(centerX - trackWidth / 2, activeY),
-                    size = Size(trackWidth, bottom - activeY),
+                    start = Offset(centerX, top),
+                    end = Offset(centerX, bottom),
+                    strokeWidth = TRACK_HAIRLINE.toPx(),
                 )
-                val thumb = 14.dp.toPx()
-                drawRect(
+                drawRoundRect(
                     color = c.primary,
-                    topLeft = Offset(centerX - thumb / 2, activeY - thumb / 2),
-                    size = Size(thumb, thumb),
+                    topLeft = Offset(centerX - READ_BAR.toPx() / 2, activeY),
+                    size = Size(READ_BAR.toPx(), (bottom - activeY).coerceAtLeast(0f)),
+                    cornerRadius = CornerRadius(READ_BAR.toPx() / 2),
                 )
+                drawHandle(Offset(centerX, activeY), c.surface, c.primary, vertical = true)
             } else {
-                val trackHeight = 4.dp.toPx()
                 val centerY = size.height / 2
                 val left = 8.dp.toPx()
                 val right = size.width - 8.dp.toPx()
                 val activeX = left + (right - left) * (if (reversed) 1f - fraction else fraction)
-                drawRect(
-                    color = c.surfaceVariant,
-                    topLeft = Offset(left, centerY - trackHeight / 2),
-                    size = Size(right - left, trackHeight),
+                drawLine(
+                    color = c.primary,
+                    start = Offset(left, centerY),
+                    end = Offset(right, centerY),
+                    strokeWidth = TRACK_HAIRLINE.toPx(),
                 )
                 // In RTL the track fills from its right end, the direction the thumb moves towards.
                 val fillStart = if (reversed) activeX else left
                 val fillEnd = if (reversed) right else activeX
-                drawRect(
+                drawRoundRect(
                     color = c.primary,
-                    topLeft = Offset(fillStart, centerY - trackHeight / 2),
-                    size = Size((fillEnd - fillStart).coerceAtLeast(0f), trackHeight),
+                    topLeft = Offset(fillStart, centerY - READ_BAR.toPx() / 2),
+                    size = Size((fillEnd - fillStart).coerceAtLeast(0f), READ_BAR.toPx()),
+                    cornerRadius = CornerRadius(READ_BAR.toPx() / 2),
                 )
-                val thumb = 14.dp.toPx()
-                drawRect(
-                    color = c.primary,
-                    topLeft = Offset(activeX - thumb / 2, centerY - thumb / 2),
-                    size = Size(thumb, thumb),
-                )
+                drawHandle(Offset(activeX, centerY), c.surface, c.primary, vertical = false)
             }
         }
     }
 }
+
+/**
+ * The knob, drawn the way BOOX's own reader draws it: a small white card ruled with two grip lines,
+ * which is what stands in for a shadow or highlight on a panel that shows neither.
+ */
+private fun DrawScope.drawHandle(centre: Offset, fill: Color, stroke: Color, vertical: Boolean) {
+    val width = (if (vertical) HANDLE_ACROSS else HANDLE_ALONG).toPx()
+    val height = (if (vertical) HANDLE_ALONG else HANDLE_ACROSS).toPx()
+    val corner = CornerRadius(HANDLE_CORNER.toPx())
+    val topLeft = Offset(centre.x - width / 2, centre.y - height / 2)
+    val size = Size(width, height)
+    drawRoundRect(color = fill, topLeft = topLeft, size = size, cornerRadius = corner)
+    drawRoundRect(
+        color = stroke,
+        topLeft = topLeft,
+        size = size,
+        cornerRadius = corner,
+        style = Stroke(width = STROKE.toPx()),
+    )
+    val reach = GRIP_LENGTH.toPx() / 2
+    val gap = GRIP_GAP.toPx() / 2
+    if (vertical) {
+        for (sign in intArrayOf(-1, 1)) {
+            val y = centre.y + sign * gap
+            drawLine(stroke, Offset(centre.x - reach, y), Offset(centre.x + reach, y), STROKE.toPx())
+        }
+    } else {
+        for (sign in intArrayOf(-1, 1)) {
+            val x = centre.x + sign * gap
+            drawLine(stroke, Offset(x, centre.y - reach), Offset(x, centre.y + reach), STROKE.toPx())
+        }
+    }
+}
+
+/** The part of the run already read: a heavy bar with rounded ends. */
+private val READ_BAR = 14.dp
+
+/** The part still ahead: a single ruled line, as BOOX draws it. */
+private val TRACK_HAIRLINE = 1.dp
+
+/** The knob: taller across the track than along it, so it stands on the bar. */
+private val HANDLE_ALONG = 15.dp
+private val HANDLE_ACROSS = 21.dp
+private val HANDLE_CORNER = 2.dp
+private val STROKE = 1.dp
+
+/** The two grip lines inside the knob. */
+private val GRIP_LENGTH = 10.dp
+private val GRIP_GAP = 5.dp
 
 private fun SliderState.valueAt(fraction: Float): Float {
     val f = fraction.coerceIn(0f, 1f)
