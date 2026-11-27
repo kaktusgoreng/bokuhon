@@ -154,7 +154,10 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             }
 
             override fun onDragMove(distance: Float) {
-                if (curlActive) curl.setProgress(distance / curlTravel())
+                if (!curlActive) return
+                val travelled = distance / curlTravel()
+                // A backward curl starts folded and unfolds with the drag, so its progress runs down.
+                curl.setProgress(if (curlForward) travelled else 1f - travelled)
             }
 
             override fun onDragEnd(velocity: Float) {
@@ -162,21 +165,24 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
                 curlActive = false
 
                 val forward = curlForward
-                val finished = curl.progress > CURL_COMMIT_PROGRESS || abs(velocity) > CURL_FLING_VELOCITY
+                val travelled = if (forward) curl.progress else 1f - curl.progress
+                val finished = travelled > CURL_COMMIT_PROGRESS || abs(velocity) > CURL_FLING_VELOCITY
+                val folded = if (forward) 1f else 0f
+                val rest = if (forward) 0f else 1f
                 if (finished) {
-                    curl.animateTo(1f, CURL_SETTLE_MILLIS) {
+                    curl.animateTo(folded, CURL_SETTLE_MILLIS) {
                         turnPage(forward, animate = false)
                         curl.clear()
                     }
                 } else {
-                    curl.animateTo(0f, CURL_SETTLE_MILLIS) { curl.clear() }
+                    curl.animateTo(rest, CURL_SETTLE_MILLIS) { curl.clear() }
                 }
             }
 
             override fun onDragCancel() {
                 if (!curlActive) return
                 curlActive = false
-                curl.animateTo(0f, CURL_SETTLE_MILLIS) { curl.clear() }
+                curl.animateTo(if (curlForward) 0f else 1f, CURL_SETTLE_MILLIS) { curl.clear() }
             }
         }
 
@@ -308,13 +314,17 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
         if (target !in 0 until adapter.count) return true
 
         val current = adapter.items.getOrNull(pager.currentItem) ?: return false
-        val next = adapter.items.getOrNull(target) ?: return false
-        val over = snapshot(holderFor(current)) ?: return false
-        val under = snapshot(holderFor(next))
+        val targetItem = adapter.items.getOrNull(target) ?: return false
+        // Forward, the page being left peels away. Back, the page returning is the sheet, lying
+        // down on the one on screen.
+        val moving = if (forward) current else targetItem
+        val under = if (forward) targetItem else current
+        val over = snapshot(holderFor(moving)) ?: return false
 
         curlForward = forward
         curlActive = true
-        curl.begin(over, under, curlAnchor(), !isReversed)
+        curl.begin(over, snapshot(holderFor(under)), curlAnchor(), !isReversed)
+        if (!forward) curl.setProgress(1f)
         return true
     }
 
