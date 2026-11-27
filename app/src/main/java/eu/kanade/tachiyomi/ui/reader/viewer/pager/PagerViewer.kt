@@ -138,7 +138,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
             activity.onViewerTap(pos)
         }
         pager.dragHandler = object : Pager.DragHandler {
-            override fun onDragStart(towardsStart: Boolean): Boolean {
+            override fun onDragStart(towardsStart: Boolean, crossPosition: Float): Boolean {
                 // A zoomed page keeps its drag: the image view and the pager pan it themselves.
                 if (isPagePannable()) return false
 
@@ -150,11 +150,12 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
                     pager.post { turnPage(forward, animate = false) }
                     return true
                 }
-                return pager.pagerIsHorizontal && startCurl(forward)
+                return pager.pagerIsHorizontal && startCurl(forward, crossPosition)
             }
 
-            override fun onDragMove(distance: Float) {
+            override fun onDragMove(distance: Float, crossPosition: Float) {
                 if (!curlActive) return
+                curl.setApex(crossPosition / pager.height.coerceAtLeast(1))
                 val travelled = distance / curlTravel()
                 // A backward curl starts folded and unfolds with the drag, so its progress runs down.
                 curl.setProgress(if (curlForward) travelled else 1f - travelled)
@@ -309,7 +310,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
      * Photographs both pages and puts the curl between them. The pager stays where it is until the
      * sheet has finished folding, so letting go of a curl never turns the page behind your back.
      */
-    private fun startCurl(forward: Boolean): Boolean {
+    private fun startCurl(forward: Boolean, crossPosition: Float): Boolean {
         val target = pager.currentItem + if (forward) pageStep else -pageStep
         if (target !in 0 until adapter.count) return true
 
@@ -320,10 +321,11 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
         val moving = if (forward) current else targetItem
         val under = if (forward) targetItem else current
         val over = snapshot(holderFor(moving)) ?: return false
+        val apex = crossPosition / pager.height.coerceAtLeast(1)
 
         curlForward = forward
         curlActive = true
-        curl.begin(over, snapshot(holderFor(under)), curlAnchor(), !isReversed)
+        curl.begin(over, snapshot(holderFor(under)), curlAnchor(), !isReversed, apex)
         if (!forward) curl.setProgress(1f)
         return true
     }
