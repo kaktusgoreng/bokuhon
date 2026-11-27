@@ -273,8 +273,14 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
     private fun isForwardSwipe(towardsStart: Boolean): Boolean =
         if (pager.pagerIsHorizontal) towardsStart != isReversed else towardsStart
 
+    /**
+     * +1 in reading order, -1 when the adapter is reversed for a right-to-left reader.
+     */
+    private val pageStep: Int
+        get() = if (isReversed) -1 else 1
+
     private fun turnPage(forward: Boolean, animate: Boolean) {
-        val target = pager.currentItem + if (forward) 1 else -1
+        val target = pager.currentItem + if (forward) pageStep else -pageStep
         if (target in 0 until adapter.count) {
             pager.setCurrentItem(target, animate)
         }
@@ -298,7 +304,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
      * sheet has finished folding, so letting go of a curl never turns the page behind your back.
      */
     private fun startCurl(forward: Boolean): Boolean {
-        val target = pager.currentItem + if (forward) 1 else -1
+        val target = pager.currentItem + if (forward) pageStep else -pageStep
         if (target !in 0 until adapter.count) return true
 
         val current = adapter.items.getOrNull(pager.currentItem) ?: return false
