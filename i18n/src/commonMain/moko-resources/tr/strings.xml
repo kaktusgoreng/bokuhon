@@ -113,10 +113,10 @@
     <string name="white_background">Beyaz</string>
     <string name="black_background">Siyah</string>
     <string name="pref_viewer_type">Varsayılan okuma modu</string>
-    <string name="left_to_right_viewer">Sayfalı (soldan sağa)</string>
-    <string name="right_to_left_viewer">Sayfalı (sağdan sola)</string>
-    <string name="vertical_viewer">Sayfalı (dikey)</string>
-    <string name="webtoon_viewer">Uzun şerit</string>
+    <string name="left_to_right_viewer">Çizgi roman</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Dikey sayfa</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Sayfalı</string>
     <string name="pref_image_scale_type">Boyutlandırma şekli</string>
     <string name="scale_type_fit_screen">Ekrana sığdır</string>
@@ -325,7 +325,7 @@
     <string name="pref_skip_filtered_chapters">Filtrelenmiş bölümleri atla</string>
     <string name="label_sources">Kaynaklar</string>
     <string name="action_select_inverse">Tersini seç</string>
-    <string name="vertical_plus_viewer">Aralıklı uzun şerit</string>
+    <string name="vertical_plus_viewer">Boşluklu Webtoon</string>
     <string name="pref_webtoon_side_padding">Kenar boşluğu</string>
     <string name="pinned_sources">Sabitlenmiş</string>
     <string name="action_unpin">Sabitlemeyi kaldır</string>

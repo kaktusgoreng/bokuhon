@@ -144,11 +144,11 @@
     <string name="scale_type_fit_screen">फिट स्क्रीन</string>
     <string name="pref_image_scale_type">स्केल प्रकार</string>
     <string name="pager_viewer">पृष्ठबद्ध</string>
-    <string name="vertical_plus_viewer">सतत उभे</string>
+    <string name="vertical_plus_viewer">अंतरांसह वेबटून</string>
     <string name="webtoon_viewer">वेबटून</string>
-    <string name="vertical_viewer">सरळ</string>
-    <string name="right_to_left_viewer">उजवीकडून डावीकडे</string>
-    <string name="left_to_right_viewer">डावीकडून उजवीकडे</string>
+    <string name="vertical_viewer">उभे पान</string>
+    <string name="right_to_left_viewer">मंगा</string>
+    <string name="left_to_right_viewer">कॉमिक</string>
     <string name="pref_viewer_type">डीफॉल्ट वाचन मोड</string>
     <string name="gray_background">फिक्का काडा</string>
     <string name="white_background">पांढरा</string>

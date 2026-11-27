@@ -114,10 +114,10 @@
     <string name="white_background">Arbu/biancu</string>
     <string name="black_background">Nieddu</string>
     <string name="pref_viewer_type">Modalidade de leghidura predefinida</string>
-    <string name="left_to_right_viewer">Pro pàgina (dae manca a destra)</string>
-    <string name="right_to_left_viewer">Pro pàgina (dae destra a manca)</string>
-    <string name="vertical_viewer">Pro pàgina (verticale)</string>
-    <string name="webtoon_viewer">Verticale longu</string>
+    <string name="left_to_right_viewer">Fumetu</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Pàgina verticale</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Impaginadu</string>
     <string name="pref_image_scale_type">Casta de iscala</string>
     <string name="scale_type_fit_screen">Adata a s\'ischermu</string>
@@ -325,7 +325,7 @@
     <string name="pref_skip_filtered_chapters">Brinca sos capìtulos filtrados</string>
     <string name="label_sources">Fontes</string>
     <string name="pref_webtoon_side_padding">Distantziamentu laterale</string>
-    <string name="vertical_plus_viewer">Verticale longu cun interrutziones</string>
+    <string name="vertical_plus_viewer">Webtoon cun ispàtzios</string>
     <string name="action_select_inverse">Fùrria s\'ischertada</string>
     <string name="pinned_sources">Apicadu</string>
     <string name="action_unpin">Boga</string>

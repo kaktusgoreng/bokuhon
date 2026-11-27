@@ -136,10 +136,10 @@
     <string name="gray_background">ნაცრისფერი</string>
     <string name="black_background">შავი</string>
     <string name="pref_viewer_type">ნაგულისხმევი კითხვის რეჟიმი</string>
-    <string name="left_to_right_viewer">მარცხნიდან მარჯვნივ</string>
-    <string name="right_to_left_viewer">მარჯვნიდან მარცხნივ</string>
-    <string name="vertical_viewer">ვერტიკალური</string>
-    <string name="vertical_plus_viewer">ვერტიკალური განგრძობითი</string>
+    <string name="left_to_right_viewer">კომიქსი</string>
+    <string name="right_to_left_viewer">მანგა</string>
+    <string name="vertical_viewer">ვერტიკალური გვერდი</string>
+    <string name="vertical_plus_viewer">ვებტუნი ინტერვალებით</string>
     <string name="pref_image_scale_type">სკალირების ტიპი</string>
     <string name="scale_type_fit_screen">ეკრანზე მორგება</string>
     <string name="scale_type_stretch">გაწელვა</string>
@@ -344,7 +344,7 @@
     <string name="pref_custom_color_filter">გამოიყენე პერსონალიზებული ფერთა ფილტრი</string>
     <string name="pref_color_filter_mode">ფერთა ფილტრის შეხამების რეჟიმი</string>
     <string name="pref_read_with_long_tap">დიალოგი ხანგრძლივი დაჭერისას</string>
-    <string name="webtoon_viewer">ვებ კომიქსი</string>
+    <string name="webtoon_viewer">ვებტუნი</string>
     <string name="pager_viewer">დანომრილი</string>
     <string name="pref_disable_battery_optimization">გამორთე ბატარეის ოპტიმიზაცია</string>
     <string name="pref_disable_battery_optimization_summary">ეხმარება უკანა ფონში მიმდინარე ბიბლიოთეკის განახლებებსდა რეზერვს</string>

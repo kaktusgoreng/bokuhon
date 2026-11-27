@@ -158,11 +158,11 @@
     <string name="scale_type_fit_screen">Экранынан</string>
     <string name="pref_image_scale_type">Тарҕаныыта</string>
     <string name="pager_viewer">Сирэйдэринэн</string>
-    <string name="vertical_plus_viewer">Тохтообоххо туруору</string>
+    <string name="vertical_plus_viewer">Арыталаах Webtoon</string>
     <string name="webtoon_viewer">Webtoon</string>
-    <string name="vertical_viewer">Туруору</string>
-    <string name="right_to_left_viewer">Хаҥас диэки</string>
-    <string name="left_to_right_viewer">Уҥа диэки</string>
+    <string name="vertical_viewer">Туруору сирэй</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="left_to_right_viewer">Комикс</string>
     <string name="pref_viewer_type">Куолутунан ааҕар эрэһиим</string>
     <string name="black_background">Хара</string>
     <string name="gray_background">Бороҥ</string>

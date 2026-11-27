@@ -123,10 +123,10 @@
     <string name="white_background">Biela</string>
     <string name="black_background">Čierna</string>
     <string name="pref_viewer_type">Predvolený režim čítania</string>
-    <string name="left_to_right_viewer">Zľava doprava</string>
-    <string name="right_to_left_viewer">Sprava doľava</string>
-    <string name="vertical_viewer">Vertikálne</string>
-    <string name="webtoon_viewer">Ako Webtoon - Zhora dole a strany sa spájajú do jednej dlhej</string>
+    <string name="left_to_right_viewer">Komiks</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Vertikálna stránka</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Stránkovanie</string>
     <string name="pref_image_scale_type">Mód škálovania</string>
     <string name="scale_type_fit_screen">Prispôsobiť obrazovke</string>
@@ -445,7 +445,7 @@
     <string name="pref_show_navigation_mode_summary">Krátko ukázať, keď je čítačka otvorená</string>
     <string name="pref_dual_page_invert">Prevrátiť rozdelenie na dve strany</string>
     <string name="nav_zone_right">Vpravo</string>
-    <string name="vertical_plus_viewer">Nepretržité vertikálne</string>
+    <string name="vertical_plus_viewer">Webtoon s medzerami</string>
     <string name="pref_viewer_nav">Dotykové zóny</string>
     <string name="pref_landscape_zoom">Priblížiť obrázok na šírku</string>
     <string name="pref_category_reading">Čítanie</string>

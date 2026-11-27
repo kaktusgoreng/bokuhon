@@ -114,10 +114,10 @@
     <string name="pref_read_with_volume_keys">ปุ่มปรับระดับเสียง</string>
     <string name="pref_read_with_volume_keys_inverted">สลับด้านปุ่มปรับระดับเสียง</string>
     <string name="pref_viewer_type">โหมดการอ่านเริ่มต้น</string>
-    <string name="left_to_right_viewer">แสดงเป็นหน้า (จากซ้ายไปขวา)</string>
-    <string name="right_to_left_viewer">แสดงเป็นหน้า (จากขวาไปซ้าย)</string>
-    <string name="vertical_viewer">แสดงเป็นหน้า (แนวตั้ง)</string>
-    <string name="webtoon_viewer">หน้ายาว</string>
+    <string name="left_to_right_viewer">คอมิก</string>
+    <string name="right_to_left_viewer">มังงะ</string>
+    <string name="vertical_viewer">หน้าแนวตั้ง</string>
+    <string name="webtoon_viewer">เว็บตูน</string>
     <string name="pager_viewer">แสดงเป็นหน้า</string>
     <string name="pref_image_scale_type">ชนิดมาตราส่วน</string>
     <string name="scale_type_fit_screen">พอดีกับหน้าจอ</string>
@@ -365,7 +365,7 @@
     <string name="pref_category_reading_mode">โหมดการอ่าน</string>
     <string name="rotation_type">การหมุน</string>
     <string name="pref_viewer_nav">โซนการแตะ</string>
-    <string name="vertical_plus_viewer">หน้ายาวแยกช่องว่าง</string>
+    <string name="vertical_plus_viewer">เว็บตูนมีช่องว่าง</string>
     <string name="nav_zone_right">ขวา</string>
     <string name="nav_zone_next">ถัดไป</string>
     <string name="edge_nav">ขอบ</string>

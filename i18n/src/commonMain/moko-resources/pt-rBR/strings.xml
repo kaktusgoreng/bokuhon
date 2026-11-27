@@ -96,10 +96,10 @@
     <string name="white_background">Branco</string>
     <string name="black_background">Preto</string>
     <string name="pref_viewer_type">Modo de leitura padrão</string>
-    <string name="left_to_right_viewer">Paginado (Esquerda para direita)</string>
-    <string name="right_to_left_viewer">Paginado (Direita para esquerda)</string>
-    <string name="vertical_viewer">Paginado (Vertical)</string>
-    <string name="webtoon_viewer">Tira longa</string>
+    <string name="left_to_right_viewer">Quadrinhos</string>
+    <string name="right_to_left_viewer">Mangá</string>
+    <string name="vertical_viewer">Página vertical</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_image_scale_type">Tipo de escala</string>
     <string name="scale_type_fit_screen">Ajustar à tela</string>
     <string name="scale_type_stretch">Estender</string>
@@ -325,7 +325,7 @@
     <string name="pref_skip_filtered_chapters">Pular os capítulos filtrados</string>
     <string name="label_sources">Fontes</string>
     <string name="action_select_inverse">Inverter a seleção</string>
-    <string name="vertical_plus_viewer">Tira longa com lacunas</string>
+    <string name="vertical_plus_viewer">Webtoon com lacunas</string>
     <string name="pref_webtoon_side_padding">Margem lateral</string>
     <string name="pinned_sources">Fixado</string>
     <string name="action_unpin">Desafixar</string>

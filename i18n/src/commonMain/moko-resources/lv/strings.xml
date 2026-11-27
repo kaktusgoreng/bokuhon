@@ -281,7 +281,7 @@
     <string name="gray_background">Pelēks</string>
     <string name="disabled_nav">Atspējots</string>
     <string name="white_background">Balts</string>
-    <string name="vertical_plus_viewer">Garā strīpā ar pārtraukumu</string>
+    <string name="vertical_plus_viewer">Webtoon ar atstarpēm</string>
     <string name="pref_webtoon_side_padding">Sānu platums</string>
     <string name="pref_remove_exclude_categories">Izslēgtās kategorijas</string>
     <string name="action_display_local_badge">Lokālais avots</string>
@@ -293,8 +293,8 @@
     <string name="edge_nav">Mala</string>
     <string name="right_and_left_nav">Pa labi un pa kreisi</string>
     <string name="nav_zone_right">Pa labi</string>
-    <string name="left_to_right_viewer">Lapaspuses (no kreisās puses uz labo)</string>
-    <string name="webtoon_viewer">Garā strīpā</string>
+    <string name="left_to_right_viewer">Komikss</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_viewer_nav">Skāriena zonas</string>
     <string name="scale_type_stretch">Izstiept</string>
     <string name="scale_type_fit_width">Ietilpt platumā</string>
@@ -304,8 +304,8 @@
     <string name="rotation_portrait">Portrets</string>
     <string name="rotation_force_portrait">Aizslēgts portreta režīmā</string>
     <string name="pref_category_reading_mode">Lasīšanas režīms</string>
-    <string name="right_to_left_viewer">Lapaspuses (no labās puses uz kreiso)</string>
-    <string name="vertical_viewer">Lapaspuses (vertikāli)</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Vertikāla lapa</string>
     <string name="manga">Bibliotēkas ieraksti</string>
     <string name="double_tap_anim_speed_fast">Ātrs</string>
     <string name="pref_rotation_type">Noklusējuma rotācijas tips</string>

@@ -164,10 +164,10 @@
     <string name="white_background">白色</string>
     <string name="black_background">黑色</string>
     <string name="pref_viewer_type">預設閱讀模式</string>
-    <string name="left_to_right_viewer">單頁(左至右)</string>
-    <string name="right_to_left_viewer">單頁(右至左)</string>
-    <string name="vertical_viewer">單頁(上至下)</string>
-    <string name="webtoon_viewer">捲動(連續)</string>
+    <string name="left_to_right_viewer">美漫</string>
+    <string name="right_to_left_viewer">日漫</string>
+    <string name="vertical_viewer">縱向單頁</string>
+    <string name="webtoon_viewer">條漫</string>
     <string name="pager_viewer">單頁</string>
     <string name="pref_image_scale_type">縮放模式</string>
     <string name="scale_type_fit_screen">符合螢幕</string>
@@ -369,7 +369,7 @@
     <string name="tapping_inverted_vertical">垂直</string>
     <string name="tapping_inverted_horizontal">水平</string>
     <string name="pref_read_with_tapping_inverted">反轉輕觸區域</string>
-    <string name="vertical_plus_viewer">捲動(留空)</string>
+    <string name="vertical_plus_viewer">間隙條漫</string>
     <string name="tapping_inverted_none">無</string>
     <string name="restore_duration">%1$02d 分， %2$02d 秒</string>
     <string name="recent_manga_time">第 %1$s 章 - %2$s</string>

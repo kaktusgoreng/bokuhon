@@ -206,11 +206,11 @@
     <string name="scale_type_stretch">Тӑс</string>
     <string name="scale_type_fit_screen">Ыкранпа</string>
     <string name="pref_image_scale_type">Сарӑмлани</string>
-    <string name="vertical_plus_viewer">Вӗҫӗмсӗрех урлӑ</string>
-    <string name="webtoon_viewer">Вӑрӑм елсем</string>
-    <string name="vertical_viewer">Елсерен (урлӑ)</string>
-    <string name="right_to_left_viewer">Елсерен (сылтӑмран сулахайалла)</string>
-    <string name="left_to_right_viewer">Елсерен (сулахайран сылтӑмалла)</string>
+    <string name="vertical_plus_viewer">Хушӑклӑ вебтун</string>
+    <string name="webtoon_viewer">Вебтун</string>
+    <string name="vertical_viewer">Тӑрӑх страницӑ</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="left_to_right_viewer">Комикс</string>
     <string name="gray_background">Сӑрӑ</string>
     <string name="pref_read_with_long_tap">Пусса тӑннӑ чух кӑтарт</string>
     <string name="pref_read_with_volume_keys_inverted">Йанравлӑх пускӑчӗсене вырӑнсемпе улӑштар</string>

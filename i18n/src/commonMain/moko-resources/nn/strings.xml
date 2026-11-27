@@ -153,11 +153,11 @@
     <string name="nav_zone_next">Neste</string>
     <string name="nav_zone_left">Venstre</string>
     <string name="nav_zone_right">Høgre</string>
-    <string name="left_to_right_viewer">Venstre til høgre</string>
-    <string name="right_to_left_viewer">Høgre til venstre</string>
-    <string name="vertical_viewer">Loddrett</string>
+    <string name="left_to_right_viewer">Teikneserie</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Loddrett side</string>
     <string name="webtoon_viewer">Webtoon</string>
-    <string name="vertical_plus_viewer">Kontinuerleg loddrett</string>
+    <string name="vertical_plus_viewer">Webtoon med mellomrom</string>
     <string name="scale_type_stretch">Strekk</string>
     <string name="zoom_start_automatic">Automatisk</string>
     <string name="zoom_start_left">Venstre</string>

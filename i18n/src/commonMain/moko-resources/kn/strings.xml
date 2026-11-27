@@ -155,11 +155,11 @@
     <string name="scale_type_fit_screen">ಪರದೆಯನ್ನು ಹೊಂದಿಸಿ</string>
     <string name="pref_image_scale_type">ಪ್ರಮಾಣದ ಪ್ರಕಾರ</string>
     <string name="pager_viewer">ಪುಟ ಸಂಯೋಜನೆಗಳು</string>
-    <string name="vertical_plus_viewer">ನಿರಂತರ ಲಂಬ</string>
+    <string name="vertical_plus_viewer">ಅಂತರವಿರುವ ವೆಬ್‌ಟೂನ್</string>
     <string name="webtoon_viewer">ವೆಬ್‌ಟೂನ್</string>
-    <string name="vertical_viewer">ಲಂಬ</string>
-    <string name="right_to_left_viewer">ಬಲದಿಂದ ಎಡಕ್ಕೆ</string>
-    <string name="left_to_right_viewer">ಎಡದಿಂದ ಬಲಕ್ಕೆ</string>
+    <string name="vertical_viewer">ಲಂಬ ಪುಟ</string>
+    <string name="right_to_left_viewer">ಮಂಗಾ</string>
+    <string name="left_to_right_viewer">ಕಾಮಿಕ್</string>
     <string name="pref_viewer_type">ಡೀಫಾಲ್ಟ್ ಓದುವ ರೀತಿ</string>
     <string name="black_background">ಕಪ್ಪು</string>
     <string name="gray_background">ಬೂದು</string>

@@ -255,8 +255,8 @@
     <string name="pref_viewer_nav">Tegish qismlari</string>
     <string name="nav_zone_left">Chap</string>
     <string name="nav_zone_right">O\'ng</string>
-    <string name="right_to_left_viewer">O\'ngdan chapga</string>
-    <string name="vertical_viewer">Vertikal</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Vertikal sahifa</string>
     <string name="l_nav">L-simon</string>
     <string name="pref_reader_theme">Orqa fon rangi</string>
     <string name="pref_read_with_volume_keys_inverted">Teskari ovoz tugmalari</string>
@@ -264,13 +264,13 @@
     <string name="automatic_background">Avtomatik</string>
     <string name="disabled_nav">O\'chirilgan</string>
     <string name="nav_zone_prev">Oldingi</string>
-    <string name="vertical_plus_viewer">Uzluksiz vertikal</string>
+    <string name="vertical_plus_viewer">Oraliqli vebtun</string>
     <string name="pager_viewer">Sahifabay</string>
     <string name="white_background">Oq</string>
     <string name="tapping_inverted_none">Yo\'q</string>
     <string name="pref_create_folder_per_manga_summary">Qism nomiga asoslanib papka yaratish</string>
     <string name="nav_zone_next">Keyingi</string>
-    <string name="left_to_right_viewer">Chapdan o\'ngga</string>
+    <string name="left_to_right_viewer">Komiks</string>
     <string name="pref_read_with_volume_keys">Ovoz tugmalari</string>
     <string name="gray_background">Kulrang</string>
     <string name="pref_viewer_type">O\'qish rejimi</string>

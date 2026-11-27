@@ -70,8 +70,8 @@
     <string name="pref_reader_theme">Barva pozadí</string>
     <string name="white_background">Bílá</string>
     <string name="black_background">Černá</string>
-    <string name="left_to_right_viewer">Stránkované (zleva doprava)</string>
-    <string name="right_to_left_viewer">Stránkované (zprava doleva)</string>
+    <string name="left_to_right_viewer">Komiks</string>
+    <string name="right_to_left_viewer">Manga</string>
     <string name="pref_rotation_type">Výchozí otáčení</string>
     <string name="rotation_free">Volné</string>
     <string name="rotation_force_portrait">Zamknuto na výšku</string>
@@ -179,8 +179,8 @@
     <string name="pref_custom_brightness">Vlastní jas</string>
     <string name="pref_custom_color_filter">Vlastní barevný filtr</string>
     <string name="pref_viewer_type">Výchozí režim čtení</string>
-    <string name="vertical_viewer">Stránkovaný (svisle)</string>
-    <string name="webtoon_viewer">Dlouhý pruh</string>
+    <string name="vertical_viewer">Svislá stránka</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_image_scale_type">Typ úpravy velikosti</string>
     <string name="scale_type_fit_screen">Přizpůsobit obrazovce</string>
     <string name="scale_type_stretch">Natáhnout</string>
@@ -439,7 +439,7 @@
     <string name="pref_category_display">Zobrazení</string>
     <string name="update_check_eol">Tato verze systému Android již není podporována</string>
     <string name="clipboard_copy_error">Kopírování do schránky se nezdařilo</string>
-    <string name="vertical_plus_viewer">Dlouhý pruh s mezerami</string>
+    <string name="vertical_plus_viewer">Webtoon s mezerami</string>
     <string name="edge_nav">Okraj</string>
     <string name="pref_read_with_tapping_inverted">Invertovat oblasti dotyku</string>
     <string name="pref_dual_page_split">Rozdělit široké stránky</string>

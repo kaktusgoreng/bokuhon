@@ -156,10 +156,10 @@
     <string name="white_background">Valkoinen</string>
     <string name="black_background">Musta</string>
     <string name="pref_viewer_type">Oletuslukutila</string>
-    <string name="left_to_right_viewer">Vasemmalta oikealle</string>
-    <string name="right_to_left_viewer">Oikealta vasemmalle</string>
-    <string name="vertical_viewer">Pystysuora</string>
-    <string name="webtoon_viewer">Webtoon-tyylinen</string>
+    <string name="left_to_right_viewer">Sarjakuva</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Pystysuora sivu</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Sivutettu</string>
     <string name="pref_image_scale_type">Skaalauksen tyyppi</string>
     <string name="scale_type_fit_screen">Sovita näyttöön</string>
@@ -334,7 +334,7 @@
     <string name="action_unpin">Poista kiinnitys</string>
     <string name="action_pin">Kiinnitä</string>
     <string name="action_select_inverse">Valitse käänteinen</string>
-    <string name="vertical_plus_viewer">Jatkuva pystysuora</string>
+    <string name="vertical_plus_viewer">Webtoon väleillä</string>
     <string name="information_webview_required">WebView on pakollinen Mihonissa</string>
     <string name="restore_in_progress">Palautus on jo käynnissä</string>
     <string name="backup_in_progress">Varmuuskopiointi on jo käynnissä</string>

@@ -113,10 +113,10 @@
     <string name="white_background">Білий</string>
     <string name="black_background">Чорний</string>
     <string name="pref_viewer_type">Типовий напрямок читання</string>
-    <string name="left_to_right_viewer">Посторінково (зліва направо)</string>
-    <string name="right_to_left_viewer">Посторінково (справа наліво)</string>
-    <string name="vertical_viewer">Посторінковий (вертикальний)</string>
-    <string name="webtoon_viewer">Довга смуга</string>
+    <string name="left_to_right_viewer">Комікс</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="vertical_viewer">Вертикальна сторінка</string>
+    <string name="webtoon_viewer">Вебтун</string>
     <string name="pager_viewer">Посторінково</string>
     <string name="pref_image_scale_type">Масштабування</string>
     <string name="scale_type_fit_screen">По екрану</string>
@@ -325,7 +325,7 @@
     <string name="updating_library">Оновлення бібліотеки</string>
     <string name="pref_skip_filtered_chapters">Пропускати відфільтровані розділи</string>
     <string name="pref_webtoon_side_padding">Бічний відступ</string>
-    <string name="vertical_plus_viewer">Довга смуга з проміжками</string>
+    <string name="vertical_plus_viewer">Вебтун з проміжками</string>
     <string name="action_select_inverse">Інвертувати вибір</string>
     <string name="add_tracking">Додати відстеження</string>
     <string name="pinned_sources">Прикріплено</string>

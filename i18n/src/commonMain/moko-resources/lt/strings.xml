@@ -186,8 +186,8 @@
     <string name="scale_type_fit_height">Pagal aukštį talpinimas</string>
     <string name="white_background">Balta</string>
     <string name="nav_zone_right">Dešinė</string>
-    <string name="left_to_right_viewer">Iš kairės į dešinę</string>
-    <string name="vertical_viewer">Vertikalus</string>
+    <string name="left_to_right_viewer">Komiksas</string>
+    <string name="vertical_viewer">Vertikalus puslapis</string>
     <string name="webtoon_viewer">Webtoon</string>
     <string name="ext_installer_pref">Diegimo programa</string>
     <string name="pref_update_only_completely_read">Kai yra neskaitytų skyrių</string>
@@ -215,7 +215,7 @@
     <string name="pref_color_filter_mode">Spalvų filtrų maišymo rėžimas</string>
     <string name="nav_zone_next">Kitas</string>
     <string name="nav_zone_left">Kairė</string>
-    <string name="vertical_plus_viewer">Ištęstinis vertikalus</string>
+    <string name="vertical_plus_viewer">Webtoon su tarpais</string>
     <string name="double_tap_anim_speed_fast">Greitai</string>
     <string name="color_filter_b_value">B</string>
     <string name="ext_update_all">Atnaujinti viską</string>
@@ -241,7 +241,7 @@
     <string name="filter_mode_multiply">Multiplikuoti</string>
     <string name="filter_mode_screen">Ekranas</string>
     <string name="tapping_inverted_none">Nėra</string>
-    <string name="right_to_left_viewer">Iš dešinės į kairę</string>
+    <string name="right_to_left_viewer">Manga</string>
     <string name="zoom_start_right">Dešiniau</string>
     <string name="color_filter_a_value">A</string>
     <string name="filter_mode_darken">Patamsinti</string>

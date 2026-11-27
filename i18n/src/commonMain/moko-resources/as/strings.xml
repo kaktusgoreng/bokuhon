@@ -349,11 +349,11 @@
     <string name="nav_zone_prev">পূৰ্বৰ</string>
     <string name="nav_zone_next">পৰৱৰ্তী</string>
     <string name="nav_zone_right">সোঁ</string>
-    <string name="left_to_right_viewer">পৃষ্ঠাযুক্ত (বাওঁৰ পৰা সোঁলৈ)</string>
-    <string name="right_to_left_viewer">পৃষ্ঠাযুক্ত (সোঁৰ পৰা বাওঁলৈ)</string>
-    <string name="vertical_viewer">পৃষ্ঠাযুক্ত (উলম্ব)</string>
-    <string name="webtoon_viewer">দীঘল ষ্ট্ৰিপ</string>
-    <string name="vertical_plus_viewer">ফাঁক থকা দীঘল ষ্ট্ৰিপ</string>
+    <string name="left_to_right_viewer">কমিক</string>
+    <string name="right_to_left_viewer">মাঙ্গা</string>
+    <string name="vertical_viewer">উলম্ব পৃষ্ঠা</string>
+    <string name="webtoon_viewer">ৱেবটুন</string>
+    <string name="vertical_plus_viewer">ফাঁক থকা ৱেবটুন</string>
     <string name="pager_viewer">পৃষ্ঠাযুক্ত</string>
     <string name="pref_viewer_nav">টেপ জোন</string>
     <string name="pref_image_scale_type">স্কেল প্ৰকাৰ</string>

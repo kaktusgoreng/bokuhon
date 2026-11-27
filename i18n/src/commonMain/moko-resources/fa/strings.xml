@@ -77,7 +77,7 @@
     <string name="remove_from_library">حذف از کتابخانه</string>
     <string name="in_library">در کتابخانه</string>
     <string name="tracking_info">برای به روز رسانی وضعیت پیشرفت قسمت ها، در سایت های خدمات ردیابی، همگام سازی یک طرفه انجام دهید. برای ردیابی هر داده از تب ردیابی اقدام کنید.</string>
-    <string name="webtoon_viewer">وب تون(Webtoon)</string>
+    <string name="webtoon_viewer">وب‌تون</string>
     <string name="filter_mode_darken">سوزاندن / تیره‌کردن</string>
     <string name="filter_mode_lighten">روشن کردن / کاهش تیرگی</string>
     <string name="update_12hour">هر ۱۲ ساعت یکبار</string>
@@ -177,10 +177,10 @@
     <string name="scale_type_fit_screen">هم اندازه با صفحه نمایش</string>
     <string name="pref_image_scale_type">نوع مقیاس</string>
     <string name="pager_viewer">صفحه به صفحه</string>
-    <string name="vertical_plus_viewer">عمودی پیوسته</string>
-    <string name="vertical_viewer">عمودی</string>
-    <string name="right_to_left_viewer">راست به چپ</string>
-    <string name="left_to_right_viewer">چپ به راست</string>
+    <string name="vertical_plus_viewer">وب‌تون با فاصله</string>
+    <string name="vertical_viewer">صفحه عمودی</string>
+    <string name="right_to_left_viewer">مانگا</string>
+    <string name="left_to_right_viewer">کمیک</string>
     <string name="pref_viewer_type">حالت پیش فرض خواندن</string>
     <string name="black_background">سیاه</string>
     <string name="gray_background">خاکستری</string>

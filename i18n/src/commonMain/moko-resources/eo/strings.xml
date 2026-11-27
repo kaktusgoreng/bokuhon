@@ -110,7 +110,7 @@
     <string name="scale_type_original_size">Originala grando</string>
     <string name="scale_type_stretch">Streĉi</string>
     <string name="scale_type_fit_screen">Adapti al ekrano</string>
-    <string name="webtoon_viewer">Longa strio</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="black_background">Nigra</string>
     <string name="gray_background">Griza</string>
     <string name="white_background">Blanka</string>
@@ -138,8 +138,8 @@
     <string name="scale_type_smart_fit">Saĝe adapti</string>
     <string name="scale_type_fit_height">Adapti laŭ alto</string>
     <string name="scale_type_fit_width">Adapti laŭ larĝo</string>
-    <string name="vertical_plus_viewer">Longa strio kun interspacoj</string>
-    <string name="vertical_viewer">Paĝigita (vertikale)</string>
+    <string name="vertical_plus_viewer">Webtoon kun interspacoj</string>
+    <string name="vertical_viewer">Vertikala paĝo</string>
     <string name="nav_zone_right">Dekstra</string>
     <string name="nav_zone_left">Maldekstra</string>
     <string name="right_and_left_nav">Dekstre kaj maldekstre</string>
@@ -312,8 +312,8 @@
     <string name="zoom_start_left">Maldekstra</string>
     <string name="pref_viewer_nav">Tuŝetzonoj</string>
     <string name="pager_viewer">Paĝigita</string>
-    <string name="right_to_left_viewer">Paĝigita (dekstre maldekstren)</string>
-    <string name="left_to_right_viewer">Paĝigita (maldekstre dekstren)</string>
+    <string name="right_to_left_viewer">Mangao</string>
+    <string name="left_to_right_viewer">Komikso</string>
     <string name="edge_nav">Rande</string>
     <string name="kindlish_nav">Simile al Kindle</string>
     <string name="pref_viewer_type">Defaŭlta legada reĝimo</string>

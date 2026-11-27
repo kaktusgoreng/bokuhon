@@ -78,10 +78,10 @@
     <string name="white_background">Bianco</string>
     <string name="black_background">Nero</string>
     <string name="pref_viewer_type">Modalità di lettura predefinita</string>
-    <string name="left_to_right_viewer">Per pagina (da sinistra a destra)</string>
-    <string name="right_to_left_viewer">Per pagina (da destra a sinistra)</string>
-    <string name="vertical_viewer">Per pagina (verticale)</string>
-    <string name="webtoon_viewer">Verticale lungo</string>
+    <string name="left_to_right_viewer">Fumetto</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Pagina verticale</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_image_scale_type">Tipo di scala</string>
     <string name="scale_type_fit_screen">Adatta a schermo</string>
     <string name="scale_type_stretch">Riempi schermo</string>
@@ -330,7 +330,7 @@
     <string name="add_to_library">Aggiungi alla libreria</string>
     <string name="pinned_sources">Fissato</string>
     <string name="pref_webtoon_side_padding">Riempimento laterale</string>
-    <string name="vertical_plus_viewer">Verticale lungo con interruzioni</string>
+    <string name="vertical_plus_viewer">Webtoon con spazi</string>
     <string name="action_unpin">Sblocca</string>
     <string name="action_select_inverse">Inverti selezione</string>
     <string name="recent_manga_time">Cap. %1$s - %2$s</string>

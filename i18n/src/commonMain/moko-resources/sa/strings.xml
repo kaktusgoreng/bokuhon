@@ -228,13 +228,13 @@
     <string name="nav_zone_prev">पूर्वतनम्</string>
     <string name="nav_zone_left">वामतः</string>
     <string name="nav_zone_right">दक्षिणतः</string>
-    <string name="left_to_right_viewer">दक्षिणेतरात् दक्षिणतः</string>
-    <string name="right_to_left_viewer">वामेतरात् वामतः</string>
-    <string name="vertical_viewer">ऊर्ध्वम्</string>
+    <string name="left_to_right_viewer">चित्रकथा</string>
+    <string name="right_to_left_viewer">मङ्गा</string>
+    <string name="vertical_viewer">ऊर्ध्वपृष्ठम्</string>
     <string name="webtoon_viewer">वेब्-टून्</string>
     <string name="pref_viewer_nav">मार्गणविन्यासः</string>
     <string name="pref_viewer_type">प्राथमिकपठनदशा</string>
-    <string name="vertical_plus_viewer">सततम् ऊर्ध्वम्</string>
+    <string name="vertical_plus_viewer">सन्तरालं वेब्-टून्</string>
     <string name="pref_read_with_tapping_inverted">विलोमं स्पर्शनम्</string>
     <string name="pref_skip_read_chapters">पठितम् इति चिह्नितान् अध्यायान् लङ्घयतु</string>
     <string name="filter_mode_lighten">प्रकाशयति</string>

@@ -113,9 +113,9 @@
     <string name="white_background">白色</string>
     <string name="black_background">黑色</string>
     <string name="pref_viewer_type">默认阅读模式</string>
-    <string name="left_to_right_viewer">单页式（从左到右）</string>
-    <string name="right_to_left_viewer">单页式（从右到左）</string>
-    <string name="vertical_viewer">单页式（从上到下）</string>
+    <string name="left_to_right_viewer">美漫</string>
+    <string name="right_to_left_viewer">日漫</string>
+    <string name="vertical_viewer">纵向单页</string>
     <string name="webtoon_viewer">条漫</string>
     <string name="pager_viewer">单页式</string>
     <string name="pref_image_scale_type">缩放模式</string>
@@ -328,7 +328,7 @@
     <string name="action_unpin">取消置顶</string>
     <string name="action_pin">置顶</string>
     <string name="pref_webtoon_side_padding">侧边留白</string>
-    <string name="vertical_plus_viewer">条漫（页间有空隙）</string>
+    <string name="vertical_plus_viewer">间隙条漫</string>
     <string name="action_select_inverse">反选</string>
     <string name="add_tracking">添加进度记录</string>
     <string name="information_webview_required">本应用需要 WebView 才能运行</string>

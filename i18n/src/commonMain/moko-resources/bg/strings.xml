@@ -82,10 +82,10 @@
     <string name="white_background">Бял</string>
     <string name="black_background">Черен</string>
     <string name="pref_viewer_type">Режим на четене по подразбиране</string>
-    <string name="left_to_right_viewer">От ляво надясно</string>
-    <string name="right_to_left_viewer">От дясно наляво</string>
-    <string name="vertical_viewer">Вертикално</string>
-    <string name="webtoon_viewer">Уебкомикс</string>
+    <string name="left_to_right_viewer">Комикс</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="vertical_viewer">Вертикална страница</string>
+    <string name="webtoon_viewer">Уебтун</string>
     <string name="pref_image_scale_type">Увеличение</string>
     <string name="scale_type_fit_screen">Запълване</string>
     <string name="scale_type_stretch">Разтегляне</string>
@@ -324,7 +324,7 @@
     <string name="pref_webtoon_side_padding">Странично разстояние</string>
     <string name="pref_category_reading">Четене</string>
     <string name="pref_always_show_chapter_transition">Винаги показвай прехода между главите</string>
-    <string name="vertical_plus_viewer">Безкраен вертикален изглед</string>
+    <string name="vertical_plus_viewer">Уебтун с интервали</string>
     <string name="pref_skip_filtered_chapters">Пропускай филтрирани глави</string>
     <string name="pref_cutout_short">Показвай съдържанието в изрязаната част</string>
     <string name="ext_updates_pending">Налични ъпдейти</string>

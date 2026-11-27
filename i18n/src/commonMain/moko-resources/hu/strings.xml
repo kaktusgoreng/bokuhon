@@ -108,10 +108,10 @@
     <string name="white_background">Fehér</string>
     <string name="black_background">Fekete</string>
     <string name="pref_viewer_type">Alapértelmezett olvasás mód</string>
-    <string name="left_to_right_viewer">Lapozott (balról jobbra)</string>
-    <string name="right_to_left_viewer">Lapozott (jobbról balra)</string>
-    <string name="vertical_viewer">Lapozott (függőlegesen)</string>
-    <string name="webtoon_viewer">Hosszú szalag</string>
+    <string name="left_to_right_viewer">Képregény</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Függőleges oldal</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="scale_type_fit_screen">Képernyőhöz igazítás</string>
     <string name="label_migration">Áttelepítés</string>
     <string name="label_extensions">Bővítmények</string>
@@ -345,7 +345,7 @@
     <string name="pref_image_scale_type">Skálázási típus</string>
     <string name="pref_viewer_nav">Érintési zónák</string>
     <string name="pager_viewer">Lapozott</string>
-    <string name="vertical_plus_viewer">Hosszú szalag lyukakkal</string>
+    <string name="vertical_plus_viewer">Webtoon hézagokkal</string>
     <string name="automatic_background">Automatikus</string>
     <string name="gray_background">Szürke</string>
     <string name="pref_create_folder_per_manga_summary">Mappák létrehozása elemek címe szerint</string>

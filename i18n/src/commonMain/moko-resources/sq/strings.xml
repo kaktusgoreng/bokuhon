@@ -280,8 +280,8 @@
     <string name="right_and_left_nav">E djathta dhe e majta</string>
     <string name="disabled_nav">I paaftë</string>
     <string name="nav_zone_prev">e mëparshme</string>
-    <string name="right_to_left_viewer">Nga e djathta në të majtë</string>
-    <string name="vertical_plus_viewer">Vertikale e vazhdueshme</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_plus_viewer">Webtoon me hapësira</string>
     <string name="pager_viewer">Faqe</string>
     <string name="pref_viewer_nav">Prekni zonat</string>
     <string name="pref_image_scale_type">Lloji i shkallës</string>
@@ -327,8 +327,8 @@
     <string name="nav_zone_next">Tjetra</string>
     <string name="nav_zone_left">Majtas</string>
     <string name="nav_zone_right">Djathtas</string>
-    <string name="left_to_right_viewer">Nga e majta në të djathtë</string>
-    <string name="vertical_viewer">Vertikale</string>
+    <string name="left_to_right_viewer">Komiks</string>
+    <string name="vertical_viewer">Faqe vertikale</string>
     <string name="scale_type_fit_screen">Ekran i përshtatshëm</string>
     <string name="pref_landscape_zoom">Zmadhoni imazhin e peizazhit</string>
     <string name="pref_zoom_start">Pozicioni fillestar i zmadhimit</string>

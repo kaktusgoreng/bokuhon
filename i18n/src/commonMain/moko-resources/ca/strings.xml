@@ -112,10 +112,10 @@
     <string name="white_background">Blanc</string>
     <string name="black_background">Negre</string>
     <string name="pref_viewer_type">Mode de lectura per defecte</string>
-    <string name="left_to_right_viewer">Paginat (d’esquerra a dreta)</string>
-    <string name="right_to_left_viewer">Paginat (de dreta a esquerra)</string>
-    <string name="vertical_viewer">Paginat (vertical)</string>
-    <string name="webtoon_viewer">Tira vertical</string>
+    <string name="left_to_right_viewer">Còmic</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Pàgina vertical</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Paginat</string>
     <string name="pref_image_scale_type">Tipus d’escalat</string>
     <string name="scale_type_fit_screen">Ajusta a la pantalla</string>
@@ -329,7 +329,7 @@
     <string name="action_pin">Fixa</string>
     <string name="add_tracking">Afegeix un seguiment</string>
     <string name="pref_webtoon_side_padding">Espaiat lateral</string>
-    <string name="vertical_plus_viewer">Tira vertical amb separació</string>
+    <string name="vertical_plus_viewer">Webtoon amb espais</string>
     <string name="action_unpin">Desfixa</string>
     <string name="in_library">A la biblioteca</string>
     <string name="add_to_library">Afegeix a la biblioteca</string>

@@ -113,10 +113,10 @@
     <string name="white_background">Vit</string>
     <string name="black_background">Svart</string>
     <string name="pref_viewer_type">Standardläsläge</string>
-    <string name="left_to_right_viewer">Sidor (vänster till höger)</string>
-    <string name="right_to_left_viewer">Sidor (höger till vänster)</string>
-    <string name="vertical_viewer">Sidformat (vertikalt)</string>
-    <string name="webtoon_viewer">Lång remsa</string>
+    <string name="left_to_right_viewer">Serie</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Vertikal sida</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Sidläsare</string>
     <string name="pref_image_scale_type">Bildanpassning</string>
     <string name="scale_type_fit_screen">Anpassa till skärmen</string>
@@ -329,7 +329,7 @@
     <string name="add_to_library">Lägg till i biblioteket</string>
     <string name="pinned_sources">Nålad</string>
     <string name="pref_webtoon_side_padding">Sidofyllning</string>
-    <string name="vertical_plus_viewer">Lång remsa med mellanrum</string>
+    <string name="vertical_plus_viewer">Webtoon med mellanrum</string>
     <string name="action_unpin">Lossa</string>
     <string name="action_pin">Nåla</string>
     <string name="action_select_inverse">Välj omvänd</string>

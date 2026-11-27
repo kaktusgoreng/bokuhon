@@ -173,11 +173,11 @@
     <string name="scale_type_fit_screen">የአካል ብቃት ማያ ገጽ</string>
     <string name="pref_image_scale_type">ልኬት ዓይነት</string>
     <string name="pager_viewer">ተለጠፈ</string>
-    <string name="vertical_plus_viewer">ቀጣይነት ያለው አቀባዊ</string>
+    <string name="vertical_plus_viewer">ክፍተት ያለው ዌብቱን</string>
     <string name="webtoon_viewer">ዌብቱን</string>
-    <string name="vertical_viewer">አቀባዊ</string>
-    <string name="right_to_left_viewer">ከቀኝ ወደ ግራ</string>
-    <string name="left_to_right_viewer">ከግራ ወደ ቀኝ</string>
+    <string name="vertical_viewer">አቀባዊ ገጽ</string>
+    <string name="right_to_left_viewer">ማንጋ</string>
+    <string name="left_to_right_viewer">ኮሚክ</string>
     <string name="pref_viewer_type">ነባሪ የንባብ ሁነታ</string>
     <string name="black_background">ጥቁር</string>
     <string name="gray_background">ግራጫ</string>

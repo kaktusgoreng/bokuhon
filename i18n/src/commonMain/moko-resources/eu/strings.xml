@@ -81,9 +81,9 @@
     <string name="secure_screen">Pantaila segurua</string>
     <string name="hide_notification_content">Ezkutatu jakinarazpenen edukia</string>
     <string name="landscape">Horizontala</string>
-    <string name="left_to_right_viewer">Ezkerretik eskuinera</string>
-    <string name="right_to_left_viewer">Eskuinetik ezkerrera</string>
-    <string name="vertical_viewer">Bertikalki</string>
+    <string name="left_to_right_viewer">Komiki</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Orrialde bertikala</string>
     <string name="reading">Irakurtzen</string>
     <string name="on_hold">Momentuz utzia</string>
     <string name="plan_to_read">Irakurtzeko asmoa dut</string>
@@ -252,7 +252,7 @@
     <string name="pref_category_reading">Irakurtzen</string>
     <string name="third_to_last">Atzetik hasita hirugarren irakurritako kapitulua</string>
     <string name="nav_zone_left">Ezkerra</string>
-    <string name="vertical_plus_viewer">Bertikalki etengabe</string>
+    <string name="vertical_plus_viewer">Webtoon tartekin</string>
     <string name="pref_image_scale_type">Eskala mota</string>
     <string name="scale_type_fit_screen">Doitu pantaila</string>
     <string name="scale_type_fit_width">Doitu zabalera</string>

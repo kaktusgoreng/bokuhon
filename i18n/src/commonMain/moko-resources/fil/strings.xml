@@ -139,11 +139,11 @@
     <string name="scale_type_fit_screen">Pagkasyahin sa screen</string>
     <string name="pref_image_scale_type">Uri ng pagsasalaki</string>
     <string name="pager_viewer">Nakapahina</string>
-    <string name="vertical_plus_viewer">Pahabang strip na may puwang</string>
-    <string name="webtoon_viewer">Pahabang strip</string>
-    <string name="vertical_viewer">Pahina (patayo)</string>
-    <string name="right_to_left_viewer">Pahina (kanan pakaliwa)</string>
-    <string name="left_to_right_viewer">Pahina (kaliwa pakanan)</string>
+    <string name="vertical_plus_viewer">Webtoon na may puwang</string>
+    <string name="webtoon_viewer">Webtoon</string>
+    <string name="vertical_viewer">Patayong pahina</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="left_to_right_viewer">Komiks</string>
     <string name="pref_viewer_type">Default na pagbasa</string>
     <string name="black_background">Itim</string>
     <string name="gray_background">Abo</string>

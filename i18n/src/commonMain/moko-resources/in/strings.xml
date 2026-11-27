@@ -94,10 +94,10 @@
     <string name="white_background">Putih</string>
     <string name="black_background">Hitam</string>
     <string name="pref_viewer_type">Mode baca bawaan</string>
-    <string name="left_to_right_viewer">Berhalaman (kiri ke kanan)</string>
-    <string name="right_to_left_viewer">Berhalaman (kanan ke kiri)</string>
-    <string name="vertical_viewer">Berhalaman (vertikal)</string>
-    <string name="webtoon_viewer">Strip panjang</string>
+    <string name="left_to_right_viewer">Komik</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Halaman vertikal</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_image_scale_type">Tipe skala</string>
     <string name="scale_type_fit_screen">Pas layar</string>
     <string name="scale_type_stretch">Rentangkan</string>
@@ -339,7 +339,7 @@
     <string name="label_downloaded_only">Hanya yang sudah diunduh</string>
     <string name="pinned_sources">Tersemat</string>
     <string name="website">Situs web</string>
-    <string name="vertical_plus_viewer">Strip panjang dengan celah</string>
+    <string name="vertical_plus_viewer">Webtoon dengan celah</string>
     <string name="local_source_help_guide">Petunjuk sumber lokal</string>
     <string name="last_used_source">Terakhir digunakan</string>
     <string name="downloaded_only_summary">Saring semua entri di pustaka Anda</string>

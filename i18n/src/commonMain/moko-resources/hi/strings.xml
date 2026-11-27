@@ -98,10 +98,10 @@
     <string name="white_background">सफेद</string>
     <string name="black_background">काला</string>
     <string name="pref_viewer_type">डिफ़ॉल्ट रीडिंग मोड</string>
-    <string name="left_to_right_viewer">बाएं से दाएं</string>
-    <string name="right_to_left_viewer">दाएं से बाएं</string>
-    <string name="vertical_viewer">सीधा</string>
-    <string name="webtoon_viewer">लंबी पट्टी</string>
+    <string name="left_to_right_viewer">कॉमिक</string>
+    <string name="right_to_left_viewer">मंगा</string>
+    <string name="vertical_viewer">वर्टिकल पेज</string>
+    <string name="webtoon_viewer">वेबटून</string>
     <string name="pref_image_scale_type">मापन प्ररूप</string>
     <string name="scale_type_fit_screen">उपयुक्त स्क्रीन</string>
     <string name="scale_type_stretch">खींचें</string>
@@ -326,7 +326,7 @@
     <string name="label_sources">स्रोत</string>
     <string name="pinned_sources">पिन की गई</string>
     <string name="pref_webtoon_side_padding">साइड पैडिंग</string>
-    <string name="vertical_plus_viewer">गैप के साथ लंबी पट्टी</string>
+    <string name="vertical_plus_viewer">गैप वाला वेबटून</string>
     <string name="action_unpin">अनपिन</string>
     <string name="action_pin">पिन</string>
     <string name="action_select_inverse">विलोम का चयन करें</string>

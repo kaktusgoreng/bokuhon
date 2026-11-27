@@ -98,10 +98,10 @@
     <string name="white_background">সাদা</string>
     <string name="black_background">কালো</string>
     <string name="pref_viewer_type">প্রকৃত পঠন ধরন</string>
-    <string name="left_to_right_viewer">বাম থেকে ডানে (পেজড)</string>
-    <string name="right_to_left_viewer">ডান থেকে বামে (পেজড)</string>
-    <string name="vertical_viewer">উল্লম্বভাবে (পেজড)</string>
-    <string name="webtoon_viewer">লং স্ট্রিপ</string>
+    <string name="left_to_right_viewer">কমিক</string>
+    <string name="right_to_left_viewer">মাঙ্গা</string>
+    <string name="vertical_viewer">উলম্ব পৃষ্ঠা</string>
+    <string name="webtoon_viewer">ওয়েবটুন</string>
     <string name="pref_image_scale_type">স্কেল ধরণ</string>
     <string name="scale_type_fit_screen">সম্পূর্ণ পর্দা জুড়ে</string>
     <string name="scale_type_stretch">প্রসারন</string>
@@ -341,7 +341,7 @@
     <string name="pref_category_reading">পড়া হচ্ছে</string>
     <string name="pref_category_reading_mode">পঠন ধরন</string>
     <string name="pref_always_show_chapter_transition">সবসময় অধ্যায় পরিবর্তন দেখান</string>
-    <string name="vertical_plus_viewer">ফাঁকসহ লং স্ট্রিপ</string>
+    <string name="vertical_plus_viewer">ফাঁকসহ ওয়েবটুন</string>
     <string name="pref_show_reading_mode">পঠন ধরন দেখান</string>
     <string name="gray_background">ধূসর</string>
     <string name="pref_skip_filtered_chapters">ফিলটারড অধ্যায় গুলো এড়িয়ে যান</string>

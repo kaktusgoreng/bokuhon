@@ -82,10 +82,10 @@
     <string name="white_background">Wit</string>
     <string name="black_background">Zwart</string>
     <string name="pref_viewer_type">Standaard leesmodus</string>
-    <string name="left_to_right_viewer">Links naar rechts</string>
-    <string name="right_to_left_viewer">Rechts naar links</string>
-    <string name="vertical_viewer">Verticaal</string>
-    <string name="webtoon_viewer">Lange strip</string>
+    <string name="left_to_right_viewer">Strip</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Verticale pagina</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="scale_type_stretch">Uitrekken</string>
     <string name="scale_type_fit_width">Breedtevullend</string>
     <string name="scale_type_fit_height">Hoogtevullend</string>
@@ -343,7 +343,7 @@
     <string name="restore_duration">%1$02d min, %2$02d sec</string>
     <string name="pref_category_reading">Lezen</string>
     <string name="pref_always_show_chapter_transition">Hoofdstukovergangen altijd weergeven</string>
-    <string name="vertical_plus_viewer">Lange strip met gaten</string>
+    <string name="vertical_plus_viewer">Webtoon met gaten</string>
     <string name="pref_skip_filtered_chapters">Gefilterde hoofdstukken overslaan</string>
     <string name="pref_cutout_short">Inhoud in uitgesneden gebied laten zien</string>
     <string name="hide_notification_content">Meldingsinhoud verbergen</string>

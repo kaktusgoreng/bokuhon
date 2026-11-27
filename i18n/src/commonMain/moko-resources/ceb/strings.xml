@@ -244,9 +244,9 @@
     <string name="nav_zone_left">Sa wala</string>
     <string name="nav_zone_right">Husto</string>
     <string name="webtoon_viewer">Webtoon</string>
-    <string name="left_to_right_viewer">Wala ngadto sa tuo</string>
-    <string name="right_to_left_viewer">Tuo ngadto sa wala</string>
-    <string name="vertical_viewer">Bertikal</string>
+    <string name="left_to_right_viewer">Komiks</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Bertikal nga pahina</string>
     <string name="pager_viewer">Paged</string>
     <string name="color_filter_a_value">A</string>
     <string name="pref_webtoon_side_padding">Padding sa kilid</string>
@@ -280,7 +280,7 @@
     <string name="network_not_metered">Lamang sa ummetered network</string>
     <string name="ext_info_language">Pinulongan sa Extension</string>
     <string name="ext_info_version">Extension nga Bersyon</string>
-    <string name="vertical_plus_viewer">Padayon nga bertikal</string>
+    <string name="vertical_plus_viewer">Webtoon nga may puwang</string>
     <string name="scale_type_original_size">Orihinal nga gidak-on</string>
     <string name="scale_type_fit_screen">Haom nga screen</string>
     <string name="scale_type_stretch">Pag-inat</string>

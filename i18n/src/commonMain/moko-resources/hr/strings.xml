@@ -183,11 +183,11 @@
     <string name="scale_type_fit_screen">Prilagodi ekranu</string>
     <string name="pref_image_scale_type">Vrsta skaliranja</string>
     <string name="pager_viewer">Stranice</string>
-    <string name="vertical_plus_viewer">Kontinuirano listanje s razmacima</string>
-    <string name="webtoon_viewer">Kontinuirano listanje</string>
-    <string name="vertical_viewer">Stranica (okomito)</string>
-    <string name="right_to_left_viewer">Stranica (s desna na lijevo)</string>
-    <string name="left_to_right_viewer">Stranica (s lijeva na desno)</string>
+    <string name="vertical_plus_viewer">Webtoon s razmacima</string>
+    <string name="webtoon_viewer">Webtoon</string>
+    <string name="vertical_viewer">Okomita stranica</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="left_to_right_viewer">Strip</string>
     <string name="pref_viewer_type">Standardni modus čitanja</string>
     <string name="black_background">Crna</string>
     <string name="gray_background">Siva</string>

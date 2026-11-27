@@ -113,10 +113,10 @@
     <string name="white_background">Alb</string>
     <string name="black_background">Negru</string>
     <string name="pref_viewer_type">Mod de citire implicit</string>
-    <string name="left_to_right_viewer">De la stânga la dreapta</string>
-    <string name="right_to_left_viewer">De la dreapta la stânga</string>
-    <string name="vertical_viewer">Paginat (vertical)</string>
-    <string name="webtoon_viewer">Benzi desenate web</string>
+    <string name="left_to_right_viewer">Bandă desenată</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Pagină verticală</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pager_viewer">Setări pagini</string>
     <string name="pref_image_scale_type">Tip de scalare</string>
     <string name="scale_type_fit_screen">Potrivește ecran</string>
@@ -325,7 +325,7 @@
     <string name="pref_skip_filtered_chapters">Săriți peste capitolele filtrate</string>
     <string name="label_sources">Surse</string>
     <string name="action_select_inverse">Selectează invers</string>
-    <string name="vertical_plus_viewer">Vertical continuu</string>
+    <string name="vertical_plus_viewer">Webtoon cu spații</string>
     <string name="pinned_sources">Fixate</string>
     <string name="pref_webtoon_side_padding">Căptușeală laterală</string>
     <string name="action_unpin">Anulați fixarea</string>

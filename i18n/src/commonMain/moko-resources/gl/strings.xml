@@ -42,11 +42,11 @@
     <string name="scale_type_fit_screen">Axustar á pantalla</string>
     <string name="pref_image_scale_type">Tipo de escala</string>
     <string name="pager_viewer">Paxinado</string>
-    <string name="vertical_plus_viewer">Tira vertical con espacios</string>
-    <string name="webtoon_viewer">Tira vertical</string>
-    <string name="vertical_viewer">Por páxinas (vertical)</string>
-    <string name="right_to_left_viewer">Páxinas (De dereita a esquerda)</string>
-    <string name="left_to_right_viewer">Por páxinas (de esquerda a dereita)</string>
+    <string name="vertical_plus_viewer">Webtoon con espazos</string>
+    <string name="webtoon_viewer">Webtoon</string>
+    <string name="vertical_viewer">Páxina vertical</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="left_to_right_viewer">Cómic</string>
     <string name="pref_viewer_type">Modo de lectura por defecto</string>
     <string name="black_background">Negro</string>
     <string name="gray_background">Gris</string>

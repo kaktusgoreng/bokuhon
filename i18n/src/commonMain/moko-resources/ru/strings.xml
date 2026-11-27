@@ -91,7 +91,7 @@
     <string name="label_settings">Настройки</string>
     <string name="landscape">Альбомная</string>
     <string name="last_read_chapter">Последняя прочитанная глава</string>
-    <string name="left_to_right_viewer">Постранично (Слева направо)</string>
+    <string name="left_to_right_viewer">Комикс</string>
     <string name="licensed">Лицензировано</string>
     <string name="loading">Загрузка…</string>
     <string name="login">Вход</string>
@@ -145,7 +145,7 @@
     <string name="pref_zoom_start">Стартовая позиция увеличения</string>
     <string name="reading">Читаю</string>
     <string name="remove_from_library">Удалить из библиотеки</string>
-    <string name="right_to_left_viewer">Постранично (Справа налево)</string>
+    <string name="right_to_left_viewer">Манга</string>
     <string name="rotation_force_landscape">Заблокированная альбомная</string>
     <string name="rotation_force_portrait">Заблокированная портретная</string>
     <string name="rotation_free">Системная</string>
@@ -181,8 +181,8 @@
     <string name="used_cache">Использовано: %1$s</string>
     <string name="username">Имя пользователя</string>
     <string name="version">Версия</string>
-    <string name="vertical_viewer">Постранично (Вертикально)</string>
-    <string name="webtoon_viewer">Длинные страницы</string>
+    <string name="vertical_viewer">Вертикальная страница</string>
+    <string name="webtoon_viewer">Вебтун</string>
     <string name="white_background">Белый</string>
     <string name="zoom_start_automatic">Автоматически</string>
     <string name="zoom_start_center">По центру</string>
@@ -325,7 +325,7 @@
     <string name="pref_category_reading">Чтение</string>
     <string name="pref_skip_filtered_chapters">Пропускать отфильтрованные главы</string>
     <string name="action_select_inverse">Выбрать наоборот</string>
-    <string name="vertical_plus_viewer">Длинные страницы с зазорами</string>
+    <string name="vertical_plus_viewer">Вебтун с промежутками</string>
     <string name="pref_webtoon_side_padding">Боковой отступ</string>
     <string name="pinned_sources">Закреплено</string>
     <string name="action_unpin">Открепить</string>

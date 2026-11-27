@@ -96,10 +96,10 @@
     <string name="white_background">أبيض</string>
     <string name="black_background">أسود</string>
     <string name="pref_viewer_type">وضع القراءة الافتراضي</string>
-    <string name="left_to_right_viewer">صفحيٌّ (يسارًا فيمينًا)</string>
-    <string name="right_to_left_viewer">صفحيٌّ (يمينًا فيسارًا)</string>
-    <string name="vertical_viewer">صفحيٌّ (عموديٌّ)</string>
-    <string name="webtoon_viewer">شريط طويل</string>
+    <string name="left_to_right_viewer">كوميك</string>
+    <string name="right_to_left_viewer">مانغا</string>
+    <string name="vertical_viewer">صفحة عمودية</string>
+    <string name="webtoon_viewer">ويبتون</string>
     <string name="pref_image_scale_type">كيفية ضبط الأبعاد</string>
     <string name="scale_type_fit_screen">ملائمة الشاشة</string>
     <string name="scale_type_stretch">التمدد</string>
@@ -351,7 +351,7 @@
     <string name="email">البريد الإلكتروني</string>
     <string name="downloaded_only_summary">تصفية جميع الإدخالات في مكتبتك</string>
     <string name="pref_webtoon_side_padding">الإزاحة الجانبية</string>
-    <string name="vertical_plus_viewer">شريط طويل بين أجزائه فجوات</string>
+    <string name="vertical_plus_viewer">ويبتون بفجوات</string>
     <string name="gray_background">رمادي</string>
     <string name="battery_optimization_setting_activity_not_found">تعذر فتح إعدادات الجهاز</string>
     <string name="action_migrate">نقل</string>

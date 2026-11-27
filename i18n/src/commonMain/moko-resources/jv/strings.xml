@@ -19,8 +19,8 @@
     <string name="double_tap_anim_speed_fast">Cepet</string>
     <string name="zoom_start_right">Nengen</string>
     <string name="zoom_start_left">Ngiwa</string>
-    <string name="right_to_left_viewer">Nengen moro ngiwa</string>
-    <string name="left_to_right_viewer">Ngiwa moro nengen</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="left_to_right_viewer">Komik</string>
     <string name="nav_zone_right">Nengen</string>
     <string name="nav_zone_left">Ngiwa</string>
     <string name="black_background">Ireng</string>
@@ -255,7 +255,7 @@
     <string name="filter_mode_overlay">Numpuki</string>
     <string name="filter_mode_screen">Layar</string>
     <string name="pref_reader_navigation">Pandhu arah</string>
-    <string name="vertical_viewer">Vertikal</string>
+    <string name="vertical_viewer">Kaca vertikal</string>
     <string name="filter_mode_darken">Ngobong / peteng</string>
     <string name="filter_mode_lighten">Nangkis / Padang</string>
     <string name="pref_skip_filtered_chapters">Skip bab sing disaring</string>
@@ -265,7 +265,7 @@
     <string name="pref_viewer_type">Mode maca standar</string>
     <string name="nav_zone_prev">Sakdurunge</string>
     <string name="nav_zone_next">Lanjut</string>
-    <string name="vertical_plus_viewer">Vertikal sakteruse</string>
+    <string name="vertical_plus_viewer">Webtoon kanthi sela</string>
     <string name="disabled_nav">Dipateni</string>
     <string name="pref_custom_color_filter">Filter warna khusus</string>
     <string name="pref_color_filter_mode">Mode campuran filter warna</string>

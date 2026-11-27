@@ -20,9 +20,9 @@
     <string name="action_menu">Мәзір</string>
     <string name="action_filter">Сүзгі</string>
     <string name="action_filter_bookmarked">Бетбелгіленген</string>
-    <string name="right_to_left_viewer">Бет (оңнан солға)</string>
-    <string name="vertical_viewer">Беттік (тік)</string>
-    <string name="webtoon_viewer">Ұзын жолақ</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="vertical_viewer">Тік бет</string>
+    <string name="webtoon_viewer">Вебтун</string>
     <string name="scale_type_fit_screen">Экранға сыйғыздыру</string>
     <string name="scale_type_stretch">Тарту</string>
     <string name="information_no_downloads">Жүктеулер жоқ</string>
@@ -36,7 +36,7 @@
     <string name="action_settings">Баптау</string>
     <string name="nav_zone_left">Сол</string>
     <string name="nav_zone_right">Оң</string>
-    <string name="left_to_right_viewer">Бет (солдан оңға қарай)</string>
+    <string name="left_to_right_viewer">Комикс</string>
     <string name="information_empty_category">Санаттарыңыз жоқ. Жаңа санат жасау үшін және кітапханаңызды ұйымдастыру үшін қосу батырмасын басыңыз.</string>
     <string name="nav_zone_next">Келесі</string>
     <string name="action_sort_last_manga_update">Соңғы жаңартпа тексеруі</string>
@@ -328,7 +328,7 @@
     <string name="action_search_hint">Іздеу…</string>
     <string name="pref_hide_threshold">Айналдырғандағы мәзірді жасыру сезгіштігі</string>
     <string name="pref_image_scale_type">Масштабтау</string>
-    <string name="vertical_plus_viewer">Тоқтаусыз тік</string>
+    <string name="vertical_plus_viewer">Аралықты вебтун</string>
     <string name="pref_viewer_nav">Басу аймағы</string>
     <string name="pref_read_with_volume_keys_inverted">Теріс дыбыс пернелері</string>
     <string name="tapping_inverted_none">Жоқ</string>

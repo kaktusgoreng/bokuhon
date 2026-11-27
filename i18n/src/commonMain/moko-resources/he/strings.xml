@@ -233,10 +233,10 @@
     <string name="scale_type_stretch">למתוח</string>
     <string name="scale_type_fit_screen">התאם לגודל מסך</string>
     <string name="pref_image_scale_type">סוג קנה מידה</string>
-    <string name="webtoon_viewer">רצועה מוארכת</string>
-    <string name="vertical_viewer">סידור עמודים (אנכי)</string>
-    <string name="right_to_left_viewer">סידור עמודים (ימין לשמאל)</string>
-    <string name="left_to_right_viewer">סידור עמודים (שמאל לימין)</string>
+    <string name="webtoon_viewer">וובטון</string>
+    <string name="vertical_viewer">עמוד אנכי</string>
+    <string name="right_to_left_viewer">מאנגה</string>
+    <string name="left_to_right_viewer">קומיקס</string>
     <string name="pref_viewer_type">ברירת המחדל של מצב הקריאה</string>
     <string name="black_background">שחור</string>
     <string name="white_background">לבן</string>
@@ -385,7 +385,7 @@
     <string name="pref_category_reading_mode">מצב קריאה</string>
     <string name="pref_category_auto_download">הורדה אוטומטית</string>
     <string name="gray_background">אפור</string>
-    <string name="vertical_plus_viewer">רצועה מוארכת עם רווחים</string>
+    <string name="vertical_plus_viewer">וובטון עם רווחים</string>
     <string name="pager_viewer">סידור עמודים</string>
     <string name="rotation_reverse_portrait">מאונך הפוך</string>
     <string name="pref_create_folder_per_manga">שמור דפים בתיקיות נפרדות</string>

@@ -170,11 +170,11 @@
     <string name="untrusted_extension">Ненадзейнае пашырэнне</string>
     <string name="pref_viewer_nav">Зоны дотыку</string>
     <string name="pager_viewer">Пастаронкава</string>
-    <string name="vertical_plus_viewer">Рулон з прамежкамі</string>
-    <string name="webtoon_viewer">Рулон</string>
-    <string name="vertical_viewer">Пастаронкава (вертыкальна)</string>
-    <string name="right_to_left_viewer">Пастаронкава (справа налева)</string>
-    <string name="left_to_right_viewer">Пастаронкава (злева направа)</string>
+    <string name="vertical_plus_viewer">Вэбтун з прамежкамі</string>
+    <string name="webtoon_viewer">Вэбтун</string>
+    <string name="vertical_viewer">Вертыкальная старонка</string>
+    <string name="right_to_left_viewer">Манга</string>
+    <string name="left_to_right_viewer">Комікс</string>
     <string name="nav_zone_right">Справа</string>
     <string name="nav_zone_left">Злева</string>
     <string name="nav_zone_next">Наступная</string>

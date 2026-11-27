@@ -82,10 +82,10 @@
     <string name="white_background">Trắng</string>
     <string name="black_background">Đen</string>
     <string name="pref_viewer_type">Kiểu đọc mặc định</string>
-    <string name="left_to_right_viewer">Phân trang (trái sang phải)</string>
-    <string name="right_to_left_viewer">Phân trang (phải sang trái)</string>
-    <string name="vertical_viewer">Phân trang (chiều dọc)</string>
-    <string name="webtoon_viewer">Cuộc dọc</string>
+    <string name="left_to_right_viewer">Comic</string>
+    <string name="right_to_left_viewer">Manga</string>
+    <string name="vertical_viewer">Trang dọc</string>
+    <string name="webtoon_viewer">Webtoon</string>
     <string name="pref_image_scale_type">Kiểu tỉ lệ</string>
     <string name="scale_type_fit_screen">Vừa màn hình</string>
     <string name="scale_type_stretch">Kéo dãn</string>
@@ -321,7 +321,7 @@
     <string name="label_more">Thêm</string>
     <string name="tracking_info">Đồng bộ một chiều để cập nhật tiến trình chương trong các dịch vụ theo dõi. Thiết lập theo dõi cho các truyện riêng lẻ từ nút theo dõi.</string>
     <string name="pref_category_reading_mode">Kiểu đọc</string>
-    <string name="vertical_plus_viewer">Cuộc dọc có khoảng cách</string>
+    <string name="vertical_plus_viewer">Webtoon có khoảng cách</string>
     <string name="pref_show_reading_mode_summary">Hiển thị nhanh chế độ hiện tại khi mở trình đọc</string>
     <string name="pref_show_reading_mode">Hiển thị chế độ đọc</string>
     <string name="pref_library_update_refresh_metadata_summary">Kiểm tra ảnh bìa và chi tiết khi cập nhật thư viện</string>

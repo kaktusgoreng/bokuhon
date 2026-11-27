@@ -384,11 +384,11 @@
     <string name="nav_zone_next">அடுத்தது</string>
     <string name="nav_zone_left">இடது</string>
     <string name="nav_zone_right">வலது</string>
-    <string name="left_to_right_viewer">பேச் (இடமிருந்து வலமாக)</string>
-    <string name="right_to_left_viewer">பேச் (வலமிருந்து இடமாக)</string>
-    <string name="vertical_viewer">பேச் செய்யப்பட்ட (செங்குத்து)</string>
-    <string name="webtoon_viewer">நீண்ட துண்டு</string>
-    <string name="vertical_plus_viewer">இடைவெளிகளுடன் நீண்ட துண்டு</string>
+    <string name="left_to_right_viewer">காமிக்</string>
+    <string name="right_to_left_viewer">மங்கா</string>
+    <string name="vertical_viewer">செங்குத்து பக்கம்</string>
+    <string name="webtoon_viewer">வெப்டூன்</string>
+    <string name="vertical_plus_viewer">இடைவெளியுடன் வெப்டூன்</string>
     <string name="pager_viewer">பேச்</string>
     <string name="pref_viewer_nav">மண்டலங்களைத் தட்டவும்</string>
     <string name="pref_image_scale_type">அளவிலான வகை</string>
