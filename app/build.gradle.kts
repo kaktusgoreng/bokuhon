@@ -35,7 +35,9 @@ android {
     namespace = "eu.kanade.tachiyomi"
 
     defaultConfig {
-        applicationId = "app.mihon"
+        // -PappId lets a sideload sit beside an existing Mihon install; the default must stay
+        // app.mihon so the e-readers keep the library they already have.
+        applicationId = providers.gradleProperty("appId").getOrElse("app.mihon")
 
         versionCode = 44
         versionName = "0.21.3_beta4"
